@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /filament/
+Disallow: /api/
+Disallow: /storage/
+Disallow: /ajax/
+Disallow: /*.json$
+
+# Sitemaps
+Sitemap: https://noorislam.com/sitemap_index.xml

@@ -1,0 +1,121 @@
+<?php
+$names = [
+    [1, 'الرَّحْمَنُ', 'Ar-Rahman', 'The All-Compassionate', 'نہایت مہربان'],
+    [2, 'الرَّحِيمُ', 'Ar-Rahim', 'The All-Merciful', 'بڑا رحم کرنے والا'],
+    [3, 'الْمَلِكُ', 'Al-Malik', 'The Absolute Ruler', 'بادشاہ'],
+    [4, 'الْقُدُّوسُ', 'Al-Quddus', 'The Pure One', 'پاک ذات'],
+    [5, 'السَّلَامُ', 'As-Salam', 'The Source of Peace', 'سلامتی دینے والا'],
+    [6, 'الْمُؤْمِنُ', 'Al-Mu\'min', 'The Inspirer of Faith', 'امن دینے والا'],
+    [7, 'الْمُهَيْمِنُ', 'Al-Muhaymin', 'The Guardian', 'نگہبان'],
+    [8, 'الْعَزِيزُ', 'Al-Aziz', 'The Victorious', 'غالب'],
+    [9, 'الْجَبَّارُ', 'Al-Jabbar', 'The Compeller', 'زبردست'],
+    [10, 'الْمُتَكَبِّرُ', 'Al-Mutakabbir', 'The Greatest', 'بڑائی والا'],
+    [11, 'الْخَالِقُ', 'Al-Khaliq', 'The Creator', 'پیدا کرنے والا'],
+    [12, 'الْبَارِئُ', 'Al-Bari\'', 'The Maker of Order', 'جان ڈالنے والا'],
+    [13, 'الْمُصَوِّرُ', 'Al-Musawwir', 'The Shaper of Beauty', 'صورت بنانے والا'],
+    [14, 'الْغَفَّارُ', 'Al-Ghaffar', 'The Forgiving', 'بڑا بخشنے والا'],
+    [15, 'الْقَهَّارُ', 'Al-Qahhar', 'The Subduer', 'سب پر غالب'],
+    [16, 'الْوَهَّابُ', 'Al-Wahhab', 'The Giver of All', 'بہت دینے والا'],
+    [17, 'الرَّزَّاقُ', 'Ar-Razzaq', 'The Sustainer', 'رزق دینے والا'],
+    [18, 'الْفَتَّاحُ', 'Al-Fattah', 'The Opener', 'مشکلات حل کرنے والا'],
+    [19, 'اَلْعَلِيْمُ', 'Al-\'Alim', 'The Knower of All', 'سب کچھ جاننے والا'],
+    [20, 'الْقَابِضُ', 'Al-Qabid', 'The Constrictor', 'روزی تنگ کرنے والا'],
+    [21, 'الْبَاسِطُ', 'Al-Basit', 'The Reliever', 'روزی کشادہ کرنے والا'],
+    [22, 'الْخَافِضُ', 'Al-Khafid', 'The Abaser', 'پست کرنے والا'],
+    [23, 'الرَّافِعُ', 'Ar-Rafi', 'The Exalter', 'بلند کرنے والا'],
+    [24, 'الْمُعِزُّ', 'Al-Mu\'izz', 'The Bestower of Honors', 'عزت دینے والا'],
+    [25, 'المُذِلُّ', 'Al-Mudhill', 'The Humiliator', 'ذلت دینے والا'],
+    [26, 'السَّمِيعُ', 'As-Sami', 'The Hearer of All', 'سب کچھ سننے والا'],
+    [27, 'الْبَصِيرُ', 'Al-Basir', 'The Seer of All', 'سب کچھ دیکھنے والا'],
+    [28, 'الْحَكَمُ', 'Al-Hakam', 'The Judge', 'فیصلہ کرنے والا'],
+    [29, 'الْعَدْلُ', 'Al-\'Adl', 'The Just', 'انصاف کرنے والا'],
+    [30, 'اللَّطِيفُ', 'Al-Latif', 'The Subtle One', 'لطف و کرم کرنے والا'],
+    [31, 'الْخَبِيرُ', 'Al-Khabir', 'The All-Aware', 'خبردار'],
+    [32, 'الْحَلِيمُ', 'Al-Halim', 'The Forbearing', 'بردبار'],
+    [33, 'الْعَظِيمُ', 'Al-\'Azim', 'The Magnificent', 'عظمت والا'],
+    [34, 'الْغَفُورُ', 'Al-Ghafur', 'The Forgiver and Hider of Faults', 'بخشنے والا'],
+    [35, 'الشَّكُورُ', 'Ash-Shakur', 'The Rewarder of Thankfulness', 'قدردان'],
+    [36, 'الْعَلِيُّ', 'Al-\'Ali', 'The Highest', 'سب سے بلند'],
+    [37, 'الْكَبِيرُ', 'Al-Kabir', 'The Greatest', 'سب سے بڑا'],
+    [38, 'الْحَفِيظُ', 'Al-Hafiz', 'The Preserver', 'حفاظت کرنے والا'],
+    [39, 'المُقيِت', 'Al-Muqit', 'The Nourisher', 'روزی دینے والا'],
+    [40, 'الْحَسِيبُ', 'Al-Hasib', 'The Accounter', 'حساب لینے والا'],
+    [41, 'الْجَلِيلُ', 'Al-Jalil', 'The Mighty', 'بزرگی والا'],
+    [42, 'الْكَرِيمُ', 'Al-Karim', 'The Generous', 'کرم کرنے والا'],
+    [43, 'الرَّقِيبُ', 'Ar-Raqib', 'The Watchful One', 'نگہبان'],
+    [44, 'الْمُجِيبُ', 'Al-Mujib', 'The Responder to Prayer', 'دعائیں قبول کرنے والا'],
+    [45, 'الْوَاسِعُ', 'Al-Wasi', 'The All-Comprehending', 'وسعت والا'],
+    [46, 'الْحَكِيمُ', 'Al-Hakim', 'The Perfectly Wise', 'حکمت والا'],
+    [47, 'الْوَدُودُ', 'Al-Wadud', 'The Loving One', 'محبت کرنے والا'],
+    [48, 'الْمَجِيدُ', 'Al-Majeed', 'The Majestic One', 'بزرگی والا'],
+    [49, 'الْبَاعِثُ', 'Al-Ba\'ith', 'The Resurrector', 'اٹھانے والا'],
+    [50, 'الشَّهِيدُ', 'Ash-Shahid', 'The Witness', 'حاضر و ناظر'],
+    [51, 'الْحَقُّ', 'Al-Haqq', 'The Truth', 'سچا'],
+    [52, 'الْوَكِيلُ', 'Al-Wakil', 'The Trustee', 'کارساز'],
+    [53, 'الْقَوِيُّ', 'Al-Qawi', 'The Possessor of All Strength', 'زور آور'],
+    [54, 'الْمَتِينُ', 'Al-Matin', 'The Forceful One', 'مضبوط'],
+    [55, 'الْوَلِيُّ', 'Al-Wali', 'The Governor', 'حمایتی'],
+    [56, 'الْحَمِيدُ', 'Al-Hamid', 'The Praised One', 'تعریف کے لائق'],
+    [57, 'الْمُحْصِي', 'Al-Muhsi', 'The Appraiser', 'شمار کرنے والا'],
+    [58, 'الْمُبْدِئُ', 'Al-Mubdi', 'The Originator', 'پہلی بار پیدا کرنے والا'],
+    [59, 'الْمُعِيدُ', 'Al-Mu\'id', 'The Restorer', 'دوبارہ پیدا کرنے والا'],
+    [60, 'الْمُحْيِي', 'Al-Muhyi', 'The Giver of Life', 'زندگی دینے والا'],
+    [61, 'اَلْمُمِيتُ', 'Al-Mumit', 'The Taker of Life', 'موت دینے والا'],
+    [62, 'الْحَيُّ', 'Al-Hayy', 'The Ever Living One', 'ہمیشہ زندہ رہنے والا'],
+    [63, 'الْقَيُّومُ', 'Al-Qayyum', 'The Self-Existing One', 'قائم رکھنے والا'],
+    [64, 'الْوَاجِدُ', 'Al-Wajid', 'The Finder', 'پانے والا'],
+    [65, 'الْمَاجِدُ', 'Al-Maajid', 'The Glorious', 'بزرگی والا'],
+    [66, 'الْواحِدُ', 'Al-Wahid', 'The Only One', 'ایک'],
+    [67, 'اَلاَحَدُ', 'Al-Ahad', 'The One', 'اکیلا'],
+    [68, 'الصَّمَدُ', 'As-Samad', 'The Satisfier of All Needs', 'بے نیاز'],
+    [69, 'الْقَادِرُ', 'Al-Qadir', 'The All Powerful', 'قدرت والا'],
+    [70, 'الْمُقْتَدِرُ', 'Al-Muqtadir', 'The Creator of All Power', 'کامل قدرت والا'],
+    [71, 'الْمُقَدِّمُ', 'Al-Muqaddim', 'The Expediter', 'آگے کرنے والا'],
+    [72, 'الْمُؤَخِّرُ', 'Al-Mu\'akhkhir', 'The Delayer', 'پیچھے کرنے والا'],
+    [73, 'الأوَّلُ', 'Al-Awwal', 'The First', 'سب سے پہلا'],
+    [74, 'الآخِرُ', 'Al-Akhir', 'The Last', 'سب سے آخری'],
+    [75, 'الظَّاهِرُ', 'Az-Zahir', 'The Manifest One', 'ظاہر'],
+    [76, 'الْبَاطِنُ', 'Al-Batin', 'The Hidden One', 'چھپا ہوا'],
+    [77, 'الْوَالِي', 'Al-Waali', 'The Protecting Friend', 'مالک'],
+    [78, 'الْمُتَعَالِي', 'Al-Muta\'ali', 'The Supreme One', 'بہت بلند'],
+    [79, 'الْبَرُّ', 'Al-Barr', 'The Doer of Good', 'بھلائی کرنے والا'],
+    [80, 'التَّوَابُ', 'At-Tawwab', 'The Guide to Repentance', 'توبہ قبول کرنے والا'],
+    [81, 'الْمُنْتَقِمُ', 'Al-Muntaqim', 'The Avenger', 'انتقام لینے والا'],
+    [82, 'العَفُوُّ', 'Al-\'Afuww', 'The Forgiver', 'معاف کرنے والا'],
+    [83, 'الرَّؤُوفُ', 'Ar-Ra\'uf', 'The Clement', 'بہت مہربان'],
+    [84, 'مَالِكُ ٱلْمُلْكُ', 'Malik-al-Mulk', 'The Owner of All', 'بادشاہیوں کا مالک'],
+    [85, 'ذُو ٱلْجَلَٰلِ وَٱلْإِكْرَامُ', 'Dhu-al-Jalal wa-al-Ikram', 'The Lord of Majesty and Bounty', 'جلال اور انعام والا'],
+    [86, 'الْمُقْسِطُ', 'Al-Muqsit', 'The Equitable One', 'انصاف کرنے والا'],
+    [87, 'الْجَامِعُ', 'Al-Jami', 'The Gatherer', 'جمع کرنے والا'],
+    [88, 'الْغَنِيُّ', 'Al-Ghani', 'The Rich One', 'بے پرواہ'],
+    [89, 'الْمُغْنِي', 'Al-Mughni', 'The Enricher', 'غنی کرنے والا'],
+    [90, 'اَلْمَانِعُ', 'Al-Mani\'', 'The Preventer of Harm', 'روکنے والا'],
+    [91, 'الضَّارَّ', 'Ad-Darr', 'The Creator of The Harmful', 'نقصان پہنچانے والا'],
+    [92, 'النَّافِعُ', 'An-Nafi', 'The Creator of Good', 'نفع پہنچانے والا'],
+    [93, 'النُّورُ', 'An-Nur', 'The Light', 'روشن کرنے والا'],
+    [94, 'الْهَادِي', 'Al-Hadi', 'The Guide', 'ہدایت دینے والا'],
+    [95, 'الْبَدِيعُ', 'Al-Badi', 'The Originator', 'نئی طرح پیدا کرنے والا'],
+    [96, 'اَلْبَاقِي', 'Al-Baqi', 'The Everlasting One', 'ہمیشہ رہنے والا'],
+    [97, 'الْوَارِثُ', 'Al-Warith', 'The Inheritor of All', 'سب کا وارث'],
+    [98, 'الرَّشِيدُ', 'Ar-Rashid', 'The Righteous Teacher', 'ہدایت دینے والا'],
+    [99, 'الصَّبُورُ', 'As-Sabur', 'The Patient One', 'صبر کرنے والا']
+];
+
+$output = "<?php\n\nnamespace Database\\Seeders;\n\nuse Illuminate\\Database\\Seeder;\nuse App\\Models\\AllahName;\nuse Illuminate\\Support\\Str;\nuse Illuminate\\Support\\Facades\\DB;\n\nclass AllahNameSeeder extends Seeder\n{\n    public function run(): void\n    {\n        DB::table('allah_names')->truncate();\n\n        \$names = [\n";
+
+foreach ($names as $n) {
+    $output .= "            [\n";
+    $output .= "                'number' => {$n[0]},\n";
+    $output .= "                'arabic' => '{$n[1]}',\n";
+    $output .= "                'transliteration' => '" . str_replace("'", "\\'", $n[2]) . "',\n";
+    $output .= "                'meaning_english' => '" . str_replace("'", "\\'", $n[3]) . "',\n";
+    $output .= "                'meaning_urdu' => '{$n[4]}',\n";
+    $output .= "                'benefits' => 'Reciting this name brings immense spiritual benefits and closeness to Allah.',\n";
+    $output .= "                'slug' => Str::slug('" . str_replace("'", "\\'", $n[2]) . "'),\n";
+    $output .= "            ],\n";
+}
+
+$output .= "        ];\n\n        foreach (\$names as \$name) {\n            AllahName::create(\$name);\n        }\n    }\n}\n";
+
+file_put_contents('database/seeders/AllahNameSeeder.php', $output);
+echo "Seeder generated.\n";
