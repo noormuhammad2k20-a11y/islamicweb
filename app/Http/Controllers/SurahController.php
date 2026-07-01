@@ -26,19 +26,31 @@ class SurahController extends Controller
             $query->where('revelation_place', $request->filter);
         }
 
-        $surahs = $query->get();
+        if (!$request->has('search') && !$request->has('filter')) {
+            $surahs = \Illuminate\Support\Facades\Cache::remember('all_surahs_index', 86400, function () use ($query) {
+                return $query->get();
+            });
+        } else {
+            $surahs = $query->get();
+        }
 
         return view('pages.surah.index', compact('surahs'));
     }
 
     public function show(Surah $surah)
     {
-        $surah->load(['ayahs', 'reviews.scholar', 'seoMeta', 'fazilatEntries']);
+        $surah = \Illuminate\Support\Facades\Cache::remember("surah_full_{$surah->id}", 86400, function () use ($surah) {
+            return $surah->load(['ayahs.englishTranslation', 'ayahs.urduTranslation', 'ayahs.tafsirs', 'reviews.scholar', 'seoMeta', 'fazilatEntries']);
+        });
         $seoMeta = $surah->seoMeta;
 
         // Get previous and next surahs for navigation
-        $prevSurah = Surah::where('number', $surah->number - 1)->first();
-        $nextSurah = Surah::where('number', $surah->number + 1)->first();
+        $prevSurah = \Illuminate\Support\Facades\Cache::remember("surah_prev_{$surah->number}", 86400, function () use ($surah) {
+            return Surah::where('number', $surah->number - 1)->first();
+        });
+        $nextSurah = \Illuminate\Support\Facades\Cache::remember("surah_next_{$surah->number}", 86400, function () use ($surah) {
+            return Surah::where('number', $surah->number + 1)->first();
+        });
 
         // Get popular/most-searched surahs for the related section
         $popularSlugs = [

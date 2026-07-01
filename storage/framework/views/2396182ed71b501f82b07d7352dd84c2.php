@@ -426,9 +426,9 @@
         <div class="section-inner" style="text-align: center;">
             <h2 class="section-title" style="font-size: 2rem;">Ayah of the <span>Day</span></h2>
             <div class="arabic-divider"><span class="line"></span><span class="symbol">﷽</span><span class="line"></span></div>
-            <div style="font-size: 2.5rem; color: var(--gold); margin: 20px 0; font-family: 'Jameel Noori Nastaleeq', 'Amiri', serif; line-height: 1.5;"><?php echo e($ayahOfDay->text_ar); ?></div>
-            <p style="font-size: 1.2rem; color: var(--text-dark); max-width: 800px; margin: 0 auto; line-height: 1.6;">"<?php echo e($ayahOfDay->translation_en); ?>"</p>
-            <p style="color: var(--text-light); margin-top: 10px;"><?php echo e($ayahOfDay->translation_ur); ?></p>
+            <div style="font-size: 2.5rem; color: var(--gold); margin: 20px 0; font-family: 'Jameel Noori Nastaleeq', 'Amiri', serif; line-height: 1.5;"><?php echo e($ayahOfDay->arabic_text); ?></div>
+            <p style="font-size: 1.2rem; color: var(--text-dark); max-width: 800px; margin: 0 auto; line-height: 1.6;">"<?php echo e($ayahOfDay->englishTranslation->text ?? ''); ?>"</p>
+            <p style="color: var(--text-light); margin-top: 10px;"><?php echo e($ayahOfDay->urduTranslation->text ?? ''); ?></p>
             <p style="font-weight: 600; color: var(--primary); margin-top: 15px;">Surah <?php echo e($ayahOfDay->surah->name_en ?? 'Unknown'); ?>, Ayah <?php echo e($ayahOfDay->ayah_number); ?></p>
         </div>
     </section>

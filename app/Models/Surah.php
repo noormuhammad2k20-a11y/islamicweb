@@ -10,7 +10,7 @@ class Surah extends Model
 
     public function ayahs()
     {
-        return $this->hasMany(SurahAyah::class);
+        return $this->hasMany(Ayah::class)->orderBy('ayah_number');
     }
 
     public function reviews()
@@ -28,10 +28,7 @@ class Surah extends Model
         return $this->hasMany(FazilatEntry::class);
     }
 
-    public function tafseer()
-    {
-        return $this->hasMany(Tafseer::class);
-    }
+    // removed old tafseer relationship
 
     public function recitations()
     {

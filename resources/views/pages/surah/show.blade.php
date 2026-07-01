@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Surah ' . $surah->name_en . ' (' . $surah->number . ') — Read Online Arabic with Urdu & English Translation')
-@section('meta_description', 'Read Surah ' . $surah->name_en . ' (' . $surah->name_ar . ') online with complete Arabic text, Urdu and English translation. ' . $surah->ayah_count . ' Ayahs, ' . $surah->revelation_place . ' Surah, Juz ' . $surah->para_juz . '. Listen to audio recitation and download PDF.')
+@section('meta_description', 'Read Surah ' . $surah->name_en . ' (' . $surah->name_ar . ') online with complete Arabic text, Urdu and English translation. ' . $surah->total_ayahs . ' Ayahs, ' . $surah->revelation_type . ' Surah, Juz ' . $surah->juz_start . '. Listen to audio recitation and download PDF.')
+@section('canonical', route('surah.show', $surah->slug))
 
 @php
 if (!function_exists('ordinal')) {
@@ -14,6 +15,9 @@ if (!function_exists('ordinal')) {
 @endphp
 
 @section('content')
+<div class="scroll-progress-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(0,0,0,0.1); z-index: 9999;">
+    <div id="scrollProgressBar" style="height: 100%; background: var(--primary); width: 0%; transition: width 0.1s;"></div>
+</div>
 <style>
     .surah-page-nav-wrapper {
         position: sticky;
@@ -97,30 +101,30 @@ if (!function_exists('ordinal')) {
                 <div class="surah-stat-pill">
                     <i class="fas fa-list-ol"></i>
                     <div>
-                        <span class="pill-value">{{ $surah->ayah_count }}</span>
+                        <span class="pill-value">{{ $surah->total_ayahs }}</span>
                         <span class="pill-label">Ayahs</span>
                     </div>
                 </div>
                 <div class="surah-stat-pill">
                     <i class="fas fa-bookmark"></i>
                     <div>
-                        <span class="pill-value">{{ $surah->para_juz }}</span>
+                        <span class="pill-value">{{ $surah->juz_start }}</span>
                         <span class="pill-label">Juz/Para</span>
                     </div>
                 </div>
-                @if($surah->ruku_count)
+                @if($surah->total_rukus)
                 <div class="surah-stat-pill">
                     <i class="fas fa-layer-group"></i>
                     <div>
-                        <span class="pill-value">{{ $surah->ruku_count }}</span>
+                        <span class="pill-value">{{ $surah->total_rukus }}</span>
                         <span class="pill-label">Rukus</span>
                     </div>
                 </div>
                 @endif
                 <div class="surah-stat-pill">
-                    <i class="fas {{ ($surah->revelation_place == 'Madani') ? 'fa-mosque' : 'fa-kaaba' }}"></i>
+                    <i class="fas {{ ($surah->revelation_type == 'Madani' || $surah->revelation_type == 'Medinan') ? 'fa-mosque' : 'fa-kaaba' }}"></i>
                     <div>
-                        <span class="pill-value">{{ $surah->revelation_place }}</span>
+                        <span class="pill-value">{{ $surah->revelation_type }}</span>
                         <span class="pill-label">Revealed In</span>
                     </div>
                 </div>
@@ -259,15 +263,17 @@ if (!function_exists('ordinal')) {
         @endif
 
         {{-- Full Arabic Text --}}
-        @if($surah->arabic_text)
+        @if($surah->ayahs->count() > 0)
             <div class="surah-content-card" id="arabic-text">
                 <div class="surah-content-card-header">
                     <i class="fas fa-book-open"></i>
                     <h3>Full Arabic Text</h3>
                 </div>
                 <div style="text-align: right; padding: 30px;">
-                    <p style="font-family: 'Amiri', serif; font-size: 2.2rem; line-height: 2.5; color: #222;">
-                        {{ $surah->arabic_text }}
+                    <p style="font-family: 'Amiri', serif; font-size: 2.2rem; line-height: 2.5; color: #222;" dir="rtl">
+                        @foreach($surah->ayahs as $ayah)
+                            {{ $ayah->arabic_text }} <span style="font-size: 1.5rem; color: var(--gold-light);">۝</span>
+                        @endforeach
                     </p>
                 </div>
             </div>
@@ -275,14 +281,17 @@ if (!function_exists('ordinal')) {
 
         {{-- Ayah by Ayah View --}}
         @if($surah->ayahs->count() > 0)
-            <div class="surah-content-card" id="translations" style="margin-top: 30px;">
-                <div class="surah-content-card-header">
-                    <i class="fas fa-align-right"></i>
-                    <h3>Verse by Verse with Translation</h3>
+            <div class="surah-content-card" id="translations" style="margin-top: 30px;" aria-label="Translations and Tafsir">
+                <div class="surah-content-card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <i class="fas fa-align-right" aria-hidden="true"></i>
+                        <h3 style="display: inline-block; margin-left: 10px; margin-bottom: 0;">Verse by Verse with Translation & Tafsir</h3>
+                    </div>
+                    <button id="readingModeBtn" class="surah-action-btn" onclick="toggleReadingMode()" aria-label="Toggle Reading Mode" style="margin: 0; padding: 8px 15px; font-size: 0.9rem;"><i class="fas fa-book-reader" aria-hidden="true"></i> Reading Mode</button>
                 </div>
                 <div style="padding: 0;">
                     @foreach($surah->ayahs as $ayah)
-                        <div class="surah-ayah-block">
+                        <div class="surah-ayah-block" id="ayah-{{ $ayah->ayah_number }}">
                             {{-- Ayah Number & Arabic --}}
                             <div class="surah-ayah-arabic-row">
                                 <div class="surah-ayah-number-circle">{{ $ayah->ayah_number }}</div>
@@ -290,15 +299,36 @@ if (!function_exists('ordinal')) {
                                     {{ $ayah->arabic_text }}
                                 </div>
                             </div>
+                            <div class="surah-ayah-actions" style="margin-top: 5px; display: flex; gap: 10px; justify-content: flex-end;">
+                                <button class="surah-action-btn copy-ayah-btn" data-text="{{ $ayah->arabic_text }}" onclick="copyAyah(this)" aria-label="Copy Ayah {{ $ayah->ayah_number }}" style="font-size: 0.85rem; padding: 5px 12px;"><i class="fas fa-copy" aria-hidden="true"></i> Copy</button>
+                            </div>
                             {{-- Translations --}}
                             <div class="surah-ayah-translations">
                                 <div class="surah-ayah-translation urdu">
                                     <h4><i class="fas fa-language"></i> Urdu Translation</h4>
-                                    <p>{{ $ayah->urdu_translation }}</p>
+                                    <p>{{ $ayah->urduTranslation->text ?? '' }}</p>
+                                    @php $urduTafseer = $ayah->tafsirs->where('language', 'urdu')->first(); @endphp
+                                    @if($urduTafseer)
+                                        <details style="margin-top: 15px;">
+                                            <summary aria-expanded="false" style="cursor: pointer; color: var(--primary); font-weight: 600; font-size: 0.95rem; outline: none; user-select: none;"><i class="fas fa-book-open" style="color: var(--gold-light);"></i> View Tafsir ({{ $urduTafseer->scholar_name }})</summary>
+                                            <div style="margin-top: 12px; padding: 18px; background: #fdfbf7; border-left: 4px solid var(--primary); border-radius: 6px; font-size: 1rem; line-height: 1.9; color: #444; font-family: 'Noto Nastaliq Urdu', serif;" dir="rtl">
+                                                {!! nl2br(e($urduTafseer->text)) !!}
+                                            </div>
+                                        </details>
+                                    @endif
                                 </div>
                                 <div class="surah-ayah-translation english">
                                     <h4><i class="fas fa-globe"></i> English Translation</h4>
-                                    <p>{{ $ayah->english_translation }}</p>
+                                    <p>{{ $ayah->englishTranslation->text ?? '' }}</p>
+                                    @php $enTafseer = $ayah->tafsirs->where('language', 'english')->first(); @endphp
+                                    @if($enTafseer)
+                                        <details style="margin-top: 15px;">
+                                            <summary aria-expanded="false" style="cursor: pointer; color: var(--primary); font-weight: 600; font-size: 0.95rem; outline: none; user-select: none;"><i class="fas fa-book-open" style="color: var(--gold-light);"></i> View Tafsir ({{ $enTafseer->scholar_name }})</summary>
+                                            <div style="margin-top: 12px; padding: 18px; background: #fdfbf7; border-left: 4px solid var(--primary); border-radius: 6px; font-size: 0.95rem; line-height: 1.8; color: #444;">
+                                                {!! nl2br(e($enTafseer->text)) !!}
+                                            </div>
+                                        </details>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -308,7 +338,7 @@ if (!function_exists('ordinal')) {
         @endif
 
         {{-- No Content Placeholder --}}
-        @if(!$surah->arabic_text && $surah->ayahs->count() == 0)
+        @if($surah->ayahs->count() == 0)
             <div class="surah-content-card" style="text-align: center; padding: 60px 30px;">
                 <i class="fas fa-book-quran fa-3x" style="color: var(--gold-light); margin-bottom: 18px;"></i>
                 <h3 style="color: var(--primary-dark); margin-bottom: 10px;">Surah Content Coming Soon</h3>
@@ -350,7 +380,7 @@ if (!function_exists('ordinal')) {
                         <i class="fas fa-question-circle"></i> Where was Surah {{ $surah->name_en }} revealed?
                     </h3>
                     <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text" class="surah-faq-answer">Surah {{ $surah->name_en }} ({{ $surah->name_ar }}) is a <strong>{{ $surah->revelation_place }}</strong> Surah, meaning it was revealed in <strong>{{ $surah->revelation_place == 'Makki' ? 'Makkah before the Hijrah (migration)' : 'Madinah after the Hijrah (migration)' }}</strong>.</p>
+                        <p itemprop="text" class="surah-faq-answer">Surah {{ $surah->name_en }} ({{ $surah->name_ar }}) is a <strong>{{ $surah->revelation_type }}</strong> Surah, meaning it was revealed in <strong>{{ ($surah->revelation_type == 'Makki' || $surah->revelation_type == 'Meccan') ? 'Makkah before the Hijrah (migration)' : 'Madinah after the Hijrah (migration)' }}</strong>.</p>
                     </div>
                 </div>
 
@@ -359,7 +389,7 @@ if (!function_exists('ordinal')) {
                         <i class="fas fa-question-circle"></i> How many Ayahs are in Surah {{ $surah->name_en }}?
                     </h3>
                     <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text" class="surah-faq-answer">Surah {{ $surah->name_en }} contains <strong>{{ $surah->ayah_count }} Ayahs</strong> (verses). It is the {{ ordinal($surah->number) }} Surah of the Holy Quran.</p>
+                        <p itemprop="text" class="surah-faq-answer">Surah {{ $surah->name_en }} contains <strong>{{ $surah->total_ayahs }} Ayahs</strong> (verses). It is the {{ ordinal($surah->number) }} Surah of the Holy Quran.</p>
                     </div>
                 </div>
 
@@ -368,7 +398,7 @@ if (!function_exists('ordinal')) {
                         <i class="fas fa-question-circle"></i> Which Juz (Para) contains Surah {{ $surah->name_en }}?
                     </h3>
                     <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text" class="surah-faq-answer">Surah {{ $surah->name_en }} is located in <strong>Juz {{ $surah->para_juz }}</strong> of the Holy Quran.@if($surah->ruku_count) It consists of <strong>{{ $surah->ruku_count }} {{ $surah->ruku_count == 1 ? 'Ruku' : 'Rukus' }}</strong>.@endif</p>
+                        <p itemprop="text" class="surah-faq-answer">Surah {{ $surah->name_en }} is located in <strong>Juz {{ $surah->juz_start }}</strong> of the Holy Quran.@if($surah->total_rukus) It consists of <strong>{{ $surah->total_rukus }} {{ $surah->total_rukus == 1 ? 'Ruku' : 'Rukus' }}</strong>.@endif</p>
                     </div>
                 </div>
 
@@ -377,7 +407,7 @@ if (!function_exists('ordinal')) {
                         <i class="fas fa-question-circle"></i> What is the meaning of Surah {{ $surah->name_en }}?
                     </h3>
                     <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text" class="surah-faq-answer">The name "{{ $surah->name_en }}" translates to "{{ $surah->name_ur }}" in Urdu. It is Surah number {{ $surah->number }} in the Holy Quran with {{ $surah->ayah_count }} verses, revealed in {{ $surah->revelation_place == 'Makki' ? 'Makkah' : 'Madinah' }}.</p>
+                        <p itemprop="text" class="surah-faq-answer">The name "{{ $surah->name_en }}" translates to "{{ $surah->meaning_en ?? $surah->name_ur }}" in Urdu. It is Surah number {{ $surah->number }} in the Holy Quran with {{ $surah->total_ayahs }} verses, revealed in {{ ($surah->revelation_type == 'Makki' || $surah->revelation_type == 'Meccan') ? 'Makkah' : 'Madinah' }}.</p>
                     </div>
                 </div>
             </div>
@@ -415,6 +445,12 @@ if (!function_exists('ordinal')) {
             @endif
         </div>
 
+        {{-- Floating Ayah Navigation --}}
+        <div class="ayah-quick-nav" style="position: fixed; bottom: 80px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 99;">
+            <button onclick="scrollToPrevAyah()" class="surah-action-btn" style="border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin: 0;" aria-label="Previous Ayah"><i class="fas fa-chevron-up"></i></button>
+            <button onclick="scrollToNextAyah()" class="surah-action-btn" style="border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin: 0;" aria-label="Next Ayah"><i class="fas fa-chevron-down"></i></button>
+        </div>
+
         {{-- Popular Surahs --}}
         @if($popularSurahs->count() > 0)
         <div class="section-header" style="margin-top: 70px;">
@@ -430,7 +466,7 @@ if (!function_exists('ordinal')) {
                 <div class="surah-popular-info">
                     <span class="surah-popular-ar">{{ $popular->name_ar }}</span>
                     <h3>{{ $popular->name_en }}</h3>
-                    <span class="surah-popular-meta">{{ $popular->ayah_count }} Ayahs · {{ $popular->revelation_place }}</span>
+                    <span class="surah-popular-meta">{{ $popular->total_ayahs }} Ayahs · {{ $popular->revelation_type }}</span>
                 </div>
                 <i class="fas fa-chevron-right surah-popular-arrow"></i>
             </a>
@@ -447,7 +483,7 @@ if (!function_exists('ordinal')) {
     "@@context": "https://schema.org",
     "@@type": "Article",
     "headline": "Surah {{ $surah->name_en }} – Complete with Translation",
-    "description": "Read Surah {{ $surah->name_en }} online with Arabic text, Urdu and English translation. {{ $surah->ayah_count }} Ayahs, {{ $surah->revelation_place }} Surah.",
+    "description": "Read Surah {{ $surah->name_en }} online with Arabic text, Urdu and English translation. {{ $surah->total_ayahs }} Ayahs, {{ $surah->revelation_type }} Surah.",
     "url": "{{ route('surah.show', $surah->slug) }}",
     "author": { "@@type": "Organization", "name": "Noor-e-Islam" },
     "publisher": { "@@type": "Organization", "name": "Noor-e-Islam" },
@@ -488,8 +524,71 @@ function shareSurah() {
     }
 }
 
+function copyAyah(btn) {
+    const text = btn.getAttribute('data-text');
+    navigator.clipboard.writeText(text).then(function() {
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+        setTimeout(function() { btn.innerHTML = originalHTML; }, 2000);
+    });
+}
+
+function shareAyah(url) {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Ayah from Surah {{ $surah->name_en }}',
+            text: 'Read this beautiful Ayah online.',
+            url: url
+        });
+    } else {
+        navigator.clipboard.writeText(url).then(function() {
+            alert('Ayah link copied to clipboard!');
+        });
+    }
+}
+
+function toggleReadingMode() {
+    const isReadingMode = document.body.classList.toggle('quran-reading-mode');
+    const translations = document.querySelectorAll('.surah-ayah-translations');
+    translations.forEach(el => {
+        el.style.display = isReadingMode ? 'none' : 'grid';
+    });
+    const btn = document.getElementById('readingModeBtn');
+    if (isReadingMode) {
+        btn.innerHTML = '<i class="fas fa-eye" aria-hidden="true"></i> Show Translations';
+    } else {
+        btn.innerHTML = '<i class="fas fa-book-reader" aria-hidden="true"></i> Reading Mode';
+    }
+}
+
+let currentAyahIndex = 1;
+function scrollToAyah(index) {
+    const ayahEl = document.getElementById('ayah-' + index);
+    if(ayahEl) {
+        ayahEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        currentAyahIndex = index;
+    }
+}
+function scrollToNextAyah() {
+    scrollToAyah(currentAyahIndex + 1);
+}
+function scrollToPrevAyah() {
+    if(currentAyahIndex > 1) scrollToAyah(currentAyahIndex - 1);
+}
+
 // Active link highlighting on scroll
 document.addEventListener("DOMContentLoaded", function() {
+    const ayahs = document.querySelectorAll('.surah-ayah-block');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                currentAyahIndex = parseInt(entry.target.id.split('-')[1]);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    ayahs.forEach(ayah => observer.observe(ayah));
+
     const navLinks = document.querySelectorAll('.surah-nav-link');
     const sections = Array.from(navLinks).map(link => {
         return document.querySelector(link.getAttribute('href'));
@@ -516,9 +615,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         }
-    }
+    } // <-- Added missing closing brace for updateNav()
 
-    window.addEventListener('scroll', updateNav, { passive: true });
+    window.addEventListener('scroll', function() {
+        // Active link highlighting
+        updateNav();
+        
+        // Scroll Progress Bar
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("scrollProgressBar").style.width = scrolled + "%";
+    }, { passive: true });
     updateNav(); // Init
 });
 </script>

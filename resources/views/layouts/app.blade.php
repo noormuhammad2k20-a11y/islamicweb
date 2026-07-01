@@ -8,13 +8,14 @@
 
     <!-- SEO Canonical and Hreflang -->
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-    <link rel="canonical" href="{{ isset($seoMeta) && $seoMeta->canonical_url ? $seoMeta->canonical_url : url()->current() }}">
+    <link rel="canonical" href="{{ isset($seoMeta) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current()) }}">
 
     @if(isset($seoMeta) && $seoMeta->schema_override_json)
     <script type="application/ld+json">
     {!! $seoMeta->schema_override_json !!}
     </script>
     @endif
+    @yield('schema')
     @php
         $currentRouteName = Route::currentRouteName();
         $routeParams = Route::current() ? Route::current()->parameters() : [];
@@ -24,9 +25,14 @@
         <link rel="alternate" hreflang="en" href="{{ route($currentRouteName, array_merge($routeParams, ['locale' => null])) }}" />
         <link rel="alternate" hreflang="ur" href="{{ route($currentRouteName, array_merge($routeParams, ['locale' => 'ur'])) }}" />
     @endif
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap"></noscript>
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('og_meta')
 </head>
 <body>
 

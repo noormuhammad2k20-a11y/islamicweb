@@ -428,9 +428,9 @@
         <div class="section-inner" style="text-align: center;">
             <h2 class="section-title" style="font-size: 2rem;">Ayah of the <span>Day</span></h2>
             <div class="arabic-divider"><span class="line"></span><span class="symbol">﷽</span><span class="line"></span></div>
-            <div style="font-size: 2.5rem; color: var(--gold); margin: 20px 0; font-family: 'Jameel Noori Nastaleeq', 'Amiri', serif; line-height: 1.5;">{{ $ayahOfDay->text_ar }}</div>
-            <p style="font-size: 1.2rem; color: var(--text-dark); max-width: 800px; margin: 0 auto; line-height: 1.6;">"{{ $ayahOfDay->translation_en }}"</p>
-            <p style="color: var(--text-light); margin-top: 10px;">{{ $ayahOfDay->translation_ur }}</p>
+            <div style="font-size: 2.5rem; color: var(--gold); margin: 20px 0; font-family: 'Jameel Noori Nastaleeq', 'Amiri', serif; line-height: 1.5;">{{ $ayahOfDay->arabic_text }}</div>
+            <p style="font-size: 1.2rem; color: var(--text-dark); max-width: 800px; margin: 0 auto; line-height: 1.6;">"{{ $ayahOfDay->englishTranslation->text ?? '' }}"</p>
+            <p style="color: var(--text-light); margin-top: 10px;">{{ $ayahOfDay->urduTranslation->text ?? '' }}</p>
             <p style="font-weight: 600; color: var(--primary); margin-top: 15px;">Surah {{ $ayahOfDay->surah->name_en ?? 'Unknown' }}, Ayah {{ $ayahOfDay->ayah_number }}</p>
         </div>
     </section>

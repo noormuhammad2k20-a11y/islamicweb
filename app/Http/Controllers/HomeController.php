@@ -8,7 +8,7 @@ use App\Models\SiteSetting;
 use App\Models\City;
 use App\Models\HijriDateCache;
 use App\Models\PrayerTime;
-use App\Models\SurahAyah;
+use App\Models\Ayah;
 use App\Models\AllahName;
 use App\Models\KnowledgeArticle;
 use App\Models\IslamicEvent;
@@ -35,7 +35,7 @@ class HomeController extends Controller
         // Fetch popular surahs (e.g. Yaseen, Rahman, Mulk, Kahf)
         $popularSurahs = \App\Models\Surah::whereIn('number', [36, 55, 67, 18])->get();
 
-        $ayahOfDay = SurahAyah::inRandomOrder()->first();
+        $ayahOfDay = Ayah::with(['surah', 'englishTranslation', 'urduTranslation'])->inRandomOrder()->first();
         $allahNames = AllahName::all();
         $latestArticles = KnowledgeArticle::latest()->take(3)->get();
         $upcomingEvents = IslamicEvent::take(3)->get();
