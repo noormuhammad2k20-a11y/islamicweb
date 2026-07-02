@@ -274,7 +274,7 @@
                 }
                 .surah-card {
                     background: var(--white);
-                    border: 1px solid rgba(17, 70, 121, 0.08);
+                    border: 1px solid rgba(10, 58, 42, 0.08);
                     border-radius: var(--radius-md);
                     padding: 25px 20px;
                     text-align: center;
@@ -352,7 +352,7 @@
                     font-size: 0.85rem;
                     font-weight: 600;
                     transition: var(--tr);
-                    border: 1px solid rgba(17, 70, 121, 0.1);
+                    border: 1px solid rgba(10, 58, 42, 0.1);
                 }
                 .surah-card:hover .btn-surah {
                     background: var(--primary);
@@ -448,7 +448,7 @@
             </div>
             <div style="display: flex; gap: 15px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none;">
                 @foreach($allahNames->take(12) as $name)
-                <div style="min-width: 140px; background: var(--white); padding: 25px 15px; border-radius: 12px; text-align: center; border: 1px solid rgba(17, 70, 121, 0.08); box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                <div style="min-width: 140px; background: var(--white); padding: 25px 15px; border-radius: 12px; text-align: center; border: 1px solid rgba(10, 58, 42, 0.08); box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
                     <div style="font-size: 1.8rem; color: var(--gold); font-family: 'Amiri', serif; margin-bottom: 10px;">{{ $name->arabic }}</div>
                     <div style="font-weight: 700; color: var(--primary); font-size: 1.1rem;">{{ $name->transliteration }}</div>
                     <div style="font-size: 0.8rem; color: var(--text-light); margin-top: 5px;">{{ Str::limit($name->meaning_english, 20) }}</div>
@@ -469,7 +469,7 @@
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px;">
                 @foreach($latestArticles as $article)
-                <div style="background: var(--white); border: 1px solid rgba(17, 70, 121, 0.1); border-radius: 12px; overflow: hidden; transition: var(--tr); box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                <div style="background: var(--white); border: 1px solid rgba(10, 58, 42, 0.1); border-radius: 12px; overflow: hidden; transition: var(--tr); box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                     <div style="padding: 25px;">
                         <span style="font-size: 0.8rem; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">{{ $article->category->name ?? 'Knowledge' }}</span>
                         <h3 style="font-size: 1.3rem; margin: 10px 0; color: var(--text-dark); line-height: 1.4;">{{ $article->title }}</h3>
@@ -525,7 +525,7 @@
                 }
                 .compact-card {
                     background: var(--secondary-light);
-                    border: 1px solid rgba(17, 70, 121, 0.06);
+                    border: 1px solid rgba(10, 58, 42, 0.06);
                     border-radius: var(--radius-md);
                     padding: 25px 15px;
                     text-align: center;

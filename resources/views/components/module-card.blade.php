@@ -23,7 +23,7 @@
     text-decoration: none;
     color: var(--text-dark);
     box-shadow: var(--shadow-sm);
-    border: 1px solid rgba(17, 70, 121, 0.05);
+    border: 1px solid rgba(10, 58, 42, 0.05);
     transition: var(--tr);
     position: relative;
     overflow: hidden;
@@ -33,7 +33,7 @@
 .module-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
-    border-color: rgba(17, 70, 121, 0.2);
+    border-color: rgba(10, 58, 42, 0.2);
 }
 
 .module-card-badge {
@@ -51,7 +51,7 @@
 .module-card-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, rgba(17, 70, 121, 0.05), rgba(17, 70, 121, 0.1));
+    background: linear-gradient(135deg, rgba(10, 58, 42, 0.05), rgba(10, 58, 42, 0.1));
     border-radius: 50%;
     display: flex;
     align-items: center;

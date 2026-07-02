@@ -53,6 +53,7 @@ $appRoutes = function () {
     Route::prefix('prayer-times')->group(function () {
         Route::get('/', [PrayerTimesController::class, 'hub'])->name('prayer-times.hub');
         Route::get('/{city:slug}', [PrayerTimesController::class, 'city'])->name('prayer-times.city');
+        Route::get('/{city:slug}/nawafil', [PrayerTimesController::class, 'nawafil'])->name('prayer-times.nawafil');
     });
 
     // CLUSTER 2.1 — Namaz Guides
@@ -114,7 +115,11 @@ $appRoutes = function () {
     Route::get('/tasbeeh', [\App\Http\Controllers\TasbeehController::class, 'index'])->name('tasbeeh.index');
 
     // CLUSTER 10 — Ramadan Section
-    Route::prefix('ramadan')->group(function () {
+    Route::get('/ramadan/{year}', [RamadanController::class, 'hub'])->name('ramadan.hub');
+    Route::get('/ramadan/{year}/{city:slug}', [RamadanController::class, 'city'])->name('ramadan.city');
+    Route::get('/sehri-iftar-timings/{city:slug}', [RamadanController::class, 'city']);
+    Route::get('/sehr-o-iftar/{city:slug}', [RamadanController::class, 'city']);
+    Route::prefix('ramadan-guide')->group(function () {
         Route::get('/calendar', [RamadanController::class, 'calendar'])->name('ramadan.calendar');
         Route::get('/timetable', [RamadanController::class, 'timetable'])->name('ramadan.timetable');
         Route::get('/duas', [RamadanController::class, 'duas'])->name('ramadan.duas');

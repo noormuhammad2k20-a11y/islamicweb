@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', 'Daily Duas & Azkar'); ?>
 
 <?php $__env->startSection('content'); ?>

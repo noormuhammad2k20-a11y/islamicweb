@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', 'Islamic Calendar & Events — Hijri Dates'); ?>
 
 <?php $__env->startSection('content'); ?>

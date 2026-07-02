@@ -1,19 +1,21 @@
-<?php $__env->startSection('title', 'Ramadan Calendar — Noor-e-Islam'); ?>
-<?php $__env->startSection('meta_description', 'Local city-based schedule and countdown'); ?>
+
+
+<?php $__env->startSection('title', 'Learn Salah — Noor-e-Islam'); ?>
+<?php $__env->startSection('meta_description', 'Importance and Pillars of Salah'); ?>
 
 <?php $__env->startSection('content'); ?>
 <section class="section" style="padding-top: 60px; padding-bottom: 60px;">
     <div class="section-inner">
         <?php if (isset($component)) { $__componentOriginalf8d4ea307ab1e58d4e472a43c8548d8e = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalf8d4ea307ab1e58d4e472a43c8548d8e = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.page-header','data' => ['title' => 'Ramadan Calendar','desc' => 'Local city-based schedule and countdown','icon' => 'fa-calendar-alt']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.page-header','data' => ['title' => 'Learn Salah','desc' => 'Importance and Pillars of Salah','icon' => 'fa-praying-hands']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('page-header'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['title' => 'Ramadan Calendar','desc' => 'Local city-based schedule and countdown','icon' => 'fa-calendar-alt']); ?>
+<?php $component->withAttributes(['title' => 'Learn Salah','desc' => 'Importance and Pillars of Salah','icon' => 'fa-praying-hands']); ?>
 <?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
 <?php echo $__env->renderComponent(); ?>
@@ -28,18 +30,18 @@
 <?php endif; ?>
 
         <div class="modules-grid">
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($items) && count($items) > 0): ?>
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($guides) && count($guides) > 0): ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $guides; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $guide): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                     <?php if (isset($component)) { $__componentOriginal51af8fcedb96b90eb762c804b9e96d95 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal51af8fcedb96b90eb762c804b9e96d95 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.module-card','data' => ['title' => ''.e($item->title ?? $item->name).'','desc' => ''.e(Str::limit($item->description ?? $item->overview ?? $item->content, 80)).'','icon' => ''.e($item->icon ?? 'fa-calendar-alt').'','url' => '#','badge' => ''.e($item->type ?? null).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.module-card','data' => ['title' => ''.e($guide->title ?? $guide->name).'','desc' => ''.e(Str::limit($guide->description ?? $guide->overview ?? $guide->content, 80)).'','icon' => ''.e($guide->icon ?? 'fa-praying-hands').'','url' => '#','badge' => ''.e($guide->type ?? null).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('module-card'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['title' => ''.e($item->title ?? $item->name).'','desc' => ''.e(Str::limit($item->description ?? $item->overview ?? $item->content, 80)).'','icon' => ''.e($item->icon ?? 'fa-calendar-alt').'','url' => '#','badge' => ''.e($item->type ?? null).'']); ?>
+<?php $component->withAttributes(['title' => ''.e($guide->title ?? $guide->name).'','desc' => ''.e(Str::limit($guide->description ?? $guide->overview ?? $guide->content, 80)).'','icon' => ''.e($guide->icon ?? 'fa-praying-hands').'','url' => '#','badge' => ''.e($guide->type ?? null).'']); ?>
 <?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
 
 <?php echo $__env->renderComponent(); ?>
@@ -64,4 +66,5 @@
     </div>
 </section>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/ramadan/calendar.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/namaz/index.blade.php ENDPATH**/ ?>

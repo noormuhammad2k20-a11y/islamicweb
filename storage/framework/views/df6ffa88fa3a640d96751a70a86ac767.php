@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', 'Hadith about ' . $topic->topic_name . ' — Authentic Islamic Traditions'); ?>
 
 <?php $__env->startSection('content'); ?>

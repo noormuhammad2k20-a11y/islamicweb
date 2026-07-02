@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', ucfirst($title ?? 'Page') . ' — Noor-e-Islam'); ?>
 <?php $__env->startSection('meta_description', 'Learn more about ' . ($title ?? 'this topic') . ' on Noor-e-Islam.'); ?>
 
@@ -20,4 +22,5 @@
     </div>
 </section>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/placeholder.blade.php ENDPATH**/ ?>

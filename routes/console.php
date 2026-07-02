@@ -9,5 +9,9 @@ Artisan::command('inspire', function () {
 
 use Illuminate\Support\Facades\Schedule;
 
-Schedule::command('islamic:refresh')->dailyAt('00:01');
-Schedule::command('islamic:fetch-calendar')->dailyAt('00:05');
+Schedule::command('islamic:refresh-prayer-times')->dailyAt('04:00');
+Schedule::command('islamic:refresh-hijri-date')->dailyAt('00:30');
+Schedule::command('islamic:refresh-zakat-rates')->weeklyOn(1, '06:00');
+Schedule::command('islamic:generate-sitemap')->dailyAt('02:00');
+Schedule::command('islamic:rotate-hadith-of-day')->dailyAt('00:00');
+Schedule::command('islamic:refresh-ramadan-timings')->dailyAt('04:30')->when(fn() => in_array(now()->month, [8,9,10]));

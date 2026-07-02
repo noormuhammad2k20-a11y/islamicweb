@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', 'Holy Quran — Noor-e-Islam'); ?>
 <?php $__env->startSection('meta_description', 'Read, Listen, and Explore the Quran'); ?>
 
@@ -64,4 +66,5 @@
     </div>
 </section>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/quran/index.blade.php ENDPATH**/ ?>

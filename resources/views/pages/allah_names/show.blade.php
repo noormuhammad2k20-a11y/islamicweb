@@ -71,7 +71,7 @@
             <div style="background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 40px; margin-bottom: 30px;" class="no-print">
                 <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 1.5rem;"><i class="fas fa-volume-up" style="color: var(--gold); margin-right: 10px;"></i> Pronunciation</h3>
                 <div style="display: flex; align-items: center; gap: 15px;">
-                    <button onclick="playPronunciation()" title="Play Pronunciation" style="background: var(--primary); color: white; border: none; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(17,70,121,0.2); font-size: 1.2rem; transition: transform 0.2s;">
+                    <button onclick="playPronunciation()" title="Play Pronunciation" style="background: var(--primary); color: white; border: none; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(10, 58, 42,0.2); font-size: 1.2rem; transition: transform 0.2s;">
                         <i class="fas fa-play" style="margin-left: 4px;"></i>
                     </button>
                     <span style="color: var(--text-dark); font-size: 1.1rem; font-weight: 500;">Listen to Arabic Pronunciation</span>
@@ -115,11 +115,11 @@
             <div style="background: var(--secondary-light); border-radius: 12px; padding: 30px; margin-bottom: 30px;">
                 <h4 style="color: var(--primary); margin-bottom: 15px;">Quick Details</h4>
                 <ul style="list-style: none; padding: 0; margin: 0;">
-                    <li style="margin-bottom: 15px; border-bottom: 1px solid rgba(17,70,121,0.1); padding-bottom: 10px;">
+                    <li style="margin-bottom: 15px; border-bottom: 1px solid rgba(10, 58, 42,0.1); padding-bottom: 10px;">
                         <span style="font-weight: 600; color: var(--text-dark); display: block;">Arabic:</span>
                         <span lang="ar" dir="rtl" style="color: var(--gold); font-size: 1.8rem; font-family: 'Amiri', serif;">{{ $name->arabic }}</span>
                     </li>
-                    <li style="margin-bottom: 15px; border-bottom: 1px solid rgba(17,70,121,0.1); padding-bottom: 10px;">
+                    <li style="margin-bottom: 15px; border-bottom: 1px solid rgba(10, 58, 42,0.1); padding-bottom: 10px;">
                         <span style="font-weight: 600; color: var(--text-dark); display: block;">English:</span>
                         <span style="color: var(--text-light);">{{ $name->meaning_english }}</span>
                     </li>

@@ -5,288 +5,636 @@
 
 @section('content')
 <style>
-    /* VIP Aesthetic */
-    .vip-container {
-        font-family: 'Inter', sans-serif;
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap');
+
+    :root {
+        --primary: #145DA0;
+        --primary-dark: #0C3D6E;
+        --primary-light: #3D8FD1;
+        --primary-glow: rgba(20, 93, 160, 0.25);
+        --primary-subtle: rgba(20, 93, 160, 0.07);
+        --secondary: #F5F8F7;
+        --secondary-dark: #E8F1ED;
+        --secondary-light: #FBFDFC;
+        --gold: #B8863B;
+        --gold-light: #D9AE6C;
+        --gold-dark: #8C631F;
+        --text-dark: #15211D;
+        --text-medium: #44544E;
+        --text-light: #76867F;
+        --white: #ffffff;
+        --shadow-sm: 0 1px 4px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 16px rgba(0,0,0,0.07);
+        --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+        --shadow-xl: 0 12px 48px rgba(0,0,0,0.12);
+        --radius-sm: 6px;
+        --radius-md: 10px;
+        --radius-lg: 16px;
+        --radius-xl: 28px;
+        --tr: all 0.25s ease;
     }
-    .input-card {
-        background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        border: 1px solid rgba(0,0,0,0.06);
-        padding: 40px;
-        position: relative;
+
+    .zakat-page * { box-sizing: border-box; }
+    .zakat-page { font-family: 'Poppins', sans-serif; background: var(--secondary-light); color: var(--text-dark); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* ====== TOP BAR ====== */
+    .z-top-bar { background: var(--primary-dark); padding: 7px 0; font-size: 0.78rem; color: rgba(255,255,255,0.85); }
+    .z-top-bar-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; display: flex; justify-content: space-between; align-items: center; }
+    .z-top-bar-left { display: flex; align-items: center; gap: 22px; }
+    .z-top-bar-left span { display: flex; align-items: center; gap: 6px; }
+    .z-top-bar-left i { color: var(--gold-light); font-size: 0.72rem; }
+    .z-top-bar-right { display: flex; align-items: center; gap: 12px; }
+    .z-top-bar-right a { color: rgba(255,255,255,0.85); text-decoration: none; width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; font-size: 0.68rem; transition: var(--tr); }
+    .z-top-bar-right a:hover { background: var(--gold); color: var(--primary-dark); border-color: var(--gold); }
+    .z-hijri-date { font-family: 'Amiri', serif; color: var(--gold-light); font-size: 0.88rem; }
+
+    /* ====== NAVBAR ====== */
+    .z-navbar { background: var(--white); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(20,93,160,0.06); transition: var(--tr); }
+    .z-navbar.scrolled { box-shadow: var(--shadow-md); border-bottom-color: transparent; }
+    .z-navbar-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .z-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .z-logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 3px 12px var(--primary-glow); }
+    .z-logo-icon i { color: var(--white); font-size: 1.1rem; }
+    .z-logo-icon::after { content: ''; position: absolute; inset: -2.5px; border-radius: 50%; border: 1.5px solid var(--gold); opacity: 0.4; }
+    .z-logo-text { display: flex; flex-direction: column; }
+    .z-logo-text-ar { font-family: 'Amiri', serif; font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); line-height: 1.15; }
+    .z-logo-text-en { font-size: 0.6rem; color: var(--text-light); letter-spacing: 2.5px; text-transform: uppercase; font-weight: 500; }
+    .z-nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+    .z-nav-links a { text-decoration: none; color: var(--text-medium); font-size: 0.85rem; font-weight: 500; padding: 8px 14px; border-radius: var(--radius-sm); transition: var(--tr); position: relative; }
+    .z-nav-links a:hover { color: var(--primary); background: var(--primary-subtle); }
+    .z-nav-links a.active { color: var(--primary); background: var(--primary-subtle); }
+    .z-nav-links a.active::after { content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: 18px; height: 2px; background: var(--primary); border-radius: 2px; }
+
+    .z-mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; z-index: 1002; }
+    .z-mobile-toggle span { width: 22px; height: 2px; background: var(--text-dark); border-radius: 2px; transition: var(--tr); }
+    .z-mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .z-mobile-toggle.active span:nth-child(2) { opacity: 0; }
+    .z-mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .z-mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
+    .z-mobile-overlay.active { opacity: 1; }
+    .z-mobile-menu { position: fixed; top: 0; right: -300px; width: 290px; height: 100%; background: var(--white); z-index: 1001; padding: 90px 24px 30px; transition: right 0.35s ease; overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.1); }
+    .z-mobile-menu.active { right: 0; }
+    .z-mobile-menu a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-dark); font-size: 0.95rem; font-weight: 500; padding: 14px 16px; border-radius: var(--radius-sm); transition: var(--tr); border-bottom: 1px solid rgba(20,93,160,0.05); }
+    .z-mobile-menu a:hover, .z-mobile-menu a.active { color: var(--primary); background: var(--primary-subtle); }
+    .z-mobile-menu a i { width: 20px; text-align: center; color: var(--primary); font-size: 0.9rem; }
+
+    /* ====== BREADCRUMB ====== */
+    .z-breadcrumb { background: var(--secondary); border-bottom: 1px solid rgba(20,93,160,0.06); padding: 14px 0; }
+    .z-breadcrumb-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; gap: 10px; font-size: 0.82rem; list-style: none; }
+    .z-breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 500; transition: var(--tr); }
+    .z-breadcrumb a:hover { color: var(--primary-dark); }
+    .z-breadcrumb-sep { color: var(--text-light); font-size: 0.7rem; }
+    .z-breadcrumb-current { color: var(--text-light); font-weight: 500; }
+
+    /* ====== PAGE HERO ====== */
+    .z-hero { position: relative; background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 45%, #1C7BC4 75%, var(--primary-dark) 100%); overflow: hidden; padding: 60px 0 55px; }
+    .z-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.04; background-image: radial-gradient(circle at 25% 25%, var(--gold) 1px, transparent 1px), radial-gradient(circle at 75% 75%, var(--white) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; }
+    .z-hero-glow { position: absolute; border-radius: 50%; pointer-events: none; }
+    .z-hero-glow-1 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(184,134,59,0.1), transparent 70%); top: -150px; right: -60px; }
+    .z-hero-glow-2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(20,93,160,0.12), transparent 70%); bottom: -100px; left: -60px; }
+    .z-hero-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; text-align: center; }
+    .z-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.09); backdrop-filter: blur(8px); padding: 6px 18px; border-radius: var(--radius-xl); font-size: 0.76rem; font-weight: 500; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.12); color: var(--white); }
+    .z-hero-badge i { color: var(--gold-light); }
+    .z-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 800; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+    .z-hero h1 span { color: var(--gold-light); }
+    .z-hero p { font-size: 1rem; color: rgba(255,255,255,0.72); max-width: 600px; margin: 0 auto; line-height: 1.8; }
+
+    /* ====== CALCULATOR SECTION ====== */
+    .z-calc-section { padding: 70px 0; background: var(--secondary-light); position: relative; }
+    .z-calc-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+    .z-calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+
+    .z-calc-form { background: var(--white); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-md); border: 1px solid rgba(20,93,160,0.05); }
+    .z-calc-form-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .z-calc-form-header i { color: var(--gold); font-size: 1.2rem; width: 36px; height: 36px; background: linear-gradient(135deg, rgba(184,134,59,0.08), rgba(184,134,59,0.14)); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; }
+    .z-calc-form-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-dark); margin: 0; }
+    .z-calc-form > .z-form-desc { font-size: 0.85rem; color: var(--text-light); margin-bottom: 28px; }
+
+    .z-field { margin-bottom: 22px; }
+    .z-field-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .z-field-top label { font-size: 0.84rem; font-weight: 600; color: var(--text-dark); display: flex; align-items: center; gap: 8px; }
+    .z-field-top label i { color: var(--primary); font-size: 0.8rem; width: 28px; height: 28px; background: var(--primary-subtle); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .z-rate-badge { font-size: 0.72rem; color: var(--text-light); background: var(--secondary); padding: 3px 10px; border-radius: var(--radius-xl); font-weight: 500; }
+    .z-rate-badge strong { color: var(--gold-dark); }
+    .z-input-wrap { position: relative; display: flex; align-items: center; }
+    .z-input-prefix { position: absolute; left: 14px; font-size: 0.84rem; font-weight: 600; color: var(--text-light); pointer-events: none; }
+    .z-input-prefix.negative { color: #C0392B; }
+    .z-input { width: 100%; padding: 13px 16px 13px 52px; border: 1.5px solid rgba(20,93,160,0.10); border-radius: var(--radius-sm); font-family: 'Poppins', sans-serif; font-size: 0.92rem; color: var(--text-dark); background: var(--secondary-light); outline: none; transition: var(--tr); }
+    .z-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-subtle); background: var(--white); }
+    .z-input::placeholder { color: var(--text-light); font-weight: 400; font-size: 0.84rem; }
+    .z-input.negative-input:focus { border-color: #C0392B; box-shadow: 0 0 0 3px rgba(192,57,43,0.08); }
+
+    .z-input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+    .z-input-grid .z-field:last-child { margin-bottom: 0; }
+
+    .z-calc-btn { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); border: none; border-radius: var(--radius-sm); font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: var(--tr); display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 3px 16px var(--primary-glow); margin-top: 8px; }
+    .z-calc-btn:hover { box-shadow: 0 6px 24px var(--primary-glow); transform: translateY(-2px); }
+    .z-calc-btn:active { transform: translateY(0); }
+
+    /* ====== RESULTS CARD ====== */
+    .z-result-card { background: var(--white); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-md); border: 1px solid rgba(20,93,160,0.05); position: sticky; top: 96px; }
+    .z-result-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .z-result-header i { color: var(--primary); font-size: 1.1rem; width: 36px; height: 36px; background: var(--primary-subtle); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; }
+    .z-result-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-dark); margin: 0; }
+
+    .z-result-placeholder { text-align: center; padding: 40px 20px; }
+    .z-result-placeholder-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--secondary); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+    .z-result-placeholder-icon i { font-size: 1.6rem; color: var(--text-light); }
+    .z-result-placeholder p { font-size: 0.88rem; color: var(--text-light); line-height: 1.7; max-width: 320px; margin: 0 auto; }
+
+    .z-result-content { display: none; }
+    .z-result-content.active { display: block; animation: zResultFade 0.4s ease; }
+    @keyframes zResultFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .z-nisab-status { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: var(--radius-md); margin-bottom: 22px; font-size: 0.88rem; font-weight: 600; }
+    .z-nisab-status.eligible { background: rgba(39, 174, 96, 0.08); color: #1E8449; border: 1px solid rgba(39, 174, 96, 0.15); }
+    .z-nisab-status.not-eligible { background: rgba(192, 57, 43, 0.06); color: #922B21; border: 1px solid rgba(192, 57, 43, 0.12); }
+    .z-nisab-status i { font-size: 1.1rem; }
+
+    .z-breakdown { margin-bottom: 24px; }
+    .z-bd-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid rgba(20,93,160,0.05); font-size: 0.86rem; }
+    .z-bd-row:last-child { border-bottom: none; }
+    .z-bd-label { color: var(--text-medium); display: flex; align-items: center; gap: 8px; }
+    .z-bd-label i { font-size: 0.75rem; color: var(--text-light); width: 18px; text-align: center; }
+    .z-bd-value { font-weight: 600; color: var(--text-dark); }
+    .z-bd-value.neg { color: #C0392B; }
+    .z-bd-row.total { border-top: 2px solid rgba(20,93,160,0.10); border-bottom: none; margin-top: 4px; padding-top: 14px; }
+    .z-bd-row.total .z-bd-label { font-weight: 700; color: var(--text-dark); }
+    .z-bd-row.total .z-bd-value { font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+
+    .z-zakat-box { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); border-radius: var(--radius-md); padding: 28px; text-align: center; color: var(--white); position: relative; overflow: hidden; }
+    .z-zakat-box::before { content: ''; position: absolute; inset: 0; opacity: 0.03; background-image: radial-gradient(circle, var(--gold) 1px, transparent 1px); background-size: 20px 20px; pointer-events: none; }
+    .z-zakat-box-label { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-bottom: 8px; position: relative; z-index: 1; }
+    .z-zakat-box-amount { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 800; color: var(--gold-light); margin-bottom: 4px; position: relative; z-index: 1; }
+    .z-zakat-box-rate { font-size: 0.76rem; color: rgba(255,255,255,0.45); position: relative; z-index: 1; }
+
+    .z-no-zakat { text-align: center; padding: 30px 20px; }
+    .z-no-zakat-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(192,57,43,0.06); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .z-no-zakat-icon i { font-size: 1.4rem; color: #C0392B; }
+    .z-no-zakat h4 { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+    .z-no-zakat p { font-size: 0.84rem; color: var(--text-light); line-height: 1.7; }
+
+    .z-nisab-info { margin-top: 20px; padding: 14px 18px; background: var(--secondary); border-radius: var(--radius-sm); font-size: 0.78rem; color: var(--text-light); line-height: 1.7; }
+    .z-nisab-info strong { color: var(--text-medium); }
+
+    /* ====== INFO / SEO SECTION ====== */
+    .z-info-section { padding: 80px 0 0; background: var(--secondary-light); }
+    .z-info-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px 60px; }
+
+    .z-info-block { margin-bottom: 50px; }
+    .z-info-block:last-child { margin-bottom: 0; }
+    .z-info-header { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 18px; }
+    .z-info-icon { width: 52px; height: 52px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--primary-subtle), rgba(20,93,160,0.12)); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; color: var(--primary); flex-shrink: 0; border: 1px solid rgba(20,93,160,0.08); }
+    .z-info-header h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--text-dark); line-height: 1.3; margin: 0; }
+    .z-info-block p { font-size: 0.92rem; color: var(--text-medium); line-height: 1.9; margin-bottom: 14px; }
+    .z-info-block p:last-child { margin-bottom: 0; }
+    .z-info-block strong { color: var(--text-dark); font-weight: 600; }
+
+    .z-info-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(20,93,160,0.10), transparent); margin: 0 0 50px; }
+
+    .z-categories-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .z-cat-item { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--white); border-radius: var(--radius-sm); border: 1px solid rgba(20,93,160,0.05); transition: var(--tr); }
+    .z-cat-item:hover { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-subtle); }
+    .z-cat-num { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .z-cat-item h4 { font-size: 0.84rem; font-weight: 600; color: var(--text-dark); margin: 0; }
+    .z-cat-item span { font-family: 'Amiri', serif; font-size: 0.82rem; color: var(--primary); display: block; margin-top: 1px; }
+
+
+
+    /* ====== TOAST ====== */
+    .z-toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--text-dark); color: var(--white); padding: 14px 28px; border-radius: var(--radius-md); font-size: 0.88rem; font-weight: 500; z-index: 9999; opacity: 0; transition: all 0.4s ease; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow-xl); }
+    .z-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .z-toast i { color: var(--gold-light); }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 1024px) {
+        .z-calc-grid { grid-template-columns: 1fr; }
+        .z-result-card { position: static; }
+        .z-categories-grid { grid-template-columns: 1fr; }
+        .z-hero h1 { font-size: 2.3rem; }
     }
-    .input-card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; height: 5px;
-        background: var(--primary);
-        border-radius: 16px 16px 0 0;
+    @media (max-width: 768px) {
+        .z-top-bar-left { display: none; }
+        .z-top-bar-inner { justify-content: center; }
+        .z-nav-links { display: none; }
+        .z-mobile-toggle { display: flex; }
+        .z-calc-section { padding: 50px 0; }
+        .z-calc-inner { padding: 0 20px; }
+        .z-calc-form, .z-result-card { padding: 24px; }
+        .z-hero { padding: 45px 0 40px; }
+        .z-hero-inner { padding: 0 20px; }
+        .z-hero h1 { font-size: 1.9rem; }
+        .z-info-section { padding: 60px 0 0; }
+        .z-info-inner { padding: 0 20px 40px; }
+        .z-info-header h2 { font-size: 1.3rem; }
+        .z-info-block p { font-size: 0.88rem; }
+        .z-breadcrumb-inner { padding: 0 20px; }
+        .z-input-grid { grid-template-columns: 1fr; }
+        .z-input-grid .z-field:last-child { margin-bottom: 22px; }
     }
-    .output-card {
-        background: #fafafa;
-        border-radius: 16px;
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
-        border: 1px solid rgba(0,0,0,0.06);
-        padding: 40px;
-    }
-    .form-group-custom {
-        margin-bottom: 25px;
-    }
-    .form-group-custom label {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
-        color: var(--primary-dark);
-        margin-bottom: 10px;
-        display: block;
-    }
-    .input-wrapper {
-        position: relative;
-    }
-    .input-wrapper .currency-symbol {
-        position: absolute;
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #777;
-        font-weight: 600;
-    }
-    .form-control-vip {
-        width: 100%;
-        padding: 16px 16px 16px 60px;
-        border: 2px solid #eaeaea;
-        border-radius: 10px;
-        font-size: 1.1rem;
-        transition: border-color 0.3s;
-    }
-    .form-control-vip:focus {
-        border-color: var(--primary);
-        outline: none;
-        box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
-    }
-    .btn-vip {
-        background: var(--primary);
-        color: white;
-        border: none;
-        width: 100%;
-        padding: 18px;
-        border-radius: 10px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 600;
-        transition: transform 0.2s;
-        cursor: pointer;
-    }
-    .btn-vip:hover {
-        transform: translateY(-2px);
-    }
-    .result-text {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.15rem;
-        color: #444;
-        line-height: 1.6;
-        padding: 20px;
-        background: #fff;
-        border-radius: 8px;
-        border-left: 4px solid var(--primary);
-        margin-top: 20px;
-    }
-    .seo-article {
-        margin-top: 80px;
-        padding-top: 50px;
-        border-top: 1px solid #eee;
-        font-family: 'Inter', sans-serif;
-        color: #333;
-        line-height: 1.8;
-    }
-    .seo-article h2 {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700;
-        color: var(--primary-dark);
-        margin-bottom: 25px;
-    }
-    .seo-article h3 {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
-        color: var(--primary);
-        margin-top: 35px;
-        margin-bottom: 15px;
+    @media (max-width: 480px) {
+        .z-top-bar { padding: 6px 0; font-size: 0.72rem; }
+        .z-top-bar-right a { width: 24px; height: 24px; font-size: 0.62rem; }
+        .z-navbar-inner { height: 64px; padding: 0 16px; }
+        .z-logo-icon { width: 38px; height: 38px; }
+        .z-logo-icon i { font-size: 0.95rem; }
+        .z-logo-text-ar { font-size: 1.1rem; }
+        .z-hero h1 { font-size: 1.5rem; }
+        .z-hero p { font-size: 0.88rem; }
+        .z-calc-inner { padding: 0 16px; }
+        .z-calc-form, .z-result-card { padding: 20px 16px; }
+        .z-calc-form-header h2, .z-result-header h2 { font-size: 1.15rem; }
+        .z-input { padding: 12px 14px 12px 48px; font-size: 0.86rem; }
+        .z-zakat-box-amount { font-size: 1.9rem; }
+        .z-info-inner { padding: 0 16px 30px; }
+        .z-info-header h2 { font-size: 1.15rem; }
+        .z-info-icon { width: 44px; height: 44px; font-size: 1.1rem; }
+        .z-cat-item { padding: 12px 14px; }
+        .z-cat-item h4 { font-size: 0.8rem; }
+        .z-toast { padding: 12px 20px; font-size: 0.82rem; bottom: 20px; }
     }
 </style>
 
-<section class="section vip-container" style="padding-top: 60px; background-color: #fcfcfc;">
-    <div class="container">
-        <div class="breadcrumb" style="text-align: center; margin-bottom: 40px;">
-            <div style="background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 0.95rem;">
-                <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a> 
-                <span style="color: #ccc; margin: 0 10px;">/</span> 
-                <span style="color: #666; font-weight: 600;">Zakat Calculator</span>
-            </div>
+<div class="zakat-page">
+
+
+
+    <!-- ====== BREADCRUMB ====== -->
+    <div class="z-breadcrumb">
+        <div class="z-breadcrumb-inner">
+            <a href="{{ route('home') }}">Home</a>
+            <i class="fas fa-chevron-right z-breadcrumb-sep"></i>
+            <span class="z-breadcrumb-current">Zakat Calculator</span>
         </div>
+    </div>
 
-        <div class="text-center mb-5">
-            <h1 style="font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--primary-dark);">Zakat Calculator</h1>
-            <p class="text-muted">Accurately determine your obligatory alms based on real-time Nisab values.</p>
+    <!-- ====== PAGE HERO ====== -->
+    <section class="z-hero">
+        <div class="z-hero-glow z-hero-glow-1"></div>
+        <div class="z-hero-glow z-hero-glow-2"></div>
+        <div class="z-hero-inner">
+            <div class="z-hero-badge"><i class="fas fa-hand-holding-usd"></i> Islamic Obligation</div>
+            <h1>Zakat <span>Calculator</span></h1>
+            <p>Accurately determine your obligatory alms based on real-time Nisab values.</p>
         </div>
+    </section>
 
-        <div class="row">
-            <!-- 12-Column Stacked Input Card -->
-            <div class="col-12 col-lg-12 mb-4">
-                <div class="input-card w-100">
-                    <h3 style="font-family: 'Poppins', sans-serif; color: var(--primary-dark); margin-bottom: 30px;">
-                        <i class="fas fa-coins" style="color: var(--gold); margin-right: 10px;"></i> Wealth Assessment
-                    </h3>
-                    
-                    <form id="zakatForm">
-                        <div class="row">
-                            <div class="col-md-6 form-group-custom">
-                                <label>Cash in Hand / Bank</label>
-                                <div class="input-wrapper">
-                                    <span class="currency-symbol">{{ $config->currency_code }}</span>
-                                    <input type="number" id="cashAmount" class="form-control-vip" placeholder="Enter amount" min="0" step="0.01">
-                                </div>
+    <!-- ====== CALCULATOR SECTION ====== -->
+    <section class="z-calc-section" id="zCalculator">
+        <div class="z-calc-inner">
+            <div class="z-calc-grid">
+
+                <!-- FORM -->
+                <div class="z-calc-form z-reveal">
+                    <div class="z-calc-form-header">
+                        <i class="fas fa-coins"></i>
+                        <h2>Wealth Assessment</h2>
+                    </div>
+                    <p class="z-form-desc">Enter your total assets and liabilities to calculate your Zakat obligation.</p>
+
+                    <div class="z-input-grid">
+                        <div class="z-field">
+                            <div class="z-field-top">
+                                <label><i class="fas fa-money-bill-wave"></i> Cash in Hand / Bank</label>
                             </div>
-                            <div class="col-md-6 form-group-custom">
-                                <label>Value of Gold</label>
-                                <div class="input-wrapper">
-                                    <span class="currency-symbol">{{ $config->currency_code }}</span>
-                                    <input type="number" id="goldAmount" class="form-control-vip" placeholder="Enter amount" min="0" step="0.01">
-                                </div>
-                                <small class="text-muted mt-2 d-block">Current Rate: {{ $config->currency_code }} {{ number_format($config->gold_price_per_gram, 2) }} / gram</small>
+                            <div class="z-input-wrap">
+                                <span class="z-input-prefix">{{ $config->currency_code }}</span>
+                                <input type="number" id="zCash" class="z-input" placeholder="0.00" min="0" step="0.01">
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6 form-group-custom">
-                                <label>Value of Silver</label>
-                                <div class="input-wrapper">
-                                    <span class="currency-symbol">{{ $config->currency_code }}</span>
-                                    <input type="number" id="silverAmount" class="form-control-vip" placeholder="Enter amount" min="0" step="0.01">
-                                </div>
-                                <small class="text-muted mt-2 d-block">Current Rate: {{ $config->currency_code }} {{ number_format($config->silver_price_per_gram, 2) }} / gram</small>
+                        <div class="z-field">
+                            <div class="z-field-top">
+                                <label><i class="fas fa-store"></i> Business Inventory</label>
                             </div>
-                            <div class="col-md-6 form-group-custom">
-                                <label>Debts / Liabilities</label>
-                                <div class="input-wrapper">
-                                    <span class="currency-symbol" style="color: #e74c3c;">- {{ $config->currency_code }}</span>
-                                    <input type="number" id="liabilitiesAmount" class="form-control-vip" placeholder="Enter amount" min="0" step="0.01">
-                                </div>
+                            <div class="z-input-wrap">
+                                <span class="z-input-prefix">{{ $config->currency_code }}</span>
+                                <input type="number" id="zInventory" class="z-input" placeholder="0.00" min="0" step="0.01">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="mt-4">
-                            <button type="button" id="calculateBtn" class="btn-vip">
-                                Calculate My Zakat
-                            </button>
+                    <div class="z-input-grid">
+                        <div class="z-field">
+                            <div class="z-field-top">
+                                <label><i class="fas fa-gem"></i> Value of Gold</label>
+                                <span class="z-rate-badge">Current Rate: <strong>{{ $config->currency_code }} {{ number_format($config->gold_price_per_gram, 2) }}</strong> / g</span>
+                            </div>
+                            <div class="z-input-wrap">
+                                <span class="z-input-prefix">{{ $config->currency_code }}</span>
+                                <input type="number" id="zGold" class="z-input" placeholder="0.00" min="0" step="0.01">
+                            </div>
                         </div>
-                    </form>
+                        <div class="z-field">
+                            <div class="z-field-top">
+                                <label><i class="fas fa-ring"></i> Value of Silver</label>
+                                <span class="z-rate-badge">Current Rate: <strong>{{ $config->currency_code }} {{ number_format($config->silver_price_per_gram, 2) }}</strong> / g</span>
+                            </div>
+                            <div class="z-input-wrap">
+                                <span class="z-input-prefix">{{ $config->currency_code }}</span>
+                                <input type="number" id="zSilver" class="z-input" placeholder="0.00" min="0" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="z-field" style="margin-top: 10px;">
+                        <div class="z-field-top">
+                            <label><i class="fas fa-file-invoice-dollar"></i> Debts & Immediate Liabilities</label>
+                        </div>
+                        <div class="z-input-wrap">
+                            <span class="z-input-prefix negative">- {{ $config->currency_code }}</span>
+                            <input type="number" id="zDebt" class="z-input negative-input" placeholder="0.00" min="0" step="0.01">
+                        </div>
+                    </div>
+
+                    <button type="button" class="z-calc-btn" id="zCalcBtn">
+                        <i class="fas fa-calculator"></i> Calculate My Zakat
+                    </button>
                 </div>
-            </div>
 
-            <!-- 12-Column Stacked Output Card -->
-            <div class="col-12 col-lg-12">
-                <div class="output-card w-100" id="outputCard">
-                    <h3 style="font-family: 'Poppins', sans-serif; color: var(--primary-dark); margin-bottom: 20px;">
-                        <i class="fas fa-file-invoice-dollar" style="color: var(--primary); margin-right: 10px;"></i> Calculation Results
-                    </h3>
-                    
-                    <div id="zakatResultContainer">
-                        <div class="result-text" style="border-left-color: #ccc;">
-                            Please enter your assets and liabilities in the form above and click calculate to view your detailed Zakat obligation.
+                <!-- RESULTS -->
+                <div class="z-result-card z-reveal">
+                    <div class="z-result-header">
+                        <i class="fas fa-chart-pie"></i>
+                        <h2>Calculation Results</h2>
+                    </div>
+
+                    <div class="z-result-placeholder" id="zPlaceholder">
+                        <div class="z-result-placeholder-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <p>Please enter your assets and liabilities in the form above and click calculate to view your detailed Zakat obligation.</p>
+                    </div>
+
+                    <div class="z-result-content" id="zResultContent">
+                        <div class="z-nisab-status" id="zNisabStatus">
+                            <i class="fas fa-check-circle"></i>
+                            <span id="zNisabText">Your wealth exceeds the Nisab threshold. Zakat is obligatory.</span>
+                        </div>
+
+                        <div class="z-breakdown" id="zBreakdown">
+                            <div class="z-bd-row">
+                                <span class="z-bd-label"><i class="fas fa-money-bill-wave"></i> Cash in Hand / Bank</span>
+                                <span class="z-bd-value" id="zResCash">{{ $config->currency_code }} 0.00</span>
+                            </div>
+                            <div class="z-bd-row">
+                                <span class="z-bd-label"><i class="fas fa-store"></i> Business Inventory</span>
+                                <span class="z-bd-value" id="zResInv">{{ $config->currency_code }} 0.00</span>
+                            </div>
+                            <div class="z-bd-row">
+                                <span class="z-bd-label"><i class="fas fa-gem"></i> Value of Gold</span>
+                                <span class="z-bd-value" id="zResGold">{{ $config->currency_code }} 0.00</span>
+                            </div>
+                            <div class="z-bd-row">
+                                <span class="z-bd-label"><i class="fas fa-ring"></i> Value of Silver</span>
+                                <span class="z-bd-value" id="zResSilver">{{ $config->currency_code }} 0.00</span>
+                            </div>
+                            <div class="z-bd-row">
+                                <span class="z-bd-label"><i class="fas fa-file-invoice-dollar"></i> Debts / Liabilities</span>
+                                <span class="z-bd-value neg" id="zResDebt">- {{ $config->currency_code }} 0.00</span>
+                            </div>
+                            <div class="z-bd-row total">
+                                <span class="z-bd-label"><i class="fas fa-balance-scale"></i> Net Zakatable Wealth</span>
+                                <span class="z-bd-value" id="zResNet">{{ $config->currency_code }} 0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="z-zakat-box" id="zZakatBox">
+                            <div class="z-zakat-box-label">Your Zakat Obligation</div>
+                            <div class="z-zakat-box-amount" id="zZakatAmount">{{ $config->currency_code }} 0.00</div>
+                            <div class="z-zakat-box-rate">Calculated at 2.5% (1/40th) of net wealth</div>
+                        </div>
+
+                        <div class="z-no-zakat" id="zNoZakat" style="display:none;">
+                            <div class="z-no-zakat-icon"><i class="fas fa-info-circle"></i></div>
+                            <h4>No Zakat Obligation</h4>
+                            <p>Your net wealth is below the Nisab threshold. Zakat is not obligatory for you at this time.</p>
+                        </div>
+
+                        <div class="z-nisab-info" id="zNisabInfo">
+                            <strong>Nisab (Silver Standard):</strong> 595 grams × {{ $config->currency_code }} {{ number_format($config->silver_price_per_gram, 2) }} = <strong>{{ $config->currency_code }} {{ number_format($config->silver_price_per_gram * 595, 2) }}</strong><br>
+                            <strong>Nisab (Gold Standard):</strong> 85 grams × {{ $config->currency_code }} {{ number_format($config->gold_price_per_gram, 2) }} = <strong>{{ $config->currency_code }} {{ number_format($config->gold_price_per_gram * 85, 2) }}</strong><br>
+                            Calculation uses the silver Nisab as recommended by many scholars for broader coverage.
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+    </section>
 
-        <!-- SEO Authoritative Content -->
-        <div class="seo-article">
-            <h2>The Jurisprudence and Economic Impact of Zakat</h2>
-            <p>
-                Zakat is one of the Five Pillars of Islam, representing a mandatory religious duty for all eligible Muslims whose wealth meets or exceeds a specific threshold known as the Nisab. Far more than mere charity, Zakat is an institutionalized mechanism designed to purify wealth, eradicate poverty, and foster socio-economic equity within society. The calculation of Zakat is governed by precise jurisprudential rules derived from the Quran and the Sunnah, ensuring that the distribution of wealth occurs systematically and fairly.
-            </p>
-            <h3>Understanding the Nisab Threshold</h3>
-            <p>
-                The Nisab serves as the minimum baseline of wealth that a Muslim must possess for one complete lunar year (Hawl) before Zakat becomes obligatory. Historically, the Prophet Muhammad (PBUH) established the Nisab based on two primary standards: gold and silver. The threshold was set at 20 Mithqal of gold (approximately 85 grams) or 200 Dirhams of silver (approximately 595 grams). In modern financial contexts, the value of these precious metals is converted into local fiat currency to determine the threshold. Due to the significant divergence in the contemporary valuation of gold and silver, many scholars recommend utilizing the silver Nisab standard, as it is lower and thus ensures a broader safety net for the marginalized members of society.
-            </p>
-            <h3>Assets Subject to Zakat (Zakatable Assets)</h3>
-            <p>
-                Not all forms of wealth are subject to Zakat. Islamic jurisprudence distinguishes between wealth that actively grows (or has the potential for growth) and personal items used for basic living. Zakatable assets strictly include cash in hand, bank balances, physical gold and silver, business inventory, agricultural produce, and livestock. Furthermore, investments such as stocks, mutual funds, and real estate acquired explicitly for resale are also factored into the net calculation. Conversely, one's primary residence, personal vehicle, clothing, and household furniture are strictly exempt from Zakat, as they constitute necessities of life rather than hoarded wealth.
-            </p>
-            <h3>The Calculation Methodology</h3>
-            <p>
-                The standard rate of Zakat on accumulated monetary wealth, gold, silver, and business inventory is unequivocally set at 2.5% (or 1/40th of the total value). The algorithmic approach to calculation requires summing the total value of all Zakatable assets and subsequently subtracting any immediate, short-term debts or liabilities. If the resulting net wealth equals or exceeds the current Nisab threshold, the 2.5% rate is applied to the entire net amount. It is critical to note that if the net wealth falls below the Nisab, the obligation drops entirely, resulting in a zero payable amount. This progressive structure ensures that individuals experiencing financial hardship are protected from the obligation.
-            </p>
-            <h3>The Eight Categories of Recipients</h3>
-            <p>
-                The distribution of Zakat is heavily regulated and restricted to eight specific categories (Asnaf) as explicitly delineated in Surah At-Tawbah (9:60) of the Quran. These categories include the destitute (Al-Fuqara), the needy (Al-Masakin), the administrators of Zakat (Al-Amilina 'Alayha), those whose hearts are to be reconciled (Al-Mu'allafati Qulubuhum), the enslaved or captives seeking freedom (Fir-Riqab), the debt-ridden (Al-Gharimin), those striving in the cause of Allah (Fi Sabilillah), and the stranded traveler (Ibn As-Sabil). Adherence to these strict distribution channels ensures that the socio-economic intervention of Zakat directly targets the most vulnerable demographics, facilitating robust societal stability and economic circulation.
-            </p>
+    <!-- ====== INFO / SEO SECTION ====== -->
+    <section class="z-info-section" id="zInfo">
+        <div class="z-info-inner">
+
+            <div class="z-info-block z-reveal">
+                <div class="z-info-header">
+                    <div class="z-info-icon"><i class="fas fa-scale-balanced"></i></div>
+                    <h2>The Jurisprudence and Economic Impact of Zakat</h2>
+                </div>
+                <p>Zakat is one of the Five Pillars of Islam, representing a mandatory religious duty for all eligible Muslims whose wealth meets or exceeds a specific threshold known as the Nisab. Far more than mere charity, Zakat is an institutionalized mechanism designed to purify wealth, eradicate poverty, and foster socio-economic equity within society. The calculation of Zakat is governed by precise jurisprudential rules derived from the Quran and the Sunnah, ensuring that the distribution of wealth occurs systematically and fairly.</p>
+            </div>
+
+            <div class="z-info-divider"></div>
+
+            <div class="z-info-block z-reveal">
+                <div class="z-info-header">
+                    <div class="z-info-icon"><i class="fas fa-gem"></i></div>
+                    <h2>Understanding the Nisab Threshold</h2>
+                </div>
+                <p>The Nisab serves as the minimum baseline of wealth that a Muslim must possess for one complete lunar year (Hawl) before Zakat becomes obligatory. Historically, the Prophet Muhammad (PBUH) established the Nisab based on two primary standards: gold and silver. The threshold was set at 20 Mithqal of gold (approximately 85 grams) or 200 Dirhams of silver (approximately 595 grams). In modern financial contexts, the value of these precious metals is converted into local fiat currency to determine the threshold.</p>
+                <p>Due to the significant divergence in the contemporary valuation of gold and silver, many scholars recommend utilizing the silver Nisab standard, as it is lower and thus ensures a broader safety net for the marginalized members of society.</p>
+            </div>
+
+            <div class="z-info-divider"></div>
+
+            <div class="z-info-block z-reveal">
+                <div class="z-info-header">
+                    <div class="z-info-icon"><i class="fas fa-coins"></i></div>
+                    <h2>Assets Subject to Zakat (Zakatable Assets)</h2>
+                </div>
+                <p>Not all forms of wealth are subject to Zakat. Islamic jurisprudence distinguishes between wealth that actively grows (or has the potential for growth) and personal items used for basic living. Zakatable assets strictly include cash in hand, bank balances, physical gold and silver, business inventory, agricultural produce, and livestock. Furthermore, investments such as stocks, mutual funds, and real estate acquired explicitly for resale are also factored into the net calculation.</p>
+                <p>Conversely, one's primary residence, personal vehicle, clothing, and household furniture are strictly exempt from Zakat, as they constitute necessities of life rather than hoarded wealth.</p>
+            </div>
+
+            <div class="z-info-divider"></div>
+
+            <div class="z-info-block z-reveal">
+                <div class="z-info-header">
+                    <div class="z-info-icon"><i class="fas fa-calculator"></i></div>
+                    <h2>The Calculation Methodology</h2>
+                </div>
+                <p>The standard rate of Zakat on accumulated monetary wealth, gold, silver, and business inventory is unequivocally set at 2.5% (or 1/40th of the total value). The algorithmic approach to calculation requires summing the total value of all Zakatable assets and subsequently subtracting any immediate, short-term debts or liabilities. If the resulting net wealth equals or exceeds the current Nisab threshold, the 2.5% rate is applied to the entire net amount.</p>
+                <p>It is critical to note that if the net wealth falls below the Nisab, the obligation drops entirely, resulting in a zero payable amount. This progressive structure ensures that individuals experiencing financial hardship are protected from the obligation.</p>
+            </div>
+
+            <div class="z-info-divider"></div>
+
+            <div class="z-info-block z-reveal">
+                <div class="z-info-header">
+                    <div class="z-info-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h2>The Eight Categories of Recipients</h2>
+                </div>
+                <p>The distribution of Zakat is heavily regulated and restricted to eight specific categories (Asnaf) as explicitly delineated in Surah At-Tawbah (9:60) of the Quran. These categories include the destitute (Al-Fuqara), the needy (Al-Masakin), the administrators of Zakat (Al-Amilina 'Alayha), those whose hearts are to be reconciled (Al-Mu'allafati Qulubuhum), the enslaved or captives seeking freedom (Fir-Riqab), the debt-ridden (Al-Gharimin), those striving in the cause of Allah (Fi Sabilillah), and the stranded traveler (Ibn As-Sabil).</p>
+                <p>Adherence to these strict distribution channels ensures that the socio-economic intervention of Zakat directly targets the most vulnerable demographics, facilitating robust societal stability and economic circulation.</p>
+
+                <div class="z-categories-grid">
+                    <div class="z-cat-item">
+                        <div class="z-cat-num">1</div>
+                        <div><h4>Al-Fuqara</h4><span>الفقراء — The Destitute</span></div>
+                    </div>
+                    <div class="z-cat-item">
+                        <div class="z-cat-num">2</div>
+                        <div><h4>Al-Masakin</h4><span>المساكين — The Needy</span></div>
+                    </div>
+                    <div class="z-cat-item">
+                        <div class="z-cat-num">3</div>
+                        <div><h4>Al-Amilina 'Alayha</h4><span>العاملين عليها — Zakat Administrators</span></div>
+                    </div>
+                    <div class="z-cat-item">
+                        <div class="z-cat-num">4</div>
+                        <div><h4>Al-Mu'allafati Qulubuhum</h4><span>المؤلفة قلوبهم — Reconciling Hearts</span></div>
+                    </div>
+                    <div class="z-cat-item">
+                        <div class="z-cat-num">5</div>
+                        <div><h4>Fir-Riqab</h4><span>في الرقاب — Freeing Captives</span></div>
+                    </div>
+                    <div class="z-cat-item">
+                        <div class="z-cat-num">6</div>
+                        <div><h4>Al-Gharimin</h4><span>الغارمين — The Debt-Ridden</span></div>
+                    </div>
+                    <div class="z-cat-item">
+                        <div class="z-cat-num">7</div>
+                        <div><h4>Fi Sabilillah</h4><span>في سبيل الله — In the Cause of Allah</span></div>
+                    </div>
+                    <div class="z-cat-item">
+                        <div class="z-cat-num">8</div>
+                        <div><h4>Ibn As-Sabil</h4><span>ابن السبيل — The Stranded Traveler</span></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
-</section>
+    </section>
+
+</div>
+
+<!-- ====== TOAST ====== -->
+<div class="z-toast" id="zToast"><i class="fas fa-check-circle"></i><span id="zToastMsg"></span></div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+    /* ====== CONFIG FROM PHP ====== */
     var goldRate = {{ $config->gold_price_per_gram }};
     var silverRate = {{ $config->silver_price_per_gram }};
     var currency = '{{ $config->currency_code }}';
-    
-    // Default to silver Nisab (595 grams)
-    var nisabThreshold = silverRate * 595; 
+    var nisabSilver = silverRate * 595;
+    var nisabGold = goldRate * 85;
 
-    var calculateBtn = document.getElementById('calculateBtn');
-    
-    calculateBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        var cash = parseFloat(document.getElementById('cashAmount').value) || 0;
-        var gold = parseFloat(document.getElementById('goldAmount').value) || 0;
-        var silver = parseFloat(document.getElementById('silverAmount').value) || 0;
-        var liabilities = parseFloat(document.getElementById('liabilitiesAmount').value) || 0;
+    /* ====== TOAST ====== */
+    var zToast = document.getElementById('zToast');
+    var zToastMsg = document.getElementById('zToastMsg');
+    var zToastTimer;
+    function zShowToast(msg) {
+        clearTimeout(zToastTimer);
+        if(zToastMsg) zToastMsg.textContent = msg;
+        if(zToast) zToast.classList.add('show');
+        zToastTimer = setTimeout(function() { if(zToast) zToast.classList.remove('show'); }, 3500);
+    }
 
-        var totalAssets = cash + gold + silver;
-        var netWealth = totalAssets - liabilities;
-        
-        var resultContainer = document.getElementById('zakatResultContainer');
-        var formattedNisab = nisabThreshold.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        var formattedNetWealth = Math.max(0, netWealth).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* ====== FORMAT ====== */
+    function zFormat(num) {
+        var abs = Math.abs(num);
+        var f = abs.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return (num < 0 ? '- ' : '') + currency + ' ' + f;
+    }
 
-        if (netWealth <= 0 && totalAssets === 0) {
-            resultContainer.innerHTML = \`
-                <div class="result-text" style="border-left-color: #f39c12; background: #fdfae6;">
-                    <strong>Notice:</strong> Please enter your asset values above to receive a calculation. 
-                    The current Nisab threshold based on silver is <strong>\${currency} \${formattedNisab}</strong>.
-                </div>
-            \`;
-            return;
-        }
+    /* ====== CALCULATE ====== */
+    var zCalcBtn = document.getElementById('zCalcBtn');
+    if (zCalcBtn) {
+        zCalcBtn.addEventListener('click', function(e) {
+            e.preventDefault();
 
-        if (netWealth >= nisabThreshold) {
-            var zakatPayable = netWealth * 0.025;
-            var formattedZakat = zakatPayable.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            var cash = parseFloat(document.getElementById('zCash').value) || 0;
+            var inv = parseFloat(document.getElementById('zInventory').value) || 0;
+            var gold = parseFloat(document.getElementById('zGold').value) || 0;
+            var silver = parseFloat(document.getElementById('zSilver').value) || 0;
+            var debt = parseFloat(document.getElementById('zDebt').value) || 0;
+
+            var totalAssets = cash + inv + gold + silver;
+            var netWealth = totalAssets - debt;
+
+            /* Hide placeholder, show results */
+            var zPlaceholder = document.getElementById('zPlaceholder');
+            if (zPlaceholder) zPlaceholder.style.display = 'none';
             
-            resultContainer.innerHTML = \`
-                <div class="result-text" style="border-left-color: var(--primary); background: rgba(var(--primary-rgb), 0.03);">
-                    <p style="margin-bottom: 10px;">Your calculated net wealth of <strong>\${currency} \${formattedNetWealth}</strong> successfully meets the Nisab threshold of <strong>\${currency} \${formattedNisab}</strong>.</p>
-                    <p style="margin-bottom: 10px; font-size: 1.3rem; font-weight: 700; color: var(--primary-dark);">
-                        Obligatory Zakat Payable: <span style="color: var(--gold);">\${currency} \${formattedZakat}</span>
-                    </p>
-                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 0;">This calculation is based on the 2.5% requirement applied to your total eligible net assets after deducting liabilities.</p>
-                </div>
-            \`;
-        } else {
-            resultContainer.innerHTML = \`
-                <div class="result-text" style="border-left-color: #e74c3c; background: #fdf5f4;">
-                    <p style="margin-bottom: 10px;">Your calculated net wealth of <strong>\${currency} \${formattedNetWealth}</strong> does not meet the minimum Nisab threshold of <strong>\${currency} \${formattedNisab}</strong>.</p>
-                    <p style="margin-bottom: 10px; font-size: 1.3rem; font-weight: 700; color: #e74c3c;">
-                        Obligatory Zakat Payable: 0.00
-                    </p>
-                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 0;">Because your net assets fall below the Nisab threshold, you are legally exempt from the obligation of paying Zakat at this time.</p>
-                </div>
-            \`;
-        }
-    });
-});
+            var rc = document.getElementById('zResultContent');
+            if (rc) {
+                rc.classList.remove('active');
+                void rc.offsetWidth;
+                rc.classList.add('active');
+            }
+
+            /* Fill breakdown */
+            document.getElementById('zResCash').textContent = zFormat(cash);
+            document.getElementById('zResInv').textContent = zFormat(inv);
+            document.getElementById('zResGold').textContent = zFormat(gold);
+            document.getElementById('zResSilver').textContent = zFormat(silver);
+            document.getElementById('zResDebt').textContent = '- ' + zFormat(debt).replace('- ', '');
+            document.getElementById('zResNet').textContent = zFormat(Math.max(0, netWealth));
+
+            var nisabStatus = document.getElementById('zNisabStatus');
+            var nisabText = document.getElementById('zNisabText');
+            var zakatBox = document.getElementById('zZakatBox');
+            var noZakat = document.getElementById('zNoZakat');
+            var breakdown = document.getElementById('zBreakdown');
+            var nisabInfo = document.getElementById('zNisabInfo');
+            var formattedNisab = nisabSilver.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            if (totalAssets === 0) {
+                breakdown.style.display = 'none';
+                zakatBox.style.display = 'none';
+                noZakat.style.display = 'none';
+                nisabInfo.style.display = 'none';
+                nisabStatus.className = 'z-nisab-status not-eligible';
+                nisabStatus.querySelector('i').className = 'fas fa-exclamation-triangle';
+                nisabText.textContent = 'Please enter at least one asset value to receive a calculation.';
+                zShowToast('Please enter your asset values first.');
+                return;
+            }
+
+            breakdown.style.display = '';
+            nisabInfo.style.display = '';
+
+            if (netWealth >= nisabSilver) {
+                var zakat = netWealth * 0.025;
+
+                nisabStatus.className = 'z-nisab-status eligible';
+                nisabStatus.querySelector('i').className = 'fas fa-check-circle';
+                nisabText.textContent = 'Your wealth exceeds the Nisab threshold (' + currency + ' ' + formattedNisab + '). Zakat is obligatory.';
+
+                zakatBox.style.display = '';
+                noZakat.style.display = 'none';
+                document.getElementById('zZakatAmount').textContent = zFormat(zakat);
+
+                zShowToast('Zakat calculated: ' + zFormat(zakat));
+            } else {
+                nisabStatus.className = 'z-nisab-status not-eligible';
+                nisabStatus.querySelector('i').className = 'fas fa-times-circle';
+                nisabText.textContent = 'Your net wealth (' + currency + ' ' + Math.max(0, netWealth).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ') is below the Nisab threshold (' + currency + ' ' + formattedNisab + ').';
+
+                zakatBox.style.display = 'none';
+                noZakat.style.display = '';
+
+                zShowToast('Your wealth is below the Nisab. No Zakat is due.');
+            }
+
+            /* Scroll to results on mobile */
+            if (window.innerWidth <= 1024 && rc) {
+                setTimeout(function() {
+                    rc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 150);
+            }
+        });
+    }
 </script>
 @endsection

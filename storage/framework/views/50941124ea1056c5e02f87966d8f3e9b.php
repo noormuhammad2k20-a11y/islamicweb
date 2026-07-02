@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo e(isset($seoMeta) && $seoMeta->title ? $seoMeta->title : View::getSection('title', 'نورِ اسلام | Noor-e-Islam')); ?></title>
-    <meta name="description" content="<?php echo e(isset($seoMeta) && $seoMeta->meta_description ? $seoMeta->meta_description : View::getSection('meta_description', 'Noor-e-Islam: Accurate Islamic knowledge, prayer times, and Quran.')); ?>">
+    <title><?php echo e(isset($seoMeta->title) && $seoMeta->title ? $seoMeta->title : View::getSection('title', 'نورِ اسلام | Noor-e-Islam')); ?></title>
+    <meta name="description" content="<?php echo e(isset($seoMeta->meta_description) && $seoMeta->meta_description ? $seoMeta->meta_description : (isset($seoMeta->description) && $seoMeta->description ? $seoMeta->description : View::getSection('meta_description', 'Noor-e-Islam: Accurate Islamic knowledge, prayer times, and Quran.'))); ?>">
 
     <!-- SEO Canonical and Hreflang -->
     <link rel="icon" href="<?php echo e(asset('favicon.svg')); ?>" type="image/svg+xml">
-    <link rel="canonical" href="<?php echo e(isset($seoMeta) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current())); ?>">
+    <link rel="canonical" href="<?php echo e(isset($seoMeta->canonical_url) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current())); ?>">
 
-    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($seoMeta) && $seoMeta->schema_override_json): ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($seoMeta->schema_override_json) && $seoMeta->schema_override_json): ?>
     <script type="application/ld+json">
     <?php echo $seoMeta->schema_override_json; ?>
 

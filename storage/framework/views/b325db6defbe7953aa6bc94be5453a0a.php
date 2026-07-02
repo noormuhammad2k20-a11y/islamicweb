@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', '99 Names of Allah (Asma ul Husna)'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -54,7 +56,7 @@
     <h2 style="text-align: center; display: none; margin-bottom: 15px; font-size: 1.5rem;" class="d-print-block">99 Names of Allah</h2>
     <div class="names-grid">
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $names; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-        <a href="<?php echo e(route('names_allah.show', $name->slug)); ?>" class="name-card" style="background: var(--white); border: 1px solid rgba(17, 70, 121, 0.1); border-radius: 12px; padding: 30px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; text-decoration: none;">
+        <a href="<?php echo e(route('names_allah.show', $name->slug)); ?>" class="name-card" style="background: var(--white); border: 1px solid rgba(10, 58, 42, 0.1); border-radius: 12px; padding: 30px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; text-decoration: none;">
             <div class="name-number" style="position: absolute; top: 15px; left: 15px; background: var(--secondary-light); color: var(--primary); font-weight: 700; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
                 <?php echo e($name->number); ?>
 
@@ -104,4 +106,5 @@ function copyName(text, btn) {
 }
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/allah_names/index.blade.php ENDPATH**/ ?>

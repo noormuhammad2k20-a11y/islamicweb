@@ -12,5 +12,10 @@ class City extends Model
     {
         return $this->morphOne(SeoMeta::class, 'metaable');
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }
 

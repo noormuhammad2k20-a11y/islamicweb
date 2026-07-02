@@ -56,7 +56,7 @@
     <h2 style="text-align: center; display: none; margin-bottom: 15px; font-size: 1.5rem;" class="d-print-block">99 Names of Allah</h2>
     <div class="names-grid">
         @foreach($names as $name)
-        <a href="{{ route('names_allah.show', $name->slug) }}" class="name-card" style="background: var(--white); border: 1px solid rgba(17, 70, 121, 0.1); border-radius: 12px; padding: 30px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; text-decoration: none;">
+        <a href="{{ route('names_allah.show', $name->slug) }}" class="name-card" style="background: var(--white); border: 1px solid rgba(10, 58, 42, 0.1); border-radius: 12px; padding: 30px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; text-decoration: none;">
             <div class="name-number" style="position: absolute; top: 15px; left: 15px; background: var(--secondary-light); color: var(--primary); font-weight: 700; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">
                 {{ $name->number }}
             </div>

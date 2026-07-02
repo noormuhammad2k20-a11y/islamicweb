@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', 'Accurate Islamic Prayer Times — Salat & Namaz Timings Worldwide'); ?>
 
 <?php $__env->startSection('content'); ?>
