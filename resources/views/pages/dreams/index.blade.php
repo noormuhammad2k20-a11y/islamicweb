@@ -23,7 +23,6 @@
 
 <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
 
-    {{-- Filter Tabs --}}
     <div style="display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; justify-content: center;">
         <a href="{{ route('dreams.index') }}" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; {{ !request('type') ? 'background: #1a1a3e; color: #fff;' : 'background: #f0f0f0; color: #555;' }}">سب</a>
         <a href="{{ route('dreams.index', ['type' => 'good']) }}" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; {{ request('type') === 'good' ? 'background: #1a6b42; color: #fff;' : 'background: #f0f0f0; color: #555;' }}">
@@ -32,18 +31,38 @@
         <a href="{{ route('dreams.index', ['type' => 'bad']) }}" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; {{ request('type') === 'bad' ? 'background: #c0392b; color: #fff;' : 'background: #f0f0f0; color: #555;' }}">
             <i class="fas fa-frown"></i> برے خواب
         </a>
+        <a href="{{ route('dreams.index', ['type' => 'warning']) }}" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; {{ request('type') === 'warning' ? 'background: #e67e22; color: #fff;' : 'background: #f0f0f0; color: #555;' }}">
+            <i class="fas fa-exclamation-triangle"></i> تنبیہی خواب
+        </a>
+        <a href="{{ route('dreams.index', ['type' => 'neutral']) }}" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; {{ request('type') === 'neutral' ? 'background: #7f8c8d; color: #fff;' : 'background: #f0f0f0; color: #555;' }}">
+            <i class="fas fa-minus-circle"></i> عام خواب
+        </a>
     </div>
 
     @if($symbols->count())
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+    <style>
+        .dreams-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (min-width: 768px) {
+            .dreams-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+    <div class="dreams-grid">
         @foreach($symbols as $symbol)
         <a href="{{ route('dreams.show', $symbol->slug) }}" style="text-decoration: none; color: inherit;">
             <div style="background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #eee; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 24px rgba(26,27,62,0.12)'; this.style.borderColor='#2d1b69';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 2px 12px rgba(0,0,0,0.06)'; this.style.borderColor='#eee';">
 
-                @if($symbol->is_good_dream === 1)
+                @if($symbol->dream_type === 1 || $symbol->is_good_dream === 1)
                 <span style="position: absolute; top: 12px; right: 12px; background: #e8f5ee; color: #1a6b42; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem;"><i class="fas fa-smile"></i> اچھا</span>
-                @elseif($symbol->is_good_dream === 0)
+                @elseif($symbol->dream_type === 2 || $symbol->is_good_dream === 0)
                 <span style="position: absolute; top: 12px; right: 12px; background: #fde8e8; color: #c0392b; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem;"><i class="fas fa-frown"></i> خبردار</span>
+                @elseif($symbol->dream_type === 3)
+                <span style="position: absolute; top: 12px; right: 12px; background: #fcf3cf; color: #e67e22; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem;"><i class="fas fa-exclamation-triangle"></i> تنبیہ</span>
                 @endif
 
                 <div style="text-align: center; margin-bottom: 16px;">
@@ -71,9 +90,8 @@
         </a>
         @endforeach
     </div>
-
     <div style="margin-top: 32px; display: flex; justify-content: center;">
-        {{ $symbols->appends(request()->query())->links() }}
+        {{ $symbols->appends(request()->query())->links('vendor.pagination.custom') }}
     </div>
     @else
     <div style="text-align: center; padding: 60px 20px; color: #888;">

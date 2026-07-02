@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\IslamicQuiz;
+use App\Models\QuizCategory;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -12,10 +13,12 @@ class QuizController extends Controller
         $category = $request->get('category');
         $difficulty = $request->get('difficulty', 'easy');
 
-        $query = IslamicQuiz::query();
+        $query = IslamicQuiz::query()->with('category');
 
         if ($category) {
-            $query->byCategory($category);
+            $query->whereHas('category', function($q) use ($category) {
+                $q->where('slug', $category);
+            });
         }
 
         if ($difficulty) {
@@ -25,9 +28,7 @@ class QuizController extends Controller
         // Get 10 random questions for a quiz session
         $questions = $query->inRandomOrder()->take(10)->get();
 
-        $categories = IslamicQuiz::select('category')
-            ->distinct()
-            ->pluck('category');
+        $categories = QuizCategory::pluck('name_english', 'slug');
 
         $seoMeta = (object) [
             'title' => 'اسلامی کوئز – اپنا اسلامی علم جانچیں | NoorIslam',

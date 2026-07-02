@@ -23,7 +23,6 @@
 
 <div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
 
-    
     <div style="display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; justify-content: center;">
         <a href="<?php echo e(route('dreams.index')); ?>" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; <?php echo e(!request('type') ? 'background: #1a1a3e; color: #fff;' : 'background: #f0f0f0; color: #555;'); ?>">سب</a>
         <a href="<?php echo e(route('dreams.index', ['type' => 'good'])); ?>" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; <?php echo e(request('type') === 'good' ? 'background: #1a6b42; color: #fff;' : 'background: #f0f0f0; color: #555;'); ?>">
@@ -32,18 +31,38 @@
         <a href="<?php echo e(route('dreams.index', ['type' => 'bad'])); ?>" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; <?php echo e(request('type') === 'bad' ? 'background: #c0392b; color: #fff;' : 'background: #f0f0f0; color: #555;'); ?>">
             <i class="fas fa-frown"></i> برے خواب
         </a>
+        <a href="<?php echo e(route('dreams.index', ['type' => 'warning'])); ?>" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; <?php echo e(request('type') === 'warning' ? 'background: #e67e22; color: #fff;' : 'background: #f0f0f0; color: #555;'); ?>">
+            <i class="fas fa-exclamation-triangle"></i> تنبیہی خواب
+        </a>
+        <a href="<?php echo e(route('dreams.index', ['type' => 'neutral'])); ?>" style="padding: 8px 20px; border-radius: 20px; text-decoration: none; font-size: 0.9rem; <?php echo e(request('type') === 'neutral' ? 'background: #7f8c8d; color: #fff;' : 'background: #f0f0f0; color: #555;'); ?>">
+            <i class="fas fa-minus-circle"></i> عام خواب
+        </a>
     </div>
 
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbols->count()): ?>
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+    <style>
+        .dreams-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (min-width: 768px) {
+            .dreams-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+    <div class="dreams-grid">
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $symbols; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $symbol): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
         <a href="<?php echo e(route('dreams.show', $symbol->slug)); ?>" style="text-decoration: none; color: inherit;">
             <div style="background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #eee; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 24px rgba(26,27,62,0.12)'; this.style.borderColor='#2d1b69';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 2px 12px rgba(0,0,0,0.06)'; this.style.borderColor='#eee';">
 
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->is_good_dream === 1): ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->dream_type === 1 || $symbol->is_good_dream === 1): ?>
                 <span style="position: absolute; top: 12px; right: 12px; background: #e8f5ee; color: #1a6b42; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem;"><i class="fas fa-smile"></i> اچھا</span>
-                <?php elseif($symbol->is_good_dream === 0): ?>
+                <?php elseif($symbol->dream_type === 2 || $symbol->is_good_dream === 0): ?>
                 <span style="position: absolute; top: 12px; right: 12px; background: #fde8e8; color: #c0392b; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem;"><i class="fas fa-frown"></i> خبردار</span>
+                <?php elseif($symbol->dream_type === 3): ?>
+                <span style="position: absolute; top: 12px; right: 12px; background: #fcf3cf; color: #e67e22; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem;"><i class="fas fa-exclamation-triangle"></i> تنبیہ</span>
                 <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
                 <div style="text-align: center; margin-bottom: 16px;">
@@ -74,9 +93,8 @@
         </a>
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
     </div>
-
     <div style="margin-top: 32px; display: flex; justify-content: center;">
-        <?php echo e($symbols->appends(request()->query())->links()); ?>
+        <?php echo e($symbols->appends(request()->query())->links('vendor.pagination.custom')); ?>
 
     </div>
     <?php else: ?>

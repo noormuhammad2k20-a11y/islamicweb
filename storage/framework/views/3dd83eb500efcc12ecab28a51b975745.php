@@ -29,7 +29,7 @@
             <div style="background: #fff; border-radius: 14px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid #eee;">
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <span style="background: linear-gradient(135deg, #1a6b42, #2d9254); color: #fff; padding: 4px 14px; border-radius: 16px; font-size: 0.8rem;"><?php echo e($q->category); ?></span>
+                    <span style="background: linear-gradient(135deg, #1a6b42, #2d9254); color: #fff; padding: 4px 14px; border-radius: 16px; font-size: 0.8rem;"><?php echo e(optional($q->category)->name_urdu ?? optional($q->category)->name_english ?? 'عمومی'); ?></span>
                     <span style="font-size: 0.8rem; color: #888;">
                         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($q->difficulty === 'easy'): ?> 🟢 آسان
                         <?php elseif($q->difficulty === 'medium'): ?> 🟡 درمیانہ

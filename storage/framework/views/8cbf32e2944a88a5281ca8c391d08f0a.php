@@ -19,15 +19,28 @@
             <h1 style="font-family: 'Amiri', serif; font-size: 2.2rem; margin-bottom: 8px; direction: rtl;">
                 خواب میں <?php echo e($symbol->symbol_urdu); ?> دیکھنا
             </h1>
-            <p style="opacity: 0.85; font-size: 1rem;"><?php echo e($symbol->symbol_english); ?> — Islamic Dream Interpretation</p>
+            <p style="opacity: 0.9; font-size: 1.1rem; margin-bottom: 4px;"><?php echo e($symbol->symbol_english); ?> — Islamic Dream Interpretation</p>
+            <p style="opacity: 0.7; font-size: 0.95rem; font-family: 'Amiri', serif; direction: rtl;">
+                <?php echo e($symbol->symbol_arabic ? 'عربی: ' . $symbol->symbol_arabic : ''); ?> 
+                <?php echo e($symbol->symbol_roman_urdu ? ' | Roman Urdu: ' . $symbol->symbol_roman_urdu : ''); ?>
 
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->is_good_dream === 1): ?>
+            </p>
+
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->dream_type === 1 || $symbol->is_good_dream === 1): ?>
             <span style="display: inline-block; background: rgba(26,107,66,0.8); padding: 6px 20px; border-radius: 20px; font-size: 0.9rem; margin-top: 12px;">
                 <i class="fas fa-smile"></i> اچھا خواب — Good Dream
             </span>
-            <?php elseif($symbol->is_good_dream === 0): ?>
+            <?php elseif($symbol->dream_type === 2 || $symbol->is_good_dream === 0): ?>
             <span style="display: inline-block; background: rgba(192,57,43,0.8); padding: 6px 20px; border-radius: 20px; font-size: 0.9rem; margin-top: 12px;">
-                <i class="fas fa-frown"></i> خبردار — Warning Dream
+                <i class="fas fa-frown"></i> خبردار — Bad Dream
+            </span>
+            <?php elseif($symbol->dream_type === 3): ?>
+            <span style="display: inline-block; background: rgba(230,126,34,0.9); padding: 6px 20px; border-radius: 20px; font-size: 0.9rem; margin-top: 12px; color: #fff;">
+                <i class="fas fa-exclamation-triangle"></i> تنبیہی خواب — Warning Dream
+            </span>
+            <?php elseif($symbol->dream_type === 0): ?>
+            <span style="display: inline-block; background: rgba(127,140,141,0.8); padding: 6px 20px; border-radius: 20px; font-size: 0.9rem; margin-top: 12px; color: #fff;">
+                <i class="fas fa-minus-circle"></i> عام خواب — Neutral Dream
             </span>
             <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
@@ -58,7 +71,30 @@
             <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
             
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->scholar_reference): ?>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->scholarly_opinions && is_array($symbol->scholarly_opinions) && count($symbol->scholarly_opinions) > 0): ?>
+                <div style="margin-bottom: 28px;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 1.4rem; color: #2d1b69; margin-bottom: 14px; direction: rtl;">
+                        <i class="fas fa-user-graduate"></i> علمائے کرام کی آراء
+                    </h2>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $symbol->scholarly_opinions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opinion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                    <div style="display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: #fafafa; border-radius: 10px; margin-bottom: 12px; border-right: 3px solid #c9982e; direction: rtl;">
+                        <i class="fas fa-quote-right" style="color: #e0e0e0; font-size: 1.8rem; margin-top: 4px;"></i>
+                        <div>
+                            <span style="display: block; font-weight: 700; color: #1a1a3e; margin-bottom: 6px; font-family: 'Amiri', serif; font-size: 1.1rem;"><?php echo e($opinion['scholar'] ?? 'عالم'); ?></span>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($opinion['interpretation_urdu'])): ?>
+                                <p style="font-family: 'Amiri', serif; font-size: 1.05rem; line-height: 1.8; color: #444; margin-bottom: 4px;"><?php echo e($opinion['interpretation_urdu']); ?></p>
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($opinion['interpretation_english'])): ?>
+                                <p style="font-size: 0.95rem; line-height: 1.6; color: #666; direction: ltr;"><?php echo e($opinion['interpretation_english']); ?></p>
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($opinion['source'])): ?>
+                                <span style="font-size: 0.8rem; color: #999; display: block; margin-top: 8px;"><i class="fas fa-book"></i> ماخذ: <?php echo e($opinion['source']); ?></span>
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                        </div>
+                    </div>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                </div>
+            <?php elseif($symbol->scholar_reference): ?>
             <div style="display: flex; align-items: center; gap: 12px; padding: 18px; background: #fafafa; border-radius: 10px; margin-bottom: 24px;">
                 <i class="fas fa-user-graduate" style="color: #2d1b69; font-size: 1.5rem;"></i>
                 <div>
@@ -69,6 +105,36 @@
             <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
             
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->quran_reference && isset($symbol->quran_reference['verse'])): ?>
+            <div style="background: linear-gradient(135deg, #f8fcf9, #e8f5ee); border-radius: 10px; padding: 20px; margin-bottom: 28px; border: 1px solid #c3e6cb;">
+                <h3 style="font-size: 1.1rem; color: #1a6b42; margin-bottom: 12px; direction: rtl; font-family: 'Amiri', serif;">
+                    <i class="fas fa-quran"></i> قرآنی حوالہ
+                </h3>
+                <p style="font-family: 'Amiri', serif; font-size: 1.25rem; color: #333; direction: rtl; line-height: 2.2; text-align: center; margin-bottom: 10px;">
+                    <?php echo e($symbol->quran_reference['arabic'] ?? ''); ?>
+
+                </p>
+                <p style="font-family: 'Amiri', serif; font-size: 1rem; color: #555; direction: rtl; line-height: 1.9;">
+                    <?php echo e($symbol->quran_reference['urdu_translation'] ?? $symbol->quran_reference['verse']); ?>
+
+                </p>
+            </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+            
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->hadith_reference && isset($symbol->hadith_reference['text'])): ?>
+            <div style="background: linear-gradient(135deg, #fffbf0, #fff8e8); border-radius: 10px; padding: 20px; margin-bottom: 28px; border: 1px solid #f0e6c8;">
+                <h3 style="font-size: 1.1rem; color: #c9982e; margin-bottom: 12px; direction: rtl; font-family: 'Amiri', serif;">
+                    <i class="fas fa-star"></i> حدیث کا حوالہ
+                </h3>
+                <p style="font-family: 'Amiri', serif; font-size: 1rem; color: #555; direction: rtl; line-height: 1.9;">
+                    <?php echo e($symbol->hadith_reference['text']); ?>
+
+                </p>
+                <p style="font-size: 0.85rem; color: #888; direction: rtl; margin-top: 8px;">( <?php echo e($symbol->hadith_reference['source'] ?? 'حدیث'); ?> )</p>
+            </div>
+            <?php else: ?>
+            
             <div style="background: linear-gradient(135deg, #fffbf0, #fff8e8); border-radius: 10px; padding: 20px; margin-bottom: 28px; border: 1px solid #f0e6c8;">
                 <h3 style="font-size: 1rem; color: #c9982e; margin-bottom: 10px; direction: rtl; font-family: 'Amiri', serif;">
                     <i class="fas fa-star"></i> خوابوں کے بارے میں حدیث
@@ -77,6 +143,20 @@
                     نبی ﷺ نے فرمایا: "اچھا خواب اللہ کی طرف سے ہے اور برا خواب شیطان کی طرف سے ہے۔ جب تم میں سے کوئی اچھا خواب دیکھے تو اسے صرف اس کو بتائے جس سے محبت ہو۔" (صحیح بخاری)
                 </p>
             </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+            
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($symbol->faqs && is_array($symbol->faqs) && count($symbol->faqs) > 0): ?>
+            <div style="margin-bottom: 32px; padding-top: 24px; border-top: 1px solid #eee;">
+                <h2 style="font-family: 'Amiri', serif; font-size: 1.4rem; color: #1a1a3e; margin-bottom: 16px; direction: rtl;">عمومی سوالات (FAQs)</h2>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $symbol->faqs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $faq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                <div style="margin-bottom: 16px; background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 16px;">
+                    <h3 style="font-family: 'Amiri', serif; font-size: 1.1rem; color: #2d1b69; margin-bottom: 8px; direction: rtl;"><i class="fas fa-question-circle" style="color: #c9982e; margin-left: 6px;"></i> <?php echo e($faq['question'] ?? ''); ?></h3>
+                    <p style="font-family: 'Amiri', serif; font-size: 0.95rem; line-height: 1.8; color: #555; direction: rtl;"><?php echo e($faq['answer'] ?? ''); ?></p>
+                </div>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+            </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
             
             <div style="display: flex; gap: 10px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid #eee;">
@@ -103,6 +183,21 @@
     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($opposite && $opposite->count()): ?>
+    <div style="margin-top: 36px;">
+        <h2 style="font-family: 'Amiri', serif; font-size: 1.5rem; color: #c0392b; margin-bottom: 20px; direction: rtl;">اس کے برعکس خواب</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;">
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $opposite; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $o): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+            <a href="<?php echo e(route('dreams.show', $o->slug)); ?>" style="text-decoration: none; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(192,57,43,0.05); border: 1px solid #fde8e8; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='#c0392b'" onmouseout="this.style.borderColor='#fde8e8'">
+                <span style="font-family: 'Amiri', serif; font-size: 1.2rem; color: #c0392b; display: block; direction: rtl;"><?php echo e($o->symbol_urdu); ?></span>
+                <span style="font-size: 0.8rem; color: #888;"><?php echo e($o->symbol_english); ?></span>
+            </a>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+        </div>
+    </div>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+    
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($popular->count()): ?>
     <div style="margin-top: 36px;">
         <h2 style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #333; margin-bottom: 16px; direction: rtl;">سب سے زیادہ تلاش کیے گئے</h2>
@@ -111,6 +206,20 @@
             <a href="<?php echo e(route('dreams.show', $p->slug)); ?>" style="padding: 6px 16px; background: #f0ecf8; color: #2d1b69; border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-family: 'Amiri', serif; transition: all 0.2s;" onmouseover="this.style.background='#2d1b69'; this.style.color='#fff'" onmouseout="this.style.background='#f0ecf8'; this.style.color='#2d1b69'">
                 <?php echo e($p->symbol_urdu); ?>
 
+            </a>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+        </div>
+    </div>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+    
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($recent) && $recent->count()): ?>
+    <div style="margin-top: 48px;">
+        <h2 style="font-family: 'Amiri', serif; font-size: 1.5rem; color: #333; margin-bottom: 20px; direction: rtl;">نئے شامل کیے گئے خواب</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;">
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $recent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rec): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+            <a href="<?php echo e(route('dreams.show', $rec->slug)); ?>" style="text-decoration: none; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='#1a6b42'" onmouseout="this.style.borderColor='#eee'">
+                <span style="font-family: 'Amiri', serif; font-size: 1.2rem; color: #1a6b42; display: block; direction: rtl;"><?php echo e($rec->symbol_urdu); ?></span>
+                <span style="font-size: 0.8rem; color: #888;"><?php echo e($rec->symbol_english); ?></span>
             </a>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
         </div>

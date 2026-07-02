@@ -34,6 +34,18 @@
     <link rel="stylesheet" href="<?php echo e(asset('vendor/fontawesome/css/all.min.css')); ?>">
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <?php echo $__env->yieldContent('og_meta'); ?>
+    
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($seoMeta) && isset($seoMeta->og_title)): ?>
+    <meta property="og:title" content="<?php echo e($seoMeta->og_title); ?>">
+    <meta property="og:description" content="<?php echo e($seoMeta->og_description ?? ''); ?>">
+    <meta property="og:image" content="<?php echo e($seoMeta->og_image ?? ''); ?>">
+    <meta property="og:url" content="<?php echo e($seoMeta->canonical_url ?? url()->current()); ?>">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo e($seoMeta->twitter_title ?? $seoMeta->og_title); ?>">
+    <meta name="twitter:description" content="<?php echo e($seoMeta->twitter_description ?? $seoMeta->og_description ?? ''); ?>">
+    <meta name="twitter:image" content="<?php echo e($seoMeta->twitter_image ?? $seoMeta->og_image ?? ''); ?>">
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 </head>
 <body>
 

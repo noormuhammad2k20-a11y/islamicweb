@@ -9,4 +9,9 @@ class IslamicName extends Model
     use \Illuminate\Database\Eloquent\Factories\HasFactory;
 
     protected $guarded = [];
+
+    public function categories()
+    {
+        return $this->belongsToMany(NameCategory::class, 'islamic_name_name_category');
+    }
 }

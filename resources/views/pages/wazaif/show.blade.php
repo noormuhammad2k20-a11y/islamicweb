@@ -19,12 +19,17 @@
     <article style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
 
         {{-- Header --}}
-        <div style="background: linear-gradient(135deg, #0d4a2e, #1a6b42); padding: 32px; text-align: center; color: #fff;">
+        <div style="background: linear-gradient(135deg, #0d4a2e, #1a6b42); padding: 32px; text-align: center; color: #fff; position: relative;">
+            <button onclick="window.print()" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.2); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;" title="Print Wazifa">
+                <i class="fas fa-print"></i>
+            </button>
             <h1 style="font-family: 'Amiri', serif; font-size: 1.8rem; margin-bottom: 8px; direction: rtl;">{{ $wazifa->title_urdu }}</h1>
             <p style="opacity: 0.85; font-size: 1rem;">{{ $wazifa->title_english }}</p>
-            @if($wazifa->purpose)
-            <span style="display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 16px; border-radius: 20px; font-size: 0.85rem; margin-top: 10px; direction: rtl;">{{ $wazifa->purpose }}</span>
-            @endif
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 10px;">
+                @foreach($wazifa->categories as $cat)
+                <span style="display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 16px; border-radius: 20px; font-size: 0.85rem; direction: rtl;">{{ $cat->name_urdu ?? $cat->name_english }}</span>
+                @endforeach
+            </div>
         </div>
 
         <div style="padding: 32px;">
@@ -49,31 +54,65 @@
             </div>
             @endif
 
+            {{-- Benefits & Conditions --}}
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 24px;">
+                @if($wazifa->benefits)
+                <div style="direction: rtl;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #10b981; margin-bottom: 12px;">
+                        <i class="fas fa-star"></i> فوائد / Benefits
+                    </h2>
+                    <div style="background: #f0fdf4; padding: 20px; border-radius: 8px; border-right: 4px solid #10b981; font-size: 1rem; line-height: 1.8; color: #333;">
+                        {{ $wazifa->benefits }}
+                    </div>
+                </div>
+                @endif
+                
+                @if($wazifa->conditions || $wazifa->precautions)
+                <div style="direction: rtl;">
+                    <h2 style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #c0392b; margin-bottom: 12px;">
+                        <i class="fas fa-exclamation-triangle"></i> شرائط و احتیاط
+                    </h2>
+                    <div style="background: #fde8e8; padding: 20px; border-radius: 8px; border-right: 4px solid #c0392b; font-size: 1rem; line-height: 1.8; color: #333;">
+                        @if($wazifa->conditions) <p><strong>شرائط:</strong> {{ $wazifa->conditions }}</p> @endif
+                        @if($wazifa->precautions) <p><strong>احتیاط:</strong> {{ $wazifa->precautions }}</p> @endif
+                    </div>
+                </div>
+                @endif
+            </div>
+
             {{-- Method --}}
-            @if($wazifa->method)
+            @if($wazifa->method || $wazifa->frequency || $wazifa->before_after_salah)
             <div style="direction: rtl; margin-bottom: 24px;">
                 <h2 style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #c9982e; margin-bottom: 12px;">
-                    <i class="fas fa-clipboard-list"></i> طریقہ
+                    <i class="fas fa-clipboard-list"></i> طریقہ / Method
                 </h2>
                 <div style="background: linear-gradient(135deg, #fffbf0, #fff8e8); padding: 20px; border-radius: 8px; border-right: 4px solid #c9982e; font-family: 'Amiri', serif; font-size: 1.05rem; line-height: 1.8; color: #555;">
-                    {{ $wazifa->method }}
+                    @if($wazifa->frequency) <p><strong>اوقات:</strong> {{ $wazifa->frequency }}</p> @endif
+                    @if($wazifa->before_after_salah) <p><strong>نماز کے بعد/پہلے:</strong> {{ $wazifa->before_after_salah }}</p> @endif
+                    @if($wazifa->method) <div>{{ $wazifa->method }}</div> @endif
                 </div>
             </div>
             @endif
 
             {{-- Reference --}}
-            @if($wazifa->reference)
-            <div style="display: flex; align-items: center; gap: 10px; padding: 16px; background: #f8f9fa; border-radius: 8px; margin-bottom: 24px;">
-                <i class="fas fa-book-open" style="color: #1a6b42; font-size: 1.2rem;"></i>
-                <div>
-                    <span style="font-size: 0.8rem; color: #888; display: block;">حوالہ / Reference</span>
-                    <span style="font-weight: 600; color: #333;">{{ $wazifa->reference }}</span>
+            @if($wazifa->reference || $wazifa->book_name)
+            <div style="display: flex; flex-direction: column; gap: 8px; padding: 20px; background: #f8f9fa; border-radius: 8px; margin-bottom: 24px; border: 1px solid #e9ecef;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-book-open" style="color: #1a6b42; font-size: 1.2rem;"></i>
+                    <span style="font-size: 1rem; font-weight: 600; color: #333;">Reference Details</span>
+                    @if($wazifa->authenticity_grade || $wazifa->scholar_verified)
+                    <span style="margin-left: auto; background: #1a6b42; color: #fff; padding: 4px 12px; border-radius: 16px; font-size: 0.8rem;">
+                        <i class="fas fa-check-circle"></i> {{ $wazifa->authenticity_grade ?: 'مستند و محقق' }}
+                    </span>
+                    @endif
                 </div>
-                @if($wazifa->scholar_verified)
-                <span style="margin-left: auto; background: #1a6b42; color: #fff; padding: 4px 12px; border-radius: 16px; font-size: 0.8rem;">
-                    <i class="fas fa-check-circle"></i> مستند و محقق
-                </span>
-                @endif
+                <div style="font-size: 0.9rem; color: #555; margin-top: 8px; margin-left: 28px;">
+                    @if($wazifa->book_name) <div><strong>Book:</strong> {{ $wazifa->book_name }}</div> @endif
+                    @if($wazifa->chapter) <div><strong>Chapter:</strong> {{ $wazifa->chapter }}</div> @endif
+                    @if($wazifa->hadith_number) <div><strong>Hadith:</strong> {{ $wazifa->hadith_number }}</div> @endif
+                    @if($wazifa->reference) <div><strong>General Ref:</strong> {{ $wazifa->reference }}</div> @endif
+                    @if($wazifa->reference_details) <div style="margin-top: 8px; color: #777;"><em>{{ $wazifa->reference_details }}</em></div> @endif
+                </div>
             </div>
             @endif
 

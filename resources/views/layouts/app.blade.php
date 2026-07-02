@@ -33,6 +33,18 @@
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('og_meta')
+    
+    @if(isset($seoMeta) && isset($seoMeta->og_title))
+    <meta property="og:title" content="{{ $seoMeta->og_title }}">
+    <meta property="og:description" content="{{ $seoMeta->og_description ?? '' }}">
+    <meta property="og:image" content="{{ $seoMeta->og_image ?? '' }}">
+    <meta property="og:url" content="{{ $seoMeta->canonical_url ?? url()->current() }}">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $seoMeta->twitter_title ?? $seoMeta->og_title }}">
+    <meta name="twitter:description" content="{{ $seoMeta->twitter_description ?? $seoMeta->og_description ?? '' }}">
+    <meta name="twitter:image" content="{{ $seoMeta->twitter_image ?? $seoMeta->og_image ?? '' }}">
+    @endif
 </head>
 <body>
 

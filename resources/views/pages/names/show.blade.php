@@ -129,12 +129,71 @@
                                 <i class="fas fa-globe"></i> {{ ucfirst($name->origin) }} Origin
                             </span>
                         @endif
+                        @if($name->is_quranic)
+                            <span class="tag-large" style="background: rgba(46, 204, 113, 0.08); color: #27ae60; border-color: rgba(46, 204, 113, 0.2);">
+                                <i class="fas fa-quran"></i> Quranic Name
+                            </span>
+                        @endif
+                        @if($name->is_sahabi || $name->is_sahabiyah)
+                            <span class="tag-large" style="background: rgba(155, 89, 182, 0.08); color: #8e44ad; border-color: rgba(155, 89, 182, 0.2);">
+                                <i class="fas fa-users"></i> Sahabah / Companion
+                            </span>
+                        @endif
+                        @if($name->is_prophet_name)
+                            <span class="tag-large" style="background: rgba(243, 156, 18, 0.08); color: #f39c12; border-color: rgba(243, 156, 18, 0.2);">
+                                <i class="fas fa-star"></i> Prophet Name
+                            </span>
+                        @endif
                     </div>
 
                     <div class="meaning-box">
                         <div class="meaning-label">Meaning in Urdu</div>
                         <p class="meaning-text" dir="rtl">{{ $name->translation_urdu }}</p>
                     </div>
+
+                    @if($name->meaning_english)
+                    <div class="meaning-box" style="margin-top: 30px;">
+                        <div class="meaning-label">Meaning in English</div>
+                        <p class="meaning-text" style="font-family: 'Playfair Display', serif;">{{ $name->meaning_english }}</p>
+                    </div>
+                    @endif
+
+                    @if($name->quranic_reference)
+                    <div style="background: rgba(46, 204, 113, 0.05); border-left: 4px solid #27ae60; padding: 25px; text-align: left; margin-top: 30px; border-radius: 0 12px 12px 0;">
+                        <h4 style="color: #27ae60; margin-bottom: 10px; font-size: 1.2rem;"><i class="fas fa-book-open"></i> Quranic Reference</h4>
+                        <p style="color: #444; line-height: 1.6; font-size: 1.05rem;">{{ $name->quranic_reference }}</p>
+                    </div>
+                    @endif
+
+                    @if($name->biography)
+                    <div style="background: #fdfdfd; border: 1px solid #eee; padding: 30px; text-align: left; margin-top: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                        <h4 style="color: var(--primary-dark); margin-bottom: 15px; font-size: 1.3rem;"><i class="fas fa-info-circle"></i> Historical Significance</h4>
+                        <p style="color: #555; line-height: 1.7; font-size: 1.05rem;">{{ $name->biography }}</p>
+                    </div>
+                    @endif
+
+                    @if($name->numerology_value)
+                    <div style="background: rgba(var(--gold-rgb), 0.05); border: 1px solid rgba(var(--gold-rgb), 0.2); padding: 20px; text-align: center; margin-top: 30px; border-radius: 12px; display: inline-block;">
+                        <span style="color: #b89730; font-weight: 600; font-size: 1.1rem;">Numerology (Abjad) Value:</span>
+                        <span style="color: var(--primary-dark); font-size: 1.8rem; font-weight: bold; margin-left: 10px;">{{ $name->numerology_value }}</span>
+                    </div>
+                    @endif
+
+                    @if($name->related_names)
+                    @php
+                        $related = is_array($name->related_names) ? $name->related_names : json_decode($name->related_names, true);
+                    @endphp
+                    @if(is_array($related) && count($related) > 0)
+                    <div style="margin-top: 50px; text-align: left;">
+                        <h4 style="color: var(--primary-dark); font-size: 1.3rem; margin-bottom: 15px;">Related Names:</h4>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            @foreach($related as $rel)
+                                <span style="background: #eee; padding: 8px 16px; border-radius: 50px; color: #555; font-size: 0.95rem;">{{ $rel }}</span>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+                    @endif
                 </div>
             </div>
         </div>
@@ -144,7 +203,7 @@
 <!-- JSON-LD SCHEMAS -->
 <script type="application/ld+json">
 {
-  "@@context": "https://schema.org",
+  "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "WebPage",
@@ -152,6 +211,24 @@
       "url": "{{ url()->current() }}",
       "name": "{{ $name->name_english }} - Islamic Name Meaning",
       "description": "Meaning of the Islamic name {{ $name->name_english }} ({{ $name->name_arabic }}) is {{ $name->translation_urdu }}."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ route('home') }}"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Islamic Names",
+        "item": "{{ route('names.index') }}"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ $name->name_english }}"
+      }]
     }
   ]
 }
