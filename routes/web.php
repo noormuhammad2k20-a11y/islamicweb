@@ -40,11 +40,7 @@ $appRoutes = function () {
     Route::prefix('islamic-date-today')->group(function () {
         Route::get('/', [IslamicDateController::class, 'hub'])->name('islamic-date.hub');
         Route::get('/{country:slug}', [IslamicDateController::class, 'country'])->name('islamic-date.country');
-        
-        // Redirect old nested city pages to the country page
-        Route::get('/{country}/{city}', function ($country, $city) {
-            return redirect()->route('islamic-date.country', ['country' => $country], 301);
-        });
+        Route::get('/{country:slug}/{city:slug}', [IslamicDateController::class, 'city'])->name('islamic-date.city');
     });
 
     Route::get('/hijri-gregorian-converter', [ConverterController::class, 'show'])->name('converter.show');

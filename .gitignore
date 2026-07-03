@@ -22,3 +22,11 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Fix/patch scripts — must not be deployed to production (BUG-006)
+fix_*.php
+patch_*.php
+create_db.php
+seed_phase*.php
+compiled*.php
+*.sql

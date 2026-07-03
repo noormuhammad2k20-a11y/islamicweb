@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @php
-$titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month . ' ' . $hijriDate->hijri_year : '';
+$titleHijri = isset($globalDate) ? $globalDate->hijri_day . ' ' . $globalDate->hijri_month . ' ' . $globalDate->hijri_year . ' AH' : '';
 @endphp
-@section('title', 'Islamic Date Today — Hijri Date Worldwide, ' . $titleHijri)
 
 @section('content')
 <style>
@@ -55,117 +54,52 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         margin-bottom: 20px;
     }
     
-    .premium-card {
+    .theme-card {
         background: var(--white);
         border-radius: var(--radius-lg);
         padding: 30px;
         box-shadow: var(--shadow-sm);
-        border: 1px solid rgba(10, 58, 42, 0.08);
+        border: 1px solid rgba(10, 58, 42, 0.06);
         height: 100%;
         position: relative;
-        overflow: hidden;
-        border-top: 4px solid var(--gold);
     }
-    .section-title-premium {
+    .theme-card.dark-card {
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        color: var(--white);
+        border: none;
+        overflow: hidden;
+    }
+    .islamic-pattern-overlay {
+        position: absolute;
+        inset: 0;
+        opacity: 0.05;
+        background-image: radial-gradient(circle at center, var(--gold) 2px, transparent 2px), radial-gradient(circle at center, var(--gold) 2px, transparent 2px);
+        background-size: 30px 30px;
+        background-position: 0 0, 15px 15px;
+        pointer-events: none;
+    }
+    .card-title-gold {
         font-family: 'Playfair Display', serif;
+        color: var(--gold-light);
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    .theme-section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
         font-weight: 700;
         color: var(--primary-dark);
-        font-size: 1.5rem;
         margin-bottom: 25px;
         display: flex;
         align-items: center;
         gap: 12px;
-    }
-    .section-title-premium i {
-        color: var(--gold);
-        font-size: 1.3rem;
-        background: var(--secondary);
-        width: 40px; height: 40px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Moon Phase */
-    .moon-phase-wrapper {
-        text-align: center;
-        padding: 20px 0;
-    }
-    .moon-icon-container {
-        font-size: 5rem;
-        color: var(--gold);
-        margin-bottom: 20px;
-        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
-        animation: floatMoon 4s ease-in-out infinite;
-    }
-    @keyframes floatMoon {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
-    }
-    .moon-name {
-        font-size: 1.4rem;
-        color: var(--primary-dark);
-        font-weight: 600;
-    }
-    .moon-desc {
-        color: var(--text-light);
-        font-size: 0.95rem;
-        margin-top: 5px;
-    }
-
-    /* Events List */
-    .event-list {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    .event-item-premium {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px;
-        background: var(--secondary-light);
-        border-radius: var(--radius-md);
-        border-left: 4px solid var(--primary);
-        transition: var(--tr);
-    }
-    .event-item-premium:hover {
-        background: var(--secondary);
-    }
-    .event-item-premium.upcoming-event {
-        border-left-color: var(--gold);
-    }
-    .event-info h4 {
-        margin: 0;
-        color: var(--primary-dark);
-        font-weight: 600;
-        font-size: 1.1rem;
-    }
-    .event-info span {
-        font-size: 0.85rem;
-        color: var(--text-medium);
-    }
-    .event-countdown {
-        text-align: center;
-        background: var(--white);
-        padding: 8px 12px;
-        border-radius: var(--radius-sm);
-        box-shadow: var(--shadow-sm);
-        min-width: 60px;
-    }
-    .event-countdown strong {
-        display: block;
-        font-size: 1.3rem;
-        color: var(--primary);
-        line-height: 1;
-    }
-    .event-countdown small {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        color: var(--text-light);
-        font-weight: 600;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(10, 58, 42, 0.08);
     }
 
     /* Fasting Alert */
@@ -222,22 +156,14 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         background: var(--white);
         padding: 15px 5px;
         text-align: center;
-        transition: var(--tr);
         position: relative;
-    }
-    .calendar-day:hover {
-        background: var(--secondary-light);
     }
     .calendar-day.today {
         background: var(--primary);
         color: var(--white);
     }
-    .calendar-day.today .h-date {
-        color: var(--white);
-    }
-    .calendar-day.today .g-date {
-        color: rgba(255,255,255,0.7);
-    }
+    .calendar-day.today .h-date { color: var(--white); }
+    .calendar-day.today .g-date { color: rgba(255,255,255,0.7); }
     .h-date {
         font-size: 1.3rem;
         font-weight: 700;
@@ -251,38 +177,31 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         color: var(--text-light);
     }
 
-    /* Converter Form */
-    .converter-form .form-label {
-        font-weight: 600;
-        color: var(--primary-dark);
-        font-size: 0.9rem;
-        margin-bottom: 8px;
+    /* Multi-Region Box */
+    .region-dates {
+        display: flex;
+        gap: 20px;
+        margin-top: 15px;
+        justify-content: center;
     }
-    .converter-form .form-control {
-        background: var(--secondary-light);
-        border: 1px solid rgba(10, 58, 42, 0.1);
+    .region-box {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 10px 20px;
         border-radius: var(--radius-md);
-        padding: 12px 15px;
-        color: var(--text-dark);
-        transition: var(--tr);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: left;
     }
-    .converter-form .form-control:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 0 4px var(--primary-subtle);
-        background: var(--white);
+    .region-box span {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--gold-light);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
     }
-    .btn-convert {
-        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-        color: var(--primary-dark);
+    .region-box strong {
+        font-size: 1.1rem;
         font-weight: 600;
-        border: none;
-        padding: 12px 25px;
-        border-radius: var(--radius-md);
-        width: 100%;
-        transition: opacity 0.2s ease;
-    }
-    .btn-convert:hover {
-        opacity: 0.9;
     }
 
     /* History Events */
@@ -303,9 +222,7 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         position: relative;
         margin-bottom: 25px;
     }
-    .history-item:last-child {
-        margin-bottom: 0;
-    }
+    .history-item:last-child { margin-bottom: 0; }
     .history-item::before {
         content: '';
         position: absolute;
@@ -349,8 +266,23 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         </div>
         <div class="hero-date-container">
             <div class="hero-gregorian"><i class="far fa-calendar-alt" style="margin-right: 8px;"></i>{{ date('l, d F Y') }}</div>
-            <div class="hero-hijri">{{ $hijriDate ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month : '15 Jumada Al-Akhirah' }}</div>
-            <div class="hero-hijri-year">{{ $hijriDate ? $hijriDate->hijri_year : '1446' }} AH</div>
+            <div class="hero-hijri">{{ $globalDate ? $globalDate->hijri_day . ' ' . $globalDate->hijri_month : '15 Jumada Al-Akhirah' }}</div>
+            <div class="hero-hijri-year">{{ $globalDate ? $globalDate->hijri_year : '1446' }} AH</div>
+            
+            <div class="region-dates">
+                @if($globalDate)
+                <div class="region-box">
+                    <span>Global (Umm al-Qura)</span>
+                    <strong>{{ $globalDate->hijri_day }} {{ $globalDate->hijri_month }}</strong>
+                </div>
+                @endif
+                @if($pakistanDate && $pakistanDate->hijri_day !== $globalDate->hijri_day)
+                <div class="region-box">
+                    <span>Pakistan (Local Sighting)</span>
+                    <strong>{{ $pakistanDate->hijri_day }} {{ $pakistanDate->hijri_month }}</strong>
+                </div>
+                @endif
+            </div>
         </div>
     </div>
 </div>
@@ -358,6 +290,8 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
 <section class="section" style="padding-top: 50px; background-color: var(--secondary-light);">
     <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         
+        <x-social-share :title="'Islamic Date Today - ' . $titleHijri" />
+
         @if(isset($fastingDays) && count($fastingDays) > 0)
         <div class="fasting-alert">
             <i class="fas fa-star-and-crescent"></i>
@@ -371,42 +305,22 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         <div class="row g-4 mb-4">
             <!-- Moon Phase -->
             <div class="col-lg-5 col-md-6">
-                <div class="premium-card">
-                    <h3 class="section-title-premium"><i class="fas fa-moon"></i> Moon Phase</h3>
-                    <div class="moon-phase-wrapper">
-                        <div class="moon-icon-container">
-                            <i class="fas {{ $moonPhase['icon'] ?? 'fa-moon' }}"></i>
-                        </div>
-                        <div class="moon-name">{{ $moonPhase['name'] ?? 'Unknown' }}</div>
-                        <div class="moon-desc">{{ $moonPhase['description'] ?? '' }}</div>
+                <div class="theme-card dark-card text-center">
+                    <div class="islamic-pattern-overlay"></div>
+                    <div class="position-relative z-1">
+                        <h3 class="card-title-gold"><i class="fas fa-moon"></i> Current Moon Phase</h3>
+                        <x-moon-phase-widget :moonPhase="$moonPhase" />
                     </div>
                 </div>
             </div>
 
             <!-- Upcoming Events -->
             <div class="col-lg-7 col-md-6">
-                <div class="premium-card">
-                    <h3 class="section-title-premium"><i class="fas fa-calendar-star"></i> Upcoming Islamic Events</h3>
-                    <div class="event-list">
-                        @if(isset($upcomingEvents) && $upcomingEvents->count() > 0)
-                            @foreach($upcomingEvents->take(4) as $index => $event)
-                            <div class="event-item-premium upcoming-event">
-                                <div class="event-info">
-                                    <h4>{{ $event->name }}</h4>
-                                    <span><i class="far fa-calendar" style="color: var(--text-light); margin-right: 5px;"></i> {{ $event->hijri_day }} {{ $event->hijriMonth->name_en ?? '' }}</span>
-                                </div>
-                                <div class="event-countdown">
-                                    <strong>{{ $event->days_away }}</strong>
-                                    <small>Days</small>
-                                </div>
-                            </div>
-                            @endforeach
-                        @else
-                            <div style="text-align: center; padding: 30px 0; color: var(--text-light);">
-                                <i class="fas fa-calendar-times" style="font-size: 2.5rem; margin-bottom: 15px; opacity: 0.5;"></i>
-                                <p>No upcoming events recorded.</p>
-                            </div>
-                        @endif
+                <div class="theme-card">
+                    <h3 class="theme-section-title"><i class="fas fa-calendar-star" style="color: var(--gold);"></i> Upcoming Islamic Events</h3>
+                    <x-countdown-timers :countdowns="$topCountdowns ?? []" />
+                    <div style="margin-top: 20px; text-align: right;">
+                        <a href="{{ route('events.index') }}" class="btn-outline" style="font-size: 0.9rem; padding: 8px 16px;">View Full Calendar <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -415,41 +329,21 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         <div class="row g-4 mb-4">
             <!-- Date Converter -->
             <div class="col-lg-4">
-                <div class="premium-card">
-                    <h3 class="section-title-premium"><i class="fas fa-exchange-alt"></i> Date Converter</h3>
-                    
-                    <form id="converterWidgetForm" class="converter-form" style="margin-top: 20px;">
-                        <div style="margin-bottom: 15px;">
-                            <label class="form-label">Conversion Type</label>
-                            <select id="convDirection" class="form-control" style="width: 100%;">
-                                <option value="g2h">Gregorian to Hijri</option>
-                                <option value="h2g">Hijri to Gregorian</option>
-                            </select>
-                        </div>
-                        <div style="margin-bottom: 25px;">
-                            <label class="form-label">Select Date</label>
-                            <input type="date" id="convDate" required class="form-control" style="width: 100%;">
-                        </div>
-                        <button type="submit" class="btn-convert">
-                            <i class="fas fa-sync-alt" style="margin-right: 8px;"></i> Convert Date
-                        </button>
-                    </form>
-                    
-                    <div id="convResult" style="display: none; margin-top: 25px; padding: 15px; background: var(--secondary); border-radius: var(--radius-sm); text-align: center; border: 1px solid rgba(10,58,42,0.1);">
-                        <h4 style="color: var(--primary-dark); font-size: 1.1rem; font-weight: 700; margin-bottom: 5px;" id="resText"></h4>
-                        <p style="color: var(--text-medium); font-size: 0.9rem; margin: 0;" id="resSub"></p>
-                    </div>
+                <x-hijri-converter-widget />
+                
+                <div class="mt-4">
+                    <x-prayer-widget city="Makkah" country="Saudi Arabia" :prayerTimes="null" />
                 </div>
             </div>
 
             <!-- Calendar -->
             <div class="col-lg-8">
                 @if(isset($monthlyCalendar) && $monthlyCalendar->count() > 0)
-                <div class="premium-card">
+                <div class="theme-card">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                        <h3 class="section-title-premium" style="margin-bottom: 0;"><i class="fas fa-calendar-alt"></i> {{ $hijriDate->hijri_month }} Calendar</h3>
+                        <h3 class="theme-section-title" style="margin-bottom: 0; padding-bottom: 0; border: none;"><i class="fas fa-calendar-alt" style="color: var(--primary);"></i> {{ $globalDate->hijri_month }} Calendar</h3>
                         <span style="font-weight: 600; color: var(--gold-dark); background: var(--secondary); padding: 6px 16px; border-radius: var(--radius-xl); font-size: 0.9rem;">
-                            {{ $hijriDate->hijri_year }} AH
+                            {{ $globalDate->hijri_year }} AH
                         </span>
                     </div>
                     
@@ -478,6 +372,15 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
                             @endforeach
                         </div>
                     </div>
+                    @if($currentMonthDetails)
+                    <div style="margin-top: 25px; padding: 20px; background: var(--secondary-light); border-radius: var(--radius-md);">
+                        <h4 style="color: var(--primary-dark); font-size: 1.1rem; margin-bottom: 10px;">About {{ $currentMonthDetails->name_en }} ({{ $currentMonthDetails->name_ar }})</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-medium); margin: 0; line-height: 1.6;">{{ $currentMonthDetails->description }}</p>
+                        @if($currentMonthDetails->is_sacred)
+                            <div style="margin-top: 10px; display: inline-block; background: rgba(212, 175, 55, 0.2); color: var(--gold-dark); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-mosque"></i> Sacred Month</div>
+                        @endif
+                    </div>
+                    @endif
                 </div>
                 @endif
             </div>
@@ -485,9 +388,9 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
 
         <!-- Historical Events -->
         @if(isset($historicalEvents) && $historicalEvents->count() > 0)
-        <div class="premium-card" style="margin-bottom: 40px;">
-            <h3 class="section-title-premium"><i class="fas fa-landmark"></i> On This Day in History</h3>
-            <p style="color: var(--text-medium); margin-bottom: 30px;">Events that occurred on {{ $hijriDate ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month : 'this day' }} across Islamic history.</p>
+        <div class="theme-card" style="margin-bottom: 40px;">
+            <h3 class="theme-section-title"><i class="fas fa-landmark" style="color: var(--primary);"></i> On This Day in History</h3>
+            <p style="color: var(--text-medium); margin-bottom: 30px;">Events that occurred on {{ $globalDate ? $globalDate->hijri_day . ' ' . $globalDate->hijri_month : 'this day' }} across Islamic history.</p>
             
             <div class="history-timeline">
                 @foreach($historicalEvents as $event)
@@ -502,87 +405,27 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
             </div>
         </div>
         @endif
+        
+        <!-- FAQs -->
+        @php
+        $faqs = [
+            ['q' => 'Why is there a difference in Hijri dates between countries?', 'a' => 'The Islamic calendar is based on the lunar cycle. The start of each month depends on the physical sighting of the new moon. Since the moon becomes visible at different times around the world, countries following local sighting (like Pakistan, India) may start their month a day later than countries following calculated astronomical data or Saudi Arabia.'],
+            ['q' => 'How accurate are the prayer times provided?', 'a' => 'We use the highly reliable AlAdhan API to calculate prayer times based on precise geographical coordinates and recognized calculation methods for each region. You can find the specific calculation method listed under the prayer times for your city.'],
+            ['q' => 'What is the current Hijri year?', 'a' => 'The current Hijri year is ' . ($globalDate ? $globalDate->hijri_year : '1446') . ' AH. It marks the number of years since the Prophet Muhammad\'s (PBUH) migration (Hijrah) from Makkah to Madinah.'],
+            ['q' => 'When do Islamic days start?', 'a' => 'Unlike the Gregorian calendar where the new day starts at midnight, an Islamic day begins at sunset (Maghrib). For example, the night of Friday begins on Thursday after sunset.']
+        ];
+        @endphp
+        
+        <div class="theme-card" style="margin-bottom: 40px;">
+            <h3 class="theme-section-title text-center" style="justify-content: center; border: none;"><i class="fas fa-question-circle" style="color: var(--gold);"></i> Frequently Asked Questions</h3>
+            <p class="text-center" style="color: var(--text-medium); margin-bottom: 30px;">Common questions about the Islamic calendar, moon sighting, and prayer times.</p>
+            <x-faq-block :faqs="$faqs" />
+        </div>
+
+        <!-- Author Box -->
+        <x-author-box />
 
     </div>
 </section>
 
-<!-- JSON-LD SCHEMAS -->
-<script type="application/ld+json">
-{
-  "@@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "{{ url()->current() }}",
-      "url": "{{ url()->current() }}",
-      "name": "Islamic Date Today — Hijri Date Worldwide",
-      "description": "Find today's Islamic date (Hijri date), moon phase, and upcoming Islamic events worldwide.",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "{{ route('home') }}"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Islamic Date Today",
-            "item": "{{ route('islamic-date.hub') }}"
-          }
-        ]
-      }
-    }
-    @if(isset($upcomingEvents) && $upcomingEvents->count() > 0)
-    ,@foreach($upcomingEvents as $index => $event)
-    {
-      "@type": "Event",
-      "name": "{{ $event->name }}",
-      "description": "{{ $event->description }}",
-      "startDate": "{{ date('Y-m-d', strtotime('+' . $event->days_away . ' days')) }}",
-      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "eventStatus": "https://schema.org/EventScheduled",
-      "location": {
-        "@type": "Place",
-        "name": "Worldwide"
-      }
-    }{{ $loop->last ? '' : ',' }}
-    @endforeach
-    @endif
-  ]
-}
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('converterWidgetForm');
-    if(form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var date = document.getElementById('convDate').value;
-            var dir = document.getElementById('convDirection').value;
-            var btn = this.querySelector('button');
-            var originalBtnText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Converting...';
-            btn.disabled = true;
-
-            fetch('/ajax/hijri-convert?date=' + date + '&direction=' + dir)
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('convResult').style.display = 'block';
-                document.getElementById('resText').innerText = data.result_text;
-                document.getElementById('resSub').innerText = data.result_subtext;
-                btn.innerHTML = originalBtnText;
-                btn.disabled = false;
-            }).catch(err => {
-                btn.innerHTML = originalBtnText;
-                btn.disabled = false;
-                alert('Conversion failed. Please try again.');
-            });
-        });
-    }
-});
-</script>
 @endsection

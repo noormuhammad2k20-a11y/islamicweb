@@ -35,7 +35,7 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         text-shadow: 0 4px 15px rgba(0,0,0,0.3);
         margin-bottom: 5px;
     }
-    .hero-country {
+    .hero-city {
         font-size: 1.2rem;
         color: rgba(255,255,255,0.9);
         margin-bottom: 20px;
@@ -66,35 +66,6 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
         padding-bottom: 15px;
         border-bottom: 1px solid rgba(10, 58, 42, 0.08);
     }
-
-    /* Cities Grid */
-    .cities-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 15px;
-    }
-    .city-card {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px;
-        background: var(--secondary-light);
-        border-radius: var(--radius-md);
-        border: 1px solid rgba(10, 58, 42, 0.05);
-        color: var(--text-dark);
-        text-decoration: none;
-        transition: all 0.2s ease;
-    }
-    .city-card:hover {
-        background: var(--white);
-        border-color: var(--primary-light);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        color: var(--primary);
-    }
-    .city-card i {
-        color: var(--gold);
-    }
 </style>
 
 <div class="page-header">
@@ -104,12 +75,14 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
             <span style="color: rgba(255,255,255,0.4); margin: 0 10px;">/</span> 
             <a href="{{ route('islamic-date.hub') }}" style="color: var(--gold-light); text-decoration: none;">Islamic Date</a>
             <span style="color: rgba(255,255,255,0.4); margin: 0 10px;">/</span>
-            <span style="color: var(--white);">{{ $country->name }}</span>
+            <a href="{{ route('islamic-date.country', $country->slug) }}" style="color: var(--gold-light); text-decoration: none;">{{ $country->name }}</a>
+            <span style="color: rgba(255,255,255,0.4); margin: 0 10px;">/</span>
+            <span style="color: var(--white);">{{ $city->name }}</span>
         </div>
         <div class="hero-content">
             <div class="hero-gregorian"><i class="far fa-calendar-alt" style="margin-right: 8px;"></i>{{ date('l, d F Y') }}</div>
             <div class="hero-hijri">{{ $hijriDate ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month : 'Unknown' }}</div>
-            <div class="hero-country"><i class="fas fa-map-marker-alt" style="color: var(--gold);"></i> {{ $country->name }} ({{ $hijriDate ? $hijriDate->hijri_year : '' }} AH)</div>
+            <div class="hero-city"><i class="fas fa-map-marker-alt" style="color: var(--gold);"></i> {{ $city->name }}, {{ $country->name }} ({{ $hijriDate ? $hijriDate->hijri_year : '' }} AH)</div>
         </div>
     </div>
 </div>
@@ -117,61 +90,42 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
 <section class="section" style="padding-top: 40px; background-color: var(--secondary-light);">
     <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         
-        <x-social-share :title="'Islamic Date Today in ' . $country->name . ' - ' . $titleHijri" />
+        <x-social-share :title="'Islamic Date & Prayer Times in ' . $city->name . ' - ' . $titleHijri" />
 
-        @if($country->local_context_note)
+        @if($city->local_context_note)
         <div style="background: var(--white); padding: 20px; border-left: 4px solid var(--primary); border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 30px; box-shadow: var(--shadow-sm);">
             <h4 style="margin: 0 0 5px 0; color: var(--primary-dark); font-size: 1.1rem;"><i class="fas fa-info-circle text-primary"></i> Local Context</h4>
-            <p style="margin: 0; color: var(--text-medium); font-size: 0.95rem;">{{ $country->local_context_note }}</p>
+            <p style="margin: 0; color: var(--text-medium); font-size: 0.95rem;">{{ $city->local_context_note }}</p>
         </div>
         @endif
 
         <div class="row g-4">
-            <div class="col-lg-8">
-                <!-- Cities List -->
-                <div class="theme-card">
-                    <h3 class="theme-section-title"><i class="fas fa-city" style="color: var(--gold);"></i> Islamic Date & Prayer Times in {{ $country->name }} Cities</h3>
-                    <p style="color: var(--text-medium); margin-bottom: 20px;">Select a city to view exact prayer times and localized Islamic date information.</p>
-                    
-                    <div class="cities-grid">
-                        @foreach($cities as $city)
-                        <a href="{{ route('islamic-date.city', ['country' => $country->slug, 'city' => $city->slug]) }}" class="city-card">
-                            <span>{{ $city->name }}</span>
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                        @endforeach
-                    </div>
-                </div>
-
-                <!-- Upcoming Events -->
-                <div class="theme-card">
-                    <h3 class="theme-section-title"><i class="fas fa-calendar-star" style="color: var(--gold);"></i> Upcoming Islamic Events in {{ $country->name }}</h3>
-                    <x-countdown-timers :countdowns="$upcomingEvents->take(4) ?? []" />
-                </div>
+            <div class="col-lg-4">
+                <x-prayer-widget :city="$city->name" :country="$country->name" :prayerTimes="$prayerTimes" />
             </div>
 
             <div class="col-lg-4">
                 <div class="theme-card" style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); color: var(--white); border: none;">
-                    <h3 class="theme-section-title" style="color: var(--gold-light); border-color: rgba(255,255,255,0.1);"><i class="fas fa-moon"></i> Moon Phase</h3>
+                    <h3 class="theme-section-title" style="color: var(--gold-light); border-color: rgba(255,255,255,0.1);"><i class="fas fa-moon"></i> Moon Phase in {{ $city->name }}</h3>
                     <x-moon-phase-widget :moonPhase="$moonPhase" />
                 </div>
+            </div>
 
-                <div class="mt-4">
-                    <x-hijri-converter-widget />
-                </div>
+            <div class="col-lg-4">
+                <x-hijri-converter-widget />
             </div>
         </div>
         
         <!-- FAQs -->
         @php
         $faqs = [
-            ['q' => "How is the Hijri date determined in {$country->name}?", 'a' => "The Hijri date in {$country->name} depends on the local moon sighting declarations by recognized authorities. " . ($country->local_context_note ?? 'We update our records according to official announcements.')],
-            ['q' => "Are prayer times accurate for {$country->name}?", 'a' => "Yes, prayer times are calculated specifically for the geographical coordinates of cities in {$country->name} using standard calculation methods like the University of Islamic Sciences, Karachi or Umm al-Qura."],
+            ['q' => "What is the Islamic date today in {$city->name}?", 'a' => "Today's Islamic date in {$city->name} is " . ($hijriDate ? "{$hijriDate->hijri_day} {$hijriDate->hijri_month} {$hijriDate->hijri_year} AH" : "currently calculating") . "."],
+            ['q' => "Which prayer calculation method is used for {$city->name}?", 'a' => "The prayer times for {$city->name} are calculated using the " . ($city->prayer_calc_method ?? 'standard recognized method for this region') . "."],
         ];
         @endphp
         
         <div class="theme-card" style="margin-top: 20px; margin-bottom: 40px;">
-            <h3 class="theme-section-title text-center" style="justify-content: center; border: none;"><i class="fas fa-question-circle" style="color: var(--gold);"></i> FAQs - {{ $country->name }}</h3>
+            <h3 class="theme-section-title text-center" style="justify-content: center; border: none;"><i class="fas fa-question-circle" style="color: var(--gold);"></i> FAQs - {{ $city->name }}</h3>
             <x-faq-block :faqs="$faqs" />
         </div>
 

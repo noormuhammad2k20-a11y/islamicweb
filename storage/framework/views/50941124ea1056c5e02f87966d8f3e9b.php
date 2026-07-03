@@ -46,6 +46,21 @@
     <meta name="twitter:description" content="<?php echo e($seoMeta->twitter_description ?? $seoMeta->og_description ?? ''); ?>">
     <meta name="twitter:image" content="<?php echo e($seoMeta->twitter_image ?? $seoMeta->og_image ?? ''); ?>">
     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+    <style media="print">
+        @page { margin: 1cm; }
+        body { background: white !important; font-size: 12pt; color: black !important; }
+        .top-bar, .navbar, .mobile-toggle, .mobile-overlay, .footer, .back-to-top, .toast-container, .social-share, .faq-container, .converter-widget, button, form {
+            display: none !important;
+        }
+        .page-header { background: none !important; color: black !important; border: none !important; padding: 20px 0 !important; }
+        .page-header * { color: black !important; text-shadow: none !important; }
+        .theme-card { border: 1px solid #ddd !important; box-shadow: none !important; break-inside: avoid; margin-bottom: 20px !important; }
+        .calendar-modern { border: 1px solid #000 !important; }
+        .calendar-day { border: 1px solid #ddd !important; }
+        .calendar-day.today { background: none !important; font-weight: bold !important; border: 2px solid black !important; color: black !important; }
+        a { text-decoration: none !important; color: black !important; }
+    </style>
 </head>
 <body>
 
