@@ -96,9 +96,16 @@ class IslamicDateController extends Controller
         return $fastingDays;
     }
 
-    public function hub()
+    public function hub(\App\Services\AladhanApiService $apiService)
     {
         $hijriDate = HijriDateCache::where('gregorian_date', date('Y-m-d'))->first();
+        
+        // Auto-fetch if not available
+        if (!$hijriDate) {
+            $apiService->getCurrentHijriYear(); // This internally fetches and caches today
+            $hijriDate = HijriDateCache::where('gregorian_date', date('Y-m-d'))->first();
+        }
+
         $countries = Country::get();
         $historicalEvents = $this->getTodayEvents($hijriDate);
         
@@ -112,9 +119,15 @@ class IslamicDateController extends Controller
         return view('pages.islamic-date.hub', compact('hijriDate', 'countries', 'historicalEvents', 'moonPhase', 'upcomingEvents', 'monthlyCalendar', 'fastingDays', 'seoMeta'));
     }
 
-    public function country(Country $country)
+    public function country(Country $country, \App\Services\AladhanApiService $apiService)
     {
         $hijriDate = HijriDateCache::where('gregorian_date', date('Y-m-d'))->first();
+        
+        // Auto-fetch if not available
+        if (!$hijriDate) {
+            $apiService->getCurrentHijriYear(); // This internally fetches and caches today
+            $hijriDate = HijriDateCache::where('gregorian_date', date('Y-m-d'))->first();
+        }
         $historicalEvents = $this->getTodayEvents($hijriDate);
         
         $moonPhase = $this->getMoonPhase($hijriDate ? $hijriDate->hijri_day : null);

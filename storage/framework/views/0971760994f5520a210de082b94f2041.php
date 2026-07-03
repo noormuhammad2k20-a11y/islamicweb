@@ -1,5 +1,3 @@
-
-
 <?php
 $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month . ' ' . $hijriDate->hijri_year : '';
 ?>
@@ -7,387 +5,520 @@ $titleHijri = isset($hijriDate) ? $hijriDate->hijri_day . ' ' . $hijriDate->hijr
 
 <?php $__env->startSection('content'); ?>
 <style>
-    /* Premium VIP Aesthetic - 8 Column Stacked Layout */
-    .vip-card {
-        background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-        border: 1px solid rgba(0, 0, 0, 0.02);
-        padding: 40px;
-        margin-bottom: 30px;
+    /* Premium Page Styles */
+    .page-header {
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        padding: 60px 0 40px;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 4px solid var(--gold);
+    }
+    .page-header::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                          radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
+        pointer-events: none;
+    }
+    .hero-date-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: var(--white);
+        z-index: 2;
+        position: relative;
+    }
+    .hero-gregorian {
+        font-size: 1.1rem;
+        color: var(--gold-light);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .hero-hijri {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        margin-bottom: 5px;
+    }
+    .hero-hijri-year {
+        font-family: 'Amiri', serif;
+        font-size: 1.8rem;
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 20px;
+    }
+    
+    .premium-card {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        padding: 30px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(10, 58, 42, 0.05);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
         position: relative;
         overflow: hidden;
     }
-    .vip-card:hover {
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-        transform: translateY(-2px);
+    .premium-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
     }
-    
-    .hero-card {
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        color: white;
-        text-align: center;
-        border: none;
-        padding: 60px 30px;
-    }
-    .hero-card .bg-icon {
+    .premium-card::before {
+        content: '';
         position: absolute;
-        top: -20px;
-        right: -20px;
-        opacity: 0.05;
-        font-size: 250px;
-        pointer-events: none;
+        top: 0; left: 0; width: 100%; height: 4px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
-    .hero-date-gregorian {
-        color: var(--gold);
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-        font-weight: 500;
-        letter-spacing: 1px;
+    .premium-card:hover::before {
+        opacity: 1;
     }
-    .hero-date-hijri {
-        font-family: 'Poppins', sans-serif;
-        font-size: 4rem;
+
+    .section-title-premium {
+        font-family: 'Playfair Display', serif;
         font-weight: 700;
-        line-height: 1.1;
-        margin-bottom: 15px;
-        text-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .hero-date-year {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.8rem;
-        color: rgba(255,255,255,0.9);
-        font-weight: 500;
-    }
-    
-    .section-title-custom {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
         color: var(--primary-dark);
+        font-size: 1.5rem;
         margin-bottom: 25px;
-        font-size: 1.6rem;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 15px;
         display: flex;
         align-items: center;
         gap: 12px;
     }
-    
-    .event-item {
-        padding: 20px 25px;
-        background: #fafafa;
-        border-radius: 12px;
-        margin-bottom: 15px;
-        border-left: 5px solid var(--primary);
-        transition: all 0.2s ease;
+    .section-title-premium i {
+        color: var(--gold);
+        font-size: 1.3rem;
+        background: var(--secondary);
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Moon Phase */
+    .moon-phase-wrapper {
+        text-align: center;
+        padding: 20px 0;
+    }
+    .moon-icon-container {
+        font-size: 5rem;
+        color: var(--gold);
+        margin-bottom: 20px;
+        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4));
+        animation: floatMoon 4s ease-in-out infinite;
+    }
+    @keyframes floatMoon {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+    .moon-name {
+        font-size: 1.4rem;
+        color: var(--primary-dark);
+        font-weight: 600;
+    }
+    .moon-desc {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        margin-top: 5px;
+    }
+
+    /* Events List */
+    .event-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .event-item-premium {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 15px;
+        background: var(--secondary-light);
+        border-radius: var(--radius-md);
+        border-left: 4px solid var(--primary);
+        transition: var(--tr);
     }
-    .event-item:hover {
-        background: #fff;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-        transform: translateX(5px);
+    .event-item-premium:hover {
+        background: var(--secondary);
     }
-    .event-item.upcoming {
+    .event-item-premium.upcoming-event {
         border-left-color: var(--gold);
     }
-    
-    /* Calendar Grid */
-    .cal-grid-wrapper {
-        background: white;
-        border-radius: 16px;
-        border: 1px solid #f0f0f0;
-        overflow: hidden;
-    }
-    .cal-header-row {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        background: var(--primary-dark);
-        color: white;
-        text-align: center;
+    .event-info h4 {
+        margin: 0;
+        color: var(--primary-dark);
         font-weight: 600;
-        font-family: 'Inter', sans-serif;
+        font-size: 1.1rem;
     }
-    .cal-header-cell {
-        padding: 18px 5px;
-        font-size: 1rem;
-        letter-spacing: 1px;
+    .event-info span {
+        font-size: 0.85rem;
+        color: var(--text-medium);
     }
-    .cal-body-row {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
+    .event-countdown {
         text-align: center;
+        background: var(--white);
+        padding: 8px 12px;
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-sm);
+        min-width: 60px;
     }
-    .cal-cell {
-        padding: 25px 10px;
-        border-bottom: 1px solid #f5f5f5;
-        border-right: 1px solid #f5f5f5;
-        transition: background 0.2s;
-    }
-    .cal-cell:hover {
-        background: #fafafa;
-    }
-    .cal-cell.is-today {
-        background: rgba(var(--gold-rgb), 0.08);
-        border-bottom: 4px solid var(--gold);
-    }
-    .cal-cell-hijri {
-        font-size: 1.6rem;
-        font-weight: 700;
-        font-family: 'Poppins', sans-serif;
+    .event-countdown strong {
+        display: block;
+        font-size: 1.3rem;
         color: var(--primary);
         line-height: 1;
+    }
+    .event-countdown small {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: var(--text-light);
+        font-weight: 600;
+    }
+
+    /* Fasting Alert */
+    .fasting-alert {
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: var(--radius-lg);
+        padding: 20px 25px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    .fasting-alert i {
+        font-size: 2rem;
+        color: var(--gold);
+    }
+    .fasting-alert h4 {
+        color: var(--primary-dark);
+        margin: 0 0 5px 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    .fasting-alert p {
+        margin: 0;
+        color: var(--text-medium);
+        font-size: 0.95rem;
+    }
+
+    /* Modern Calendar */
+    .calendar-modern {
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(10, 58, 42, 0.08);
+        overflow: hidden;
+    }
+    .calendar-header {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        background: var(--primary-subtle);
+        text-align: center;
+        padding: 15px 0;
+        font-weight: 600;
+        color: var(--primary-dark);
+        font-size: 0.9rem;
+    }
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        background: #f8faf9;
+        gap: 1px;
+    }
+    .calendar-day {
+        background: var(--white);
+        padding: 15px 5px;
+        text-align: center;
+        transition: var(--tr);
+        position: relative;
+    }
+    .calendar-day:hover {
+        background: var(--secondary-light);
+    }
+    .calendar-day.today {
+        background: var(--primary);
+        color: var(--white);
+    }
+    .calendar-day.today .h-date {
+        color: var(--white);
+    }
+    .calendar-day.today .g-date {
+        color: rgba(255,255,255,0.7);
+    }
+    .h-date {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+        line-height: 1;
+        margin-bottom: 4px;
+        display: block;
+    }
+    .g-date {
+        font-size: 0.75rem;
+        color: var(--text-light);
+    }
+
+    /* Converter Form */
+    .converter-form .form-label {
+        font-weight: 600;
+        color: var(--primary-dark);
+        font-size: 0.9rem;
         margin-bottom: 8px;
     }
-    .cal-cell.is-today .cal-cell-hijri {
-        color: var(--primary-dark);
+    .converter-form .form-control {
+        background: var(--secondary-light);
+        border: 1px solid rgba(10, 58, 42, 0.1);
+        border-radius: var(--radius-md);
+        padding: 12px 15px;
+        color: var(--text-dark);
+        transition: var(--tr);
     }
-    .cal-cell-greg {
-        font-size: 0.85rem;
-        color: #888;
-        font-weight: 500;
-        text-transform: uppercase;
-    }
-    
-    .form-control-vip {
-        width: 100%;
-        padding: 15px 20px;
-        border: 2px solid #eaeaea;
-        border-radius: 12px;
-        background: #fcfcfc;
-        font-family: 'Inter', sans-serif;
-        color: #444;
-        font-size: 1.05rem;
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    .form-control-vip:focus {
+    .converter-form .form-control:focus {
         border-color: var(--primary);
-        box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.1);
-        outline: none;
-        background: #fff;
+        box-shadow: 0 0 0 4px var(--primary-subtle);
+        background: var(--white);
     }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-        .cal-cell { padding: 15px 5px; }
-        .cal-cell-hijri { font-size: 1.2rem; }
-        .hero-date-hijri { font-size: 2.5rem; }
-        .event-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-        .event-item > div:last-child { text-align: left !important; }
+    .btn-convert {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: var(--primary-dark);
+        font-weight: 600;
+        border: none;
+        padding: 12px 25px;
+        border-radius: var(--radius-md);
+        width: 100%;
+        transition: var(--tr);
+        box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+    }
+    .btn-convert:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    /* History Events */
+    .history-timeline {
+        position: relative;
+        padding-left: 30px;
+    }
+    .history-timeline::before {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--primary-subtle);
+    }
+    .history-item {
+        position: relative;
+        margin-bottom: 25px;
+    }
+    .history-item:last-child {
+        margin-bottom: 0;
+    }
+    .history-item::before {
+        content: '';
+        position: absolute;
+        left: -30px;
+        top: 5px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 4px solid var(--gold);
+        box-shadow: 0 0 0 4px var(--white);
+    }
+    .history-item h4 {
+        color: var(--primary-dark);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    .history-item p {
+        color: var(--text-medium);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    .history-source {
+        display: inline-block;
+        background: var(--secondary);
+        padding: 4px 10px;
+        border-radius: var(--radius-sm);
+        font-size: 0.8rem;
+        color: var(--text-light);
     }
 </style>
 
-<section class="section" style="padding-top: 60px; padding-bottom: 60px; background-color: #fbfbfb;">
+<div class="page-header">
     <div class="container">
+        <div class="breadcrumb" style="text-align: center; margin-bottom: 25px; position: relative; z-index: 2;">
+            <a href="<?php echo e(route('home')); ?>" style="color: var(--gold-light); text-decoration: none; font-weight: 500;"><i class="fas fa-home"></i> Home</a> 
+            <span style="color: rgba(255,255,255,0.4); margin: 0 10px;">/</span> 
+            <span style="color: var(--white); font-weight: 500;">Islamic Date Today</span>
+        </div>
+        <div class="hero-date-container">
+            <div class="hero-gregorian"><i class="far fa-calendar-alt" style="margin-right: 8px;"></i><?php echo e(date('l, d F Y')); ?></div>
+            <div class="hero-hijri"><?php echo e($hijriDate ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month : '15 Jumada Al-Akhirah'); ?></div>
+            <div class="hero-hijri-year"><?php echo e($hijriDate ? $hijriDate->hijri_year : '1446'); ?> AH</div>
+        </div>
+    </div>
+</div>
+
+<section class="section" style="padding-top: 50px; background-color: var(--secondary-light);">
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
         
-        <!-- Breadcrumb -->
-        <div class="breadcrumb" style="text-align: center; margin-bottom: 40px;">
-            <div style="background: rgba(255,255,255,0.9); padding: 12px 30px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.03); font-size: 0.95rem; border: 1px solid rgba(0,0,0,0.02);">
-                <a href="<?php echo e(route('home')); ?>" style="color: var(--primary); text-decoration: none; font-weight: 500;"><i class="fas fa-home"></i> Home</a> 
-                <span style="color: #ccc; margin: 0 12px;">/</span> 
-                <span style="color: var(--primary-dark); font-weight: 600;">Islamic Date Today</span>
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($fastingDays) && count($fastingDays) > 0): ?>
+        <div class="fasting-alert">
+            <i class="fas fa-star-and-crescent"></i>
+            <div>
+                <h4>Sunnah Fasting Today</h4>
+                <p>Today is a recommended day for fasting: <strong><?php echo e(implode(', ', $fastingDays)); ?></strong>. May Allah accept your efforts.</p>
+            </div>
+        </div>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+        <div class="row g-4 mb-4">
+            <!-- Moon Phase -->
+            <div class="col-lg-5 col-md-6">
+                <div class="premium-card">
+                    <h3 class="section-title-premium"><i class="fas fa-moon"></i> Moon Phase</h3>
+                    <div class="moon-phase-wrapper">
+                        <div class="moon-icon-container">
+                            <i class="fas <?php echo e($moonPhase['icon'] ?? 'fa-moon'); ?>"></i>
+                        </div>
+                        <div class="moon-name"><?php echo e($moonPhase['name'] ?? 'Unknown'); ?></div>
+                        <div class="moon-desc"><?php echo e($moonPhase['description'] ?? ''); ?></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="col-lg-7 col-md-6">
+                <div class="premium-card">
+                    <h3 class="section-title-premium"><i class="fas fa-calendar-star"></i> Upcoming Islamic Events</h3>
+                    <div class="event-list">
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($upcomingEvents) && $upcomingEvents->count() > 0): ?>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $upcomingEvents->take(4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                            <div class="event-item-premium upcoming-event">
+                                <div class="event-info">
+                                    <h4><?php echo e($event->name); ?></h4>
+                                    <span><i class="far fa-calendar" style="color: var(--text-light); margin-right: 5px;"></i> <?php echo e($event->hijri_day); ?> <?php echo e($event->hijriMonth->name_en ?? ''); ?></span>
+                                </div>
+                                <div class="event-countdown">
+                                    <strong><?php echo e($event->days_away); ?></strong>
+                                    <small>Days</small>
+                                </div>
+                            </div>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                        <?php else: ?>
+                            <div style="text-align: center; padding: 30px 0; color: var(--text-light);">
+                                <i class="fas fa-calendar-times" style="font-size: 2.5rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                                <p>No upcoming events recorded.</p>
+                            </div>
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- STACKED 8-COLUMN LAYOUT START -->
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-8 mx-auto">
-                
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(count($fastingDays) > 0): ?>
-                <!-- FASTING ALERTS -->
-                <div class="vip-card" style="background: rgba(var(--gold-rgb), 0.1); border-left: 5px solid var(--gold); display: flex; align-items: center; gap: 20px; padding: 25px 35px;">
-                    <i class="fas fa-star-and-crescent" style="color: var(--gold); font-size: 2rem;"></i>
-                    <div>
-                        <h4 style="color: var(--primary-dark); margin-bottom: 5px; font-weight: 600; font-family: 'Poppins', sans-serif; font-size: 1.2rem;">Sunnah Fasting Today</h4>
-                        <p style="color: #555; margin: 0; font-size: 1.05rem;">Today is a recommended day for fasting: <strong><?php echo e(implode(', ', $fastingDays)); ?></strong>.</p>
-                    </div>
-                </div>
-                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-
-                <!-- 1. HERO CARD -->
-                <div class="vip-card hero-card">
-                    <i class="fas fa-moon bg-icon"></i>
-                    <div class="hero-date-gregorian"><?php echo e(date('l, d F Y')); ?></div>
-                    <div class="hero-date-hijri">
-                        <?php echo e($hijriDate ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month : '15 Jumada Al-Akhirah'); ?>
-
-                    </div>
-                    <div class="hero-date-year"><?php echo e($hijriDate ? $hijriDate->hijri_year : '1446'); ?> AH</div>
-                </div>
-
-                <!-- 2. MOON PHASE CARD -->
-                <div class="vip-card" style="text-align: center; padding: 50px 30px;">
-                    <h3 class="section-title-custom" style="justify-content: center; border: none; margin-bottom: 10px;">
-                        Current Moon Phase
-                    </h3>
-                    <div style="font-size: 5rem; color: var(--gold); margin: 20px 0; filter: drop-shadow(0 4px 15px rgba(var(--gold-rgb), 0.4));">
-                        <i class="fas <?php echo e($moonPhase['icon'] ?? 'fa-moon'); ?>"></i>
-                    </div>
-                    <h3 style="color: var(--primary-dark); font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 600; margin-bottom: 10px;"><?php echo e($moonPhase['name'] ?? 'Unknown'); ?></h3>
-                    <p style="color: #666; font-size: 1.1rem; margin: 0 auto; max-width: 600px;"><?php echo e($moonPhase['description'] ?? ''); ?></p>
-                </div>
-
-                <!-- 3. UPCOMING EVENTS CARD -->
-                <div class="vip-card">
-                    <h3 class="section-title-custom"><i class="fas fa-calendar-star" style="color: var(--gold);"></i> Upcoming Islamic Events</h3>
+        <div class="row g-4 mb-4">
+            <!-- Date Converter -->
+            <div class="col-lg-4">
+                <div class="premium-card">
+                    <h3 class="section-title-premium"><i class="fas fa-exchange-alt"></i> Date Converter</h3>
                     
-                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($upcomingEvents) && $upcomingEvents->count() > 0): ?>
-                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $upcomingEvents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                        <div class="event-item upcoming">
-                            <div>
-                                <h4 style="color: var(--primary-dark); margin: 0 0 8px 0; font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 600;"><?php echo e($event->name); ?></h4>
-                                <span style="font-size: 1rem; color: #666; font-weight: 500;"><i class="fas fa-calendar-day" style="color: var(--primary); opacity: 0.6; margin-right: 8px;"></i><?php echo e($event->hijri_day); ?> <?php echo e($event->hijriMonth->name_en ?? ''); ?></span>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 2rem; font-weight: bold; color: var(--primary); line-height: 1;"><?php echo e($event->days_away); ?></div>
-                                <div style="font-size: 0.85rem; color: #999; text-transform: uppercase; font-weight: 600; margin-top: 5px;">Days Away</div>
-                            </div>
+                    <form id="converterWidgetForm" class="converter-form" style="margin-top: 20px;">
+                        <div style="margin-bottom: 15px;">
+                            <label class="form-label">Conversion Type</label>
+                            <select id="convDirection" class="form-control" style="width: 100%;">
+                                <option value="g2h">Gregorian to Hijri</option>
+                                <option value="h2g">Hijri to Gregorian</option>
+                            </select>
                         </div>
-                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
-                    <?php else: ?>
-                        <div style="padding: 30px; text-align: center; background: #fafafa; border-radius: 12px; border: 1px dashed #ddd;">
-                            <p style="color: #888; font-size: 1.1rem; margin: 0;"><i class="fas fa-info-circle" style="margin-right: 8px;"></i> No upcoming events found.</p>
+                        <div style="margin-bottom: 25px;">
+                            <label class="form-label">Select Date</label>
+                            <input type="date" id="convDate" required class="form-control" style="width: 100%;">
                         </div>
-                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-                </div>
-
-                <!-- 4. DATE CONVERTER CARD -->
-                <div class="vip-card">
-                    <h3 class="section-title-custom"><i class="fas fa-exchange-alt" style="color: var(--primary);"></i> Date Converter</h3>
-                    <p style="margin-bottom: 30px; color: #555; font-size: 1.05rem;">Instantly convert dates between the Hijri and Gregorian calendars.</p>
-                    
-                    <form id="converterWidgetForm" style="background: #fafafa; padding: 30px; border-radius: 16px; border: 1px solid #f0f0f0;">
-                        <div class="row g-4 align-items-end">
-                            <div class="col-md-5">
-                                <label style="font-weight: 600; margin-bottom: 10px; display: block; color: var(--primary-dark);">Conversion Type</label>
-                                <select id="convDirection" class="form-control-vip">
-                                    <option value="g2h">Gregorian to Hijri</option>
-                                    <option value="h2g">Hijri to Gregorian</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label style="font-weight: 600; margin-bottom: 10px; display: block; color: var(--primary-dark);">Date</label>
-                                <input type="date" id="convDate" required class="form-control-vip">
-                            </div>
-                            <div class="col-md-3">
-                                <button type="submit" class="btn-primary" style="width: 100%; height: 54px; border-radius: 12px; font-weight: 600; font-size: 1.1rem;">
-                                    <i class="fas fa-sync"></i> Convert
-                                </button>
-                            </div>
-                        </div>
+                        <button type="submit" class="btn-convert">
+                            <i class="fas fa-sync-alt" style="margin-right: 8px;"></i> Convert Date
+                        </button>
                     </form>
                     
-                    <div id="convResult" style="margin-top: 30px; text-align: center; display: none; padding: 25px; background: rgba(var(--primary-rgb), 0.05); border-radius: 12px; border: 2px dashed rgba(var(--primary-rgb), 0.2);">
-                        <h4 style="color: var(--primary-dark); margin-bottom: 8px; font-size: 1.4rem; font-family: 'Poppins', sans-serif; font-weight: 600;" id="resText"></h4>
-                        <p style="color: #666; font-size: 1.1rem; margin: 0;" id="resSub"></p>
+                    <div id="convResult" style="display: none; margin-top: 25px; padding: 15px; background: var(--secondary); border-radius: var(--radius-sm); text-align: center; border: 1px solid rgba(10,58,42,0.1);">
+                        <h4 style="color: var(--primary-dark); font-size: 1.1rem; font-weight: 700; margin-bottom: 5px;" id="resText"></h4>
+                        <p style="color: var(--text-medium); font-size: 0.9rem; margin: 0;" id="resSub"></p>
                     </div>
                 </div>
+            </div>
 
-                <!-- 5. MONTHLY CALENDAR GRID -->
+            <!-- Calendar -->
+            <div class="col-lg-8">
                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($monthlyCalendar) && $monthlyCalendar->count() > 0): ?>
-                <div class="vip-card" style="padding: 0; background: transparent; box-shadow: none; border: none;">
-                    <div class="cal-grid-wrapper">
-                        <div style="background: #fff; padding: 30px; text-align: center; border-bottom: 1px solid #f0f0f0;">
-                            <h3 style="font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--primary-dark); margin: 0; font-size: 1.6rem;">
-                                <i class="fas fa-calendar-alt" style="color: var(--primary); margin-right: 10px;"></i> Hijri Calendar — <?php echo e($hijriDate->hijri_month); ?>
-
-                            </h3>
+                <div class="premium-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                        <h3 class="section-title-premium" style="margin-bottom: 0;"><i class="fas fa-calendar-alt"></i> <?php echo e($hijriDate->hijri_month); ?> Calendar</h3>
+                        <span style="font-weight: 600; color: var(--gold-dark); background: var(--secondary); padding: 6px 16px; border-radius: var(--radius-xl); font-size: 0.9rem;">
+                            <?php echo e($hijriDate->hijri_year); ?> AH
+                        </span>
+                    </div>
+                    
+                    <div class="calendar-modern">
+                        <div class="calendar-header">
+                            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
                         </div>
-                        <div class="cal-header-row">
-                            <div class="cal-header-cell">Sun</div>
-                            <div class="cal-header-cell">Mon</div>
-                            <div class="cal-header-cell">Tue</div>
-                            <div class="cal-header-cell">Wed</div>
-                            <div class="cal-header-cell">Thu</div>
-                            <div class="cal-header-cell">Fri</div>
-                            <div class="cal-header-cell">Sat</div>
-                        </div>
-                        <div class="cal-body-row" style="background: white;">
+                        <div class="calendar-grid">
                             <?php
                                 $firstDay = $monthlyCalendar->first();
                                 $dayOfWeek = date('w', strtotime($firstDay->gregorian_date));
                             ?>
                             
                             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php for($i = 0; $i < $dayOfWeek; $i++): ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                                <div style="padding: 20px 5px; border-bottom: 1px solid #f5f5f5; border-right: 1px solid #f5f5f5; background: #fafafa;"></div>
+                                <div style="background: var(--white);"></div>
                             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endfor; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                             
                             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $monthlyCalendar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $day): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                                 <?php
                                     $isToday = $day->gregorian_date == date('Y-m-d');
                                 ?>
-                                <div class="cal-cell <?php echo e($isToday ? 'is-today' : ''); ?>">
-                                    <div class="cal-cell-hijri"><?php echo e($day->hijri_day); ?></div>
-                                    <div class="cal-cell-greg"><?php echo e(date('j M', strtotime($day->gregorian_date))); ?></div>
+                                <div class="calendar-day <?php echo e($isToday ? 'today' : ''); ?>">
+                                    <span class="h-date"><?php echo e($day->hijri_day); ?></span>
+                                    <span class="g-date"><?php echo e(date('j M', strtotime($day->gregorian_date))); ?></span>
                                 </div>
                             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                         </div>
                     </div>
                 </div>
                 <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-
-                <!-- 6. HISTORY LOG -->
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($historicalEvents) && $historicalEvents->count() > 0): ?>
-                <div class="vip-card">
-                    <h3 class="section-title-custom"><i class="fas fa-history" style="color: var(--gold);"></i> On This Day in Islamic History</h3>
-                    <p style="margin-bottom: 25px; color: #666; font-size: 1.05rem;">Major events that occurred on <?php echo e($hijriDate ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month : 'this day'); ?>:</p>
-                    
-                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $historicalEvents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                        <div class="event-item" style="border-left-color: #eee;">
-                            <div style="width: 100%;">
-                                <h4 style="margin-bottom: 10px; color: var(--primary-dark); font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 600;"><?php echo e($event->title); ?></h4>
-                                <p style="color: #555; margin-bottom: 15px; line-height: 1.7; font-size: 1.05rem;"><?php echo e($event->description); ?></p>
-                                <div style="font-size: 0.9rem; color: #888; font-weight: 500; background: #fff; display: inline-block; padding: 5px 15px; border-radius: 50px; border: 1px solid #f0f0f0;">
-                                    <i class="fas fa-book-open" style="margin-right: 6px; color: var(--gold);"></i> Source: <?php echo e($event->source_note); ?>
-
-                                </div>
-                            </div>
-                        </div>
-                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
-                </div>
-                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
-                
-                <!-- 7. LOCALIZED COUNTRIES -->
-                <div class="vip-card">
-                    <h3 class="section-title-custom"><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> Localized Dates by Country</h3>
-                    <p style="margin-bottom: 30px; color: #555; font-size: 1.05rem;">View local Hijri dates and specific prayer times based on official country moon sightings.</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
-                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $countries; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                        <a href="<?php echo e(route('islamic-date.country', ['country' => $country->slug])); ?>" style="text-decoration: none; color: inherit;">
-                            <div style="text-align: center; padding: 30px 20px; background: #fafafa; border-radius: 12px; border: 1px solid #f0f0f0; transition: all 0.3s ease;" onmouseover="this.style.background='#fff'; this.style.borderColor='var(--primary)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.background='#fafafa'; this.style.borderColor='#f0f0f0'; this.style.transform='translateY(0)';">
-                                <div style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"><i class="fas fa-flag"></i></div>
-                                <h4 style="font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 600; margin: 0; color: var(--primary-dark);"><?php echo e($country->name); ?></h4>
-                            </div>
-                        </a>
-                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
-                    </div>
-                </div>
-
-                <!-- 8. FAQ SECTION -->
-                <div class="vip-card" itemscope itemtype="https://schema.org/FAQPage">
-                    <h3 class="section-title-custom"><i class="fas fa-question-circle" style="color: var(--gold);"></i> Frequently Asked Questions</h3>
-                    
-                    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="margin-bottom: 35px; background: #fafafa; padding: 25px; border-radius: 12px; border-left: 4px solid var(--primary);">
-                        <h4 itemprop="name" style="margin-bottom: 15px; font-family: 'Poppins', sans-serif; font-size: 1.25rem; color: var(--primary-dark); font-weight: 600;">Why does the Islamic day start at sunset, not midnight?</h4>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <p itemprop="text" style="color: #555; line-height: 1.7; margin: 0; font-size: 1.05rem;">In the Islamic calendar, a new day begins at Maghrib (sunset), following the lunar cycle. This is rooted in the Quran and Sunnah, where the night precedes the daytime, unlike the Gregorian calendar which starts at midnight.</p>
-                        </div>
-                    </div>
-                    
-                    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="margin-bottom: 0; background: #fafafa; padding: 25px; border-radius: 12px; border-left: 4px solid var(--gold);">
-                        <h4 itemprop="name" style="margin-bottom: 15px; font-family: 'Poppins', sans-serif; font-size: 1.25rem; color: var(--primary-dark); font-weight: 600;">Why do Hijri dates shift earlier each Gregorian year?</h4>
-                        <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                            <p itemprop="text" style="color: #555; line-height: 1.7; margin: 0; font-size: 1.05rem;">The Hijri calendar is strictly lunar, consisting of 354 or 355 days. Because it is approximately 10 to 12 days shorter than the 365-day solar Gregorian year, Islamic dates and months (like Ramadan) shift backward through the seasons each year.</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-        <!-- STACKED 8-COLUMN LAYOUT END -->
+
+        <!-- Historical Events -->
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($historicalEvents) && $historicalEvents->count() > 0): ?>
+        <div class="premium-card" style="margin-bottom: 40px;">
+            <h3 class="section-title-premium"><i class="fas fa-landmark"></i> On This Day in History</h3>
+            <p style="color: var(--text-medium); margin-bottom: 30px;">Events that occurred on <?php echo e($hijriDate ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month : 'this day'); ?> across Islamic history.</p>
+            
+            <div class="history-timeline">
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $historicalEvents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                    <div class="history-item">
+                        <h4><?php echo e($event->title); ?></h4>
+                        <p><?php echo e($event->description); ?></p>
+                        <div class="history-source">
+                            <i class="fas fa-book-open" style="color: var(--gold); margin-right: 5px;"></i> Source: <?php echo e($event->source_note); ?>
+
+                        </div>
+                    </div>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+            </div>
+        </div>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     </div>
 </section>
@@ -452,7 +583,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var dir = document.getElementById('convDirection').value;
             var btn = this.querySelector('button');
             var originalBtnText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Converting...';
             btn.disabled = true;
 
             fetch('/ajax/hijri-convert?date=' + date + '&direction=' + dir)

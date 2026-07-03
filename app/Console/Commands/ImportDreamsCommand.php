@@ -8,23 +8,9 @@ use Illuminate\Support\Str;
 
 class ImportDreamsCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'dreams:import {file}';
+    protected $description = 'Import Khwabon Ki Tabeer from a JSON dataset and strictly merge duplicates into master symbols';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Import Khwabon Ki Tabeer from a JSON dataset';
-
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
         $file = $this->argument('file');
@@ -55,40 +41,69 @@ class ImportDreamsCommand extends Command
             return 1;
         }
 
-        $this->info("Importing " . count($data) . " Dreams...");
+        $this->info("Importing " . count($data) . " Dreams with strict duplicate merging...");
         
         $bar = $this->output->createProgressBar(count($data));
         $bar->start();
 
         foreach ($data as $item) {
-            $slug = Str::slug($item['symbol_english'] ?? ($item['symbol_urdu'] ?? 'dream'));
+            $rawEnglish = $item['symbol_english'] ?? '';
+            $rawUrdu = $item['symbol_urdu'] ?? '';
             
-            // Check for existing canonical record by exact english name or slug
+            // Strictly remove numbered variations if any sneaked in
+            $rawEnglish = preg_replace('/\(Type\s*\d+\)/i', '', $rawEnglish);
+            $rawUrdu = preg_replace('/\(قسم\s*\d+\)/iu', '', $rawUrdu);
+
+            $normalizedEnglish = $this->normalizeEnglishTitle($rawEnglish);
+            $normalizedUrdu = $this->normalizeUrduTitle($rawUrdu);
+            
+            // Prefer english for slug, fallback to urdu
+            $baseForSlug = !empty($normalizedEnglish) ? $normalizedEnglish : $normalizedUrdu;
+            if (empty($baseForSlug)) {
+                $baseForSlug = 'dream';
+            }
+            
+            $slug = Str::slug($baseForSlug);
+            
+            // Search existing canonical record
             $existing = DreamSymbol::where('slug', $slug)
-                                   ->orWhere('symbol_english', $item['symbol_english'] ?? '')
-                                   ->first();
+                ->orWhere('symbol_english', $normalizedEnglish)
+                ->orWhere('symbol_urdu', $normalizedUrdu)
+                ->first();
                                    
             if ($existing) {
                 // If it exists, append to scholarly opinions instead of creating a duplicate
                 $opinions = $existing->scholarly_opinions ?? [];
                 
-                // Avoid duplicating the exact same opinion
+                // Avoid duplicating the exact same opinion context
                 $alreadyExists = false;
+                $newInterpretation = trim($item['detailed_interpretation_english'] ?? ($item['detailed_interpretation_urdu'] ?? ''));
+                
                 foreach ($opinions as $op) {
-                    if (($op['scholar'] ?? '') === ($item['scholar_reference'] ?? '')) {
+                    $existingInt = trim($op['interpretation_english'] ?? ($op['interpretation_urdu'] ?? ''));
+                    if ($existingInt === $newInterpretation) {
                         $alreadyExists = true;
                         break;
                     }
                 }
                 
-                if (!$alreadyExists) {
+                if (!$alreadyExists && !empty($newInterpretation)) {
                     $opinions[] = [
-                        'scholar' => $item['scholar_reference'] ?? 'Unknown',
+                        'scholar' => $item['scholar_reference'] ?? 'General',
                         'interpretation_urdu' => $item['detailed_interpretation_urdu'] ?? null,
                         'interpretation_english' => $item['detailed_interpretation_english'] ?? null,
                         'source' => $item['source_book'] ?? null,
                     ];
-                    $existing->update(['scholarly_opinions' => $opinions]);
+                    
+                    // Also merge keywords
+                    $existingKeywords = is_array($existing->keywords) ? $existing->keywords : [];
+                    $newKeywords = is_array($item['keywords'] ?? []) ? $item['keywords'] : [];
+                    $mergedKeywords = array_values(array_unique(array_merge($existingKeywords, $newKeywords)));
+                    
+                    $existing->update([
+                        'scholarly_opinions' => $opinions,
+                        'keywords' => $mergedKeywords
+                    ]);
                 }
                 
                 $bar->advance();
@@ -97,10 +112,10 @@ class ImportDreamsCommand extends Command
 
             // Create new canonical record
             $dream = DreamSymbol::create([
-                'symbol_urdu' => $item['symbol_urdu'] ?? null,
+                'symbol_urdu' => $normalizedUrdu,
                 'symbol_arabic' => $item['symbol_arabic'] ?? null,
                 'symbol_roman_urdu' => $item['symbol_roman_urdu'] ?? null,
-                'symbol_english' => $item['symbol_english'] ?? null,
+                'symbol_english' => ucwords(strtolower($normalizedEnglish)),
                 'short_interpretation' => $item['short_interpretation'] ?? null,
                 'interpretation_urdu' => $item['detailed_interpretation_urdu'] ?? null,
                 'detailed_interpretation_urdu' => $item['detailed_interpretation_urdu'] ?? null,
@@ -135,5 +150,40 @@ class ImportDreamsCommand extends Command
         $bar->finish();
         $this->info("\nImport completed successfully!");
         return 0;
+    }
+
+    private function normalizeEnglishTitle($title)
+    {
+        if (empty($title)) return '';
+        $title = strtolower(trim($title));
+        
+        // Remove common extraneous words
+        $remove = [
+            'dream about', 'dreaming of', 'dreaming about', 'dream of', 'dream in', 
+            'in a dream', 'in dream', 'meaning of', 'interpretation of', 'seeing a', 'seeing an', 'seeing'
+        ];
+        
+        foreach ($remove as $word) {
+            $title = str_replace($word, '', $title);
+        }
+        
+        return trim($title);
+    }
+
+    private function normalizeUrduTitle($title)
+    {
+        if (empty($title)) return '';
+        $title = trim($title);
+        
+        // Remove common extraneous words in Urdu
+        $remove = [
+            'خواب میں', 'کا خواب دیکھنا', 'دیکھنا', 'کی تعبیر', 'کا خواب'
+        ];
+        
+        foreach ($remove as $word) {
+            $title = str_replace($word, '', $title);
+        }
+        
+        return trim($title);
     }
 }

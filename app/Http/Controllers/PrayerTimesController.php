@@ -7,9 +7,17 @@ use App\Models\City;
 use App\Models\PrayerTime;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use App\Services\PrayerTimesService;
 
 class PrayerTimesController extends Controller
 {
+    protected $prayerTimesService;
+
+    public function __construct(PrayerTimesService $prayerTimesService)
+    {
+        $this->prayerTimesService = $prayerTimesService;
+    }
+
     public function hub()
     {
         // Load Pakistan cities for the hub page, or all cities grouped by country
@@ -22,50 +30,16 @@ class PrayerTimesController extends Controller
         $city->load('seoMeta', 'country');
         
         $date = date('Y-m-d');
-        $prayerTimes = Cache::remember('prayer_times_' . $city->id . '_' . $date, 3600, function() use ($city, $date) {
-            $times = PrayerTime::where('city_id', $city->id)
-                ->where('date', '>=', $date)
-                ->orderBy('date', 'asc')
-                ->limit(30)
-                ->get();
-
-            // Fallback: If no data found, generate 30 days of dummy data for demo purposes
-            if ($times->isEmpty()) {
-                $dummyTimes = collect();
-                for ($i = 0; $i < 30; $i++) {
-                    $d = Carbon::parse($date)->addDays($i);
-                    $dummyTimes->push((object)[
-                        'date' => $d->format('Y-m-d'),
-                        'fajr' => '04:15:00',
-                        'sunrise' => '05:40:00',
-                        'dhuhr' => '12:30:00',
-                        'asr' => '16:05:00',
-                        'maghrib' => '19:15:00',
-                        'isha' => '20:45:00',
-                    ]);
-                }
-                return $dummyTimes;
-            }
-            
-            return $times;
+        
+        // Use the new PrayerTimesService which handles AlAdhan, Fallbacks, and DB caching
+        $prayerTimes = Cache::remember('prayer_times_srv_' . $city->id . '_' . $date, 3600, function() use ($city) {
+            return $this->prayerTimesService->fetchAndCacheForCity($city);
         });
 
         $todayPrayer = $prayerTimes->firstWhere('date', $date) ?? $prayerTimes->first();
 
-        // Qibla Calculation
-        $lat = $city->latitude;
-        $lon = $city->longitude;
-        $mekkaLat = 21.422487;
-        $mekkaLon = 39.826206;
-        $latRad = deg2rad($lat);
-        $lonRad = deg2rad($lon);
-        $mekkaLatRad = deg2rad($mekkaLat);
-        $mekkaLonRad = deg2rad($mekkaLon);
-        
-        $y = sin($mekkaLonRad - $lonRad);
-        $x = cos($latRad) * tan($mekkaLatRad) - sin($latRad) * cos($mekkaLonRad - $lonRad);
-        $qiblaDegree = rad2deg(atan2($y, $x));
-        $qiblaDegree = round(fmod($qiblaDegree + 360, 360), 2);
+        // Qibla Calculation via Service
+        $qiblaDegree = $this->prayerTimesService->getQibla($city);
 
         // Nawafil Calculation
         $nawafil = null;
