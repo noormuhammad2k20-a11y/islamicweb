@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Allow: /prayer-times
+Allow: /prayer-times/
 
 Disallow: /admin/
 Disallow: /filament/

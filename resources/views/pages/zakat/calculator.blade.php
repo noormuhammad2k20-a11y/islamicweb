@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Zakat Calculator — Detailed Assessment')
-@section('meta_description', 'Calculate your Zakat accurately using our comprehensive Zakat Calculator. Evaluates Nisab threshold dynamically.')
+@section('title', 'Online Zakat Calculator 2024 — Calculate Zakat on Gold & PKR')
+@section('meta_description', 'Learn how to calculate zakat in Islam using our online zakat calculator 2024. Accurate zakat calculator for Pakistan in rupees (PKR), gold, and silver.')
+@section('meta_keywords', 'zakat calculator, gold zakat calculator, zakat calculator pakistan, how to calculate zakat in islam, how to calculate zakat on gold, zakat calculator pakistan 2022, how to calculate zakat, zakat calculator on gold, zakat calculator pkr, zakat calculator rupees, zakat calculator 2023, online zakat calculator, zakat calculator 2024, zakat calculator in rupees, zakat calculator pakistan 2021')
 
 @section('content')
 <style>
@@ -425,96 +426,7 @@
 
     <!-- ====== INFO / SEO SECTION ====== -->
     <section class="z-info-section" id="zInfo">
-        <div class="z-info-inner">
-
-            <div class="z-info-block z-reveal">
-                <div class="z-info-header">
-                    <div class="z-info-icon"><i class="fas fa-scale-balanced"></i></div>
-                    <h2>The Jurisprudence and Economic Impact of Zakat</h2>
-                </div>
-                <p>Zakat is one of the Five Pillars of Islam, representing a mandatory religious duty for all eligible Muslims whose wealth meets or exceeds a specific threshold known as the Nisab. Far more than mere charity, Zakat is an institutionalized mechanism designed to purify wealth, eradicate poverty, and foster socio-economic equity within society. The calculation of Zakat is governed by precise jurisprudential rules derived from the Quran and the Sunnah, ensuring that the distribution of wealth occurs systematically and fairly.</p>
-            </div>
-
-            <div class="z-info-divider"></div>
-
-            <div class="z-info-block z-reveal">
-                <div class="z-info-header">
-                    <div class="z-info-icon"><i class="fas fa-gem"></i></div>
-                    <h2>Understanding the Nisab Threshold</h2>
-                </div>
-                <p>The Nisab serves as the minimum baseline of wealth that a Muslim must possess for one complete lunar year (Hawl) before Zakat becomes obligatory. Historically, the Prophet Muhammad (PBUH) established the Nisab based on two primary standards: gold and silver. The threshold was set at 20 Mithqal of gold (approximately 85 grams) or 200 Dirhams of silver (approximately 595 grams). In modern financial contexts, the value of these precious metals is converted into local fiat currency to determine the threshold.</p>
-                <p>Due to the significant divergence in the contemporary valuation of gold and silver, many scholars recommend utilizing the silver Nisab standard, as it is lower and thus ensures a broader safety net for the marginalized members of society.</p>
-            </div>
-
-            <div class="z-info-divider"></div>
-
-            <div class="z-info-block z-reveal">
-                <div class="z-info-header">
-                    <div class="z-info-icon"><i class="fas fa-coins"></i></div>
-                    <h2>Assets Subject to Zakat (Zakatable Assets)</h2>
-                </div>
-                <p>Not all forms of wealth are subject to Zakat. Islamic jurisprudence distinguishes between wealth that actively grows (or has the potential for growth) and personal items used for basic living. Zakatable assets strictly include cash in hand, bank balances, physical gold and silver, business inventory, agricultural produce, and livestock. Furthermore, investments such as stocks, mutual funds, and real estate acquired explicitly for resale are also factored into the net calculation.</p>
-                <p>Conversely, one's primary residence, personal vehicle, clothing, and household furniture are strictly exempt from Zakat, as they constitute necessities of life rather than hoarded wealth.</p>
-            </div>
-
-            <div class="z-info-divider"></div>
-
-            <div class="z-info-block z-reveal">
-                <div class="z-info-header">
-                    <div class="z-info-icon"><i class="fas fa-calculator"></i></div>
-                    <h2>The Calculation Methodology</h2>
-                </div>
-                <p>The standard rate of Zakat on accumulated monetary wealth, gold, silver, and business inventory is unequivocally set at 2.5% (or 1/40th of the total value). The algorithmic approach to calculation requires summing the total value of all Zakatable assets and subsequently subtracting any immediate, short-term debts or liabilities. If the resulting net wealth equals or exceeds the current Nisab threshold, the 2.5% rate is applied to the entire net amount.</p>
-                <p>It is critical to note that if the net wealth falls below the Nisab, the obligation drops entirely, resulting in a zero payable amount. This progressive structure ensures that individuals experiencing financial hardship are protected from the obligation.</p>
-            </div>
-
-            <div class="z-info-divider"></div>
-
-            <div class="z-info-block z-reveal">
-                <div class="z-info-header">
-                    <div class="z-info-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                    <h2>The Eight Categories of Recipients</h2>
-                </div>
-                <p>The distribution of Zakat is heavily regulated and restricted to eight specific categories (Asnaf) as explicitly delineated in Surah At-Tawbah (9:60) of the Quran. These categories include the destitute (Al-Fuqara), the needy (Al-Masakin), the administrators of Zakat (Al-Amilina 'Alayha), those whose hearts are to be reconciled (Al-Mu'allafati Qulubuhum), the enslaved or captives seeking freedom (Fir-Riqab), the debt-ridden (Al-Gharimin), those striving in the cause of Allah (Fi Sabilillah), and the stranded traveler (Ibn As-Sabil).</p>
-                <p>Adherence to these strict distribution channels ensures that the socio-economic intervention of Zakat directly targets the most vulnerable demographics, facilitating robust societal stability and economic circulation.</p>
-
-                <div class="z-categories-grid">
-                    <div class="z-cat-item">
-                        <div class="z-cat-num">1</div>
-                        <div><h4>Al-Fuqara</h4><span>الفقراء — The Destitute</span></div>
-                    </div>
-                    <div class="z-cat-item">
-                        <div class="z-cat-num">2</div>
-                        <div><h4>Al-Masakin</h4><span>المساكين — The Needy</span></div>
-                    </div>
-                    <div class="z-cat-item">
-                        <div class="z-cat-num">3</div>
-                        <div><h4>Al-Amilina 'Alayha</h4><span>العاملين عليها — Zakat Administrators</span></div>
-                    </div>
-                    <div class="z-cat-item">
-                        <div class="z-cat-num">4</div>
-                        <div><h4>Al-Mu'allafati Qulubuhum</h4><span>المؤلفة قلوبهم — Reconciling Hearts</span></div>
-                    </div>
-                    <div class="z-cat-item">
-                        <div class="z-cat-num">5</div>
-                        <div><h4>Fir-Riqab</h4><span>في الرقاب — Freeing Captives</span></div>
-                    </div>
-                    <div class="z-cat-item">
-                        <div class="z-cat-num">6</div>
-                        <div><h4>Al-Gharimin</h4><span>الغارمين — The Debt-Ridden</span></div>
-                    </div>
-                    <div class="z-cat-item">
-                        <div class="z-cat-num">7</div>
-                        <div><h4>Fi Sabilillah</h4><span>في سبيل الله — In the Cause of Allah</span></div>
-                    </div>
-                    <div class="z-cat-item">
-                        <div class="z-cat-num">8</div>
-                        <div><h4>Ibn As-Sabil</h4><span>ابن السبيل — The Stranded Traveler</span></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        @include('pages.zakat.seo_article')
     </section>
 
 </div>

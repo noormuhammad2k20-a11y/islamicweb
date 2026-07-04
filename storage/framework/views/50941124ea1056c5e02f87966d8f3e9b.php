@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo e(isset($seoMeta->title) && $seoMeta->title ? $seoMeta->title : View::getSection('title', 'نورِ اسلام | Noor-e-Islam')); ?></title>
     <meta name="description" content="<?php echo e(isset($seoMeta->meta_description) && $seoMeta->meta_description ? $seoMeta->meta_description : (isset($seoMeta->description) && $seoMeta->description ? $seoMeta->description : View::getSection('meta_description', 'Noor-e-Islam: Accurate Islamic knowledge, prayer times, and Quran.'))); ?>">
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(View::hasSection('meta_keywords')): ?>
+    <meta name="keywords" content="<?php echo $__env->yieldContent('meta_keywords'); ?>">
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     <!-- SEO Canonical and Hreflang -->
     <link rel="icon" href="<?php echo e(asset('favicon.svg')); ?>" type="image/svg+xml">

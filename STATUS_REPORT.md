@@ -1,49 +1,119 @@
-# STATUS REPORT — Phase 2 Fixes
+http://127.0.0.1:8000/zakat-calculator
 
-## 1. Automated Refresh Proof
-The scheduled task to refresh Islamic data automatically is active on the server:
+zakat calculator
+gold zakat calculator
+zakat calculator pakistan
+how to calculate zakat in islam
+how to calculate zakat on gold
+zakat calculator pakistan 2022
+how to calculate zakat
+zakat calculator on gold
+zakat calculator pkr
+zakat calculator rupees
+zakat calculator 2023
+online zakat calculator
+zakat calculator 2024
+zakat calculator in rupees
+zakat calculator pakistan 2021
 
-Output of `php artisan schedule:list`:
-```text
-  1 0 * * *  php artisan islamic:refresh ................................................. Next Due: 10 hours from now
-```
+zakat calculator
+gold zakat calculator
+zakat calculator pakistan
+how to calculate zakat in islam
+how to calculate zakat on gold
+how to calculate zakat
+zakat calculator on gold
+zakat calculator pkr
+zakat calculator rupees
+online zakat calculator
+zakat calculator in rupees
+silver zakat calculator
+nisab calculator
+zakat nisab calculator
+calculate zakat online
+islamic zakat calculator
+Pakistan SEO Keywords
 
-## 2. Hijri Date Caching Proof
-The `hijri_date_caches` data dynamically reads via `$hijriDate = HijriDateCache::where('gregorian_date', date('Y-m-d'))->first();` which eliminates long multi-day caching bugs. 
-Recent `hijri_date_caches` database records show recent automated fetch:
-```json
-[
-  {
-    "id": 1,
-    "gregorian_date": "2026-06-21",
-    "hijri_day": 6,
-    "hijri_month": "Muḥarram",
-    "hijri_year": 1448,
-    "source": "AlAdhan API",
-    "fetched_at": "2026-06-21 13:28:42"
-  }
-]
-```
+Create dedicated SEO optimization for:
 
-## 3. Row Counts
-| Table | Row Count |
-|---|---|
-| `countries` | 10 |
-| `cities` | 41 |
-| `surahs` | 4 |
-| `hadith_topics` | 6 |
-| `islamic_events` | 4 |
+zakat calculator pakistan
+zakat calculator pakistan pkr
+zakat calculator karachi
+zakat calculator lahore
+zakat calculator islamabad
+zakat calculator rawalpindi
+zakat calculator faisalabad
+zakat calculator multan
+zakat calculator hyderabad pakistan
+zakat calculator peshawar
+zakat calculator quetta
+Gold & Silver Keywords
+gold zakat calculator
+zakat calculator on gold
+how to calculate zakat on gold
+gold nisab today
+silver nisab today
+silver zakat calculator
+zakat on gold jewellery
+zakat on gold ornaments
+zakat on silver jewellery
+Long-Tail Keywords
 
-## 4. URL Restructure Confirmation
-- The Islamic Date cluster was restructured to flat URLs per country (e.g., `/islamic-date-today/{country}`).
-- The nested city-level pages (`/islamic-date-today/{country}/{city}`) have been removed.
-- A 301 redirect has been placed in `routes/web.php` so any old city-level URLs redirect to the country page.
-- The sitemap (`/sitemap-dates.xml`) and SitemapController were updated to only output country URLs.
+Naturally optimize for searches such as:
 
-## 5. Live View-Source Proof
-A hidden HTML comment `<!-- generated_at: {{ now()->toDateTimeString() }} -->` has been added to the `home.blade.php`, `hub.blade.php`, and `country.blade.php` pages.
-When you view the source of the homepage, you will see it dynamically renders the exact server time at the bottom of the page, proving that the page is not served from a stale static cache.
+calculate zakat online
+calculate zakat in pakistan
+free zakat calculator
+accurate zakat calculator
+zakat calculator according to hanafi
+zakat calculator according to shafi
+zakat calculator worldwide
+zakat calculator today
+zakat calculator with gold price
+zakat calculator with silver price
+zakat percentage
+zakat amount
+zakat due
+zakat formula
+zakat calculation method
+zakat on cash
+zakat on salary
+zakat on investments
+zakat on business assets
+zakat on shares
+zakat on mutual funds
+zakat on pension
+zakat on cryptocurrency
+zakat on foreign currency
+zakat on rental income
+zakat on savings
+zakat on bank balance
+zakat on property
+zakat on trade goods
+Search Intent Optimization
 
-```html
-<!-- generated_at: 2026-06-21 13:54:35 -->
-```
+Create content that satisfies every search intent.
+
+Informational
+What is Zakat?
+What is Nisab?
+How to Calculate Zakat?
+How to Calculate Zakat on Gold?
+How to Calculate Zakat in Islam?
+Zakat Rules
+Who Must Pay Zakat?
+Who Can Receive Zakat?
+Commercial
+Best Zakat Calculator
+Online Zakat Calculator
+Free Zakat Calculator
+Accurate Zakat Calculator
+Gold Zakat Calculator
+Pakistan Zakat Calculator
+Transactional
+Calculate My Zakat
+Calculate Zakat Now
+Check Zakat Eligibility
+Find Today's Nisab
+Calculate Gold Zakat
+Calculate Silver Zakat

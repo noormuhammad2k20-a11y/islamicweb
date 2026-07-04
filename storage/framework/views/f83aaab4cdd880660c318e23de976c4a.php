@@ -1,21 +1,19 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', $seoMeta->title ?? 'Prayer Times in ' . $city->name); ?>
+<?php $__env->startSection('meta_description', $seoMeta->description ?? ''); ?>
+<?php $__env->startSection('meta_keywords', "namaz timing {$city->name}, prayer time {$city->name}, fajr time {$city->name}, azan time {$city->name}, namaz waqt {$city->name}, {$city->name} prayer times today, {$city->name} namaz schedule, maghrib time {$city->name}, isha time {$city->name}, zohar namaz time {$city->name}, asr time {$city->name}, namaz timing {$city->name} hanafi"); ?>
+<?php $__env->startSection('canonical', url()->current()); ?>
 
-@section('title', $seoMeta->title ?? 'Prayer Times in ' . $city->name)
-@section('meta_description', $seoMeta->description ?? '')
-@section('meta_keywords', "namaz timing {$city->name}, prayer time {$city->name}, fajr time {$city->name}, azan time {$city->name}, namaz waqt {$city->name}, {$city->name} prayer times today, {$city->name} namaz schedule, maghrib time {$city->name}, isha time {$city->name}, zohar namaz time {$city->name}, asr time {$city->name}, namaz timing {$city->name} hanafi")
-@section('canonical', url()->current())
-
-@section('og_meta')
-<meta property="og:title" content="{{ $seoMeta->title ?? 'Prayer Times in ' . $city->name }}">
-<meta property="og:description" content="{{ $seoMeta->description ?? '' }}">
-<meta property="og:url" content="{{ url()->current() }}">
+<?php $__env->startSection('og_meta'); ?>
+<meta property="og:title" content="<?php echo e($seoMeta->title ?? 'Prayer Times in ' . $city->name); ?>">
+<meta property="og:description" content="<?php echo e($seoMeta->description ?? ''); ?>">
+<meta property="og:url" content="<?php echo e(url()->current()); ?>">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ $seoMeta->title ?? 'Prayer Times in ' . $city->name }}">
-<meta name="twitter:description" content="{{ $seoMeta->description ?? '' }}">
-@endsection
+<meta name="twitter:title" content="<?php echo e($seoMeta->title ?? 'Prayer Times in ' . $city->name); ?>">
+<meta name="twitter:description" content="<?php echo e($seoMeta->description ?? ''); ?>">
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     /* ======= PREMIUM PRAYER PAGE — BENTO DESIGN ======= */
     :root {
@@ -707,42 +705,43 @@
 <section class="prayer-page-bg">
     <div class="prayer-container" style="padding-top: 24px;">
 
-        {{-- ═══════ BREADCRUMB + HEADER ═══════ --}}
+        
         <div style="margin-bottom: 16px;">
             <nav aria-label="breadcrumb">
                 <ul class="p-breadcrumb">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('prayer-times.hub') }}">Prayer Times</a></li>
-                    <li><span class="current">{{ $city->name }}</span></li>
+                    <li><a href="<?php echo e(route('home')); ?>">Home</a></li>
+                    <li><a href="<?php echo e(route('prayer-times.hub')); ?>">Prayer Times</a></li>
+                    <li><span class="current"><?php echo e($city->name); ?></span></li>
                 </ul>
             </nav>
-            <h1 class="page-h1">Namaz Timing {{ $city->name }} Today | Prayer Times {{ $city->name }} | اوقاتِ نماز {{ $city->name }}</h1>
-            <p class="page-sub">{{ date('d M Y') }} — آج کے نماز کے اوقات {{ $city->name }} — Aaj ke namaz ke awqat {{ $city->name }}</p>
+            <h1 class="page-h1">Namaz Timing <?php echo e($city->name); ?> Today | Prayer Times <?php echo e($city->name); ?> | اوقاتِ نماز <?php echo e($city->name); ?></h1>
+            <p class="page-sub"><?php echo e(date('d M Y')); ?> — آج کے نماز کے اوقات <?php echo e($city->name); ?> — Aaj ke namaz ke awqat <?php echo e($city->name); ?></p>
         </div>
 
 
-        {{-- ═══════ SECTION 1: LIVE COUNTDOWN HERO BANNER ═══════ --}}
-        @if($todayPrayer)
+        
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($todayPrayer): ?>
         <div class="b-card hero-banner mb-16">
             <div class="hero-banner-content">
                 <div>
                     <div class="hero-tag"><i class="fas fa-mosque" style="margin-right:4px;"></i> Today's Prayers</div>
                     <p class="hero-date-line">
-                        {{ date('l, d M Y') }}
-                        @if($hijriDate)
-                        &bull; <span style="font-family:'Amiri',serif; color: var(--gold-light, #F3E5AB);">{{ $hijriDate->hijri_day }} {{ $hijriDate->hijri_month }} {{ $hijriDate->hijri_year }}</span>
-                        @endif
+                        <?php echo e(date('l, d M Y')); ?>
+
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($hijriDate): ?>
+                        &bull; <span style="font-family:'Amiri',serif; color: var(--gold-light, #F3E5AB);"><?php echo e($hijriDate->hijri_day); ?> <?php echo e($hijriDate->hijri_month); ?> <?php echo e($hijriDate->hijri_year); ?></span>
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     </p>
                 </div>
                 <div style="text-align: right;">
-                    <p class="next-label" id="nextPrayerLabel">Time until {{ $nextPrayer }}</p>
+                    <p class="next-label" id="nextPrayerLabel">Time until <?php echo e($nextPrayer); ?></p>
                     <div class="countdown-big" id="liveCountdown">--:--:--</div>
                 </div>
             </div>
 
-            {{-- Prayer Timeline Strip --}}
+            
             <div class="prayer-timeline">
-                @php
+                <?php
                     $tlPrayers = [
                         ['name' => 'Fajr', 'time' => $todayPrayer->fajr],
                         ['name' => 'Sunrise', 'time' => $todayPrayer->sunrise],
@@ -751,54 +750,54 @@
                         ['name' => 'Maghrib', 'time' => $todayPrayer->maghrib],
                         ['name' => 'Isha', 'time' => $todayPrayer->isha],
                     ];
-                @endphp
-                @foreach($tlPrayers as $tlP)
-                <div class="tl-item {{ $nextPrayer == $tlP['name'] ? 'tl-active' : '' }} {{ $tlP['name'] == 'Sunrise' ? 'tl-dimmed' : '' }}">
-                    <div class="tl-name">{{ $tlP['name'] }}</div>
-                    <div class="tl-time">{{ \Carbon\Carbon::parse($tlP['time'])->format('h:i A') }}</div>
+                ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $tlPrayers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tlP): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                <div class="tl-item <?php echo e($nextPrayer == $tlP['name'] ? 'tl-active' : ''); ?> <?php echo e($tlP['name'] == 'Sunrise' ? 'tl-dimmed' : ''); ?>">
+                    <div class="tl-name"><?php echo e($tlP['name']); ?></div>
+                    <div class="tl-time"><?php echo e(\Carbon\Carbon::parse($tlP['time'])->format('h:i A')); ?></div>
                 </div>
-                @endforeach
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
             </div>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
 
-        {{-- ═══════ SECTION 2: HIJRI + GREGORIAN DATE BAR ═══════ --}}
+        
         <div class="b-card mb-16">
             <div class="date-bar">
                 <i class="fas fa-calendar-alt"></i>
-                <span class="greg-date">{{ date('l, d F Y') }}</span>
+                <span class="greg-date"><?php echo e(date('l, d F Y')); ?></span>
                 <span style="color: #CBD5E1;">|</span>
-                @if($hijriDate)
-                <span class="hijri-date-text">{{ $hijriDate->hijri_day }} {{ $hijriDate->hijri_month }} {{ $hijriDate->hijri_year }} AH</span>
-                @if($hijriUrduMonth)
-                <span class="hijri-urdu">({{ $hijriUrduMonth }})</span>
-                @endif
-                @else
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($hijriDate): ?>
+                <span class="hijri-date-text"><?php echo e($hijriDate->hijri_day); ?> <?php echo e($hijriDate->hijri_month); ?> <?php echo e($hijriDate->hijri_year); ?> AH</span>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($hijriUrduMonth): ?>
+                <span class="hijri-urdu">(<?php echo e($hijriUrduMonth); ?>)</span>
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                <?php else: ?>
                 <span class="hijri-date-text">Hijri Date</span>
-                @endif
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
             </div>
         </div>
 
 
-        {{-- ═══════ SECTION 3: CITY SELECTOR + SETTINGS ═══════ --}}
+        
         <div class="b-card mb-16">
             <div class="b-card-header">
                 <i class="fas fa-cog"></i>
                 <h2>Select City / شہر منتخب کریں</h2>
             </div>
-            <form id="prayerSettingsForm" method="GET" action="{{ route('prayer-times.city', $city->slug) }}">
+            <form id="prayerSettingsForm" method="GET" action="<?php echo e(route('prayer-times.city', $city->slug)); ?>">
                 <div class="settings-grid">
                     <div class="setting-group">
                         <label>City / شہر</label>
                         <select name="city" onchange="window.location.href='/prayer-times/' + this.value">
-                            @if(isset($allCities))
-                            @foreach($allCities as $c)
-                            <option value="{{ $c->slug }}" {{ $city->id == $c->id ? 'selected' : '' }}>
-                                {{ $c->name }}@if($c->name_ur) — {{ $c->name_ur }}@endif
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($allCities)): ?>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $allCities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                            <option value="<?php echo e($c->slug); ?>" <?php echo e($city->id == $c->id ? 'selected' : ''); ?>>
+                                <?php echo e($c->name); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($c->name_ur): ?> — <?php echo e($c->name_ur); ?><?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                             </option>
-                            @endforeach
-                            @endif
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                         </select>
                     </div>
                     <div class="setting-group">
@@ -821,19 +820,19 @@
         </div>
 
 
-        {{-- ═══════ SECTION 4: 5 DAILY PRAYER TIMES TABLE ═══════ --}}
-        @if($todayPrayer)
+        
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($todayPrayer): ?>
         <div class="b-card mb-16">
             <div class="b-card-header">
                 <i class="fas fa-mosque"></i>
-                <h2>Namaz Time Today {{ $city->name }} — آج کی نماز</h2>
+                <h2>Namaz Time Today <?php echo e($city->name); ?> — آج کی نماز</h2>
                 <span class="urdu-sub">اوقات نماز</span>
             </div>
             <p style="font-size: 0.8rem; color: #64748B; margin: -8px 0 14px 40px;">
-                Fajr time {{ $city->name }}, Zuhr, Asr, Maghrib, Isha aur Sunrise timings — azan time {{ $city->name }}.
+                Fajr time <?php echo e($city->name); ?>, Zuhr, Asr, Maghrib, Isha aur Sunrise timings — azan time <?php echo e($city->name); ?>.
             </p>
 
-            @php
+            <?php
                 $prayerList = [
                     ['name'=>'Fajr','urdu'=>'فجر','icon'=>'🌙','time'=>$todayPrayer->fajr,'key'=>'Fajr'],
                     ['name'=>'Sunrise','urdu'=>'طلوعِ آفتاب','icon'=>'🌅','time'=>$todayPrayer->sunrise,'key'=>'Sunrise'],
@@ -842,25 +841,25 @@
                     ['name'=>'Maghrib','urdu'=>'مغرب','icon'=>'🌇','time'=>$todayPrayer->maghrib,'key'=>'Maghrib'],
                     ['name'=>'Isha','urdu'=>'عشاء','icon'=>'🌌','time'=>$todayPrayer->isha,'key'=>'Isha'],
                 ];
-            @endphp
+            ?>
 
-            @foreach($prayerList as $prayer)
-            <div class="prayer-row {{ $nextPrayer == $prayer['key'] ? 'pr-active' : '' }}">
-                <span class="pr-icon">{{ $prayer['icon'] }}</span>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $prayerList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prayer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+            <div class="prayer-row <?php echo e($nextPrayer == $prayer['key'] ? 'pr-active' : ''); ?>">
+                <span class="pr-icon"><?php echo e($prayer['icon']); ?></span>
                 <div class="pr-names">
-                    <div class="pr-en">{{ $prayer['name'] }}</div>
-                    <div class="pr-ur">{{ $prayer['urdu'] }}</div>
+                    <div class="pr-en"><?php echo e($prayer['name']); ?></div>
+                    <div class="pr-ur"><?php echo e($prayer['urdu']); ?></div>
                 </div>
-                <span class="pr-time-12">{{ \Carbon\Carbon::parse($prayer['time'])->format('h:i A') }}</span>
-                <span class="pr-time-24">{{ \Carbon\Carbon::parse($prayer['time'])->format('H:i') }}</span>
+                <span class="pr-time-12"><?php echo e(\Carbon\Carbon::parse($prayer['time'])->format('h:i A')); ?></span>
+                <span class="pr-time-24"><?php echo e(\Carbon\Carbon::parse($prayer['time'])->format('H:i')); ?></span>
             </div>
-            @endforeach
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
 
-            {{-- Jamaat Times Row (Part D) --}}
-            @if(isset($jamaatTimes))
+            
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($jamaatTimes)): ?>
             <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(212,175,55,0.2);">
                 <p style="font-size: 0.65rem; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 6px 36px;">Estimated Jamaat Times — جماعت کے اوقات</p>
-                @php
+                <?php
                     $jamaatList = [
                         ['name' => 'Fajr Jamaat', 'urdu' => 'فجر جماعت', 'time' => $jamaatTimes->fajr],
                         ['name' => 'Dhuhr Jamaat', 'urdu' => 'ظہر جماعت', 'time' => $jamaatTimes->dhuhr],
@@ -868,81 +867,81 @@
                         ['name' => 'Maghrib Jamaat', 'urdu' => 'مغرب جماعت', 'time' => $jamaatTimes->maghrib],
                         ['name' => 'Isha Jamaat', 'urdu' => 'عشاء جماعت', 'time' => $jamaatTimes->isha],
                     ];
-                @endphp
-                @foreach($jamaatList as $j)
+                ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $jamaatList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $j): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                 <div class="jamaat-row">
                     <span class="pr-icon">🕌</span>
                     <div class="pr-names">
-                        <div class="pr-en">{{ $j['name'] }}</div>
-                        <div class="pr-ur">{{ $j['urdu'] }}</div>
+                        <div class="pr-en"><?php echo e($j['name']); ?></div>
+                        <div class="pr-ur"><?php echo e($j['urdu']); ?></div>
                     </div>
-                    <span class="pr-time-12">{{ $j['time'] }}</span>
+                    <span class="pr-time-12"><?php echo e($j['time']); ?></span>
                 </div>
-                @endforeach
-                <p style="font-size: 0.6rem; color: #94A3B8; margin: 6px 0 0 36px;">* Estimated times. Actual jamaat timing varies by masjid — fajr jamaat timing {{ $city->name }} masjid se confirm karein.</p>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                <p style="font-size: 0.6rem; color: #94A3B8; margin: 6px 0 0 36px;">* Estimated times. Actual jamaat timing varies by masjid — fajr jamaat timing <?php echo e($city->name); ?> masjid se confirm karein.</p>
             </div>
-            @endif
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
 
-        {{-- ═══════ SECTION 5 + 6: SUNNAH TIMES + QIBLA (Side by Side) ═══════ --}}
+        
         <div class="layout-2col mb-16">
 
-            {{-- SUNNAH TIMES --}}
+            
             <div class="col-main">
                 <div class="b-card" style="height:100%; margin-bottom:0;">
                     <div class="b-card-header">
                         <i class="fas fa-sun" style="background:rgba(212,175,55,0.08); color:var(--gold, #D4AF37);"></i>
-                        {{-- Part C: Keyword H2 --}}
-                        <h3>Sunnah & Nafl Prayer Times {{ $city->name }}</h3>
+                        
+                        <h3>Sunnah & Nafl Prayer Times <?php echo e($city->name); ?></h3>
                         <span class="urdu-sub">سنت اور نوافل</span>
                     </div>
-                    @if($sunnahTimes)
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($sunnahTimes): ?>
                     <div class="sunnah-grid">
                         <div class="sunnah-card">
                             <i class="fas fa-moon"></i>
                             <div class="s-title">Tahajjud</div>
                             <div class="s-urdu">تہجد</div>
-                            <div class="s-time">{{ $sunnahTimes->midnight }}</div>
+                            <div class="s-time"><?php echo e($sunnahTimes->midnight); ?></div>
                             <div class="s-desc">Midnight</div>
                         </div>
                         <div class="sunnah-card">
                             <i class="fas fa-star-and-crescent"></i>
                             <div class="s-title">Last Third</div>
                             <div class="s-urdu">آخری تہائی رات</div>
-                            <div class="s-time">{{ $sunnahTimes->last_third }}</div>
+                            <div class="s-time"><?php echo e($sunnahTimes->last_third); ?></div>
                             <div class="s-desc">Best Tahajjud</div>
                         </div>
                         <div class="sunnah-card">
                             <i class="fas fa-sun"></i>
                             <div class="s-title">Ishraq</div>
                             <div class="s-urdu">اشراق</div>
-                            <div class="s-time">{{ $sunnahTimes->ishraq }}</div>
+                            <div class="s-time"><?php echo e($sunnahTimes->ishraq); ?></div>
                             <div class="s-desc">~20min after Sunrise</div>
                         </div>
                         <div class="sunnah-card">
                             <i class="fas fa-cloud-sun"></i>
                             <div class="s-title">Chaasht</div>
                             <div class="s-urdu">چاشت</div>
-                            <div class="s-time">{{ $sunnahTimes->chaasht }}</div>
+                            <div class="s-time"><?php echo e($sunnahTimes->chaasht); ?></div>
                             <div class="s-desc">Mid-morning</div>
                         </div>
                         <div class="sunnah-card">
                             <i class="fas fa-exclamation-circle"></i>
                             <div class="s-title">Zawal</div>
                             <div class="s-urdu">زوال</div>
-                            <div class="s-time">{{ $sunnahTimes->zawal }}</div>
+                            <div class="s-time"><?php echo e($sunnahTimes->zawal); ?></div>
                             <div class="s-desc">Before Dhuhr</div>
                         </div>
                     </div>
-                    @else
+                    <?php else: ?>
                     <p style="color:#64748B; font-size:0.85rem;">Sunnah times not available.</p>
-                    @endif
+                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                 </div>
             </div>
 
-            {{-- QIBLA DIRECTION --}}
+            
             <div class="col-side">
                 <div class="b-card" style="height:100%; margin-bottom:0;">
                     <div class="b-card-header">
@@ -952,16 +951,17 @@
                     <div class="qibla-content" style="justify-content:center; text-align:center; flex-direction:column; align-items:center;">
                         <div class="qibla-compass">
                             <span class="compass-n">N</span>
-                            <div class="compass-needle" style="transform: translate(-50%, -100%) rotate({{ ($qiblaDegree ?? 260) - 0 }}deg);"></div>
+                            <div class="compass-needle" style="transform: translate(-50%, -100%) rotate(<?php echo e(($qiblaDegree ?? 260) - 0); ?>deg);"></div>
                             <div class="compass-dot"></div>
                         </div>
                         <div class="qibla-info" style="text-align:center; margin-top:12px;">
-                            <div class="q-degree">{{ number_format($qiblaDegree ?? 0, 2) }}°</div>
+                            <div class="q-degree"><?php echo e(number_format($qiblaDegree ?? 0, 2)); ?>°</div>
                             <div class="q-direction">
-                                Face <strong>{{ $qiblaDirectionText ?? 'West-Northwest' }}</strong> from {{ $city->name }}
+                                Face <strong><?php echo e($qiblaDirectionText ?? 'West-Northwest'); ?></strong> from <?php echo e($city->name); ?>
+
                             </div>
                             <div style="font-family:'Amiri',serif; color:var(--gold-dark); font-size:0.82rem; margin-top:4px;">
-                                قبلہ سمت — {{ number_format($qiblaDegree ?? 0, 2) }}° شمال سے
+                                قبلہ سمت — <?php echo e(number_format($qiblaDegree ?? 0, 2)); ?>° شمال سے
                             </div>
                         </div>
                     </div>
@@ -970,11 +970,11 @@
         </div>
 
 
-        {{-- ═══════ SECTION 7: MONTHLY PRAYER TIMETABLE ═══════ --}}
+        
         <div class="b-card mb-16" id="monthlyTimetable">
             <div class="b-card-header">
                 <i class="fas fa-calendar-alt"></i>
-                <h2>Monthly Prayer Timetable {{ $city->name }} — ماہانہ نماز شیڈول</h2>
+                <h2>Monthly Prayer Timetable <?php echo e($city->name); ?> — ماہانہ نماز شیڈول</h2>
                 <div style="margin-left: auto;">
                     <button class="download-btn" onclick="downloadTimetable()">
                         <i class="fas fa-download"></i> Download
@@ -982,10 +982,10 @@
                 </div>
             </div>
             <p style="font-size: 0.78rem; color: #64748B; margin: -8px 0 14px 40px;">
-                Complete namaz timing schedule for {{ $city->name }} for {{ date('F Y') }}.
+                Complete namaz timing schedule for <?php echo e($city->name); ?> for <?php echo e(date('F Y')); ?>.
             </p>
             <div class="tt-list">
-                {{-- Header --}}
+                
                 <div class="tt-row tt-header">
                     <div class="tt-col" data-label="Date">Date / تاریخ</div>
                     <div class="tt-col" data-label="Fajr">Fajr / فجر</div>
@@ -996,30 +996,32 @@
                     <div class="tt-col" data-label="Isha">Isha / عشاء</div>
                 </div>
 
-                {{-- Data Rows --}}
-                @foreach($prayerTimes as $pt)
-                @php $isToday = $pt->date == date('Y-m-d'); @endphp
-                <div class="tt-row {{ $isToday ? 'tt-today' : '' }}">
+                
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $prayerTimes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pt): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                <?php $isToday = $pt->date == date('Y-m-d'); ?>
+                <div class="tt-row <?php echo e($isToday ? 'tt-today' : ''); ?>">
                     <div class="tt-col" data-label="Date">
-                        {{ \Carbon\Carbon::parse($pt->date)->format('d M, l') }}
-                        @if($isToday) <span class="tt-today-badge">Today</span> @endif
+                        <?php echo e(\Carbon\Carbon::parse($pt->date)->format('d M, l')); ?>
+
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($isToday): ?> <span class="tt-today-badge">Today</span> <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     </div>
-                    <div class="tt-col" data-label="Fajr">{{ \Carbon\Carbon::parse($pt->fajr)->format('h:i A') }}</div>
-                    <div class="tt-col" data-label="Sunrise" style="color:#94A3B8;">{{ \Carbon\Carbon::parse($pt->sunrise)->format('h:i A') }}</div>
-                    <div class="tt-col" data-label="Dhuhr">{{ \Carbon\Carbon::parse($pt->dhuhr)->format('h:i A') }}</div>
-                    <div class="tt-col" data-label="Asr">{{ \Carbon\Carbon::parse($pt->asr)->format('h:i A') }}</div>
-                    <div class="tt-col" data-label="Maghrib" style="color: {{ $isToday ? 'var(--primary-dark)' : 'var(--primary, #0A3A2A)' }};">
-                        {{ \Carbon\Carbon::parse($pt->maghrib)->format('h:i A') }}
+                    <div class="tt-col" data-label="Fajr"><?php echo e(\Carbon\Carbon::parse($pt->fajr)->format('h:i A')); ?></div>
+                    <div class="tt-col" data-label="Sunrise" style="color:#94A3B8;"><?php echo e(\Carbon\Carbon::parse($pt->sunrise)->format('h:i A')); ?></div>
+                    <div class="tt-col" data-label="Dhuhr"><?php echo e(\Carbon\Carbon::parse($pt->dhuhr)->format('h:i A')); ?></div>
+                    <div class="tt-col" data-label="Asr"><?php echo e(\Carbon\Carbon::parse($pt->asr)->format('h:i A')); ?></div>
+                    <div class="tt-col" data-label="Maghrib" style="color: <?php echo e($isToday ? 'var(--primary-dark)' : 'var(--primary, #0A3A2A)'); ?>;">
+                        <?php echo e(\Carbon\Carbon::parse($pt->maghrib)->format('h:i A')); ?>
+
                     </div>
-                    <div class="tt-col" data-label="Isha">{{ \Carbon\Carbon::parse($pt->isha)->format('h:i A') }}</div>
+                    <div class="tt-col" data-label="Isha"><?php echo e(\Carbon\Carbon::parse($pt->isha)->format('h:i A')); ?></div>
                 </div>
-                @endforeach
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
             </div>
         </div>
 
 
-        {{-- ═══════ SECTION 8: ALL PAKISTAN CITIES QUICK LINKS ═══════ --}}
-        @if(isset($allCities) && $allCities->count() > 0)
+        
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($allCities) && $allCities->count() > 0): ?>
         <div class="b-card mb-16">
             <div class="b-card-header">
                 <i class="fas fa-globe-asia"></i>
@@ -1027,19 +1029,19 @@
                 <span class="urdu-sub">پاکستان کے تمام شہروں کے اوقاتِ نماز</span>
             </div>
             <div class="cities-internal-grid">
-                @foreach($allCities as $c)
-                <a href="{{ route('prayer-times.city', $c->slug) }}"
-                   class="city-link {{ $city->id == $c->id ? 'cl-active' : '' }}">
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $allCities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                <a href="<?php echo e(route('prayer-times.city', $c->slug)); ?>"
+                   class="city-link <?php echo e($city->id == $c->id ? 'cl-active' : ''); ?>">
                     <i class="fas fa-mosque"></i>
-                    <span>{{ $c->name }}</span>
+                    <span><?php echo e($c->name); ?></span>
                 </a>
-                @endforeach
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
             </div>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
 
-        {{-- ═══════ SECTION 9: FAQ SECTION (7 Questions — Part C exact queries) ═══════ --}}
+        
         <div class="b-card mb-16">
             <div class="b-card-header">
                 <i class="fas fa-question-circle"></i>
@@ -1047,89 +1049,90 @@
                 <span class="urdu-sub">اکثر پوچھے گئے سوالات</span>
             </div>
 
-            @if($todayPrayer)
-            {{-- FAQ 1: fajr time {{ city }} today (71,500/mo) --}}
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($todayPrayer): ?>
+            
             <div class="faq-card faq-open" id="faq1">
                 <div class="faq-q" onclick="toggleFaq('faq1')">
-                    <span>Fajr time {{ $city->name }} today?</span>
+                    <span>Fajr time <?php echo e($city->name); ?> today?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-a">
                     <p>
-                        Fajr time {{ $city->name }} today {{ date('d M Y') }} is
-                        <strong>{{ $fajrFormatted }}</strong>.
-                        Fajar namaz time in {{ $city->name }} starts at {{ $fajrFormatted }} and
-                        ends at sunrise {{ $sunriseFormatted }}. Fajr end time {{ $city->name }}
-                        today is {{ $sunriseFormatted }}.
+                        Fajr time <?php echo e($city->name); ?> today <?php echo e(date('d M Y')); ?> is
+                        <strong><?php echo e($fajrFormatted); ?></strong>.
+                        Fajar namaz time in <?php echo e($city->name); ?> starts at <?php echo e($fajrFormatted); ?> and
+                        ends at sunrise <?php echo e($sunriseFormatted); ?>. Fajr end time <?php echo e($city->name); ?>
+
+                        today is <?php echo e($sunriseFormatted); ?>.
                     </p>
                 </div>
             </div>
 
-            {{-- FAQ 2: namaz timing in {{ city }} today (31,500/mo) --}}
+            
             <div class="faq-card" id="faq2">
                 <div class="faq-q" onclick="toggleFaq('faq2')">
-                    <span>Namaz timing in {{ $city->name }} today?</span>
+                    <span>Namaz timing in <?php echo e($city->name); ?> today?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-a">
                     <p>
-                        Namaz timing {{ $city->name }} today {{ date('d M Y') }}:
-                        Fajr {{ $fajrFormatted }}, Sunrise {{ $sunriseFormatted }},
-                        Zuhr/Dhuhr {{ $dhuhrFormatted }}, Asr {{ $asrFormatted }},
-                        Maghrib {{ $maghribFormatted }}, Isha {{ $ishaFormatted }}.
+                        Namaz timing <?php echo e($city->name); ?> today <?php echo e(date('d M Y')); ?>:
+                        Fajr <?php echo e($fajrFormatted); ?>, Sunrise <?php echo e($sunriseFormatted); ?>,
+                        Zuhr/Dhuhr <?php echo e($dhuhrFormatted); ?>, Asr <?php echo e($asrFormatted); ?>,
+                        Maghrib <?php echo e($maghribFormatted); ?>, Isha <?php echo e($ishaFormatted); ?>.
                         Ye timings Hanafi method ke mutabiq hain.
                     </p>
                 </div>
             </div>
 
-            {{-- FAQ 3: azan time in {{ city }} today (5,445/mo) --}}
+            
             <div class="faq-card" id="faq3">
                 <div class="faq-q" onclick="toggleFaq('faq3')">
-                    <span>Azan time in {{ $city->name }} today?</span>
+                    <span>Azan time in <?php echo e($city->name); ?> today?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-a">
                     <p>
-                        Azan time {{ $city->name }} today: Fajr azan {{ $fajrFormatted }},
-                        Zohar azan {{ $dhuhrFormatted }}, Asr azan {{ $asrFormatted }},
-                        Maghrib azan {{ $maghribFormatted }}, Isha azan {{ $ishaFormatted }}.
+                        Azan time <?php echo e($city->name); ?> today: Fajr azan <?php echo e($fajrFormatted); ?>,
+                        Zohar azan <?php echo e($dhuhrFormatted); ?>, Asr azan <?php echo e($asrFormatted); ?>,
+                        Maghrib azan <?php echo e($maghribFormatted); ?>, Isha azan <?php echo e($ishaFormatted); ?>.
                     </p>
                 </div>
             </div>
 
-            {{-- FAQ 4: maghrib time {{ city }} today (22,140/mo) --}}
+            
             <div class="faq-card" id="faq4">
                 <div class="faq-q" onclick="toggleFaq('faq4')">
-                    <span>Maghrib time {{ $city->name }} today?</span>
+                    <span>Maghrib time <?php echo e($city->name); ?> today?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-a">
                     <p>
-                        Maghrib time {{ $city->name }} today {{ date('d M Y') }} is <strong>{{ $maghribFormatted }}</strong>.
-                        Maghrib azan time {{ $city->name }} is same as Maghrib prayer time.
+                        Maghrib time <?php echo e($city->name); ?> today <?php echo e(date('d M Y')); ?> is <strong><?php echo e($maghribFormatted); ?></strong>.
+                        Maghrib azan time <?php echo e($city->name); ?> is same as Maghrib prayer time.
                         Maghrib namaz time today changes daily.
                     </p>
                 </div>
             </div>
 
-            {{-- FAQ 5: namaz timing {{ city }} Hanafi --}}
+            
             <div class="faq-card" id="faq5">
                 <div class="faq-q" onclick="toggleFaq('faq5')">
-                    <span>Namaz timing {{ $city->name }} Hanafi?</span>
+                    <span>Namaz timing <?php echo e($city->name); ?> Hanafi?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-a">
                     <p>
-                        Namaz timing {{ $city->name }} Hanafi method (University of Islamic Sciences Karachi):
-                        Fajr {{ $fajrFormatted }}, Dhuhr {{ $dhuhrFormatted }},
-                        Asr {{ $asrFormatted }} (Hanafi shadow = 2x),
-                        Maghrib {{ $maghribFormatted }}, Isha {{ $ishaFormatted }}.
-                        Namaz timing {{ $city->name }} Ahle Sunnat bhi same Hanafi method hai.
+                        Namaz timing <?php echo e($city->name); ?> Hanafi method (University of Islamic Sciences Karachi):
+                        Fajr <?php echo e($fajrFormatted); ?>, Dhuhr <?php echo e($dhuhrFormatted); ?>,
+                        Asr <?php echo e($asrFormatted); ?> (Hanafi shadow = 2x),
+                        Maghrib <?php echo e($maghribFormatted); ?>, Isha <?php echo e($ishaFormatted); ?>.
+                        Namaz timing <?php echo e($city->name); ?> Ahle Sunnat bhi same Hanafi method hai.
                     </p>
                 </div>
             </div>
 
-            {{-- FAQ 6: fajar ka time kya hai --}}
+            
             <div class="faq-card" id="faq6">
                 <div class="faq-q" onclick="toggleFaq('faq6')">
                     <span>Fajar ka time kya hai?</span>
@@ -1137,115 +1140,115 @@
                 </div>
                 <div class="faq-a">
                     <p>
-                        Fajar ka time aaj {{ $city->name }} mein {{ $fajrFormatted }} hai.
+                        Fajar ka time aaj <?php echo e($city->name); ?> mein <?php echo e($fajrFormatted); ?> hai.
                         Fajar ki namaz ka time subah sadiq se shuru hota hai
-                        aur sunrise tak rehta hai. Aaj fajr end time {{ $sunriseFormatted }} hai.
+                        aur sunrise tak rehta hai. Aaj fajr end time <?php echo e($sunriseFormatted); ?> hai.
                     </p>
                 </div>
             </div>
 
-            {{-- FAQ 7: jumma time in {{ city }} --}}
+            
             <div class="faq-card" id="faq7">
                 <div class="faq-q" onclick="toggleFaq('faq7')">
-                    <span>Jumma time in {{ $city->name }}?</span>
+                    <span>Jumma time in <?php echo e($city->name); ?>?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-a">
                     <p>
-                        Jumma time in {{ $city->name }} is at Zuhr time which today is {{ $dhuhrFormatted }}.
+                        Jumma time in <?php echo e($city->name); ?> is at Zuhr time which today is <?php echo e($dhuhrFormatted); ?>.
                         Juma ki namaz Zuhr ke waqt mein ada hoti hai.
-                        Most mosques in {{ $city->name }} hold Jummah between 1:00 PM and 2:30 PM.
+                        Most mosques in <?php echo e($city->name); ?> hold Jummah between 1:00 PM and 2:30 PM.
                     </p>
                 </div>
             </div>
-            @endif
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
 
 
-        {{-- ═══════ SECTION 10: FULL KEYWORD-RICH SEO CONTENT (Part C) ═══════ --}}
-        @if($todayPrayer)
+        
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($todayPrayer): ?>
         <div class="b-card seo-block mb-16">
-            <h2>Namaz Timing {{ $city->name }} — Complete Prayer Times Guide</h2>
+            <h2>Namaz Timing <?php echo e($city->name); ?> — Complete Prayer Times Guide</h2>
             <p>
-                <strong>Namaz timing {{ $city->name }}</strong> today
-                <strong>{{ date('d F Y') }}</strong>@if($hijriDate) ({{ $hijriDate->hijri_day }} {{ $hijriDate->hijri_month }} {{ $hijriDate->hijri_year }} Hijri)@endif.
-                Aaj {{ $city->name }} mein <strong>fajr time {{ $city->name }}</strong>
-                {{ $fajrFormatted }} hai. <strong>Fajr namaz time</strong>
+                <strong>Namaz timing <?php echo e($city->name); ?></strong> today
+                <strong><?php echo e(date('d F Y')); ?></strong><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($hijriDate): ?> (<?php echo e($hijriDate->hijri_day); ?> <?php echo e($hijriDate->hijri_month); ?> <?php echo e($hijriDate->hijri_year); ?> Hijri)<?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>.
+                Aaj <?php echo e($city->name); ?> mein <strong>fajr time <?php echo e($city->name); ?></strong>
+                <?php echo e($fajrFormatted); ?> hai. <strong>Fajr namaz time</strong>
                 Pakistan mein Karachi method se calculate hoti hai.
                 <strong>Fajr ka time</strong> ya <strong>fajar ki namaz ka time</strong>
                 roz thoda badalta hai — ye page daily auto-update hota hai.
             </p>
 
-            <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin:14px 0 6px;">Azan Time {{ $city->name }} — اذان کا وقت</h3>
+            <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin:14px 0 6px;">Azan Time <?php echo e($city->name); ?> — اذان کا وقت</h3>
             <p>
-                <strong>Azan time {{ $city->name }}</strong> —
-                <strong>Zohar namaz time</strong> {{ $dhuhrFormatted }},
-                <strong>Asr time {{ $city->name }}</strong> {{ $asrFormatted }},
-                <strong>Maghrib time {{ $city->name }}</strong> {{ $maghribFormatted }},
-                <strong>Isha namaz time</strong> {{ $ishaFormatted }}.
+                <strong>Azan time <?php echo e($city->name); ?></strong> —
+                <strong>Zohar namaz time</strong> <?php echo e($dhuhrFormatted); ?>,
+                <strong>Asr time <?php echo e($city->name); ?></strong> <?php echo e($asrFormatted); ?>,
+                <strong>Maghrib time <?php echo e($city->name); ?></strong> <?php echo e($maghribFormatted); ?>,
+                <strong>Isha namaz time</strong> <?php echo e($ishaFormatted); ?>.
                 Ye <strong>namaz time today</strong> ke liye complete schedule hai.
             </p>
 
-            <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin:14px 0 6px;">Fajr Time {{ $city->name }} Today — فجر کا وقت</h3>
+            <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin:14px 0 6px;">Fajr Time <?php echo e($city->name); ?> Today — فجر کا وقت</h3>
             <p>
-                <strong>Namaz timing {{ $city->name }} Hanafi</strong> aur
-                <strong>namaz timing {{ $city->name }} ahle sunnat</strong> ke liye
+                <strong>Namaz timing <?php echo e($city->name); ?> Hanafi</strong> aur
+                <strong>namaz timing <?php echo e($city->name); ?> ahle sunnat</strong> ke liye
                 Karachi method use hoti hai. Asr time Hanafi aur Shafi mein
                 farq hota hai — upar selector se change kar saktay hain.
-                <strong>Fajr end time {{ $city->name }}</strong>
+                <strong>Fajr end time <?php echo e($city->name); ?></strong>
                 (آخری وقتِ فجر) sunrise par hota hai jo aaj
-                {{ $sunriseFormatted }} hai.
+                <?php echo e($sunriseFormatted); ?> hai.
             </p>
 
-            <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin:14px 0 6px;">Zuhr / Zohar Namaz Time {{ $city->name }}</h3>
+            <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin:14px 0 6px;">Zuhr / Zohar Namaz Time <?php echo e($city->name); ?></h3>
             <p>
-                <strong>Jumma time in {{ $city->name }}</strong> — Jummah prayer
-                Zuhr time ke baad hoti hai. {{ $city->name }} mein Jumma ki namaz
+                <strong>Jumma time in <?php echo e($city->name); ?></strong> — Jummah prayer
+                Zuhr time ke baad hoti hai. <?php echo e($city->name); ?> mein Jumma ki namaz
                 generally 1:00 PM – 2:30 PM ke darmiyan hoti hai.
-                <strong>Fajr qaza time {{ $city->name }}</strong> — Fajr ki qaza
+                <strong>Fajr qaza time <?php echo e($city->name); ?></strong> — Fajr ki qaza
                 Zuhr se pehle ada kar saktay hain.
             </p>
 
             <h3 style="font-size:0.95rem; font-weight:700; color:var(--text-dark); margin:14px 0 6px;">Fajr Jamaat Timing & Pakistan Fajr Time</h3>
             <p>
-                <strong>Fajr jamaat timing {{ $city->name }}</strong>
+                <strong>Fajr jamaat timing <?php echo e($city->name); ?></strong>
                 masjid se puchein kyunki har masjid ki jamaat alag hoti hai.
                 <strong>Pakistan fajr time</strong> —
                 Pakistan mein sab se pehle fajr Chitral aur Gilgit mein
                 hoti hai aur sab se baad mein Gwadar aur Karachi mein.
-                <strong>Shia fajr time {{ $city->name }}</strong> bhi is page par
+                <strong>Shia fajr time <?php echo e($city->name); ?></strong> bhi is page par
                 available hai — Shia calculation method alag hoti hai.
                 Upar "Calculation Method" dropdown se change kar saktay hain.
             </p>
 
             <p style="font-family:'Amiri',serif; font-size:0.92rem; color:var(--gold-dark); line-height:2;">
-                آج {{ $city->name }} میں نماز کے اوقات — فجر {{ $fajrFormatted }}،
-                ظہر {{ $dhuhrFormatted }}،
-                عصر {{ $asrFormatted }}،
-                مغرب {{ $maghribFormatted }}،
-                عشاء {{ $ishaFormatted }}۔
+                آج <?php echo e($city->name); ?> میں نماز کے اوقات — فجر <?php echo e($fajrFormatted); ?>،
+                ظہر <?php echo e($dhuhrFormatted); ?>،
+                عصر <?php echo e($asrFormatted); ?>،
+                مغرب <?php echo e($maghribFormatted); ?>،
+                عشاء <?php echo e($ishaFormatted); ?>۔
                 یہ اوقات جامعہ العلوم الاسلامیہ کراچی کے طریقے سے حساب کیے گئے ہیں۔
             </p>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
 
-        {{-- ═══════ TOMORROW'S FAJR CARD (Part D) ═══════ --}}
-        @if(isset($tomorrowFajr))
+        
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($tomorrowFajr)): ?>
         <div class="tomorrow-card">
             <div>
-                <div class="tc-label"><i class="fas fa-moon" style="margin-right:6px;"></i> Tomorrow's Fajr Time {{ $city->name }}</div>
-                <div class="tc-title">Fajr time in {{ $city->name }} tomorrow — کل فجر کا وقت</div>
+                <div class="tc-label"><i class="fas fa-moon" style="margin-right:6px;"></i> Tomorrow's Fajr Time <?php echo e($city->name); ?></div>
+                <div class="tc-title">Fajr time in <?php echo e($city->name); ?> tomorrow — کل فجر کا وقت</div>
             </div>
-            <div class="tc-time">{{ $tomorrowFajr }}</div>
+            <div class="tc-time"><?php echo e($tomorrowFajr); ?></div>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
 
-        {{-- ═══════ NEARBY CITIES + ISLAMIC TOOLS ═══════ --}}
+        
         <div class="layout-2col mb-16">
-            {{-- Nearby Cities --}}
-            @if(isset($nearbyCities) && $nearbyCities->count() > 0)
+            
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($nearbyCities) && $nearbyCities->count() > 0): ?>
             <div class="col-main">
                 <div class="b-card" style="height:100%; margin-bottom:0;">
                     <div class="b-card-header">
@@ -1253,18 +1256,18 @@
                         <h3>Nearby Cities</h3>
                     </div>
                     <div style="display:grid; grid-template-columns: repeat(2,1fr); gap:8px;">
-                        @foreach($nearbyCities as $nearby)
-                        <a href="{{ route('prayer-times.city', $nearby->slug) }}" class="city-link">
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $nearbyCities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $nearby): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                        <a href="<?php echo e(route('prayer-times.city', $nearby->slug)); ?>" class="city-link">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ $nearby->name }}</span>
+                            <span><?php echo e($nearby->name); ?></span>
                         </a>
-                        @endforeach
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                     </div>
                 </div>
             </div>
-            @endif
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
-            {{-- Islamic Tools --}}
+            
             <div class="col-side">
                 <div class="b-card" style="height:100%; margin-bottom:0;">
                     <div class="b-card-header">
@@ -1272,19 +1275,19 @@
                         <h3>Islamic Tools</h3>
                     </div>
                     <div style="display:flex; flex-direction:column; gap:6px;">
-                        <a href="{{ route('zakat.index') }}" class="city-link" style="border-color:var(--border-light);">
+                        <a href="<?php echo e(route('zakat.index')); ?>" class="city-link" style="border-color:var(--border-light);">
                             <i class="fas fa-calculator"></i>
                             <span>Zakat Calculator</span>
                         </a>
-                        <a href="{{ route('duas.index') }}" class="city-link" style="border-color:var(--border-light);">
+                        <a href="<?php echo e(route('duas.index')); ?>" class="city-link" style="border-color:var(--border-light);">
                             <i class="fas fa-praying-hands"></i>
                             <span>Daily Duas</span>
                         </a>
-                        <a href="{{ route('names.index') }}" class="city-link" style="border-color:var(--border-light);">
+                        <a href="<?php echo e(route('names.index')); ?>" class="city-link" style="border-color:var(--border-light);">
                             <i class="fas fa-book"></i>
                             <span>99 Names of Allah</span>
                         </a>
-                        <a href="{{ route('prayer-times.hub') }}" class="city-link" style="border-color:var(--border-light);">
+                        <a href="<?php echo e(route('prayer-times.hub')); ?>" class="city-link" style="border-color:var(--border-light);">
                             <i class="fas fa-globe"></i>
                             <span>All Cities</span>
                         </a>
@@ -1297,18 +1300,18 @@
 </section>
 
 
-{{-- ═══════ SECTION 11: LIVE COUNTDOWN JAVASCRIPT ═══════ --}}
-@if($todayPrayer)
+
+<?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($todayPrayer): ?>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     // Prayer times data from server
     var prayerTimes = [
-        { name: "Fajr", time: "{{ \Carbon\Carbon::parse($todayPrayer->fajr)->format('H:i:s') }}" },
-        { name: "Sunrise", time: "{{ \Carbon\Carbon::parse($todayPrayer->sunrise)->format('H:i:s') }}" },
-        { name: "Dhuhr", time: "{{ \Carbon\Carbon::parse($todayPrayer->dhuhr)->format('H:i:s') }}" },
-        { name: "Asr", time: "{{ \Carbon\Carbon::parse($todayPrayer->asr)->format('H:i:s') }}" },
-        { name: "Maghrib", time: "{{ \Carbon\Carbon::parse($todayPrayer->maghrib)->format('H:i:s') }}" },
-        { name: "Isha", time: "{{ \Carbon\Carbon::parse($todayPrayer->isha)->format('H:i:s') }}" }
+        { name: "Fajr", time: "<?php echo e(\Carbon\Carbon::parse($todayPrayer->fajr)->format('H:i:s')); ?>" },
+        { name: "Sunrise", time: "<?php echo e(\Carbon\Carbon::parse($todayPrayer->sunrise)->format('H:i:s')); ?>" },
+        { name: "Dhuhr", time: "<?php echo e(\Carbon\Carbon::parse($todayPrayer->dhuhr)->format('H:i:s')); ?>" },
+        { name: "Asr", time: "<?php echo e(\Carbon\Carbon::parse($todayPrayer->asr)->format('H:i:s')); ?>" },
+        { name: "Maghrib", time: "<?php echo e(\Carbon\Carbon::parse($todayPrayer->maghrib)->format('H:i:s')); ?>" },
+        { name: "Isha", time: "<?php echo e(\Carbon\Carbon::parse($todayPrayer->isha)->format('H:i:s')); ?>" }
     ];
 
     function getSeconds(t) {
@@ -1421,7 +1424,7 @@ function captureAndDownload(el) {
         useCORS: true
     }).then(function(canvas) {
         var link = document.createElement('a');
-        link.download = 'namaz-time-table-{{ $city->slug }}-{{ date("Y-m") }}.png';
+        link.download = 'namaz-time-table-<?php echo e($city->slug); ?>-<?php echo e(date("Y-m")); ?>.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
     }).catch(function(err) {
@@ -1430,5 +1433,6 @@ function captureAndDownload(el) {
     });
 }
 </script>
-@endif
-@endsection
+<?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/prayer-times/city.blade.php ENDPATH**/ ?>
