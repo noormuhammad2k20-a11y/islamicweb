@@ -37,11 +37,12 @@ $appRoutes = function () {
     Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
     // CLUSTER 1 — Islamic Date / Hijri Calendar
-    Route::prefix('islamic-date-today')->group(function () {
-        Route::get('/', [IslamicDateController::class, 'hub'])->name('islamic-date.hub');
-        Route::get('/{country:slug}', [IslamicDateController::class, 'country'])->name('islamic-date.country');
-        Route::get('/{country:slug}/{city:slug}', [IslamicDateController::class, 'city'])->name('islamic-date.city');
-    });
+    Route::get('/islamic-date', [IslamicDateController::class, 'index'])->name('islamic-date');
+    Route::get('/hijri-date', [IslamicDateController::class, 'index']);
+    Route::get('/islamic-date/{city}', [IslamicDateController::class, 'cityPage'])->name('islamic-date.city')->where('city', '[a-z\-]+');
+    
+    // Redirect old routes
+    Route::redirect('/islamic-date-today', '/islamic-date', 301);
 
     Route::get('/hijri-gregorian-converter', [ConverterController::class, 'show'])->name('converter.show');
 

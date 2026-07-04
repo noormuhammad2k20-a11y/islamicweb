@@ -2,275 +2,184 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Country;
-use App\Models\City;
-use App\Models\HijriDateCache;
-use App\Models\HistoricalEvent;
-use App\Models\IslamicEvent;
-use App\Models\HijriMonth;
-use App\Models\PrayerTime;
-use App\Models\KnowledgeArticle;
-use App\Models\Dua;
-use App\Services\AladhanApiService;
-use App\Services\MoonPhaseService;
-use App\Services\CountdownService;
-use App\Services\SeoMetaService;
-use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Services\SeoMetaService;
 
 class IslamicDateController extends Controller
 {
-    private AladhanApiService $apiService;
-    private MoonPhaseService $moonPhaseService;
-    private CountdownService $countdownService;
     private SeoMetaService $seoService;
 
-    public function __construct(
-        AladhanApiService $apiService,
-        MoonPhaseService $moonPhaseService,
-        CountdownService $countdownService,
-        SeoMetaService $seoService
-    ) {
-        $this->apiService = $apiService;
-        $this->moonPhaseService = $moonPhaseService;
-        $this->countdownService = $countdownService;
+    public function __construct(SeoMetaService $seoService)
+    {
         $this->seoService = $seoService;
     }
 
-    /**
-     * Display the Global Hub Page for Islamic Date.
-     */
-    public function hub()
+    public function index()
     {
-        $today = Carbon::today();
+        return $this->buildDatePage();
+    }
 
-        // 1. Get Global Date (Region: global)
-        $globalDate = Cache::remember('hub_global_date_' . $today->toDateString(), 3600, function () use ($today) {
-            return $this->apiService->getHijriDate($today, 'global');
-        });
+    public function cityPage($city)
+    {
+        $cityName = ucfirst(str_replace('-', ' ', $city));
+        return $this->buildDatePage($cityName);
+    }
 
-        // 2. Get Pakistan Date (Region: pakistan)
-        $pakistanDate = Cache::remember('hub_pakistan_date_' . $today->toDateString(), 3600, function () use ($today) {
-            return $this->apiService->getHijriDate($today, 'pakistan');
-        });
+    private function buildDatePage($targetCity = null)
+    {
+        // Pakistan time
+        $nowPK = Carbon::now('Asia/Karachi');
+        // Saudi time (UTC+3)
+        $nowSA = Carbon::now('Asia/Riyadh');
 
-        // Use global for the rest of the generic calculations on the hub
-        $primaryDate = $globalDate;
+        // Hijri for Pakistan (1 day behind Saudi usually)
+        $hijriPK = $this->toHijri($nowPK);
+        // Hijri for Saudi
+        $hijriSA = $this->toHijri($nowSA);
+        // For UAE (same as Saudi usually)
+        $hijriUAE = $hijriSA;
 
-        // 3. Moon Phase
-        $moonPhase = Cache::remember('moon_phase_' . $today->toDateString(), 3600, function () use ($today) {
-            return $this->moonPhaseService->getPhase($today);
-        });
-
-        // 4. Countdowns
-        $topCountdowns = Cache::remember('top_countdowns_' . ($primaryDate->id ?? 'fallback'), 3600, function () use ($primaryDate) {
-            return $this->countdownService->getTopCountdowns($primaryDate);
-        });
-
-        // 5. Monthly Calendar
-        $monthlyCalendar = collect();
-        if ($primaryDate) {
-            $monthlyCalendar = Cache::remember(
-                "monthly_calendar_global_{$primaryDate->hijri_month_number}_{$primaryDate->hijri_year}",
-                3600,
-                function () use ($primaryDate) {
-                    return $this->apiService->getHijriMonthCalendar(
-                        $primaryDate->hijri_month_number,
-                        $primaryDate->hijri_year,
-                        'global'
-                    );
-                }
-            );
-        }
-
-        // 6. Upcoming Events (Full year)
-        $upcomingEvents = Cache::remember('upcoming_events_all_' . ($primaryDate->id ?? 'none'), 3600, function () use ($primaryDate) {
-            return collect($this->countdownService->getCountdowns($primaryDate));
-        });
-
-        // 7. Today's Historical Events
-        $historicalEvents = collect();
-        if ($primaryDate) {
-            $historicalEvents = Cache::remember("historical_events_{$primaryDate->hijri_month}_{$primaryDate->hijri_day}", 86400, function () use ($primaryDate) {
-                return HistoricalEvent::where('hijri_day', $primaryDate->hijri_day)
-                    ->where('hijri_month', $primaryDate->hijri_month)
-                    ->get();
-            });
-        }
-
-        // 8. Prayer Times (Default: Makkah for Hub, or skip and just use a default widget in view)
-        // We'll use a hardcoded default for the global hub or fetch Makkah if seeded.
-
-        // 9. Fasting Days Check
-        $fastingDays = $primaryDate ? $this->getFastingDays($primaryDate->gregorian_date, $primaryDate->hijri_day) : [];
-
-        // 10. Hijri Month Details
-        $currentMonthDetails = null;
-        if ($primaryDate) {
-            $currentMonthDetails = Cache::remember("hijri_month_{$primaryDate->hijri_month_number}", 86400, function () use ($primaryDate) {
-                return HijriMonth::where('name_en', $primaryDate->hijri_month)
-                    ->orWhere('month_number', $primaryDate->hijri_month_number)
-                    ->first();
-            });
-        }
-
-        // 11. SEO & Schema
-        $title = $primaryDate ? "Islamic Date Today - {$primaryDate->hijri_day} {$primaryDate->hijri_month} {$primaryDate->hijri_year} AH" : 'Islamic Date Today - Current Hijri Calendar';
-        $desc = "Find out today's Islamic date (Hijri date), current moon phase, upcoming Islamic events, and daily prayer times.";
-        
-        $schema = [
-            '@context' => 'https://schema.org',
-            '@graph' => [
-                [
-                    '@type' => 'WebPage',
-                    '@id' => route('islamic-date.hub'),
-                    'url' => route('islamic-date.hub'),
-                    'name' => $title,
-                    'description' => $desc,
-                ]
-            ]
+        // Cities
+        $cities = [
+            'Karachi'      => $this->toHijri(Carbon::now('Asia/Karachi')),
+            'Lahore'       => $this->toHijri(Carbon::now('Asia/Karachi')),
+            'Islamabad'    => $this->toHijri(Carbon::now('Asia/Karachi')),
+            'Rawalpindi'   => $this->toHijri(Carbon::now('Asia/Karachi')),
+            'Faisalabad'   => $this->toHijri(Carbon::now('Asia/Karachi')),
+            'Saudi Arabia' => $hijriSA,
+            'UAE'          => $hijriUAE,
         ];
 
-        if ($upcomingEvents && $upcomingEvents->count() > 0) {
-            foreach ($upcomingEvents as $event) {
-                $schema['@graph'][] = [
-                    '@type' => 'Event',
-                    'name' => $event['name'],
-                    'description' => $event['description'] ?? "Upcoming event in " . $event['days_away'] . " days.",
-                    'startDate' => Carbon::today()->addDays($event['days_away'])->format('Y-m-d'),
-                    'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
-                    'eventStatus' => 'https://schema.org/EventScheduled',
-                    'location' => [
-                        '@type' => 'Place',
-                        'name' => 'Worldwide'
-                    ]
-                ];
-            }
-        }
+        $monthInfo = $this->getMonthInfo($hijriPK['month']);
+        $nextMonth = $this->getMonthInfo(($hijriPK['month'] % 12) + 1);
+        $islamicYear = $this->getYearInfo($hijriPK['year']);
+        
+        $seoData = $this->getSeoData($hijriPK, $hijriSA, $nowPK, $targetCity);
+        
+        // Pass to the SEO service to inject into the master layout as well
+        $this->seoService->setForPage($seoData['title'], $seoData['description'], request()->url());
 
-        $this->seoService->setForPage($title, $desc, route('islamic-date.hub'), $schema);
+        // Full Hijri calendar for current month
+        $monthCalendar = $this->getMonthCalendar($nowPK, $hijriPK);
 
-        return view('pages.islamic-date.hub', compact(
-            'globalDate', 'pakistanDate', 'moonPhase', 'topCountdowns',
-            'monthlyCalendar', 'upcomingEvents', 'historicalEvents',
-            'fastingDays', 'currentMonthDetails'
+        return view('pages.islamic-date.index', compact(
+            'hijriPK', 'hijriSA', 'hijriUAE', 'cities',
+            'monthInfo', 'nextMonth', 'islamicYear',
+            'seoData', 'nowPK', 'monthCalendar', 'targetCity'
         ));
     }
 
-    /**
-     * Display the Country-specific Islamic Date Page.
-     */
-    public function country(Country $country)
+    private function toHijri(Carbon $date): array
     {
-        $today = Carbon::today();
-        $region = strtolower($country->slug) === 'pakistan' ? 'pakistan' : 'global';
+        $hijri = \GeniusTS\HijriDate\Hijri::convertToHijri($date);
+        $monthNum = (int) $hijri->month;
+        $dayNum = (int) $hijri->day;
+        $yearNum = (int) $hijri->year;
+        $monthName = $hijri->format('F');
 
-        $hijriDate = Cache::remember("country_date_{$country->id}_{$today->toDateString()}", 3600, function () use ($today, $region) {
-            return $this->apiService->getHijriDate($today, $region);
-        });
-
-        $moonPhase = Cache::remember('moon_phase_' . $today->toDateString(), 3600, function () use ($today) {
-            return $this->moonPhaseService->getPhase($today);
-        });
-
-        $monthlyCalendar = collect();
-        if ($hijriDate) {
-            $monthlyCalendar = Cache::remember(
-                "monthly_calendar_{$region}_{$hijriDate->hijri_month_number}_{$hijriDate->hijri_year}",
-                3600,
-                function () use ($hijriDate, $region) {
-                    return $this->apiService->getHijriMonthCalendar(
-                        $hijriDate->hijri_month_number,
-                        $hijriDate->hijri_year,
-                        $region
-                    );
-                }
-            );
-        }
-
-        $upcomingEvents = Cache::remember('upcoming_events_' . ($hijriDate->id ?? 'none'), 3600, function () use ($hijriDate) {
-            return collect($this->countdownService->getCountdowns($hijriDate));
-        });
-
-        $historicalEvents = collect();
-        if ($hijriDate) {
-            $historicalEvents = Cache::remember("historical_events_{$hijriDate->hijri_month}_{$hijriDate->hijri_day}", 86400, function () use ($hijriDate) {
-                return HistoricalEvent::where('hijri_day', $hijriDate->hijri_day)
-                    ->where('hijri_month', $hijriDate->hijri_month)
-                    ->get();
-            });
-        }
-
-        $fastingDays = $hijriDate ? $this->getFastingDays($hijriDate->gregorian_date, $hijriDate->hijri_day) : [];
-
-        $cities = $country->cities()->orderBy('population', 'desc')->take(10)->get();
-
-        // SEO
-        $titleHijri = $hijriDate ? "{$hijriDate->hijri_day} {$hijriDate->hijri_month} {$hijriDate->hijri_year} AH" : '';
-        $title = "Islamic Date Today in {$country->name} - {$titleHijri}";
-        $desc = "Today's Hijri date in {$country->name}. View the Islamic calendar, current moon phase, and prayer times for {$country->name} cities.";
-        $this->seoService->setForPage($title, $desc, route('islamic-date.country', $country->slug));
-
-        return view('pages.islamic-date.country', compact(
-            'country', 'hijriDate', 'moonPhase', 'monthlyCalendar',
-            'upcomingEvents', 'historicalEvents', 'fastingDays', 'cities'
-        ));
+        return [
+            'day'          => $dayNum,
+            'month'        => $monthNum,
+            'year'         => $yearNum,
+            'month_name'   => $monthName,
+            'month_urdu'   => $this->hijriMonthUrdu($monthNum),
+            'month_arabic' => $this->hijriMonthArabic($monthNum),
+            'day_name'     => $date->locale('en')->isoFormat('dddd'),
+            'day_urdu'     => $this->urduDayName($date->dayOfWeek),
+            'formatted'    => $dayNum . ' ' . $monthName . ' ' . $yearNum . ' AH',
+        ];
     }
 
-    /**
-     * Display the City-specific Islamic Date Page.
-     */
-    public function city(Country $country, City $city)
+    private function getMonthCalendar(Carbon $now, array $hijriToday): array
     {
-        if ($city->country_id !== $country->id) {
-            abort(404);
+        $calendar = [];
+        $daysInGregorianMonth = $now->daysInMonth;
+
+        for ($d = 1; $d <= $daysInGregorianMonth; $d++) {
+            $date = Carbon::create($now->year, $now->month, $d, 0, 0, 0, 'Asia/Karachi');
+            $hijri = $this->toHijri($date);
+
+            $calendar[] = [
+                'gregorian_day'  => $d,
+                'gregorian_date' => $date->format('d M'),
+                'hijri_day'      => $hijri['day'],
+                'hijri_month'    => $hijri['month_name'],
+                'is_today'       => $d === $now->day,
+            ];
         }
 
-        $today = Carbon::today();
-        $region = strtolower($country->slug) === 'pakistan' ? 'pakistan' : 'global';
-
-        $hijriDate = Cache::remember("city_date_{$city->id}_{$today->toDateString()}", 3600, function () use ($today, $region) {
-            return $this->apiService->getHijriDate($today, $region);
-        });
-
-        $prayerTimes = Cache::remember("prayer_times_{$city->id}_{$today->toDateString()}", 3600, function () use ($city, $today) {
-            return PrayerTime::where('city_id', $city->id)->where('date', $today->toDateString())->first();
-        });
-
-        $moonPhase = Cache::remember('moon_phase_' . $today->toDateString(), 3600, function () use ($today) {
-            return $this->moonPhaseService->getPhase($today);
-        });
-
-        $fastingDays = $hijriDate ? $this->getFastingDays($hijriDate->gregorian_date, $hijriDate->hijri_day) : [];
-
-        // SEO
-        $titleHijri = $hijriDate ? "{$hijriDate->hijri_day} {$hijriDate->hijri_month}" : '';
-        $title = "Islamic Date in {$city->name} Today - {$titleHijri}";
-        $desc = "Check the exact Islamic date today in {$city->name}, {$country->name}. Includes local moon phase, Hijri calendar, and precise prayer times.";
-        $this->seoService->setForPage($title, $desc, route('islamic-date.city', ['country' => $country->slug, 'city' => $city->slug]));
-
-        return view('pages.islamic-date.city', compact(
-            'country', 'city', 'hijriDate', 'prayerTimes', 'moonPhase', 'fastingDays'
-        ));
+        return $calendar;
     }
 
-    /**
-     * Helper to determine sunnah fasting days.
-     */
-    private function getFastingDays(string $gregorianDate, int $hijriDay): array
+    public function getMonthInfoPublic(int $month): array
     {
-        $fastingDays = [];
-        $dayOfWeek = date('l', strtotime($gregorianDate));
+        return $this->getMonthInfo($month);
+    }
+
+    private function getMonthInfo(int $month): array
+    {
+        $info = [
+            1  => ['name' => 'Muharram', 'urdu' => 'محرم', 'significance' => 'First month of Islamic year. Ashura falls on 10th Muharram — a day of great importance.'],
+            2  => ['name' => 'Safar', 'urdu' => 'صفر', 'significance' => 'Second month. Historically a month of travel and battles in early Islamic history.'],
+            3  => ['name' => 'Rabi al-Awwal', 'urdu' => 'ربیع الاول', 'significance' => 'Birth month of Prophet Muhammad (PBUH). Eid Milad-un-Nabi celebrated on 12th.'],
+            4  => ['name' => 'Rabi al-Thani', 'urdu' => 'ربیع الثانی', 'significance' => 'Fourth month. Also called Rabi ul Akhir.'],
+            5  => ['name' => 'Jumada al-Awwal', 'urdu' => 'جمادی الاول', 'significance' => 'Fifth month of the Islamic calendar year.'],
+            6  => ['name' => 'Jumada al-Thani', 'urdu' => 'جمادی الثانی', 'significance' => 'Sixth month. End of the first half of the Islamic year.'],
+            7  => ['name' => 'Rajab', 'urdu' => 'رجب', 'significance' => 'One of the four sacred months. Night of Isra and Miraj (27th Rajab).'],
+            8  => ['name' => 'Shaban', 'urdu' => 'شعبان', 'significance' => 'Month of preparation for Ramadan. Shab-e-Barat on 15th Shaban.'],
+            9  => ['name' => 'Ramadan', 'urdu' => 'رمضان', 'significance' => 'Holiest month. Fasting (Roza) is obligatory. Laylatul Qadr in last 10 nights.'],
+            10 => ['name' => 'Shawwal', 'urdu' => 'شوال', 'significance' => 'Eid-ul-Fitr on 1st Shawwal. Six fasts of Shawwal are sunnah.'],
+            11 => ['name' => 'Dhu al-Qadah', 'urdu' => 'ذوالقعدہ', 'significance' => 'One of four sacred months. Hajj preparation begins.'],
+            12 => ['name' => 'Dhu al-Hijjah', 'urdu' => 'ذوالحجہ', 'significance' => 'Month of Hajj. Eid-ul-Adha on 10th. First 10 days most blessed.'],
+        ];
+
+        return $info[$month] ?? $info[1];
+    }
+
+    private function getYearInfo(int $year): array
+    {
+        return [
+            'year'    => $year,
+            'started' => 'The Islamic Hijri calendar started from the migration (Hijra) of Prophet Muhammad (PBUH) from Makkah to Madinah in 622 CE.',
+            'type'    => 'Lunar calendar — 354 or 355 days per year, 12 months of 29–30 days.',
+        ];
+    }
+
+    private function getSeoData(array $hijriPK, array $hijriSA, Carbon $nowPK, $targetCity = null): array
+    {
+        $dateStr = $nowPK->format('d F Y');
+        $pkDate = $hijriPK['day'] . ' ' . $hijriPK['month_name'] . ' ' . $hijriPK['year'];
+        $saDate = $hijriSA['day'] . ' ' . $hijriSA['month_name'] . ' ' . $hijriSA['year'];
         
-        if ($dayOfWeek === 'Monday' || $dayOfWeek === 'Thursday') {
-            $fastingDays[] = 'Sunnah Fasting (' . $dayOfWeek . ')';
+        $title = "Islamic Date Today {$dateStr} | {$pkDate} | Hijri Date Pakistan | آج کی اسلامی تاریخ";
+        $description = "Islamic date today in Pakistan is {$pkDate}. Saudi Arabia Islamic date today is {$saDate}. Today Islamic date in Karachi, Lahore, Rawalpindi, Faisalabad. Exact Hijri date {$dateStr}.";
+        
+        if ($targetCity) {
+            $title = "Islamic Date Today in {$targetCity} {$dateStr} | {$pkDate} | Hijri Date {$targetCity}";
+            $description = "Today Islamic date in {$targetCity} Pakistan is {$pkDate}. Islamic date today in {$targetCity}, Saudi Arabia Islamic date, and exact Hijri calendar for {$dateStr}.";
         }
-        
-        if (in_array($hijriDay, [13, 14, 15])) {
-            $fastingDays[] = 'Ayyam al-Bid (White Days)';
-        }
-        
-        return $fastingDays;
+
+        return [
+            'title'       => $title,
+            'description' => $description,
+            'keywords'    => "islamic date today, islamic date today in pakistan, today islamic date, hijri date today, islamic date today in karachi, islamic date today in lahore, today islamic date pakistan, islamic month date today, exact islamic date today, today's date according to islamic calendar",
+        ];
+    }
+
+    private function hijriMonthUrdu(int $m): string
+    {
+        return ['', 'محرم', 'صفر', 'ربیع الاول', 'ربیع الثانی', 'جمادی الاول', 'جمادی الثانی', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذوالقعدہ', 'ذوالحجہ'][$m] ?? '';
+    }
+
+    private function hijriMonthArabic(int $m): string
+    {
+        return ['', 'مُحَرَّم', 'صَفَر', 'رَبِيع ٱلْأَوَّل', 'رَبِيع ٱلثَّانِي', 'جُمَادَى ٱلْأُولَى', 'جُمَادَى ٱلثَّانِيَة', 'رَجَب', 'شَعْبَان', 'رَمَضَان', 'شَوَّال', 'ذُو ٱلْقَعْدَة', 'ذُو ٱلْحِجَّة'][$m] ?? '';
+    }
+
+    private function urduDayName(int $dow): string
+    {
+        // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+        return ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'][$dow] ?? '';
     }
 }
