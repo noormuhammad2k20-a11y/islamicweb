@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\IslamicDateController;
+use App\Http\Controllers\IslamicCalendarController;
 use App\Http\Controllers\PrayerTimesController;
 use App\Http\Controllers\ConverterController;
 use App\Http\Controllers\AjaxController;
@@ -36,13 +37,44 @@ $appRoutes = function () {
     Route::get('/sitemap', [PageController::class, 'sitemap'])->name('sitemap');
     Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
-    // CLUSTER 1 — Islamic Date / Hijri Calendar
-    Route::get('/islamic-date', [IslamicDateController::class, 'index'])->name('islamic-date');
-    Route::get('/hijri-date', [IslamicDateController::class, 'index']);
-    Route::get('/islamic-date/{city}', [IslamicDateController::class, 'cityPage'])->name('islamic-date.city')->where('city', '[a-z\-]+');
-    
-    // Redirect old routes
-    Route::redirect('/islamic-date-today', '/islamic-date', 301);
+    // CLUSTER 1 — Islamic Calendar + Programmatic SEO Pages
+    // Redirect old /islamic-date to new hub
+    Route::redirect('/islamic-date', '/islamic-calendar', 301);
+    Route::redirect('/hijri-date', '/islamic-calendar', 301);
+
+    // Main pages
+    Route::get('/islamic-calendar', [IslamicCalendarController::class, 'mainCalendar'])->name('islamic-calendar');
+    Route::get('/islamic-calendar/today', [IslamicCalendarController::class, 'islamicDateToday'])->name('islamic-date-today');
+    Route::get('/islamic-calendar/pakistan', [IslamicCalendarController::class, 'pakistanDate'])->name('islamic-date-pakistan');
+    Route::get('/islamic-calendar/saudi-arabia', [IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi');
+    Route::get('/islamic-calendar/in-urdu', [IslamicCalendarController::class, 'urduDate'])->name('islamic-date-urdu');
+
+    // Programmatic: Country pages
+    Route::get('/islamic-calendar/{country}', [IslamicCalendarController::class, 'countryPage'])
+        ->name('islamic-date-country')
+        ->where('country', 'uae|kuwait|qatar|bahrain|jordan|egypt|turkey');
+
+    // Programmatic: City pages
+    Route::get('/islamic-date/{city}', [IslamicCalendarController::class, 'cityPage'])
+        ->name('islamic-date-city')
+        ->where('city', '[a-z\-]+');
+
+    // Programmatic: Year archive
+    Route::get('/islamic-calendar/{year}', [IslamicCalendarController::class, 'yearArchive'])
+        ->name('islamic-calendar-year')
+        ->where('year', '[0-9]{4}');
+
+    // Programmatic: Year-Month archive
+    Route::get('/islamic-calendar/{year}/{month}', [IslamicCalendarController::class, 'yearMonthArchive'])
+        ->name('islamic-calendar-year-month')
+        ->where(['year' => '[0-9]{4}', 'month' => '[0-9]+']);
+
+    // Programmatic: Month pages
+    Route::redirect('/islamic-month/rabi-us-sani', '/islamic-month/rabi-ul-thani', 301);
+    Route::redirect('/islamic-month/jumada-as-sani', '/islamic-month/jumada-al-thani', 301);
+    Route::get('/islamic-month/{month}', [IslamicCalendarController::class, 'monthPage'])
+        ->name('islamic-month')
+        ->where('month', '[a-z\-]+');
 
     Route::get('/hijri-gregorian-converter', [ConverterController::class, 'show'])->name('converter.show');
 
@@ -78,9 +110,10 @@ $appRoutes = function () {
     Route::get('/hadith-topics/{topic:slug}', [HadithController::class, 'show'])->name('hadith.show');
     Route::get('/hadith-topics/{topic:slug}/{hadith:slug}', [HadithController::class, 'hadithShow'])->name('hadith.hadithShow');
 
-    // CLUSTER 5 — Events & Calendar
-    Route::get('/islamic-calendar', [IslamicEventsController::class, 'index'])->name('events.index');
-    Route::get('/islamic-calendar/{hijri_month:slug}', [IslamicEventsController::class, 'month'])->name('events.month');
+    // CLUSTER 5 — Events & Calendar (legacy — kept for month detail pages)
+    // Main /islamic-calendar now handled by IslamicCalendarController above
+    Route::get('/islamic-events', [IslamicEventsController::class, 'index'])->name('events.index');
+    Route::get('/islamic-events/{hijri_month:slug}', [IslamicEventsController::class, 'month'])->name('events.month');
 
     // CLUSTER 6 — Islamic Names
     Route::prefix('islamic-names')->group(function () {
@@ -237,6 +270,7 @@ Route::prefix('ajax')->group(function () {
 
 // SEO Routes
 Route::get('/sitemap_index.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap-calendar.xml', [App\Http\Controllers\SitemapController::class, 'calendar'])->name('sitemap.calendar');
 Route::get('/sitemap-dates.xml', [App\Http\Controllers\SitemapController::class, 'dates'])->name('sitemap.dates');
 Route::get('/sitemap-prayer.xml', [App\Http\Controllers\SitemapController::class, 'prayer'])->name('sitemap.prayer');
 Route::get('/sitemap-surah.xml', [App\Http\Controllers\SitemapController::class, 'surah'])->name('sitemap.surah');

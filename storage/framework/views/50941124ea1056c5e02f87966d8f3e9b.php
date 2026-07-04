@@ -137,7 +137,7 @@
                     <ul>
                         <li><a href="<?php echo e(route('home')); ?>"><i class="fas fa-chevron-right"></i> Home</a></li>
                         <li><a href="<?php echo e(route('about')); ?>"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                        <li><a href="<?php echo e(route('islamic-date')); ?>"><i class="fas fa-chevron-right"></i> Islamic Date</a></li>
+                        <li><a href="<?php echo e(route('islamic-calendar')); ?>"><i class="fas fa-chevron-right"></i> Islamic Calendar</a></li>
                         <li><a href="<?php echo e(route('names.index')); ?>"><i class="fas fa-chevron-right"></i> Islamic Names</a></li>
                         <li><a href="<?php echo e(route('zakat.index')); ?>"><i class="fas fa-chevron-right"></i> Zakat Calculator</a></li>
                         <li><a href="<?php echo e(route('contact')); ?>"><i class="fas fa-chevron-right"></i> Contact</a></li>

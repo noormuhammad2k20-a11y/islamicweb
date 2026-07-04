@@ -136,7 +136,7 @@
                     <ul>
                         <li><a href="{{ route('home') }}"><i class="fas fa-chevron-right"></i> Home</a></li>
                         <li><a href="{{ route('about') }}"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                        <li><a href="{{ route('islamic-date') }}"><i class="fas fa-chevron-right"></i> Islamic Date</a></li>
+                        <li><a href="{{ route('islamic-calendar') }}"><i class="fas fa-chevron-right"></i> Islamic Calendar</a></li>
                         <li><a href="{{ route('names.index') }}"><i class="fas fa-chevron-right"></i> Islamic Names</a></li>
                         <li><a href="{{ route('zakat.index') }}"><i class="fas fa-chevron-right"></i> Zakat Calculator</a></li>
                         <li><a href="{{ route('contact') }}"><i class="fas fa-chevron-right"></i> Contact</a></li>

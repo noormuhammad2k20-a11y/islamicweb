@@ -23,7 +23,7 @@
                 <p class="hero-desc">Your gateway to authentic Islamic knowledge, spiritual growth, and community
                     connection. Learn, pray, and grow together on the straight path.</p>
                 <div class="hero-buttons">
-                    <a href="{{ route('islamic-date') }}" class="btn-primary"><i class="fas fa-calendar-day"></i> Today's Date</a>
+                    <a href="{{ route('islamic-calendar') }}" class="btn-primary"><i class="fas fa-calendar-day"></i> Islamic Calendar</a>
                     <a href="#explore" class="btn-outline-hero"><i class="fas fa-compass"></i> Explore More</a>
                 </div>
                 <div class="hero-stats">
@@ -392,7 +392,7 @@
                     <div class="service-icon"><i class="fas fa-calendar-day"></i></div>
                     <h3>Islamic Date Today</h3>
                     <p>Check the accurate Hijri date for your country according to local moon sighting authorities.</p>
-                    <a href="{{ route('islamic-date') }}" class="service-link">View Date <i class="fas fa-arrow-right"></i></a>
+                    <a href="{{ route('islamic-calendar') }}" class="service-link">View Calendar <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon"><i class="fas fa-clock"></i></div>

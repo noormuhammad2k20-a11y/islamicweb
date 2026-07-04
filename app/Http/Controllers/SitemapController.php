@@ -13,6 +13,14 @@ class SitemapController extends Controller
         return response()->view('sitemap.index')->header('Content-Type', 'text/xml');
     }
 
+    public function calendar()
+    {
+        $cities = \App\Models\CityIslamicContent::all();
+        $months = \App\Models\IslamicMonthContent::all();
+        $years = range(2018, 2030);
+        return response()->view('sitemap.calendar', compact('cities', 'months', 'years'))->header('Content-Type', 'text/xml');
+    }
+
     public function dates()
     {
         $countries = \App\Models\Country::all();
