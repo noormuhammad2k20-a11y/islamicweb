@@ -1,0 +1,11 @@
+STEP 1: DATABASE TABLE BANAO
+STEP 2: SEED DATA — INSERT UNIQUE CONTENT
+STEP 3: UPDATE city.blade.php — ADD CONTENT SECTIONS
+STEP 4: CONTROLLER — ADD MISSING VARIABLES
+STEP 5: MODEL — CREATE IF MISSING
+STEP 6: RUN COMMANDS
+STEP 7: INTERNAL LINKING — Add to city.blade.php
+── 7A: PRAYER CARDS pe sub-page links ──────────────
+── 7B: Prayer-Specific Pages Internal Links Section ──
+── 7C: Country Hub + Related Countries ─────────────
+── 7D: Cross-Feature Links (Islamic Date + Qibla) ──

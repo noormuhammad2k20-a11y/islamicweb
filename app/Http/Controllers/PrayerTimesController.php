@@ -62,7 +62,7 @@ class PrayerTimesController extends Controller
         $lng = $city->longitude ?? $city->lng;
         $tz = $city->timezone ?? 'Asia/Karachi';
         $name = $city->name;
-        $country = $city->country ?? 'Pakistan';
+        $country = is_object($city->country) ? ($city->country->name ?? 'Pakistan') : ($city->country ?? 'Pakistan');
 
         // Add caching logic
         $cacheKey = "prayers_{$citySlug}_{$madhab}_{$method}_".now($tz)->format('Ymd');
@@ -114,10 +114,11 @@ class PrayerTimesController extends Controller
         $monthlyKey = "monthly_{$citySlug}_hanafi_".now($tz)->format('Ym');
         $monthly = Cache::remember($monthlyKey, 86400, fn()=>$this->buildMonthly($lat, $lng, $tz));
 
-        $seoData = $this->prayerSeo($name, $prayerName, $prayers, $tz);
+        $prayerKey = $prayerName === 'zuhr' ? 'dhuhr' : $prayerName;
+        $seoData = $this->prayerSeo($name, $prayerName, $prayerKey, $prayers, $tz);
 
         return view('prayer-times.prayer', compact(
-            'city','name','citySlug','prayerName','prayers',
+            'city','name','citySlug','prayerName','prayerKey','prayers',
             'prayerContent','monthly','seoData','tz'
         ));
     }
@@ -303,9 +304,9 @@ class PrayerTimesController extends Controller
         ];
     }
 
-    private function prayerSeo($name,$prayer,$prayers,$tz): array
+    private function prayerSeo($name,$prayer,$prayerKey,$prayers,$tz): array
     {
-        $time = $prayers[$prayer];
+        $time = $prayers[$prayerKey];
         $date = Carbon::now($tz)->format('d F Y');
         return [
             'title' => ucfirst($prayer)." Time {$name} Today {$date} | {$prayer} Prayer Time {$name} | {$time}",

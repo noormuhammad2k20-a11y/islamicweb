@@ -149,9 +149,9 @@
                         <li><a href="<?php echo e(route('prayer-times.hub')); ?>"><i class="fas fa-chevron-right"></i> Prayer Times</a></li>
                         <li><a href="<?php echo e(route('duas.index')); ?>"><i class="fas fa-chevron-right"></i> Daily Duas</a></li>
                         <li><a href="<?php echo e(route('wazaif.index')); ?>"><i class="fas fa-chevron-right"></i> Wazaif</a></li>
+                        <li><a href="<?php echo e(route('tasbeeh.counter')); ?>"><i class="fas fa-chevron-right"></i> Tasbeeh Counter</a></li>
                         <li><a href="<?php echo e(route('dreams.index')); ?>"><i class="fas fa-chevron-right"></i> Khwabon Ki Tabeer</a></li>
                         <li><a href="<?php echo e(route('quiz.index')); ?>"><i class="fas fa-chevron-right"></i> Islamic Quiz</a></li>
-                        <li><a href="<?php echo e(route('tasbeeh.index')); ?>"><i class="fas fa-chevron-right"></i> Tasbeeh Tracker</a></li>
                         <li><a href="<?php echo e(route('events.index')); ?>"><i class="fas fa-chevron-right"></i> Islamic Calendar</a></li>
                         <li><a href="<?php echo e(route('hadith.index')); ?>"><i class="fas fa-chevron-right"></i> Hadith Collection</a></li>
                         <li><a href="<?php echo e(route('converter.show')); ?>"><i class="fas fa-chevron-right"></i> Date Converter</a></li>

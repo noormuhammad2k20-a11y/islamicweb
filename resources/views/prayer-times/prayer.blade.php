@@ -41,7 +41,7 @@
     <div class="date-cards-wrapper">
         <div class="main-date-card">
             <div class="card-region">Today's {{ ucfirst($prayerName) }} Time</div>
-            <div class="hijri-day-large">{{ $prayers[$prayerName] }}</div>
+            <div class="hijri-day-large">{{ $prayers[$prayerKey] }}</div>
         </div>
     </div>
 </section>
@@ -73,7 +73,7 @@
                 <tr class="{{ $day['is_today'] ? 'today-row' : '' }}">
                     <td>{{ $day['date'] }}</td>
                     <td>{{ $day['dow'] }}</td>
-                    <td style="font-weight: 600;">{{ $day[$prayerName] }}</td>
+                    <td style="font-weight: 600;">{{ $day[$prayerKey] }}</td>
                 </tr>
                 @endforeach
             </tbody>

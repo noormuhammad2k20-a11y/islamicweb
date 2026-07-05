@@ -39,7 +39,7 @@
     <div class="date-cards-wrapper">
         <div class="main-date-card">
             <div class="card-region">Today's <?php echo e(ucfirst($prayerName)); ?> Time</div>
-            <div class="hijri-day-large"><?php echo e($prayers[$prayerName]); ?></div>
+            <div class="hijri-day-large"><?php echo e($prayers[$prayerKey]); ?></div>
         </div>
     </div>
 </section>
@@ -72,7 +72,7 @@
                 <tr class="<?php echo e($day['is_today'] ? 'today-row' : ''); ?>">
                     <td><?php echo e($day['date']); ?></td>
                     <td><?php echo e($day['dow']); ?></td>
-                    <td style="font-weight: 600;"><?php echo e($day[$prayerName]); ?></td>
+                    <td style="font-weight: 600;"><?php echo e($day[$prayerKey]); ?></td>
                 </tr>
                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
             </tbody>

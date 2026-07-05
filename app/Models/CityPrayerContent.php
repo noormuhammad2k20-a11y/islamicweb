@@ -10,4 +10,8 @@ class CityPrayerContent extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'famous_mosques' => 'array',
+    ];
 }

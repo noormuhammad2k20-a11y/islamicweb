@@ -98,6 +98,7 @@ $appRoutes = function () {
     Route::prefix('namaz-guides')->group(function () {
         Route::get('/', [NamazGuideController::class, 'index'])->name('namaz.index');
         Route::get('/how-to-pray-salah', [NamazGuideController::class, 'salah'])->name('namaz.salah');
+        Route::get('/salat-ul-tasbeeh', [NamazGuideController::class, 'salatUlTasbeeh'])->name('namaz.salat_tasbeeh');
         Route::get('/{prayer}', [NamazGuideController::class, 'show'])->name('namaz.show');
     });
 
@@ -151,7 +152,8 @@ $appRoutes = function () {
     });
 
     // CLUSTER 9 — Digital Tasbeeh Tracker
-    Route::get('/tasbeeh', [\App\Http\Controllers\TasbeehController::class, 'index'])->name('tasbeeh.index');
+    Route::redirect('/tasbeeh', '/digital-tasbeeh-counter', 301);
+    Route::get('/digital-tasbeeh-counter', [\App\Http\Controllers\TasbeehController::class, 'digitalCounter'])->name('tasbeeh.counter');
 
     // CLUSTER 10 — Ramadan Section
     Route::get('/ramadan/{year}', [RamadanController::class, 'hub'])->name('ramadan.hub');
