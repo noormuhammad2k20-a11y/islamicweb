@@ -79,11 +79,20 @@ $appRoutes = function () {
     Route::get('/hijri-gregorian-converter', [ConverterController::class, 'show'])->name('converter.show');
 
     // CLUSTER 2 — Prayer Times
-    Route::prefix('prayer-times')->group(function () {
-        Route::get('/', [PrayerTimesController::class, 'hub'])->name('prayer-times.hub');
-        Route::get('/{city:slug}', [PrayerTimesController::class, 'city'])->name('prayer-times.city');
-        Route::get('/{city:slug}/nawafil', [PrayerTimesController::class, 'nawafil'])->name('prayer-times.nawafil');
-    });
+    Route::get('/prayer-times/{country}', [PrayerTimesController::class, 'countryHub'])
+        ->where('country','pakistan|uae|saudi-arabia|india|usa')
+        ->name('prayer-times.country');
+
+    Route::get('/prayer-times/{city}/{prayer}', [PrayerTimesController::class, 'prayerPage'])
+        ->where(['city'=>'[a-z0-9\-]+','prayer'=>'fajr|zuhr|asr|maghrib|isha'])
+        ->name('prayer-times.prayer');
+
+    Route::get('/prayer-times/{city}', [PrayerTimesController::class, 'cityPage'])
+        ->where('city','[a-z0-9\-]+')
+        ->name('prayer-times.city');
+
+    Route::get('/prayer-times', fn() => redirect('/prayer-times/pakistan'))
+        ->name('prayer-times.hub');
 
     // CLUSTER 2.1 — Namaz Guides
     Route::prefix('namaz-guides')->group(function () {

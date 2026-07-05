@@ -30,7 +30,11 @@ class SitemapController extends Controller
     public function prayer()
     {
         $cities = City::limit(200)->get();
-        return response()->view('sitemap.prayer', ['cities' => $cities])->header('Content-Type', 'text/xml');
+        $worldCities = \App\Models\WorldCity::all();
+        $countries = ['pakistan', 'uae', 'saudi-arabia', 'india', 'usa'];
+        $prayers = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha'];
+        
+        return response()->view('sitemap.prayer', compact('cities', 'worldCities', 'countries', 'prayers'))->header('Content-Type', 'text/xml');
     }
 
     public function surah()
