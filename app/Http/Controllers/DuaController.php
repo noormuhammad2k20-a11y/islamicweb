@@ -1,170 +1,127 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\DuaCategory;
 use App\Models\Dua;
-use Illuminate\Support\Facades\Cache;
+use App\Models\DuaCategory;
+use Illuminate\Http\Request;
 
 class DuaController extends Controller
 {
-    private function applySearch($query, $searchTerm)
+    // /duas — Category listing hub page
+    public function index()
     {
-        return $query->where(function($q) use ($searchTerm) {
-            $q->where('title_english', 'like', '%' . $searchTerm . '%')
-              ->orWhere('title_urdu', 'like', '%' . $searchTerm . '%')
-              ->orWhere('title_roman_urdu', 'like', '%' . $searchTerm . '%')
-              ->orWhere('translation', 'like', '%' . $searchTerm . '%')
-              ->orWhere('arabic_text', 'like', '%' . $searchTerm . '%')
-              ->orWhere('tags', 'like', '%' . $searchTerm . '%')
-              ->orWhere('synonyms', 'like', '%' . $searchTerm . '%')
-              ->orWhere('search_keywords', 'like', '%' . $searchTerm . '%');
-        });
+        $categories = DuaCategory::whereNull('parent_id')
+            ->with(['duas' => fn($q) => $q->limit(6), 'children'])
+            ->withCount('duas')
+            ->get();
+        
+        $featuredDuas = Dua::where('is_featured', 1)
+            ->where('published_status', 1)
+            ->with('categories')
+            ->limit(8)->get();
+        
+        $totalDuas = Dua::where('published_status', 1)->count();
+        
+        $seo = [
+            'title' => 'تمام دعائیں - All Islamic Duas in Urdu & Arabic | NoorIslam',
+            'description' => 'Sone ki dua, namaz ki dua, shifa ki dua aur 95+ Islamic duain mukammal Arabic text, Urdu tarjuma, Roman Urdu aur hadith hawale ke sath. NoorIslam par tamam zaroorat ki duain.',
+            'canonical' => config('app.url') . '/duas',
+        ];
+        
+        return view('duas.index', compact('categories', 'featuredDuas', 'totalDuas', 'seo'));
     }
 
-    public function index(Request $request)
+    // /duas/category/{slug} — Category page
+    public function category(string $slug)
     {
-        $categories = Cache::remember('dua_categories_all', 3600, function () {
-            return DuaCategory::whereNull('parent_id')->get();
-        });
-
-        $activeCategory = DuaCategory::where('slug', 'morning-azkar')->first();
-        if (!$activeCategory) {
-            $activeCategory = $categories->first();
-        }
-
-        $duasQuery = $activeCategory ? $activeCategory->duas()->where('published_status', true) : Dua::where('published_status', true);
-
-        if ($request->has('search') && !empty($request->search)) {
-            $duasQuery = $this->applySearch($duasQuery, $request->search);
-        }
-
-        // Paginate for performance if dataset is large (user asked for 5k-10k duas)
-        $duas = $duasQuery->paginate(50);
+        $category = DuaCategory::where('slug', $slug)
+            ->orWhere('slug_urdu', $slug)
+            ->with(['duas' => fn($q) => $q->where('published_status', 1)->orderBy('is_featured', 'desc'), 'parent', 'children'])
+            ->firstOrFail();
         
-        if ($activeCategory) {
-            $activeCategory->setRelation('duas', $duas);
-        }
-
-        if ($request->ajax()) {
-            return view('pages.duas.partials.dua_list', compact('activeCategory', 'duas'))->render();
-        }
-
-        return view('pages.duas.hub', compact('categories', 'activeCategory', 'duas'));
+        $duas = $category->duas()->where('published_status', 1)->paginate(20);
+        
+        $relatedCategories = DuaCategory::whereNull('parent_id')
+            ->where('id', '!=', $category->id)->limit(6)->get();
+        
+        $seo = [
+            'title' => $category->seo_title ?? $category->name_english . ' - ' . $category->name_urdu . ' | NoorIslam',
+            'description' => $category->seo_description ?? 'NoorIslam par ' . $category->name_roman_urdu . ' ki tamam duain mukammal Arabic, Urdu tarjuma aur hadith reference ke sath parhen.',
+            'canonical' => config('app.url') . '/duas/' . $category->slug,
+        ];
+        
+        return view('duas.category', compact('category', 'duas', 'relatedCategories', 'seo'));
     }
 
-    public function category(Request $request, $slug)
+    // Legacy URL redirect handler
+    public function legacyShow(string $slug)
     {
-        $categories = Cache::remember('dua_categories_all', 3600, function () {
-            return DuaCategory::whereNull('parent_id')->get();
-        });
-
-        $activeCategory = DuaCategory::where('slug', $slug)->firstOrFail();
-
-        $duasQuery = $activeCategory->duas()->where('published_status', true);
-
-        if ($request->has('search') && !empty($request->search)) {
-            $duasQuery = $this->applySearch($duasQuery, $request->search);
-        }
-
-        $duas = $duasQuery->paginate(50);
-        $activeCategory->setRelation('duas', $duas);
-
-        if ($request->ajax()) {
-            return view('pages.duas.partials.dua_list', compact('activeCategory', 'duas'))->render();
-        }
-
-        return view('pages.duas.hub', compact('categories', 'activeCategory', 'duas'));
+        $dua = Dua::where('seo_slug', $slug)->firstOrFail();
+        return redirect($dua->canonical_url, 301);
     }
 
-    public function show($category_slug, $seo_slug)
+    // /duas/{category}/{slug} — Individual Dua Page (MAIN SEO PAGE)
+    public function show(string $category, string $slug)
     {
-        $category = DuaCategory::where('slug', $category_slug)->firstOrFail();
+        $dua = Dua::where('seo_slug', $slug)
+            ->where('published_status', 1)
+            ->with(['categories', 'seoMeta', 'relatedDuas' => fn($q) => $q->limit(6)])
+            ->firstOrFail();
         
-        $dua = Cache::remember("dua_show_{$seo_slug}", 3600, function () use ($seo_slug, $category) {
-            return Dua::with(['relatedDuas', 'relatedArticles', 'wazaif'])
-                ->where('seo_slug', $seo_slug)
-                ->whereHas('categories', function($q) use ($category) {
-                    $q->where('dua_categories.id', $category->id);
-                })
-                ->firstOrFail();
-        });
-
-        // SEO Strategy: Fetch 4 to 6 related duas from the same category or explicitly related ones
-        if ($dua->relatedDuas->isNotEmpty()) {
-            $relatedDuas = $dua->relatedDuas->take(6);
-        } else {
-            $relatedDuas = Cache::remember("dua_related_{$dua->id}", 3600, function () use ($category, $dua) {
-                return Dua::whereHas('categories', function($q) use ($category) {
-                        $q->where('dua_categories.id', $category->id);
-                    })
-                    ->where('id', '!=', $dua->id)
-                    ->where('published_status', true)
-                    ->inRandomOrder()
-                    ->limit(6)
-                    ->get();
-            });
+        // SEO Protection: redirect if accessed via wrong category URL
+        if (!$dua->categories->contains('slug', $category) && $category !== 'general') {
+            return redirect($dua->canonical_url, 301);
         }
         
-        // Navigation: Previous & Next
-        $previousDua = Dua::whereHas('categories', function($q) use ($category) {
-                $q->where('dua_categories.id', $category->id);
+        $activeCategory = $dua->categories->firstWhere('slug', $category) ?? $dua->categories->first();
+        
+        // Get related duas from same category
+        $relatedDuas = Dua::whereHas('categories', function($q) use ($dua) {
+                $q->whereIn('dua_categories.id', $dua->categories->pluck('id'));
             })
-            ->where('id', '<', $dua->id)
-            ->where('published_status', true)
-            ->orderBy('id', 'desc')
-            ->first();
-
-        $nextDua = Dua::whereHas('categories', function($q) use ($category) {
-                $q->where('dua_categories.id', $category->id);
-            })
-            ->where('id', '>', $dua->id)
-            ->where('published_status', true)
-            ->orderBy('id', 'asc')
-            ->first();
-
-        // FAQs Generation
-        $faqs = $dua->faqs;
-        if (empty($faqs)) {
-            $faqs = [];
-            
-            $contentType = $dua->content_type ?? 'Prophetic Dua';
-            $title = $dua->title_english ?? $dua->title_urdu ?? 'this';
-            
-            if ($contentType === 'Hadith') {
-                $faqs[] = [
-                    'question' => "Which Hadith collection contains \"{$title}\"?",
-                    'answer' => "This narration is from " . ($dua->reference_source ?? $dua->book_name ?? 'authentic sources') . ($dua->hadith_number ? ", Hadith #" . $dua->hadith_number : "") . "."
-                ];
-                $faqs[] = [
-                    'question' => "Is this Hadith authentic?",
-                    'answer' => "Its authentication grade is: " . ($dua->authenticity ?? 'Not specified in this record') . ". " . ($dua->authenticity_notes ?? '')
-                ];
-                if ($dua->narrator) {
-                    $faqs[] = [
-                        'question' => "Who narrated this Hadith?",
-                        'answer' => "It was narrated by " . $dua->narrator . "."
-                    ];
-                }
-            } else {
-                $faqs[] = [
-                    'question' => "What is the purpose of \"{$title}\"?",
-                    'answer' => $dua->short_meaning ?? "This is a supplication categorized under {$category->name_english}."
-                ];
-                $faqs[] = [
-                    'question' => "When should I recite this Dua?",
-                    'answer' => $dua->when_to_read ?? $dua->best_time ?? "You can recite this " . ($dua->occasion ?? "regularly as part of your daily supplications.")
-                ];
-                if ($dua->authenticity) {
-                    $faqs[] = [
-                        'question' => "Is the source of this Dua authentic?",
-                        'answer' => "Yes, it is referenced from " . ($dua->reference_source ?? 'authentic texts') . " and is graded as " . $dua->authenticity . "."
-                    ];
-                }
-            }
+            ->where('id', '!=', $dua->id)
+            ->where('published_status', 1)
+            ->limit(8)->get();
+        
+        // Prev / Next navigation
+        $prevDua = Dua::where('id', '<', $dua->id)->where('published_status', 1)->orderBy('id','desc')->first();
+        $nextDua = Dua::where('id', '>', $dua->id)->where('published_status', 1)->orderBy('id','asc')->first();
+        
+        $seo = [
+            'title' => $dua->seo_title ?? $dua->meta_title ?? $dua->title_roman_urdu . ' - ' . $dua->title_urdu . ' | NoorIslam',
+            'description' => $dua->meta_description ?? $dua->short_meaning,
+            'canonical' => $dua->canonical_url,
+            'schema_article' => $dua->generateSchema(),
+            'schema_faq' => $dua->generateFaqSchema(),
+            'schema_breadcrumb' => $this->generateBreadcrumb($dua),
+        ];
+        
+        return view('duas.show', compact('dua', 'activeCategory', 'relatedDuas', 'prevDua', 'nextDua', 'seo'));
+    }
+    
+    private function generateBreadcrumb(Dua $dua): array
+    {
+        $items = [
+            ['name' => 'Home', 'url' => config('app.url')],
+            ['name' => 'Duas', 'url' => config('app.url') . '/duas'],
+        ];
+        if ($dua->categories->first()) {
+            $cat = $dua->categories->first();
+            $items[] = ['name' => $cat->name_english, 'url' => config('app.url') . '/duas/' . $cat->slug];
         }
-
-        return view('pages.duas.show', compact('category', 'dua', 'relatedDuas', 'previousDua', 'nextDua', 'faqs'));
+        $items[] = ['name' => $dua->title_english ?? $dua->title_roman_urdu, 'url' => $dua->canonical_url];
+        
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => collect($items)->map(function($item, $i) {
+                return [
+                    '@type' => 'ListItem',
+                    'position' => $i + 1,
+                    'name' => $item['name'],
+                    'item' => $item['url'],
+                ];
+            })->toArray(),
+        ];
     }
 }

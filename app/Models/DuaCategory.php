@@ -24,4 +24,9 @@ class DuaCategory extends Model
     {
         return $this->hasMany(DuaCategory::class, 'parent_id');
     }
+
+    public function seoMeta()
+    {
+        return $this->morphOne(SeoMeta::class, 'metaable');
+    }
 }

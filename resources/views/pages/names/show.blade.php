@@ -203,19 +203,19 @@
 <!-- JSON-LD SCHEMAS -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@@context": "https://schema.org",
+  "@@graph": [
     {
-      "@type": "WebPage",
-      "@id": "{{ url()->current() }}",
+      "@@type": "WebPage",
+      "@@id": "{{ url()->current() }}",
       "url": "{{ url()->current() }}",
       "name": "{{ $name->name_english }} - Islamic Name Meaning",
       "description": "Meaning of the Islamic name {{ $name->name_english }} ({{ $name->name_arabic }}) is {{ $name->translation_urdu }}."
     },
     {
-      "@type": "BreadcrumbList",
+      "@@type": "BreadcrumbList",
       "itemListElement": [{
-        "@type": "ListItem",
+        "@@type": "ListItem",
         "position": 1,
         "name": "Home",
         "item": "{{ route('home') }}"

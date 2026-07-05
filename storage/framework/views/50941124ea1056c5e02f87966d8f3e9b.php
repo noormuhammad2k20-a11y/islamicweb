@@ -64,6 +64,7 @@
         .calendar-day.today { background: none !important; font-weight: bold !important; border: 2px solid black !important; color: black !important; }
         a { text-decoration: none !important; color: black !important; }
     </style>
+    <?php echo $__env->yieldContent('head'); ?>
 </head>
 <body>
 
@@ -382,6 +383,7 @@
             showToast('Video feature will be available soon, InshaAllah.');
         });
     </script>
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
 <?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/layouts/app.blade.php ENDPATH**/ ?>

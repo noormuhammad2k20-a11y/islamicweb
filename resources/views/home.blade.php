@@ -126,13 +126,69 @@
                     <div class="about-arabic-line">إِنَّ مَعَ الْعُسْرِ يُسْرًا</div>
                     <p>Noor-e-Islam provides accurate and reliable Islamic resources for Muslims worldwide. From looking up today's Hijri date and finding local prayer times, to reading the Holy Quran and authentic Hadith collections.</p>
                     <p>Our goal is to make essential daily Islamic information accessible and easy to use on any device.</p>
-                    <div class="about-features">
-                        <div class="about-feature"><i class="fas fa-calendar-day"></i><span>Live Hijri Date</span></div>
-                        <div class="about-feature"><i class="fas fa-clock"></i><span>Prayer Times by City</span></div>
-                        <div class="about-feature"><i class="fas fa-book-open"></i><span>Surah & Fazilat</span></div>
-                        <div class="about-feature"><i class="fas fa-scroll"></i><span>Authentic Hadith</span></div>
-                        <div class="about-feature"><i class="fas fa-exchange-alt"></i><span>Hijri Converter</span></div>
-                        <div class="about-feature"><i class="fas fa-language"></i><span>Bilingual Urdu/English</span></div>
+                    <style>
+                        .about-feature-link {
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            padding: 12px 15px;
+                            background: var(--white);
+                            border: 1px solid rgba(10, 58, 42, 0.1);
+                            border-radius: 10px;
+                            text-decoration: none;
+                            color: var(--text-dark);
+                            font-weight: 600;
+                            transition: var(--tr);
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+                        }
+                        .about-feature-link:hover {
+                            background: var(--primary-light);
+                            border-color: var(--primary);
+                            transform: translateY(-2px);
+                            color: var(--primary);
+                        }
+                        .about-feature-link .icon-box {
+                            background: var(--secondary-light);
+                            color: var(--primary);
+                            width: 35px;
+                            height: 35px;
+                            border-radius: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1.1rem;
+                            transition: var(--tr);
+                        }
+                        .about-feature-link:hover .icon-box {
+                            background: var(--primary);
+                            color: var(--white);
+                        }
+                    </style>
+                    <div class="about-features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 25px;">
+                        <a href="{{ route('islamic-calendar') }}" class="about-feature-link">
+                            <div class="icon-box"><i class="fas fa-calendar-day"></i></div>
+                            <span>Live Hijri Date</span>
+                        </a>
+                        <a href="{{ route('prayer-times.hub') }}" class="about-feature-link">
+                            <div class="icon-box"><i class="fas fa-clock"></i></div>
+                            <span>Prayer Times by City</span>
+                        </a>
+                        <a href="{{ route('duas.index') }}" class="about-feature-link">
+                            <div class="icon-box"><i class="fas fa-hands-praying"></i></div>
+                            <span>Daily Islamic Duas</span>
+                        </a>
+                        <a href="{{ route('quran.index') }}" class="about-feature-link">
+                            <div class="icon-box"><i class="fas fa-book-open"></i></div>
+                            <span>Surah & Fazilat</span>
+                        </a>
+                        <a href="{{ route('hadith.index') }}" class="about-feature-link">
+                            <div class="icon-box"><i class="fas fa-scroll"></i></div>
+                            <span>Authentic Hadith</span>
+                        </a>
+                        <a href="{{ route('converter.show') }}" class="about-feature-link">
+                            <div class="icon-box"><i class="fas fa-exchange-alt"></i></div>
+                            <span>Hijri Converter</span>
+                        </a>
                     </div>
                     <a href="#explore" class="btn-primary" style="margin-top:8px;"><i class="fas fa-arrow-right"></i>
                         Explore Features</a>
@@ -389,6 +445,12 @@
             </div>
             <div class="services-grid">
                 <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hands-praying"></i></div>
+                    <h3>Daily Islamic Duas</h3>
+                    <p>Discover 95+ essential duas for daily routine, namaz, sickness, and success with authentic references.</p>
+                    <a href="{{ route('duas.index') }}" class="service-link">Read Duas <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
                     <div class="service-icon"><i class="fas fa-calendar-day"></i></div>
                     <h3>Islamic Date Today</h3>
                     <p>Check the accurate Hijri date for your country according to local moon sighting authorities.</p>
@@ -566,6 +628,10 @@
             </style>
 
             <div class="compact-grid">
+                <a href="{{ route('duas.index') }}" class="compact-card">
+                    <i class="fas fa-hands-praying compact-icon"></i>
+                    <span class="compact-title">Islamic Duas</span>
+                </a>
                 <a href="{{ route('namaz.index') }}" class="compact-card">
                     <i class="fas fa-praying-hands compact-icon"></i>
                     <span class="compact-title">Learn Salah</span>

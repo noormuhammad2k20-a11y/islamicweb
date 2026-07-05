@@ -63,6 +63,7 @@
         .calendar-day.today { background: none !important; font-weight: bold !important; border: 2px solid black !important; color: black !important; }
         a { text-decoration: none !important; color: black !important; }
     </style>
+    @yield('head')
 </head>
 <body>
 
@@ -381,5 +382,6 @@
             showToast('Video feature will be available soon, InshaAllah.');
         });
     </script>
+    @stack('scripts')
 </body>
 </html>

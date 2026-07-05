@@ -1,0 +1,560 @@
+/* ===== GLOBAL THEME ALIGNED DUA PAGE STYLES ===== */
+
+/* Breadcrumb Premium */
+.dua-breadcrumb-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.dua-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary-subtle);
+    padding: 8px 24px;
+    border-radius: var(--radius-xl);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary-dark);
+    border: 1px solid rgba(10, 58, 42, 0.1);
+}
+.dua-breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--tr);
+}
+.dua-breadcrumb a:hover {
+    color: var(--gold);
+}
+.dua-breadcrumb .separator {
+    color: var(--text-light);
+    font-size: 0.8rem;
+}
+
+/* Dua Hero (Aligned to Global) */
+.dua-hero {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-dark) 100%);
+    padding: 60px 0;
+    text-align: center;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+.dua-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="white" stroke-width="0.5"/></svg>');
+    background-size: 80px;
+}
+.dua-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.dua-title-urdu {
+    font-family: 'Amiri', serif;
+    font-size: 2.8rem;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+    direction: rtl;
+    line-height: 1.2;
+}
+.dua-title-roman {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.dua-hero-desc {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.badge-gold {
+    background: var(--gold);
+    color: var(--islamic-green);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: inline-block;
+    margin: 0.2rem;
+}
+.meta-badge {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 0.25rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 0.2rem;
+}
+/* Premium Dua Reading Cards */
+.arabic-card, .transliteration-card, .translation-card, .word-by-word-card, .hadith-reference-card, .explanation-card, .benefits-card, .how-to-read-card, .notes-card, .lessons-card, .faq-section {
+    background: var(--white);
+    border: 1px solid rgba(10, 58, 42, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--tr);
+}
+.arabic-card:hover, .transliteration-card:hover, .translation-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+.arabic-card {
+    text-align: center;
+    position: relative;
+    padding-bottom: 60px; /* Space for buttons */
+}
+.arabic-text {
+    font-family: 'Amiri', serif;
+    font-size: 2.2rem;
+    line-height: 2.2;
+    color: var(--primary);
+    direction: rtl;
+    background: var(--secondary);
+    padding: 24px;
+    border-radius: var(--radius-md);
+}
+.dua-action-bar {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+}
+.copy-btn, .listen-btn {
+    background: var(--white);
+    color: var(--primary);
+    border: 1px solid rgba(10, 58, 42, 0.15);
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: var(--tr);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.copy-btn:hover, .listen-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+.copy-btn.copied-state, .listen-btn.playing-state {
+    background: var(--primary);
+    color: var(--gold);
+    border-color: var(--primary);
+}
+.section-heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.gold-line {
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background: var(--gold);
+    border-radius: 4px;
+}
+.transliteration-text {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    line-height: 1.8;
+    font-style: italic;
+}
+.translation-text {
+    font-family: 'Amiri', serif;
+    font-size: 1.3rem;
+    line-height: 2.2;
+    color: var(--text-dark);
+}
+.word-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-end;
+}
+.word-item {
+    background: var(--secondary);
+    border: 1px solid rgba(10, 58, 42, 0.05);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    text-align: center;
+    min-width: 90px;
+}
+.word-arabic {
+    display: block;
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+.word-urdu { display: block; font-size: 0.85rem; color: var(--text-dark); direction: rtl; font-weight: 600; }
+.word-english { display: block; font-size: 0.75rem; color: var(--text-light); }
+.reference-box {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--secondary);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+.reference-box i {
+    color: var(--primary);
+    margin-top: 4px;
+}
+.grade-badge {
+    background: var(--primary);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.how-to-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+.how-item {
+    background: var(--secondary);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+.gold { color: var(--gold); }
+.faq-item {
+    border: 1px solid rgba(10, 58, 42, 0.1);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+.faq-question {
+    width: 100%;
+    background: var(--white);
+    border: none;
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-dark);
+    transition: var(--tr);
+}
+.faq-question:hover { background: var(--secondary); color: var(--primary); }
+.faq-answer {
+    display: none;
+    padding: 16px 20px;
+    color: var(--text-medium);
+    line-height: 1.7;
+    background: var(--secondary);
+    border-top: 1px solid rgba(10, 58, 42, 0.05);
+}
+.dua-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2.5rem;
+    padding: 2rem 0;
+}
+@media (max-width: 900px) {
+    .dua-content-grid { grid-template-columns: 1fr; }
+}
+.sidebar-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    border: 1px solid rgba(10, 58, 42, 0.08);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+}
+.sidebar-heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+.sidebar-category-list { list-style: none; padding: 0; margin: 0; }
+.sidebar-category-list li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    color: var(--text-medium);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    transition: var(--tr);
+}
+.sidebar-category-list li a:hover,
+.sidebar-category-list li a.active {
+    color: var(--primary);
+    background: var(--primary-subtle);
+    font-weight: 600;
+}
+.sidebar-category-list .count {
+    margin-left: auto;
+    background: var(--white);
+    color: var(--text-light);
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(10, 58, 42, 0.1);
+}
+.related-duas-list { list-style: none; padding: 0; margin: 0; }
+.related-duas-list li a {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: var(--tr);
+}
+.related-duas-list li a:hover {
+    background: var(--secondary);
+}
+.related-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    direction: rtl;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+.related-roman { font-size: 0.85rem; color: var(--text-medium); }
+.share-buttons { display: flex; gap: 0.8rem; }
+.share-wa {
+    background: #25D366;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+    font-weight: 600;
+    transition: var(--tr);
+}
+.share-wa:hover { opacity: 0.9; }
+.share-copy {
+    background: var(--secondary);
+    color: var(--primary);
+    border: 1px solid rgba(10, 58, 42, 0.1);
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+    font-weight: 600;
+    transition: var(--tr);
+}
+.share-copy:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+.dua-pagination {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0;
+    border-top: 1px solid rgba(10, 58, 42, 0.08);
+    margin-top: 32px;
+}
+.prev-dua, .next-dua {
+    color: var(--primary);
+    background: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 1px solid rgba(10, 58, 42, 0.1);
+    border-radius: var(--radius-md);
+    transition: var(--tr);
+}
+.prev-dua:hover, .next-dua:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+.all-categories-section {
+    background: var(--secondary);
+    padding: 80px 0;
+    border-top: 1px solid rgba(10, 58, 42, 0.05);
+}
+.category-tile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+.dua-category-tile {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid rgba(10, 58, 42, 0.08);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    text-decoration: none;
+    transition: var(--tr);
+    box-shadow: var(--shadow-sm);
+}
+.dua-category-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+    background: var(--white);
+}
+.dua-category-tile-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    background: var(--primary-subtle);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-right: 16px;
+    flex-shrink: 0;
+    transition: var(--tr);
+}
+.dua-category-tile:hover .dua-category-tile-icon {
+    background: var(--gold);
+    color: var(--primary-dark);
+}
+.dua-category-tile-content {
+    flex-grow: 1;
+}
+.dua-category-tile-title {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 2px 0;
+    transition: var(--tr);
+}
+.dua-category-tile:hover .dua-category-tile-title {
+    color: var(--primary);
+}
+.dua-category-tile-count {
+    color: var(--text-light);
+    font-size: 0.8rem;
+    margin: 0;
+}
+.dua-category-tile-arrow {
+    color: var(--gold);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: var(--tr);
+    font-size: 0.9rem;
+    margin-left: 8px;
+}
+.dua-category-tile:hover .dua-category-tile-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Featured Dua Special Card */
+.featured-dua-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+.featured-dua-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    border: 1px solid rgba(10, 58, 42, 0.08);
+    box-shadow: var(--shadow-sm);
+    transition: var(--tr);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.featured-dua-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+.featured-dua-title {
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+.featured-dua-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+    color: var(--primary);
+    direction: rtl;
+    line-height: 1.8;
+    background: var(--secondary);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.featured-dua-meaning {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: auto;
+}
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--islamic-green);
+    color: var(--gold);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    z-index: 9999;
+    font-weight: 600;
+    animation: fadeInOut 3s forwards;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    15% { opacity: 1; transform: translateY(0); }
+    85% { opacity: 1; }
+    100% { opacity: 0; }
+}
+.breadcrumb-nav { padding: 0.8rem 0; background: #f8f4ee; }
+.breadcrumb { list-style: none; display: flex; gap: 0.5rem; padding: 0; margin: 0; font-size: 0.85rem; flex-wrap: wrap; }
+.breadcrumb li:not(:last-child)::after { content: " › "; color: #999; }
+.breadcrumb li a { color: var(--islamic-green); text-decoration: none; }
+.breadcrumb li a:hover { color: var(--gold); }

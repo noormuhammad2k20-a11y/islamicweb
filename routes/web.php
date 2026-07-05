@@ -133,11 +133,11 @@ $appRoutes = function () {
     });
 
     // CLUSTER 7 — Daily Duas & Azkar
-    Route::prefix('duas')->group(function () {
-        Route::get('/', [\App\Http\Controllers\DuaController::class, 'index'])->name('duas.index');
-        Route::get('/{category:slug}', [\App\Http\Controllers\DuaController::class, 'category'])->name('duas.category');
-        Route::get('/{category:slug}/{seo_slug}', [\App\Http\Controllers\DuaController::class, 'show'])->name('duas.show');
-    });
+    Route::get('/duas', [\App\Http\Controllers\DuaController::class, 'index'])->name('duas.index');
+    Route::get('/dua/{slug}', [\App\Http\Controllers\DuaController::class, 'legacyShow']);
+    Route::get('/duas/category/{slug}', function($slug) { return redirect('/duas/' . $slug, 301); });
+    Route::get('/duas/{category}', [\App\Http\Controllers\DuaController::class, 'category'])->name('duas.category');
+    Route::get('/duas/{category}/{slug}', [\App\Http\Controllers\DuaController::class, 'show'])->name('duas.show');
 
     // CLUSTER 8 — Zakat Calculator
     Route::prefix('zakat-calculator')->group(function () {
