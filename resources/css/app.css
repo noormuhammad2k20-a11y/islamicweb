@@ -2465,6 +2465,36 @@
             overflow: hidden;
         }
 
+        .surah-card-bg-img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 45%;
+            opacity: 0.06;
+            z-index: 0;
+            transition: var(--tr);
+            pointer-events: none;
+        }
+
+        .surah-card-bg-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -webkit-mask-image: linear-gradient(to right, transparent, black);
+            mask-image: linear-gradient(to right, transparent, black);
+        }
+
+        .surah-card:hover .surah-card-bg-img {
+            opacity: 0.15;
+            transform: scale(1.05);
+        }
+
+        .surah-card-number, .surah-card-body, .surah-card-meta, .surah-card-hover-arrow {
+            position: relative;
+            z-index: 1;
+        }
+
         .surah-card::before {
             content: '';
             position: absolute;
@@ -2599,6 +2629,18 @@
                 radial-gradient(circle at 25% 25%, var(--gold) 1px, transparent 1px),
                 radial-gradient(circle at 75% 75%, var(--white) 1px, transparent 1px);
             background-size: 50px 50px;
+        }
+
+        .surah-hero-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            mix-blend-mode: luminosity;
+            z-index: 1;
+            transition: var(--tr);
         }
 
         .surah-detail-hero-content {

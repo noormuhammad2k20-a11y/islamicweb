@@ -39,9 +39,7 @@ class SurahController extends Controller
 
     public function show(Surah $surah)
     {
-        $surah = \Illuminate\Support\Facades\Cache::remember("surah_full_{$surah->id}", 86400, function () use ($surah) {
-            return $surah->load(['ayahs.englishTranslation', 'ayahs.urduTranslation', 'ayahs.tafsirs', 'reviews.scholar', 'seoMeta', 'fazilatEntries']);
-        });
+        $surah->load(['ayahs.englishTranslation', 'ayahs.urduTranslation', 'ayahs.tafsirs', 'reviews.scholar', 'seoMeta', 'fazilatEntries']);
         $seoMeta = $surah->seoMeta;
 
         // Get previous and next surahs for navigation
@@ -64,8 +62,8 @@ class SurahController extends Controller
 
         // Generate Mushaf pages array based on start and end page
         $mushafPages = [];
-        if ($surah->start_page && $surah->end_page) {
-            for ($i = $surah->start_page; $i <= $surah->end_page; $i++) {
+        if ($surah->page_start && $surah->page_end) {
+            for ($i = $surah->page_start; $i <= $surah->page_end; $i++) {
                 $mushafPages[] = $i;
             }
         }

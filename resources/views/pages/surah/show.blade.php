@@ -82,7 +82,25 @@ if (!function_exists('ordinal')) {
         </div>
 
         {{-- Surah Hero Header --}}
+        @php
+            $surahImagePath = 'images/surahs/default.png';
+            $possiblePaths = [
+                'images/surahs/' . $surah->slug . '.png',
+                'images/surahs/' . $surah->slug . '.jpg',
+                'images/surahs/' . $surah->slug . '.webp',
+                'images/surahs/' . $surah->id . '.png',
+                'images/surahs/' . $surah->id . '.jpg',
+                'images/surahs/' . $surah->id . '.webp'
+            ];
+            foreach($possiblePaths as $path) {
+                if(file_exists(public_path($path))) {
+                    $surahImagePath = $path;
+                    break;
+                }
+            }
+        @endphp
         <div class="surah-detail-hero">
+            <img src="{{ asset($surahImagePath) }}" alt="Surah {{ $surah->name_en }}" class="surah-hero-bg-img" loading="lazy">
             <div class="surah-detail-hero-bg"></div>
             <div class="surah-detail-hero-content">
                 <div class="surah-detail-number-badge">{{ $surah->number }}</div>
@@ -139,7 +157,6 @@ if (!function_exists('ordinal')) {
             @if($surah->pdf_url)
                 <a href="{{ $surah->pdf_url }}" class="surah-action-btn" target="_blank"><i class="fas fa-file-pdf"></i> Download PDF</a>
             @endif
-            <button class="surah-action-btn" onclick="shareSurah()"><i class="fas fa-share-alt"></i> Share</button>
         </div>
 
         {{-- Sticky Page Navigation --}}
@@ -152,9 +169,7 @@ if (!function_exists('ordinal')) {
                 @if($surah->audio_url)
                 <a href="#audioPlayer" class="surah-nav-link">Audio</a>
                 @endif
-                @if(!empty($mushafPages))
-                <a href="#mushaf" class="surah-nav-link">Mushaf</a>
-                @endif
+
                 @if($surah->arabic_text)
                 <a href="#arabic-text" class="surah-nav-link">Arabic Text</a>
                 @endif
@@ -229,38 +244,6 @@ if (!function_exists('ordinal')) {
         </div>
         @endif
 
-        {{-- Mushaf View (Page Images) --}}
-        @if(!empty($mushafPages))
-            <div class="surah-content-card" id="mushaf">
-                <div class="surah-content-card-header">
-                    <i class="fas fa-book-open-reader"></i>
-                    <h3>Mushaf Mode (Page View)</h3>
-                </div>
-                <div class="mushaf-pages-container">
-                    @foreach($mushafPages as $page)
-                        @php
-                            $imagePath = 'images/quran/pages/' . $page . '.png';
-                            $imageExists = file_exists(public_path($imagePath));
-                        @endphp
-                        
-                        @if($imageExists)
-                            <div class="mushaf-page-wrapper">
-                                <img src="{{ asset($imagePath) }}" alt="Quran Page {{ $page }}" class="mushaf-page-image" loading="lazy">
-                                <div class="mushaf-page-number">Page {{ $page }}</div>
-                            </div>
-                        @endif
-                    @endforeach
-                    
-                    @if(count($mushafPages) > 0 && !file_exists(public_path('images/quran/pages/' . $mushafPages[0] . '.png')))
-                        <div style="padding: 40px; text-align: center;">
-                            <i class="fas fa-cloud-download-alt fa-3x" style="color: var(--gold-light); margin-bottom: 15px;"></i>
-                            <h4 style="color: var(--primary-dark);">Mushaf Images Not Found</h4>
-                            <p style="color: var(--text-medium);">Please run <code>php artisan quran:download-pages</code> to download the high-quality page images.</p>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        @endif
 
         {{-- Full Arabic Text --}}
         @if($surah->ayahs->count() > 0)

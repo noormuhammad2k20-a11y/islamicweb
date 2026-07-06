@@ -1,24 +1,24 @@
-@extends('layouts.app')
 
-@section('title', 'All 114 Surahs of the Holy Quran — Read Online | Noor-e-Islam')
-@section('meta_description', 'Browse all 114 Surahs of the Holy Quran. Read Surah Al-Fatihah to Surah An-Nas with Arabic text, Urdu & English translation, audio recitation, and PDF download.')
 
-@section('content')
+<?php $__env->startSection('title', 'All 114 Surahs of the Holy Quran — Read Online | Noor-e-Islam'); ?>
+<?php $__env->startSection('meta_description', 'Browse all 114 Surahs of the Holy Quran. Read Surah Al-Fatihah to Surah An-Nas with Arabic text, Urdu & English translation, audio recitation, and PDF download.'); ?>
+
+<?php $__env->startSection('content'); ?>
 <section class="section services-section" style="padding-top: 60px;">
     <div class="section-inner">
 
-        {{-- Breadcrumb --}}
+        
         <div class="breadcrumb" style="text-align: center; margin-bottom: 40px;">
             <div style="background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 0.95rem;">
-                <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a>
+                <a href="<?php echo e(route('home')); ?>" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a>
                 <span style="color: #ccc; margin: 0 10px;">/</span>
-                <a href="{{ route('quran.index') }}" style="color: var(--primary); text-decoration: none;">Quran</a>
+                <a href="<?php echo e(route('quran.index')); ?>" style="color: var(--primary); text-decoration: none;">Quran</a>
                 <span style="color: #ccc; margin: 0 10px;">/</span>
                 <span style="color: #666; font-weight: 600;">All Surahs</span>
             </div>
         </div>
 
-        {{-- Header --}}
+        
         <div class="section-header">
             <div class="section-badge"><i class="fas fa-quran"></i> Holy Quran</div>
             <h1 class="section-title">All 114 <span>Surahs</span> of the Quran</h1>
@@ -26,26 +26,26 @@
             <p class="section-subtitle">Browse the complete Holy Quran — Read every Surah with Arabic text, Urdu & English translation, audio, and more.</p>
         </div>
 
-        {{-- Search & Filter Bar --}}
+        
         <div class="surah-search-bar">
             <div class="surah-search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="surahSearchInput" placeholder="Search by Surah name or number..." value="{{ request('search') }}" autocomplete="off">
+                <input type="text" id="surahSearchInput" placeholder="Search by Surah name or number..." value="<?php echo e(request('search')); ?>" autocomplete="off">
             </div>
             <div class="surah-filter-chips">
-                <button class="surah-filter-chip {{ !request('filter') ? 'active' : '' }}" data-filter="all">
+                <button class="surah-filter-chip <?php echo e(!request('filter') ? 'active' : ''); ?>" data-filter="all">
                     <i class="fas fa-quran"></i> All (114)
                 </button>
-                <button class="surah-filter-chip {{ request('filter') == 'Makki' ? 'active' : '' }}" data-filter="Makki">
+                <button class="surah-filter-chip <?php echo e(request('filter') == 'Makki' ? 'active' : ''); ?>" data-filter="Makki">
                     <i class="fas fa-kaaba"></i> Makki
                 </button>
-                <button class="surah-filter-chip {{ request('filter') == 'Madani' ? 'active' : '' }}" data-filter="Madani">
+                <button class="surah-filter-chip <?php echo e(request('filter') == 'Madani' ? 'active' : ''); ?>" data-filter="Madani">
                     <i class="fas fa-mosque"></i> Madani
                 </button>
             </div>
         </div>
 
-        {{-- Stats Summary --}}
+        
         <div class="surah-stats-row">
             <div class="surah-stat-item">
                 <div class="surah-stat-icon"><i class="fas fa-book-quran"></i></div>
@@ -78,8 +78,8 @@
         </div>
 
         <div class="surah-index-grid" id="surahGrid">
-            @foreach($surahs as $surah)
-            @php
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $surahs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $surah): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+            <?php
                 $surahImagePath = 'images/surahs/default.png';
                 $possiblePaths = [
                     'images/surahs/' . $surah->slug . '.png',
@@ -95,34 +95,35 @@
                         break;
                     }
                 }
-            @endphp
-            <a href="{{ route('surah.show', $surah->slug) }}" class="surah-card" data-name="{{ strtolower($surah->name_en) }}" data-number="{{ $surah->number }}" data-place="{{ $surah->revelation_place }}">
+            ?>
+            <a href="<?php echo e(route('surah.show', $surah->slug)); ?>" class="surah-card" data-name="<?php echo e(strtolower($surah->name_en)); ?>" data-number="<?php echo e($surah->number); ?>" data-place="<?php echo e($surah->revelation_place); ?>">
                 <div class="surah-card-bg-img">
-                    <img src="{{ asset($surahImagePath) }}" alt="Surah {{ $surah->name_en }}" loading="lazy">
+                    <img src="<?php echo e(asset($surahImagePath)); ?>" alt="Surah <?php echo e($surah->name_en); ?>" loading="lazy">
                 </div>
                 <div class="surah-card-number">
-                    <span>{{ $surah->number }}</span>
+                    <span><?php echo e($surah->number); ?></span>
                 </div>
                 <div class="surah-card-body">
                     <div class="surah-card-names">
-                        <h3 class="surah-card-en">{{ $surah->name_en }}</h3>
-                        <span class="surah-card-ur">{{ $surah->name_ur }}</span>
+                        <h3 class="surah-card-en"><?php echo e($surah->name_en); ?></h3>
+                        <span class="surah-card-ur"><?php echo e($surah->name_ur); ?></span>
                     </div>
-                    <div class="surah-card-arabic">{{ $surah->name_ar }}</div>
+                    <div class="surah-card-arabic"><?php echo e($surah->name_ar); ?></div>
                 </div>
                 <div class="surah-card-meta">
-                    <span class="surah-card-ayahs"><i class="fas fa-list-ol"></i> {{ $surah->ayah_count }} Ayahs</span>
-                    <span class="surah-card-place {{ strtolower($surah->revelation_place ?? 'makki') }}">
-                        <i class="fas {{ ($surah->revelation_place == 'Madani') ? 'fa-mosque' : 'fa-kaaba' }}"></i>
-                        {{ $surah->revelation_place }}
+                    <span class="surah-card-ayahs"><i class="fas fa-list-ol"></i> <?php echo e($surah->ayah_count); ?> Ayahs</span>
+                    <span class="surah-card-place <?php echo e(strtolower($surah->revelation_place ?? 'makki')); ?>">
+                        <i class="fas <?php echo e(($surah->revelation_place == 'Madani') ? 'fa-mosque' : 'fa-kaaba'); ?>"></i>
+                        <?php echo e($surah->revelation_place); ?>
+
                     </span>
                 </div>
                 <div class="surah-card-hover-arrow"><i class="fas fa-arrow-right"></i></div>
             </a>
-            @endforeach
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
         </div>
 
-        {{-- No Results Message --}}
+        
         <div class="surah-no-results" id="surahNoResults" style="display: none;">
             <i class="fas fa-search fa-3x" style="color: var(--gold-light); margin-bottom: 15px;"></i>
             <h3 style="color: var(--primary-dark); margin-bottom: 8px;">No Surahs Found</h3>
@@ -132,31 +133,31 @@
     </div>
 </section>
 
-{{-- JSON-LD Structured Data --}}
+
 <script type="application/ld+json">
 {
-    "@@context": "https://schema.org",
-    "@@type": "CollectionPage",
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
     "name": "All 114 Surahs of the Holy Quran",
     "description": "Browse all 114 Surahs of the Holy Quran with Arabic text, Urdu & English translation.",
-    "url": "{{ route('surah.index') }}",
+    "url": "<?php echo e(route('surah.index')); ?>",
     "isPartOf": {
-        "@@type": "WebSite",
+        "@type": "WebSite",
         "name": "Noor-e-Islam",
-        "url": "{{ route('home') }}"
+        "url": "<?php echo e(route('home')); ?>"
     },
     "breadcrumb": {
-        "@@type": "BreadcrumbList",
+        "@type": "BreadcrumbList",
         "itemListElement": [
-            { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
-            { "@@type": "ListItem", "position": 2, "name": "Quran", "item": "{{ route('quran.index') }}" },
-            { "@@type": "ListItem", "position": 3, "name": "All Surahs" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "<?php echo e(route('home')); ?>" },
+            { "@type": "ListItem", "position": 2, "name": "Quran", "item": "<?php echo e(route('quran.index')); ?>" },
+            { "@type": "ListItem", "position": 3, "name": "All Surahs" }
         ]
     }
 }
 </script>
 
-{{-- Client-side search/filter --}}
+
 <script>
 (function() {
     var searchInput = document.getElementById('surahSearchInput');
@@ -201,4 +202,6 @@
     });
 })();
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/surah/index.blade.php ENDPATH**/ ?>
