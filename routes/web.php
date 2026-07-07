@@ -114,6 +114,7 @@ $appRoutes = function () {
     });
     Route::get('/surahs', [SurahController::class, 'index'])->name('surah.index');
     Route::get('/surah/{surah:slug}', [SurahController::class, 'show'])->name('surah.show');
+    Route::get('/surahs/collections/{slug}', [SurahController::class, 'collection'])->name('surah.collection');
 
     // CLUSTER 4 — Hadith
     Route::get('/hadith-topics', [HadithController::class, 'index'])->name('hadith.index');
@@ -281,10 +282,13 @@ Route::prefix('ajax')->group(function () {
 
 // SEO Routes
 Route::get('/sitemap_index.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/sitemap-calendar.xml', [App\Http\Controllers\SitemapController::class, 'calendar'])->name('sitemap.calendar');
 Route::get('/sitemap-dates.xml', [App\Http\Controllers\SitemapController::class, 'dates'])->name('sitemap.dates');
 Route::get('/sitemap-prayer.xml', [App\Http\Controllers\SitemapController::class, 'prayer'])->name('sitemap.prayer');
 Route::get('/sitemap-surah.xml', [App\Http\Controllers\SitemapController::class, 'surah'])->name('sitemap.surah');
+Route::get('/sitemap-surahs.xml', [App\Http\Controllers\SitemapController::class, 'surahs'])->name('sitemap.surahs');
+Route::get('/sitemap-collections.xml', [App\Http\Controllers\SitemapController::class, 'collections'])->name('sitemap.collections');
 Route::get('/sitemap-hadith.xml', [App\Http\Controllers\SitemapController::class, 'hadith'])->name('sitemap.hadith');
 Route::get('/sitemap-pages.xml', [App\Http\Controllers\SitemapController::class, 'pages'])->name('sitemap.pages');
 Route::get('/sitemap-duas.xml', [App\Http\Controllers\SitemapController::class, 'duas'])->name('sitemap.duas');

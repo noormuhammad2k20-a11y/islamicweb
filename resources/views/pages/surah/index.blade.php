@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'All 114 Surahs of the Holy Quran — Read Online | Noor-e-Islam')
-@section('meta_description', 'Browse all 114 Surahs of the Holy Quran. Read Surah Al-Fatihah to Surah An-Nas with Arabic text, Urdu & English translation, audio recitation, and PDF download.')
-
+@push('seo')
+    @if(isset($seoData))
+        <x-seo-head :seo="$seoData" />
+    @endif
+@endpush
 @section('content')
 <section class="section services-section" style="padding-top: 60px;">
     <div class="section-inner">

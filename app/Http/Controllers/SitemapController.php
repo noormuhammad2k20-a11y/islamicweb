@@ -43,6 +43,48 @@ class SitemapController extends Controller
         return response()->view('sitemap.surah', ['surahs' => $surahs])->header('Content-Type', 'text/xml');
     }
 
+    public function surahs()
+    {
+        $surahs = Surah::select('slug', 'updated_at')->orderBy('number')->get();
+        
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        
+        foreach ($surahs as $surah) {
+            $xml .= '<url>';
+            $xml .= '<loc>' . route('surah.show', $surah->slug) . '</loc>';
+            $xml .= '<lastmod>' . ($surah->updated_at ? $surah->updated_at->toDateString() : now()->toDateString()) . '</lastmod>';
+            $xml .= '<changefreq>monthly</changefreq>';
+            $xml .= '<priority>0.9</priority>';
+            $xml .= '</url>';
+        }
+        
+        $xml .= '</urlset>';
+        
+        return response($xml, 200, ['Content-Type' => 'application/xml']);
+    }
+
+    public function collections()
+    {
+        $collections = \App\Models\SurahCollection::where('is_published', true)->get();
+        
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        
+        foreach ($collections as $collection) {
+            $xml .= '<url>';
+            $xml .= '<loc>' . route('surah.collection', $collection->slug) . '</loc>';
+            $xml .= '<lastmod>' . ($collection->updated_at ? $collection->updated_at->toDateString() : now()->toDateString()) . '</lastmod>';
+            $xml .= '<changefreq>weekly</changefreq>';
+            $xml .= '<priority>0.8</priority>';
+            $xml .= '</url>';
+        }
+        
+        $xml .= '</urlset>';
+        
+        return response($xml, 200, ['Content-Type' => 'application/xml']);
+    }
+
     public function hadith()
     {
         $topics = HadithTopic::all();

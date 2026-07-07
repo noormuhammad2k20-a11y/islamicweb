@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Surah;
+use App\Services\SurahSeoService;
+use Illuminate\Support\Facades\Cache;
 
 class SurahController extends Controller
 {
+    public function __construct(private SurahSeoService $seoService) {}
+
     public function index(Request $request)
     {
         $query = Surah::orderBy('number');
@@ -23,42 +27,81 @@ class SurahController extends Controller
         }
 
         if ($request->has('filter') && in_array($request->filter, ['Makki', 'Madani'])) {
-            $query->where('revelation_place', $request->filter);
+            $query->where('revelation_type', $request->filter);
         }
 
         if (!$request->has('search') && !$request->has('filter')) {
-            $surahs = \Illuminate\Support\Facades\Cache::remember('all_surahs_index', 86400, function () use ($query) {
-                return $query->get();
+            $surahs = Cache::remember('surahs.index.list', now()->addHours(24), function () use ($query) {
+                return $query->select([
+                    'id', 'number', 'name_ar', 'name_en', 'name_ur',
+                    'meaning_en', 'meaning_ur', 'total_ayahs',
+                    'revelation_type', 'juz_start', 'slug',
+                ])->get();
             });
         } else {
             $surahs = $query->get();
         }
 
-        return view('pages.surah.index', compact('surahs'));
+        $seoData = $this->seoService->getIndexSeoData();
+        // Since prompt mentions view('surahs.index'), I'll use the existing pages.surah.index
+        return view('pages.surah.index', compact('surahs', 'seoData'));
     }
 
-    public function show(Surah $surah)
+    public function show($slug)
     {
-        $surah->load(['ayahs.englishTranslation', 'ayahs.urduTranslation', 'ayahs.tafsirs', 'reviews.scholar', 'seoMeta', 'fazilatEntries']);
-        $seoMeta = $surah->seoMeta;
+        if ($slug instanceof Surah) {
+            $slug = $slug->slug;
+        }
+        
+        $surah = Cache::remember("surah.show.{$slug}", now()->addHours(24), function () use ($slug) {
+            return Surah::where('slug', $slug)
+                ->with([
+                    // Core content
+                    'ayahs.englishTranslation',
+                    'ayahs.urduTranslation',
+                    'ayahs.tafsirs',
+                    // New knowledge hub sections
+                    'contentBlocks',
+                    'faqs',
+                    'themes',
+                    'importantAyahs.ayah.englishTranslation',
+                    'importantAyahs.ayah.urduTranslation',
+                    'relatedSurahs.relatedSurah',
+                    'entities',
+                    'recitationGuides',
+                    'learningPath',
+                    // Existing relationships
+                    'hadiths',
+                    'wazaif',
+                    'collections',
+                    'seoMeta',
+                    'reviews.scholar',
+                    'fazilatEntries'
+                ])
+                ->firstOrFail();
+        });
 
-        // Get previous and next surahs for navigation
-        $prevSurah = \Illuminate\Support\Facades\Cache::remember("surah_prev_{$surah->number}", 86400, function () use ($surah) {
-            return Surah::where('number', $surah->number - 1)->first();
-        });
-        $nextSurah = \Illuminate\Support\Facades\Cache::remember("surah_next_{$surah->number}", 86400, function () use ($surah) {
-            return Surah::where('number', $surah->number + 1)->first();
-        });
+        $prevSurah = Cache::remember("surah.prev.{$surah->number}", now()->addDay(), fn() =>
+            Surah::where('number', $surah->number - 1)
+                ->select('number', 'name_en', 'name_ar', 'slug')->first()
+        );
+
+        $nextSurah = Cache::remember("surah.next.{$surah->number}", now()->addDay(), fn() =>
+            Surah::where('number', $surah->number + 1)
+                ->select('number', 'name_en', 'name_ar', 'slug')->first()
+        );
 
         // Get popular/most-searched surahs for the related section
         $popularSlugs = [
             'al-fatihah', 'ya-sin', 'al-mulk', 'ar-rahman',
             'al-waqiah', 'al-kahf', 'al-baqarah', 'al-ikhlas'
         ];
-        $popularSurahs = Surah::whereIn('slug', $popularSlugs)
-            ->where('id', '!=', $surah->id)
-            ->take(6)
-            ->get();
+        $popularSurahs = Cache::remember("surah.popular", now()->addDay(), fn() => 
+            Surah::whereIn('slug', $popularSlugs)
+                ->where('id', '!=', $surah->id)
+                ->take(6)
+                ->get()
+        );
 
         // Generate Mushaf pages array based on start and end page
         $mushafPages = [];
@@ -68,6 +111,27 @@ class SurahController extends Controller
             }
         }
 
-        return view('pages.surah.show', compact('surah', 'seoMeta', 'prevSurah', 'nextSurah', 'popularSurahs', 'mushafPages'));
+        $seoData   = $this->seoService->getSurahSeoData($surah);
+        $schemaOrg = $this->seoService->buildSchema($surah);
+
+        // Track page view
+        if (class_exists(\App\Models\PageView::class) && method_exists(\App\Models\PageView::class, 'track')) {
+            \App\Models\PageView::track(request()->path(), 'surah');
+        }
+
+        // Return pages.surah.show as that is what already exists, we will update it instead of surahs.show
+        return view('pages.surah.show', compact(
+            'surah', 'prevSurah', 'nextSurah', 'popularSurahs', 'mushafPages', 'seoData', 'schemaOrg'
+        ));
+    }
+
+    public function collection(string $slug)
+    {
+        $collection = \App\Models\SurahCollection::where('slug', $slug)
+            ->where('is_published', true)
+            ->with('surahs:id,number,name_en,name_ar,slug,total_ayahs,revelation_type,juz_start')
+            ->firstOrFail();
+
+        return view('pages.surah.collection', compact('collection'));
     }
 }

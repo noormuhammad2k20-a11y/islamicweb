@@ -13,6 +13,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            SurahEntitySeeder::class,
+            SurahCollectionSeeder::class,
+            SurahContentBlockSeeder::class,
+            SurahThemeSeeder::class,
+            SurahFaqSeeder::class,
+            SurahImportantAyahSeeder::class,
+            SurahRelatedSurahSeeder::class,
+            SurahRecitationGuideSeeder::class,
+            SurahLearningPathSeeder::class,
+            SurahSeoMetaSeeder::class,
+        ]);
+        \Illuminate\Support\Facades\Cache::flush();
+
         $country = \App\Models\Country::create([
             'name' => 'Pakistan',
             'slug' => 'pakistan',
