@@ -4,9 +4,7 @@
         @if($surah->fazilatEntries && $surah->fazilatEntries->count() > 0)
         <a href="#virtues" class="surah-nav-link">Virtues & Benefits</a>
         @endif
-        @if($surah->audio_url)
-        <a href="#audioPlayer" class="surah-nav-link">Audio</a>
-        @endif
+
         @if($surah->ayahs->count() > 0)
         <a href="#translations" class="surah-nav-link">Translations</a>
         @endif

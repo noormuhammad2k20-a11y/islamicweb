@@ -33,13 +33,14 @@ class HomeController extends Controller
         }
 
         // Fetch popular surahs (e.g. Yaseen, Rahman, Mulk, Kahf)
-        $popularSurahs = \App\Models\Surah::whereIn('number', [36, 55, 67, 18])->get();
+        $popularSurahs = \App\Models\Surah::whereIn('number', [1, 18, 32, 36, 55, 56, 67, 112])->get();
 
         $ayahOfDay = Ayah::with(['surah', 'englishTranslation', 'urduTranslation'])->inRandomOrder()->first();
         $allahNames = AllahName::all();
         $latestArticles = KnowledgeArticle::latest()->take(3)->get();
         $upcomingEvents = IslamicEvent::take(3)->get();
+        $dailyDuas = \App\Models\Dua::inRandomOrder()->take(8)->get();
 
-        return view('home', compact('city', 'hijriDate', 'prayerTimes', 'popularSurahs', 'ayahOfDay', 'allahNames', 'latestArticles', 'upcomingEvents'));
+        return view('home', compact('city', 'hijriDate', 'prayerTimes', 'popularSurahs', 'ayahOfDay', 'allahNames', 'latestArticles', 'upcomingEvents', 'dailyDuas'));
     }
 }

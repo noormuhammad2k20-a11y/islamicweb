@@ -285,7 +285,11 @@
             <h2 class="section-title">Famous Mosques in {{ $name }}</h2>
         </div>
         <div class="info-box" style="display: flex; flex-direction: column; gap: 10px; margin-top:0; text-align: left;">
-            @foreach($content->famous_mosques as $mosque)
+            @php 
+                $mosques = is_string($content->famous_mosques) ? json_decode($content->famous_mosques, true) : $content->famous_mosques;
+                if (!is_array($mosques)) $mosques = [];
+            @endphp
+            @foreach($mosques as $mosque)
             <div style="font-size: 1.1rem; color: var(--primary);">🕌 {{ $mosque }}</div>
             @endforeach
         </div>

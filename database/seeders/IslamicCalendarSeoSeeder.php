@@ -63,6 +63,103 @@ class IslamicCalendarSeoSeeder extends Seeder
         foreach ($events as $event) {
             IslamicYearEvent::create($event);
         }
+
+        // Generate events for 2027 - 2036 dynamically
+        for ($hy = 1448; $hy <= 1459; $hy++) {
+            $this->createDynamicEventsForYear($hy);
+        }
+    }
+
+    private function createDynamicEventsForYear(int $hy): void
+    {
+        $eventsData = [];
+
+        // 1 Muharram - Islamic New Year
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(1, 1, $hy);
+        $gy = $greg->format('Y');
+        if ($gy > 2036) return;
+
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => 'Islamic New Year', 'event_name_urdu' => 'اسلامی نیا سال',
+            'hijri_date' => "1 Muharram $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'muharram',
+            'description' => "The Islamic New Year marks the beginning of the new Hijri year $hy."
+        ];
+
+        // 10 Muharram - Ashura
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(10, 1, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => 'Day of Ashura', 'event_name_urdu' => 'یوم عاشورہ',
+            'hijri_date' => "10 Muharram $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'muharram',
+            'description' => 'Ashura commemorates the martyrdom of Imam Hussain (RA) at Karbala.'
+        ];
+
+        // 12 Rabi al-Awwal - Eid Milad-un-Nabi
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(12, 3, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => 'Eid Milad-un-Nabi', 'event_name_urdu' => 'عید میلاد النبی ﷺ',
+            'hijri_date' => "12 Rabi al-Awwal $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'other',
+            'description' => 'Birth anniversary of Prophet Muhammad (PBUH).'
+        ];
+
+        // 27 Rajab - Shab-e-Meraj
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(27, 7, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => 'Shab-e-Meraj', 'event_name_urdu' => 'شب معراج',
+            'hijri_date' => "27 Rajab $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'other',
+            'description' => 'Night of Ascension — Prophet Muhammad (PBUH) ascended to the heavens.'
+        ];
+
+        // 15 Shaban - Shab-e-Barat
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(15, 8, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => 'Shab-e-Barat', 'event_name_urdu' => 'شب برات',
+            'hijri_date' => "15 Shaban $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'other',
+            'description' => 'Night of Forgiveness — Muslims pray for forgiveness and blessings.'
+        ];
+
+        // 1 Ramadan - Start of Ramadan
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(1, 9, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => "Start of Ramadan $gy", 'event_name_urdu' => "رمضان المبارک شروع",
+            'hijri_date' => "1 Ramadan $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'ramadan',
+            'description' => "The blessed month of Ramadan begins."
+        ];
+
+        // 27 Ramadan - Laylatul Qadr
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(27, 9, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => 'Laylatul Qadr (Night of Power)', 'event_name_urdu' => 'شب قدر',
+            'hijri_date' => "27 Ramadan $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'ramadan',
+            'description' => 'The Night of Power is better than a thousand months.'
+        ];
+
+        // 1 Shawwal - Eid ul-Fitr
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(1, 10, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => "Eid ul-Fitr $gy", 'event_name_urdu' => "عید الفطر $gy",
+            'hijri_date' => "1 Shawwal $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'eid',
+            'description' => "Eid ul-Fitr marks the end of Ramadan fasting."
+        ];
+
+        // 8 Dhu al-Hijjah - Hajj Season
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(8, 12, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => 'Hajj Season', 'event_name_urdu' => 'حج کا موسم',
+            'hijri_date' => "8-13 Dhu al-Hijjah $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'hajj',
+            'description' => 'Annual Hajj pilgrimage to Makkah. The fifth pillar of Islam.'
+        ];
+
+        // 10 Dhu al-Hijjah - Eid ul-Adha
+        $greg = \GeniusTS\HijriDate\Hijri::convertToGregorian(10, 12, $hy);
+        $eventsData[] = [
+            'hijri_year' => $hy, 'gregorian_year' => $gy, 'event_name' => "Eid ul-Adha $gy", 'event_name_urdu' => "عید الاضحٰی $gy",
+            'hijri_date' => "10 Dhu al-Hijjah $hy", 'gregorian_date' => $greg->format('Y-m-d'), 'event_type' => 'eid',
+            'description' => "Eid ul-Adha commemorates Prophet Ibrahim (AS) sacrifice."
+        ];
+
+        foreach ($eventsData as $event) {
+            IslamicYearEvent::create($event);
+        }
     }
 
     private function seedCityContent(): void

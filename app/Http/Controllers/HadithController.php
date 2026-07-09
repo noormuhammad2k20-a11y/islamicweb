@@ -23,4 +23,41 @@ class HadithController extends Controller
         $hadith = \App\Models\Hadith::where('slug', $hadithSlug)->where('topic_id', $topic->id)->firstOrFail();
         return view('pages.hadith.hadith_show', compact('topic', 'hadith'));
     }
+
+    private function getBookName($collection) {
+        $map = [
+            'sahih-bukhari' => 'Sahih Bukhari',
+            'sahih-muslim' => 'Sahih Muslim',
+            'sunan-abu-dawud' => 'Sunan Abu Dawud',
+            'jami-at-tirmidhi' => 'Jami at-Tirmidhi',
+            'sunan-an-nasai' => 'Sunan an-Nasai',
+            'sunan-ibn-majah' => 'Sunan Ibn Majah',
+        ];
+        return $map[$collection] ?? ucwords(str_replace('-', ' ', $collection));
+    }
+
+    public function collectionShow($collection)
+    {
+        $bookName = $this->getBookName($collection);
+        $hadiths = \App\Models\Hadith::where('book_name', $bookName)->paginate(20);
+        
+        if ($hadiths->isEmpty()) {
+            abort(404);
+        }
+        
+        return view('pages.hadith.collection_show', compact('collection', 'bookName', 'hadiths'));
+    }
+
+    public function collectionHadithShow($collection, $chapter, $number)
+    {
+        $bookName = $this->getBookName($collection);
+        $hadith = \App\Models\Hadith::where('book_name', $bookName)
+                    ->where(function($query) use ($number) {
+                        $query->where('hadith_number', $number)
+                              ->orWhere('reference', 'LIKE', '% ' . $number);
+                    })
+                    ->firstOrFail();
+                    
+        return view('pages.hadith.collection_hadith_show', compact('collection', 'bookName', 'hadith', 'chapter', 'number'));
+    }
 }

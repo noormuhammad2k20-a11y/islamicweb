@@ -14,8 +14,7 @@
             <div style="background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 0.95rem;">
                 <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a>
                 <span style="color: #ccc; margin: 0 10px;">/</span>
-                <a href="{{ route('quran.index') }}" style="color: var(--primary); text-decoration: none;">Quran</a>
-                <span style="color: #ccc; margin: 0 10px;">/</span>
+
                 <span style="color: #666; font-weight: 600;">All Surahs</span>
             </div>
         </div>
@@ -151,7 +150,7 @@
         "@@type": "BreadcrumbList",
         "itemListElement": [
             { "@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ route('home') }}" },
-            { "@@type": "ListItem", "position": 2, "name": "Quran", "item": "{{ route('quran.index') }}" },
+
             { "@@type": "ListItem", "position": 3, "name": "All Surahs" }
         ]
     }

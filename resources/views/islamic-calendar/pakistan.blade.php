@@ -182,7 +182,7 @@
     @php
     $faqs = [
         ['q' => 'What is Islamic date today in Pakistan?', 'a' => "<strong>Islamic date today in Pakistan</strong> is <strong>{$hijriPK['formatted']}</strong> ({$nowPK->format('d F Y')}). This date is determined by the Central Ruet-e-Hilal Committee."],
-        ['q' => 'Today Islamic date in Pakistan 2026?', 'a' => "Today Islamic date in Pakistan 2026 is <strong>{$hijriPK['formatted']}</strong>. All Pakistan cities observe the same date."],
+        ['q' => 'Today Islamic date in Pakistan ' . date('Y') . '?', 'a' => "Today Islamic date in Pakistan " . date('Y') . " is <strong>{$hijriPK['formatted']}</strong>. All Pakistan cities observe the same date."],
         ['q' => 'Which Islamic date is today in Pakistan?', 'a' => "It is <strong>{$hijriPK['day']}</strong> of <strong>{$hijriPK['month_name']}</strong> ({$hijriPK['month_urdu']}), {$hijriPK['year']} Hijri."],
         ['q' => 'Why is Pakistan Islamic date different from Saudi?', 'a' => "Pakistan follows local moon sighting via the Ruet-e-Hilal Committee, while Saudi Arabia uses the Umm al-Qura calculated calendar. This often results in a 1-day difference."],
         ['q' => 'Today date Islamic in Pakistan — all provinces same?', 'a' => "Yes, all provinces of Pakistan (Punjab, Sindh, KPK, Balochistan, AJK, GB, ICT) follow the same Islamic date as announced by the Central Ruet-e-Hilal Committee."],

@@ -216,7 +216,7 @@
     <div class="controls-bar">
         <form method="GET" action="{{ route('islamic-date-urdu') }}" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
             <select name="year" class="control-select" onchange="this.form.submit()">
-                @for($y = 2018; $y <= 2030; $y++)
+                @for($y = 2018; $y <= 2036; $y++)
                     <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
                 @endfor
             </select>

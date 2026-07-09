@@ -2,145 +2,305 @@
 
 @section('content')
 <style>
-    :root { --primary: #0A3A2A; --primary-dark: #052116; --gold: #D4AF37; --gold-light: #F3E5AB; --border-light: rgba(10,58,42,0.1); }
-    .date-hero { background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 50%, #125740 100%); padding: 60px 20px; text-align: center; color: white; position: relative; overflow: hidden; }
-    .date-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(circle at 25% 25%, var(--gold) 1px, transparent 1px); background-size: 40px 40px; }
-    .date-hero-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; position: relative; z-index: 2; }
-    .date-hero-subtitle { font-size: 1.1rem; color: var(--gold-light); margin-bottom: 30px; position: relative; z-index: 2; }
-    .date-cards-wrapper { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; }
-    .main-date-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 30px; width: 100%; max-width: 450px; text-align: center; transition: transform 0.3s ease; }
-    .main-date-card:hover { transform: translateY(-5px); border-color: var(--gold); }
-    .card-flag { font-size: 2rem; margin-bottom: 10px; }
-    .card-region { font-size: 0.9rem; color: var(--gold-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-    .hijri-day-large { font-size: 4rem; font-weight: 800; line-height: 1; margin-bottom: 5px; font-family: 'Playfair Display', serif; }
-    .hijri-month-name { font-size: 1.5rem; font-weight: 600; margin-bottom: 5px; }
-    .hijri-urdu-arabic { font-family: 'Amiri', serif; font-size: 1.3rem; color: var(--gold-light); margin-bottom: 10px; }
-    .gregorian-date { font-size: 0.9rem; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; margin-top: 15px; }
-    .section-container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--gold); display: inline-block; padding-bottom: 10px; }
-    .title-wrapper { text-align: center; margin-bottom: 40px; }
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap');
 
-    /* Countries Grid */
-    .countries-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 15px;
-    }
-    .country-card {
-        background: white;
-        border: 1px solid var(--border-light);
-        border-radius: 12px;
-        padding: 16px 20px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        text-align: left;
-        transition: all 0.3s;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        text-decoration: none;
-        color: inherit;
-    }
-    .country-card:hover { 
-        border-color: var(--gold); 
-        transform: translateY(-3px); 
-        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15); 
-        background: #fdfcee;
-    }
-    .country-flag { 
-        font-size: 2rem; 
-        line-height: 1;
-        background: rgba(10,58,42,0.03);
-        width: 55px;
-        height: 55px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        border: 1px solid rgba(212,175,55,0.2);
-        flex-shrink: 0;
-    }
-    .country-info {
-        flex: 1;
-    }
-    .country-name { 
-        font-weight: 700; 
-        color: var(--primary); 
-        font-size: 1.05rem; 
-        margin-bottom: 3px; 
-    }
-    .country-date { 
-        font-size: 0.85rem; 
-        font-weight: 600; 
-        color: var(--gold); 
-    }
-    .country-urdu {
-        font-family: 'Amiri', serif; 
-        color: #888; 
-        font-size: 1.1rem;
-        margin-left: auto;
-        text-align: right;
+    :root {
+        --bg-main: #F7F8FA;
+        --bg-alt: #FFFFFF;
+        --bg-tinted: #EFF2F7;
+        --navy: #0A1F3F;
+        --navy-mid: #0F2D52;
+        --navy-light: #14466E;
+        --navy-tint: #E4EBF3;
+        --gold: #C9A84C;
+        --gold-light: #E4D08C;
+        --gold-dark: #8A6E2F;
+        --gold-tint: #FBF8EE;
+        --gold-gradient: linear-gradient(135deg, #C9A84C 0%, #E4D08C 50%, #C9A84C 100%);
+        --text-dark: #0C1425;
+        --text-medium: #4A5568;
+        --text-light: #8E9AB0;
+        --white: #ffffff;
+        --border: #DFE5ED;
+        --border-light: #EDF0F5;
+        --shadow-xs: 0 1px 3px rgba(10, 31, 63, 0.04);
+        --shadow-sm: 0 4px 12px rgba(10, 31, 63, 0.05);
+        --shadow-md: 0 8px 30px rgba(10, 31, 63, 0.07);
+        --shadow-lg: 0 16px 48px rgba(10, 31, 63, 0.10);
+        --shadow-xl: 0 24px 64px rgba(10, 31, 63, 0.14);
+        --radius-sm: 14px;
+        --radius-md: 22px;
+        --radius-lg: 32px;
+        --radius-full: 9999px;
+        --tr: all .45s cubic-bezier(.25, .46, .45, .94);
+        --tr-fast: all .25s cubic-bezier(.25, .46, .45, .94);
     }
 
-    /* Comparison Table */
-    .compare-table {
-        width: 100%; border-collapse: collapse; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    /* ===== HERO SECTION ===== */
+    .date-hero {
+        background: linear-gradient(150deg, var(--navy-mid) 0%, var(--navy) 50%, #0D1B33 100%);
+        padding: 140px 20px 120px;
+        text-align: center;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
     }
-    .compare-table th { background: var(--primary); color: white; padding: 15px 20px; text-align: center; font-weight: 600; }
-    .compare-table td { padding: 14px 20px; border-bottom: 1px solid #eee; text-align: center; }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table tr:hover { background: rgba(212,175,55,0.05); }
+    .date-hero::before {
+        content: ''; position: absolute; inset: 0; opacity: 0.04;
+        background-image: radial-gradient(var(--navy-tint) 1px, transparent 1px);
+        background-size: 28px 28px;
+        mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent 70%);
+        -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent 70%);
+        z-index: 1;
+    }
+    .date-hero::after {
+        content: ""; position: absolute; top: -10%; left: -5%;
+        width: 600px; height: 600px;
+        background: radial-gradient(circle, rgba(201, 168, 76, 0.08), transparent 60%);
+        border-radius: 50%; filter: blur(60px); pointer-events: none; z-index: 1;
+    }
+    .date-hero-title {
+        font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 700;
+        margin-bottom: 16px; position: relative; z-index: 2; line-height: 1.1; letter-spacing: -.5px;
+    }
+    .date-hero-subtitle {
+        font-size: 1.1rem; color: var(--gold-light); margin-bottom: 60px; position: relative; z-index: 2;
+        max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.85; font-weight: 500;
+    }
+    .date-cards-wrapper {
+        display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+        position: relative; z-index: 2; max-width: 1000px; margin: 0 auto;
+    }
+    .main-date-card {
+        background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-lg);
+        padding: 44px 30px; width: 100%; max-width: 450px; text-align: center;
+        transition: var(--tr); color: var(--white); position: relative; overflow: hidden;
+    }
+    .main-date-card::before {
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: var(--gold-gradient); transform: scaleX(0); transform-origin: left; transition: var(--tr);
+    }
+    .main-date-card:hover {
+        transform: translateY(-8px); border-color: rgba(201, 168, 76, 0.3);
+        box-shadow: 0 24px 60px rgba(10, 31, 63, 0.3); background: rgba(255, 255, 255, 0.12);
+    }
+    .main-date-card:hover::before { transform: scaleX(1); }
+    .card-flag { font-size: 2.5rem; margin-bottom: 12px; }
+    .card-region { 
+        font-size: .75rem; color: var(--gold-light); text-transform: uppercase; 
+        letter-spacing: 1.5px; margin-bottom: 20px; font-weight: 700; 
+    }
+    .hijri-day-large { 
+        font-size: 5rem; font-weight: 700; line-height: 1; margin-bottom: 8px; 
+        font-family: 'Cormorant Garamond', serif; color: var(--white); 
+    }
+    .hijri-month-name { 
+        font-size: 1.6rem; font-weight: 600; margin-bottom: 8px; 
+        font-family: 'Cormorant Garamond', serif; color: var(--white); 
+    }
+    .hijri-urdu-arabic { 
+        font-family: 'Scheherazade New', serif; font-size: 1.5rem; color: var(--gold-light); 
+        margin-bottom: 20px; line-height: 1.5; 
+    }
+    .gregorian-date { 
+        font-size: .9rem; opacity: 0.7; border-top: 1px solid rgba(255,255,255,0.1); 
+        padding-top: 20px; margin-top: 20px; font-weight: 500; 
+    }
 
-    .info-box { background: linear-gradient(135deg, #fdf6e3, #fefcf2); border: 1px solid var(--gold); border-radius: 16px; padding: 30px; margin-top: 30px; }
-    .info-box h3 { color: var(--primary); font-family: 'Playfair Display', serif; margin-bottom: 15px; }
-    .info-box p { color: #555; line-height: 1.8; }
+    /* ===== CONTROLS BAR ===== */
+    .controls-bar { 
+        max-width: 600px; margin: -60px auto 80px; position: relative; z-index: 10; padding: 0 20px; 
+    }
+    .controls-bar form {
+        background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px);
+        border-radius: var(--radius-full); padding: 12px; box-shadow: var(--shadow-xl);
+        border: 1px solid rgba(255,255,255,0.8);
+    }
+    .control-select {
+        padding: 12px 24px; border: 1px solid var(--border); border-radius: var(--radius-full);
+        background: var(--bg-main); color: var(--navy); font-weight: 600; font-size: .9rem;
+        cursor: pointer; transition: var(--tr); font-family: 'Outfit', sans-serif; outline: none;
+    }
+    .control-select:hover, .control-select:focus { border-color: var(--navy); background: var(--white); }
+    .print-btn {
+        padding: 12px 28px; background: linear-gradient(145deg, var(--navy), var(--navy-mid));
+        border: 1px solid transparent; color: var(--white); border-radius: var(--radius-full);
+        font-weight: 600; cursor: pointer; transition: var(--tr); font-size: .9rem;
+        font-family: 'Outfit', sans-serif; box-shadow: var(--shadow-md); display: inline-flex; align-items: center; gap: 8px;
+    }
+    .print-btn:hover { background: linear-gradient(145deg, var(--navy-mid), var(--navy-light)); transform: translateY(-2px); }
 
-    .faq-container { margin-top: 30px; }
-    .faq-item { background: white; border: 1px solid var(--border-light); border-radius: 12px; margin-bottom: 12px; overflow: hidden; }
-    .faq-question { padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--primary); }
-    .faq-question i { color: var(--gold); transition: transform 0.3s; }
-    .faq-answer { padding: 0 20px 18px; display: none; color: #555; line-height: 1.7; }
-    .faq-open .faq-answer { display: block; }
-    .faq-open .faq-question i { transform: rotate(180deg); }
-    .seo-content { background: white; padding: 35px; border-radius: 20px; border: 1px solid var(--border-light); margin-top: 40px; line-height: 1.8; color: #444; }
-    .seo-content h2, .seo-content h3 { color: var(--primary); margin-top: 25px; margin-bottom: 12px; font-family: 'Playfair Display', serif; }
-    .internal-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 30px; }
-    .internal-link { display: flex; align-items: center; gap: 8px; padding: 12px 18px; background: white; border: 1px solid var(--border-light); border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 600; transition: all 0.3s; font-size: 0.9rem; }
-    .internal-link:hover { border-color: var(--gold); background: #fdfcee; transform: translateY(-2px); }
-    
-    /* Calendar Grid CSS */
-    .controls-bar { background: white; padding: 20px; border-radius: 16px; margin-top: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-    .control-select { padding: 10px 15px; border-radius: 10px; border: 1px solid var(--border-light); font-size: 1rem; color: #333; outline: none; }
-    .print-btn { padding: 10px 25px; background: transparent; border: 2px solid var(--primary); color: var(--primary); border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 0.9rem; }
-    .print-btn:hover { background: var(--primary); color: white; }
+    /* ===== CONTAINERS & TITLES ===== */
+    .section-container { max-width: 1140px; margin: 90px auto; padding: 0 20px; }
+    .section-title {
+        font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; color: var(--navy);
+        text-align: center; margin-bottom: 0; display: inline-block; position: relative;
+        font-weight: 600; letter-spacing: -.5px;
+    }
+    .section-title::after {
+        content: ""; position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+        width: 60px; height: 3px; background: var(--gold-gradient);
+        border-radius: 2px; box-shadow: 0 0 12px rgba(201, 168, 76, 0.25);
+    }
+    .title-wrapper { text-align: center; margin-bottom: 60px; }
+    .title-wrapper p { color: var(--text-medium); max-width: 600px; margin: 30px auto 0; line-height: 1.85; }
 
-    .calendar-grid-wrapper { background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow: hidden; border: 1px solid var(--border-light); margin-bottom: 25px; }
-    .calendar-grid-header { background: var(--primary); color: white; padding: 15px 20px; }
-    .calendar-grid-title { margin: 0; font-family: 'Playfair Display', serif; font-size: 1.3rem; }
-    .calendar-grid { padding: 10px; }
-    .calendar-grid-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-    .calendar-grid-header-row { margin-bottom: 8px; }
-    .cal-cell { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 10px; padding: 6px; position: relative; min-height: 60px; transition: all 0.2s; cursor: default; }
-    .cal-cell:hover:not(.cal-empty):not(.cal-header) { background: rgba(10,58,42,0.05); transform: scale(1.05); }
-    .cal-header { font-weight: 700; color: var(--primary); font-size: 0.85rem; min-height: auto; aspect-ratio: auto; }
-    .cal-greg { font-weight: 700; font-size: 1rem; color: #333; }
-    .cal-hijri { font-size: 0.75rem; color: var(--gold); font-weight: 600; }
-    .cal-hijri-month { font-size: 0.55rem; color: var(--primary); font-weight: 500; position: absolute; bottom: 2px; }
-    .cal-today { background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(10,58,42,0.1)); border: 2px solid var(--gold); border-radius: 12px; }
-    .cal-friday { background: rgba(10,58,42,0.04); }
-    .cal-empty { opacity: 0.3; }
-    .cal-event-badge { font-size: 0.5rem; position: absolute; top: 3px; right: 5px; }
+    /* ===== CALENDAR GRID ===== */
+    .calendar-grid-wrapper {
+        background: var(--white); border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
+        overflow: hidden; border: 1px solid var(--border-light); margin-bottom: 24px; transition: var(--tr);
+    }
+    .calendar-grid-wrapper:hover { box-shadow: var(--shadow-md); border-color: var(--navy-tint); transform: translateY(-3px); }
+    .calendar-grid-header {
+        background: linear-gradient(150deg, var(--navy), var(--navy-mid)); color: var(--white);
+        padding: 16px 24px; position: relative; overflow: hidden;
+    }
+    .calendar-grid-header::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold-gradient); }
+    .calendar-grid-title { margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; }
+    .calendar-grid { padding: 12px; }
+    .calendar-grid-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .calendar-grid-header-row { margin-bottom: 10px; }
+    .cal-cell {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        border-radius: var(--radius-sm); padding: 8px 4px; position: relative; min-height: 72px;
+        transition: all 0.3s ease; cursor: default; background: var(--bg-main); border: 1px solid transparent; overflow: visible;
+    }
+    .cal-cell:hover:not(.cal-empty):not(.cal-header) {
+        background: var(--white); border-color: var(--gold); transform: scale(1.05);
+        z-index: 1; box-shadow: 0 6px 15px rgba(10, 31, 63, 0.08);
+    }
+    .cal-header {
+        font-weight: 700; color: var(--navy); font-size: .75rem; min-height: auto; padding: 8px 0;
+        text-transform: uppercase; letter-spacing: 1px; background: transparent; border: none;
+    }
+    .cal-greg { font-weight: 700; font-size: 1rem; color: var(--text-dark); line-height: 1.2; white-space: nowrap; }
+    .cal-hijri { font-size: .75rem; color: var(--gold-dark); font-weight: 600; margin-top: 2px; line-height: 1.2; white-space: nowrap; }
+    .cal-hijri-month { font-size: .6rem; color: var(--text-light); font-weight: 500; margin-top: 2px; line-height: 1.2; text-align: center; white-space: nowrap; }
+    .cal-today { background: linear-gradient(135deg, var(--gold), var(--gold-light)); border: 1px solid var(--gold-dark); box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3); }
+    .cal-today .cal-greg { color: var(--navy); }
+    .cal-today .cal-hijri { color: var(--navy); }
+    .cal-friday { background: var(--navy-tint); }
+    .cal-empty { opacity: 0.3; background: transparent; }
+    .cal-event-badge { font-size: .6rem; position: absolute; top: 4px; right: 6px; }
     .cal-event-eid { color: #22c55e; }
     .cal-event-ramadan { color: #8b5cf6; }
     .cal-event-hajj { color: #f59e0b; }
     .cal-event-muharram { color: #ef4444; }
     .cal-event-other { color: #3b82f6; }
 
-    @media (max-width: 768px) { 
-        .date-hero-title { font-size: 1.6rem; } 
-        .hijri-day-large { font-size: 3rem; } 
-        .cal-cell { min-height: 45px; padding: 3px; }
-        .cal-greg { font-size: 0.8rem; }
-        .cal-hijri { font-size: 0.6rem; }
+    /* ===== COUNTRIES GRID ===== */
+    .countries-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;
+    }
+    .country-card {
+        background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-md);
+        padding: 20px 24px; display: flex; align-items: center; gap: 16px; text-align: left;
+        transition: var(--tr); box-shadow: var(--shadow-xs); text-decoration: none; color: var(--text-dark);
+        position: relative; overflow: hidden;
+    }
+    .country-card::before {
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: var(--gold-gradient); transform: scaleX(0); transform-origin: left; transition: var(--tr);
+    }
+    .country-card:hover { 
+        border-color: var(--navy-tint); transform: translateY(-4px); box-shadow: var(--shadow-md); 
+    }
+    .country-card:hover::before { transform: scaleX(1); }
+    .country-flag { 
+        font-size: 2rem; line-height: 1; background: var(--navy-tint); width: 52px; height: 52px;
+        display: flex; align-items: center; justify-content: center; border-radius: 14px;
+        border: 1px solid var(--border-light); flex-shrink: 0; transition: var(--tr);
+    }
+    .country-card:hover .country-flag { background: var(--navy); }
+    .country-info { flex: 1; }
+    .country-name { 
+        font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--navy); 
+        font-size: 1.3rem; margin-bottom: 2px; transition: var(--tr-fast); 
+    }
+    .country-card:hover .country-name { color: var(--navy-mid); }
+    .country-date { font-size: .85rem; font-weight: 600; color: var(--gold-dark); }
+    .country-urdu {
+        font-family: 'Scheherazade New', serif; color: var(--text-light); font-size: 1.4rem;
+        margin-left: auto; text-align: right;
+    }
+
+    /* ===== COMPARISON TABLE ===== */
+    .compare-table-wrapper {
+        background: var(--white); border-radius: var(--radius-md); overflow: hidden;
+        box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
+    }
+    .compare-table {
+        width: 100%; border-collapse: collapse;
+    }
+    .compare-table th { 
+        background: linear-gradient(150deg, var(--navy), var(--navy-mid)); color: var(--white); 
+        padding: 18px 24px; text-align: center; font-weight: 600; font-family: 'Outfit', sans-serif; 
+        font-size: .9rem; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .compare-table td { 
+        padding: 16px 24px; border-bottom: 1px solid var(--border-light); text-align: center;
+        color: var(--text-medium); font-weight: 500;
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: var(--gold-tint); color: var(--navy); }
+
+    /* ===== INFO BOX ===== */
+    .info-box {
+        background: var(--gold-tint); border: 1px solid rgba(201, 168, 76, 0.15);
+        border-left: 4px solid var(--gold); border-radius: var(--radius-md);
+        padding: 30px; margin-top: 30px; box-shadow: var(--shadow-sm);
+    }
+    .info-box.white-bg {
+        background: var(--white); border-left-color: var(--navy); border-color: var(--border-light);
+    }
+    .info-box h3 { color: var(--navy); font-family: 'Cormorant Garamond', serif; margin-bottom: 15px; font-size: 1.5rem; font-weight: 700; }
+    .info-box p { color: var(--text-medium); line-height: 1.8; }
+
+    /* ===== INTERNAL LINKS ===== */
+    .internal-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 30px; }
+    .internal-link {
+        display: flex; align-items: center; gap: 12px; padding: 18px 24px; background: var(--white);
+        border: 1px solid var(--border-light); border-radius: var(--radius-sm); text-decoration: none;
+        color: var(--navy); font-weight: 600; transition: var(--tr); font-size: .95rem; box-shadow: var(--shadow-xs);
+    }
+    .internal-link:hover { border-color: var(--gold); background: var(--gold-tint); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+
+    /* ===== FAQ ===== */
+    .faq-container { margin-top: 30px; }
+    .faq-item { background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-md); margin-bottom: 16px; overflow: hidden; transition: var(--tr); box-shadow: var(--shadow-xs); }
+    .faq-item:hover { box-shadow: var(--shadow-sm); border-color: var(--navy-tint); }
+    .faq-question { padding: 22px 28px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; }
+    .faq-question i { color: var(--gold); transition: transform 0.3s; font-size: 1rem; }
+    .faq-answer { padding: 0 28px 24px; display: none; color: var(--text-medium); line-height: 1.8; font-size: 1rem; }
+    .faq-open .faq-answer { display: block; }
+    .faq-open .faq-question i { transform: rotate(180deg); }
+    .faq-open { box-shadow: var(--shadow-md); border-color: var(--gold); }
+
+    /* ===== SEO CONTENT ===== */
+    .seo-content {
+        background: var(--white); padding: 50px; border-radius: var(--radius-lg);
+        border: 1px solid var(--border-light); margin-top: 40px; line-height: 1.8; color: var(--text-medium);
+        box-shadow: var(--shadow-lg); position: relative;
+    }
+    .seo-content::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold-gradient); border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+    .seo-content h2, .seo-content h3 { color: var(--navy); margin-top: 30px; margin-bottom: 15px; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.8rem; }
+    .seo-content p { margin-bottom: 20px; }
+    .seo-content strong { color: var(--text-dark); }
+
+    @media (max-width: 768px) {
+        .date-hero { padding: 80px 20px 100px; }
+        .date-hero-title { font-size: 2.4rem; }
+        .section-title { font-size: 2rem; }
+        .cal-cell { min-height: 55px; padding: 4px 2px; }
+        .cal-greg { font-size: .85rem; }
+        .cal-hijri { font-size: .65rem; }
+        .cal-hijri-month { font-size: .55rem; }
+        .controls-bar form { flex-direction: column; border-radius: var(--radius-md); }
+        .control-select, .print-btn { width: 100%; justify-content: center; }
+        .seo-content { padding: 30px; }
+        .compare-table th, .compare-table td { padding: 12px 15px; font-size: .85rem; }
     }
 </style>
 
@@ -153,22 +313,20 @@
 </section>
 
 {{-- CONTROLS --}}
-<section class="section-container">
-    <div class="controls-bar">
-        <form method="GET" action="{{ route('islamic-date-saudi') }}" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
-            <select name="year" class="control-select" onchange="this.form.submit()">
-                @for($y = 2018; $y <= 2030; $y++)
-                    <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
-                @endfor
-            </select>
-            <select name="month" class="control-select" onchange="this.form.submit()">
-                @for($m = 1; $m <= 12; $m++)
-                    <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>{{ Carbon\Carbon::create($year, $m, 1)->format('F') }}</option>
-                @endfor
-            </select>
-            <button type="button" class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> Print Calendar</button>
-        </form>
-    </div>
+<section class="controls-bar">
+    <form method="GET" action="{{ route('islamic-date-saudi') }}" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+        <select name="year" class="control-select" onchange="this.form.submit()">
+            @for($y = 2018; $y <= 2036; $y++)
+                <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
+            @endfor
+        </select>
+        <select name="month" class="control-select" onchange="this.form.submit()">
+            @for($m = 1; $m <= 12; $m++)
+                <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>{{ Carbon\Carbon::create($year, $m, 1)->format('F') }}</option>
+            @endfor
+        </select>
+        <button type="button" class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> Print Calendar</button>
+    </form>
 </section>
 
 {{-- FULL YEAR CALENDAR (SAUDI ARABIA) --}}
@@ -221,36 +379,38 @@
         <h2 class="section-title">Saudi Arabia vs Pakistan — Islamic Date Comparison</h2>
     </div>
 
-    <table class="compare-table">
-        <thead>
-            <tr>
-                <th>Country</th>
-                <th>Islamic Date</th>
-                <th>Calendar Method</th>
-                <th>Hijri Year</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>🇸🇦 Saudi Arabia</strong></td>
-                <td>{{ $hijriSA['day'] }} {{ $hijriSA['month_name'] }}</td>
-                <td>Umm al-Qura (Calculated)</td>
-                <td>{{ $hijriSA['year'] }} AH</td>
-            </tr>
-            <tr>
-                <td><strong>🇵🇰 Pakistan</strong></td>
-                <td>{{ $hijriPK['day'] }} {{ $hijriPK['month_name'] }}</td>
-                <td>Local Moon Sighting</td>
-                <td>{{ $hijriPK['year'] }} AH</td>
-            </tr>
-            <tr>
-                <td><strong>🇦🇪 UAE</strong></td>
-                <td>{{ $hijriUAE['day'] }} {{ $hijriUAE['month_name'] }}</td>
-                <td>Follows Saudi/Calculated</td>
-                <td>{{ $hijriUAE['year'] }} AH</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="compare-table-wrapper">
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Islamic Date</th>
+                    <th>Calendar Method</th>
+                    <th>Hijri Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>🇸🇦 Saudi Arabia</strong></td>
+                    <td>{{ $hijriSA['day'] }} {{ $hijriSA['month_name'] }}</td>
+                    <td>Umm al-Qura (Calculated)</td>
+                    <td>{{ $hijriSA['year'] }} AH</td>
+                </tr>
+                <tr>
+                    <td><strong>🇵🇰 Pakistan</strong></td>
+                    <td>{{ $hijriPK['day'] }} {{ $hijriPK['month_name'] }}</td>
+                    <td>Local Moon Sighting</td>
+                    <td>{{ $hijriPK['year'] }} AH</td>
+                </tr>
+                <tr>
+                    <td><strong>🇦🇪 UAE</strong></td>
+                    <td>{{ $hijriUAE['day'] }} {{ $hijriUAE['month_name'] }}</td>
+                    <td>Follows Saudi/Calculated</td>
+                    <td>{{ $hijriUAE['year'] }} AH</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </section>
 
 {{-- UMM AL-QURA EXPLANATION --}}
@@ -265,7 +425,7 @@
 
 {{-- MAKKAH MOON SIGHTING --}}
 <section class="section-container">
-    <div class="info-box" style="background: white; border-color: var(--border-light);">
+    <div class="info-box white-bg">
         <h3>🌙 Makkah Moon Sighting Tradition</h3>
         <p>Historically, the new Islamic month begins when the crescent moon (hilal) is first sighted after sunset in Makkah al-Mukarramah. The Hilal Committee in Saudi Arabia was responsible for physical moon sighting before the Umm al-Qura astronomical method became standard.</p>
         <p>The <strong>Islamic date today in Saudi Arabia</strong> is considered the "base date" by many Muslim-majority countries. Countries in the Gulf Cooperation Council (GCC) — UAE, Kuwait, Qatar, Bahrain, and Oman — generally follow Saudi Arabia's Islamic dates. However, some countries like Pakistan, Bangladesh, and India maintain their own independent moon sighting committees.</p>
@@ -293,7 +453,7 @@
         ['q' => 'Islamic date today in UAE?', 'a' => "Islamic date today in UAE is <strong>{$hijriUAE['formatted']}</strong>. UAE generally follows the same calendar as Saudi Arabia."],
         ['q' => 'Why is Saudi Arabia Islamic date different from Pakistan?', 'a' => "Saudi Arabia uses the <strong>Umm al-Qura calculated calendar</strong>, while Pakistan follows local physical moon sighting. This often causes a 1-day difference."],
         ['q' => 'What is Umm al-Qura calendar?', 'a' => "The Umm al-Qura calendar is Saudi Arabia's official Islamic calendar based on astronomical calculations by KACST. It can predict Islamic dates years in advance."],
-        ['q' => 'Today Islamic date in Saudi Arabia 2026?', 'a' => "Today Islamic date in Saudi Arabia 2026 is <strong>{$hijriSA['formatted']}</strong>. This is the official date per the Umm al-Qura calendar."],
+        ['q' => 'Today Islamic date in Saudi Arabia ' . date('Y') . '?', 'a' => "Today Islamic date in Saudi Arabia " . date('Y') . " is <strong>{$hijriSA['formatted']}</strong>. This is the official date per the Umm al-Qura calendar."],
         ['q' => 'Do all Arab countries have the same Islamic date?', 'a' => "Most Gulf countries (UAE, Kuwait, Qatar, Bahrain) follow Saudi Arabia's Islamic date. However, countries like Egypt, Jordan, and Turkey may have 1-day differences depending on their own moon sighting or calculation methods."],
     ];
     @endphp

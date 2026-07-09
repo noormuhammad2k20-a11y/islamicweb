@@ -409,7 +409,7 @@
     <div class="cities-grid">
         @foreach($cities as $cityName => $hijri)
             @continue(in_array($cityName, ['Saudi Arabia', 'UAE']))
-            <a href="{{ route('islamic-date.city', strtolower(str_replace(' ', '-', $cityName))) }}" class="city-card">
+            <a href="{{ route('islamic-date-city', strtolower(str_replace(' ', '-', $cityName))) }}" class="city-card">
                 <div class="city-name">{{ $cityName }}</div>
                 <div class="city-date">{{ $hijri['day'] }} {{ $hijri['month_name'] }} {{ $hijri['year'] }} AH</div>
                 <div class="city-urdu">{{ $hijri['month_urdu'] }} — {{ $hijri['month_arabic'] }}</div>

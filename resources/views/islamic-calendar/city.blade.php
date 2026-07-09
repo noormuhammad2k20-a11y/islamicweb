@@ -71,7 +71,11 @@
         <h2 class="section-title">Famous Mosques in {{ $cityName }}</h2>
     </div>
     <div class="mosque-list">
-        @foreach($cityContent->famous_mosques as $mosque)
+        @php 
+            $mosques = is_string($cityContent->famous_mosques) ? json_decode($cityContent->famous_mosques, true) : $cityContent->famous_mosques;
+            if (!is_array($mosques)) $mosques = [];
+        @endphp
+        @foreach($mosques as $mosque)
             <div class="mosque-item">🕌 {{ $mosque }}</div>
         @endforeach
     </div>

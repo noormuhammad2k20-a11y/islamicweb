@@ -1,0 +1,533 @@
+==================================================
+HOME
+==================================================
+
+Home
+File: resources/views/home.blade.php
+URL: http://127.0.0.1:8000/
+
+==================================================
+QURAN
+==================================================
+
+Quran Index
+
+Quran Audio
+
+Quran Juz
+
+Quran Reading
+
+Quran Search
+
+Quran Tafsir
+
+Quran Translation
+
+==================================================
+SURAHS
+==================================================
+
+Surah Index
+File: resources/views/pages/surah/index.blade.php
+URL: http://127.0.0.1:8000/surahs
+
+Surah Show
+File: resources/views/pages/surah/show.blade.php
+URL: http://127.0.0.1:8000/surah/yaseen
+
+Surah Collection
+File: resources/views/pages/surah/collection.blade.php
+URL: http://127.0.0.1:8000/surahs/collections/4-qul
+
+==================================================
+DUAS
+==================================================
+
+Duas Hub (Pages)
+File: resources/views/pages/duas/hub.blade.php
+URL: http://127.0.0.1:8000/duas
+
+Duas Category (Pages)
+File: resources/views/pages/duas/category.blade.php
+URL: http://127.0.0.1:8000/duas/morning-evening
+
+Duas Show (Pages)
+File: resources/views/pages/duas/show.blade.php
+URL: http://127.0.0.1:8000/duas/morning-evening/dua-for-protection
+
+Duas Index
+File: resources/views/duas/index.blade.php
+URL: http://127.0.0.1:8000/duas
+
+Duas Category
+File: resources/views/duas/category.blade.php
+URL: http://127.0.0.1:8000/duas/morning-evening
+
+Duas Show
+File: resources/views/duas/show.blade.php
+URL: http://127.0.0.1:8000/duas/morning-evening/dua-for-protection
+
+==================================================
+ISLAMIC CALENDAR
+==================================================
+
+Calendar Main
+File: resources/views/islamic-calendar/main.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar
+
+Calendar City
+File: resources/views/islamic-calendar/city.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar/pakistan/karachi
+
+Calendar Country
+File: resources/views/islamic-calendar/country.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar/pakistan
+
+Calendar Month
+File: resources/views/islamic-calendar/month.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar/2026/ramadan
+
+Calendar Pakistan
+File: resources/views/islamic-calendar/pakistan.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar/pakistan
+
+Calendar Saudi
+File: resources/views/islamic-calendar/saudi.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar/saudi
+
+Calendar Today
+File: resources/views/islamic-calendar/today.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar/today
+
+Calendar Urdu
+File: resources/views/islamic-calendar/urdu.blade.php
+URL: http://127.0.0.1:8000/ur/islamic-calendar
+
+Calendar Year Month
+File: resources/views/islamic-calendar/year-month.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar/2026/3
+
+Calendar Year
+File: resources/views/islamic-calendar/year.blade.php
+URL: http://127.0.0.1:8000/islamic-calendar/2026
+
+Islamic Date Index
+File: resources/views/pages/islamic-date/index.blade.php
+URL: http://127.0.0.1:8000/islamic-date-today
+
+==================================================
+HADITH
+==================================================
+
+Hadith Index
+File: resources/views/pages/hadith/index.blade.php
+URL: http://127.0.0.1:8000/hadith
+
+Hadith Show
+File: resources/views/pages/hadith/show.blade.php
+URL: http://127.0.0.1:8000/hadith/sahih-bukhari
+
+Hadith Show (Specific)
+File: resources/views/pages/hadith/hadith_show.blade.php
+URL: http://127.0.0.1:8000/hadith/sahih-bukhari/1/1
+
+==================================================
+PRAYER TIMES
+==================================================
+
+Prayer Times Hub
+File: resources/views/pages/prayer-times/hub.blade.php
+URL: http://127.0.0.1:8000/prayer-times
+
+Prayer Times City (Pages)
+File: resources/views/pages/prayer-times/city.blade.php
+URL: http://127.0.0.1:8000/prayer-times/karachi
+
+Prayer Times Nawafil
+File: resources/views/pages/prayer-times/nawafil.blade.php
+URL: http://127.0.0.1:8000/prayer-times/karachi/nawafil
+
+Prayer Times City
+File: resources/views/prayer-times/city.blade.php
+URL: http://127.0.0.1:8000/prayer-times/karachi
+
+Prayer Times Country
+File: resources/views/prayer-times/country.blade.php
+URL: http://127.0.0.1:8000/prayer-times/pakistan
+
+Prayer Times Prayer
+File: resources/views/prayer-times/prayer.blade.php
+URL: http://127.0.0.1:8000/prayer-times/karachi/fajr
+
+==================================================
+NAMES
+==================================================
+
+Allah Names Index
+File: resources/views/pages/allah_names/index.blade.php
+URL: http://127.0.0.1:8000/99-names-of-allah
+
+Allah Names Show
+File: resources/views/pages/allah_names/show.blade.php
+URL: http://127.0.0.1:8000/99-names-of-allah/ar-rahman
+
+Names Hub
+File: resources/views/pages/names/hub.blade.php
+URL: http://127.0.0.1:8000/islamic-names
+
+Names Show
+File: resources/views/pages/names/show.blade.php
+URL: http://127.0.0.1:8000/islamic-names/muhammad
+
+==================================================
+RAMADAN
+==================================================
+
+Ramadan Hub
+File: resources/views/pages/ramadan/hub.blade.php
+URL: http://127.0.0.1:8000/ramadan/2026
+
+Ramadan Calendar
+File: resources/views/pages/ramadan/calendar.blade.php
+URL: http://127.0.0.1:8000/ramadan-guide/calendar
+
+Ramadan City
+File: resources/views/pages/ramadan/city.blade.php
+URL: http://127.0.0.1:8000/ramadan/2026/karachi
+
+Ramadan Duas
+File: resources/views/pages/ramadan/duas.blade.php
+URL: http://127.0.0.1:8000/ramadan-guide/duas
+
+Ramadan FAQs
+File: resources/views/pages/ramadan/faqs.blade.php
+URL: http://127.0.0.1:8000/ramadan-guide/faqs
+
+Ramadan Laylatul Qadr
+File: resources/views/pages/ramadan/laylatul_qadr.blade.php
+URL: http://127.0.0.1:8000/ramadan-guide/laylatul-qadr-guide
+
+Ramadan Rules
+File: resources/views/pages/ramadan/rules.blade.php
+URL: http://127.0.0.1:8000/ramadan-guide/rules
+
+Ramadan Timetable
+File: resources/views/pages/ramadan/timetable.blade.php
+URL: http://127.0.0.1:8000/ramadan-guide/timetable
+
+==================================================
+HAJJ & UMRAH
+==================================================
+
+Hajj Umrah Hub
+File: resources/views/pages/hajj_umrah/hub.blade.php
+URL: http://127.0.0.1:8000/hajj-and-umrah
+
+Hajj Checklist
+File: resources/views/pages/hajj_umrah/hajj_checklist.blade.php
+URL: http://127.0.0.1:8000/hajj-checklist
+
+Hajj Duas
+File: resources/views/pages/hajj_umrah/hajj_duas.blade.php
+URL: http://127.0.0.1:8000/hajj-duas
+
+Hajj FAQs
+File: resources/views/pages/hajj_umrah/hajj_faqs.blade.php
+URL: http://127.0.0.1:8000/hajj-faqs
+
+Hajj Guide
+File: resources/views/pages/hajj_umrah/hajj_guide.blade.php
+URL: http://127.0.0.1:8000/hajj-guide
+
+Umrah Checklist
+File: resources/views/pages/hajj_umrah/umrah_checklist.blade.php
+URL: http://127.0.0.1:8000/umrah-checklist
+
+Umrah Duas
+File: resources/views/pages/hajj_umrah/umrah_duas.blade.php
+URL: http://127.0.0.1:8000/umrah-duas
+
+Umrah Guide
+File: resources/views/pages/hajj_umrah/umrah_guide.blade.php
+URL: http://127.0.0.1:8000/umrah-guide
+
+==================================================
+ZAKAT
+==================================================
+
+Zakat Calculator
+File: resources/views/pages/zakat/calculator.blade.php
+URL: http://127.0.0.1:8000/zakat-calculator
+
+Zakat Nisab
+File: resources/views/pages/zakat/nisab.blade.php
+URL: http://127.0.0.1:8000/zakat/nisab
+
+Zakat Rules
+File: resources/views/pages/zakat/rules.blade.php
+URL: http://127.0.0.1:8000/zakat/rules
+
+Zakat SEO Article
+File: resources/views/pages/zakat/seo_article.blade.php
+URL: http://127.0.0.1:8000/zakat-calculator-online
+
+Zakat Who Can Receive
+File: resources/views/pages/zakat/whocanreceive.blade.php
+URL: http://127.0.0.1:8000/zakat/who-can-receive
+
+Zakat Who Must Pay
+File: resources/views/pages/zakat/whomustpay.blade.php
+URL: http://127.0.0.1:8000/zakat/who-must-pay
+
+==================================================
+ISLAMIC KNOWLEDGE
+==================================================
+
+Knowledge Index
+File: resources/views/pages/knowledge/index.blade.php
+URL: http://127.0.0.1:8000/knowledge
+
+Knowledge Facts
+File: resources/views/pages/knowledge/facts.blade.php
+URL: http://127.0.0.1:8000/knowledge/islamic-facts
+
+Knowledge History
+File: resources/views/pages/knowledge/history.blade.php
+URL: http://127.0.0.1:8000/knowledge/islamic-history
+
+Knowledge Names of Allah
+File: resources/views/pages/knowledge/names_allah.blade.php
+URL: http://127.0.0.1:8000/knowledge/names-of-allah
+
+Knowledge Pillars of Iman
+File: resources/views/pages/knowledge/pillars_iman.blade.php
+URL: http://127.0.0.1:8000/knowledge/pillars-of-iman
+
+Knowledge Pillars of Islam
+File: resources/views/pages/knowledge/pillars_islam.blade.php
+URL: http://127.0.0.1:8000/knowledge/pillars-of-islam
+
+Knowledge Prophets
+File: resources/views/pages/knowledge/prophets.blade.php
+URL: http://127.0.0.1:8000/knowledge/prophets-in-islam
+
+==================================================
+DREAM INTERPRETATION
+==================================================
+
+Dreams Index
+File: resources/views/pages/dreams/index.blade.php
+URL: http://127.0.0.1:8000/khwabon-ki-tabeer
+
+Dreams Show
+File: resources/views/pages/dreams/show.blade.php
+URL: http://127.0.0.1:8000/khwabon-ki-tabeer/seeing-water
+
+==================================================
+CALCULATORS
+==================================================
+
+Calculators Index
+File: resources/views/pages/calculators/index.blade.php
+URL: http://127.0.0.1:8000/calculators
+
+Calculators Fidya
+File: resources/views/pages/calculators/fidya.blade.php
+URL: http://127.0.0.1:8000/calculators/fidya
+
+Calculators Inheritance
+File: resources/views/pages/calculators/inheritance.blade.php
+URL: http://127.0.0.1:8000/calculators/inheritance
+
+Calculators Kaffarah
+File: resources/views/pages/calculators/kaffarah.blade.php
+URL: http://127.0.0.1:8000/calculators/kaffarah
+
+Calculators Zakat
+File: resources/views/pages/calculators/zakat.blade.php
+URL: http://127.0.0.1:8000/calculators/zakat
+
+Calculators Zakat Gold
+File: resources/views/pages/calculators/zakat_gold.blade.php
+URL: http://127.0.0.1:8000/calculators/zakat-on-gold
+
+Calculators Zakat Silver
+File: resources/views/pages/calculators/zakat_silver.blade.php
+URL: http://127.0.0.1:8000/calculators/zakat-on-silver
+
+==================================================
+EVENTS
+==================================================
+
+Events Index
+File: resources/views/pages/events/index.blade.php
+URL: http://127.0.0.1:8000/islamic-events
+
+Events Month
+File: resources/views/pages/events/month.blade.php
+URL: http://127.0.0.1:8000/islamic-events/ramadan
+
+==================================================
+NAMAZ
+==================================================
+
+Namaz Index
+File: resources/views/pages/namaz/index.blade.php
+URL: http://127.0.0.1:8000/namaz-guides
+
+Namaz Salah
+File: resources/views/pages/namaz/salah.blade.php
+URL: http://127.0.0.1:8000/namaz-guides/how-to-pray-salah
+
+Namaz Salat Tasbeeh
+File: resources/views/pages/namaz/salat_tasbeeh.blade.php
+URL: http://127.0.0.1:8000/namaz-guides/salat-ul-tasbeeh
+
+Namaz Show
+File: resources/views/pages/namaz/show.blade.php
+URL: http://127.0.0.1:8000/namaz-guides/fajr
+
+==================================================
+TOOLS
+==================================================
+
+Tools Age
+File: resources/views/pages/tools/age.blade.php
+URL: http://127.0.0.1:8000/tools/age-calculator
+
+Tools Events
+File: resources/views/pages/tools/events.blade.php
+URL: http://127.0.0.1:8000/tools/islamic-event-finder
+
+Tools Qibla
+File: resources/views/pages/tools/qibla.blade.php
+URL: http://127.0.0.1:8000/tools/qibla-direction
+
+Tools Ramadan Gen
+File: resources/views/pages/tools/ramadan_gen.blade.php
+URL: http://127.0.0.1:8000/tools/ramadan-calendar-generator
+
+Converter Show
+File: resources/views/pages/converter/show.blade.php
+URL: http://127.0.0.1:8000/hijri-converter
+
+==================================================
+WAZAIF
+==================================================
+
+Wazaif Index
+File: resources/views/pages/wazaif/index.blade.php
+URL: http://127.0.0.1:8000/wazaif
+
+Wazaif Show
+File: resources/views/pages/wazaif/show.blade.php
+URL: http://127.0.0.1:8000/wazaif/wazifa-for-wealth
+
+==================================================
+TASBEEH
+==================================================
+
+Tasbeeh Tracker
+File: resources/views/pages/tasbeeh/tracker.blade.php
+URL: http://127.0.0.1:8000/tasbeeh
+
+==================================================
+QUIZ
+==================================================
+
+Quiz Index
+File: resources/views/pages/quiz/index.blade.php
+URL: http://127.0.0.1:8000/islamic-quiz
+
+==================================================
+SEARCH
+==================================================
+
+Search Index
+File: resources/views/pages/search/index.blade.php
+URL: http://127.0.0.1:8000/search
+
+==================================================
+SITEMAP (XML Views & HTML Index)
+==================================================
+
+Sitemap Root
+File: resources/views/sitemap.blade.php
+URL: http://127.0.0.1:8000/sitemap
+
+Sitemap Pages
+File: resources/views/pages/sitemap.blade.php
+URL: http://127.0.0.1:8000/sitemap/pages
+
+Sitemap Calendar
+File: resources/views/sitemap/calendar.blade.php
+URL: http://127.0.0.1:8000/sitemap-calendar.xml
+
+Sitemap Dates
+File: resources/views/sitemap/dates.blade.php
+URL: http://127.0.0.1:8000/sitemap-dates.xml
+
+Sitemap Dreams
+File: resources/views/sitemap/dreams.blade.php
+URL: http://127.0.0.1:8000/sitemap-dreams.xml
+
+Sitemap Duas
+File: resources/views/sitemap/duas.blade.php
+URL: http://127.0.0.1:8000/sitemap-duas.xml
+
+Sitemap Hadith
+File: resources/views/sitemap/hadith.blade.php
+URL: http://127.0.0.1:8000/sitemap-hadith.xml
+
+Sitemap Index
+File: resources/views/sitemap/index.blade.php
+URL: http://127.0.0.1:8000/sitemap_index.xml
+
+Sitemap Names
+File: resources/views/sitemap/names.blade.php
+URL: http://127.0.0.1:8000/sitemap-names.xml
+
+Sitemap Pages List
+File: resources/views/sitemap/pages.blade.php
+URL: http://127.0.0.1:8000/sitemap-pages.xml
+
+Sitemap Prayer
+File: resources/views/sitemap/prayer.blade.php
+URL: http://127.0.0.1:8000/sitemap-prayer.xml
+
+Sitemap Surah
+File: resources/views/sitemap/surah.blade.php
+URL: http://127.0.0.1:8000/sitemap-surah.xml
+
+Sitemap Wazaif
+File: resources/views/sitemap/wazaif.blade.php
+URL: http://127.0.0.1:8000/sitemap-wazaif.xml
+
+==================================================
+STATIC PAGES
+==================================================
+
+About
+File: resources/views/pages/about.blade.php
+URL: http://127.0.0.1:8000/about
+
+Contact
+File: resources/views/pages/contact.blade.php
+URL: http://127.0.0.1:8000/contact
+
+Disclaimer
+File: resources/views/pages/disclaimer.blade.php
+URL: http://127.0.0.1:8000/disclaimer
+
+FAQ
+File: resources/views/pages/faq.blade.php
+URL: http://127.0.0.1:8000/faq
+
+Privacy
+File: resources/views/pages/privacy.blade.php
+URL: http://127.0.0.1:8000/privacy-policy
+
+Terms
+File: resources/views/pages/terms.blade.php
+URL: http://127.0.0.1:8000/terms-and-conditions

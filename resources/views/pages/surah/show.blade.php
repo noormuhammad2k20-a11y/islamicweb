@@ -10,135 +10,224 @@
 @endpush
 
 @section('content')
-<div class="scroll-progress-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(0,0,0,0.1); z-index: 9999;">
-    <div id="scrollProgressBar" style="height: 100%; background: var(--primary); width: 0%; transition: width 0.1s;"></div>
-</div>
 <style>
-    .surah-page-nav-wrapper {
-        position: sticky;
-        top: 80px; /* Adjust based on your main header height */
-        z-index: 100;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        border-radius: 50px;
-        margin: 30px auto;
-        max-width: 900px;
-        padding: 5px;
-        display: flex;
-        overflow-x: auto;
-        scrollbar-width: none; /* Firefox */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap');
+
+    :root {
+        /* Mapping old variables to new theme for included partials */
+        --primary: #0A1F3F;
+        --primary-dark: #0F2D52;
+        --primary-light: #C9A84C;
+        
+        /* Premium Theme Variables */
+        --bg-main: #F7F8FA;
+        --bg-alt: #FFFFFF;
+        --bg-tinted: #EFF2F7;
+        --navy: #0A1F3F;
+        --navy-mid: #0F2D52;
+        --navy-light: #14466E;
+        --navy-tint: #E4EBF3;
+        --gold: #C9A84C;
+        --gold-light: #E4D08C;
+        --gold-dark: #8A6E2F;
+        --gold-tint: #FBF8EE;
+        --gold-gradient: linear-gradient(135deg, #C9A84C 0%, #E4D08C 50%, #C9A84C 100%);
+        --emerald: #0D7C5F;
+        --emerald-tint: #E8F5F0;
+        --text-dark: #0C1425;
+        --text-medium: #4A5568;
+        --text-light: #8E9AB0;
+        --text-faint: #B8C2D4;
+        --white: #ffffff;
+        --border: #DFE5ED;
+        --border-light: #EDF0F5;
+        --shadow-xs: 0 1px 3px rgba(10, 31, 63, 0.04);
+        --shadow-sm: 0 4px 12px rgba(10, 31, 63, 0.05);
+        --shadow-md: 0 8px 30px rgba(10, 31, 63, 0.07);
+        --shadow-lg: 0 16px 48px rgba(10, 31, 63, 0.10);
+        --shadow-xl: 0 24px 64px rgba(10, 31, 63, 0.14);
+        --shadow-gold: 0 8px 32px rgba(201, 168, 76, 0.15);
+        --radius-sm: 14px;
+        --radius-md: 22px;
+        --radius-lg: 32px;
+        --radius-full: 9999px;
+        --tr: all .45s cubic-bezier(.25, .46, .45, .94);
+        --tr-fast: all .25s cubic-bezier(.25, .46, .45, .94);
     }
-    .surah-page-nav-wrapper::-webkit-scrollbar {
-        display: none; /* Chrome/Safari */
+
+    .scroll-progress-container {
+        position: fixed; top: 0; left: 0; width: 100%; height: 4px; 
+        background: rgba(10, 31, 63, 0.1); z-index: 9999;
     }
-    .surah-page-nav {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        margin: 0 auto;
+    #scrollProgressBar {
+        height: 100%; background: var(--gold-gradient); width: 0%; 
+        transition: width 0.1s; box-shadow: 0 0 10px rgba(201, 168, 76, 0.5);
     }
-    .surah-nav-link {
-        padding: 10px 20px;
-        color: #555;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.95rem;
-        border-radius: 50px;
-        white-space: nowrap;
-        transition: all 0.3s ease;
-    }
-    .surah-nav-link:hover, .surah-nav-link.active {
-        background: var(--primary);
-        color: white;
-    }
-    html {
-        scroll-behavior: smooth;
-    }
-    /* Add scroll margin for sticky nav offset */
-    #overview, #virtues, #audioPlayer, #mushaf, #arabic-text, #translations, #faq {
+
+    html { scroll-behavior: smooth; }
+    
+    /* Sticky Nav Offset */
+    #overview, #virtues, #mushaf, #arabic-text, #translations, #faq {
         scroll-margin-top: 150px;
     }
-    
-    /* New Grid Layout CSS */
+
+    /* Surah Container */
     .surah-container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 15px;
+        padding: 60px 15px;
     }
+
+    /* Breadcrumb */
+    .surah-breadcrumb { text-align: center; margin-bottom: 40px; }
+    .surah-breadcrumb-inner { 
+        background: var(--white); padding: 12px 30px; border-radius: var(--radius-full); 
+        display: inline-block; box-shadow: var(--shadow-md); font-size: .9rem; 
+        font-weight: 600; border: 1px solid var(--border-light); 
+    }
+    .surah-breadcrumb-inner a { color: var(--navy); text-decoration: none; transition: var(--tr-fast); }
+    .surah-breadcrumb-inner a:hover { color: var(--gold-dark); }
+    .surah-breadcrumb-inner span { color: var(--text-faint); margin: 0 10px; }
+    .surah-breadcrumb-inner .active { color: var(--text-medium); }
+
+    /* Scholar Badge */
+    .scholar-badge-container { text-align: center; margin-bottom: 40px; }
+    .scholar-badge { 
+        display: inline-flex; align-items: center; background: var(--emerald-tint); 
+        color: var(--emerald); padding: 10px 24px; border-radius: var(--radius-full); 
+        font-size: .9rem; font-weight: 600; border: 1px solid rgba(13, 124, 95, 0.15); 
+        box-shadow: var(--shadow-sm);
+    }
+    .scholar-badge i { margin-right: 10px; font-size: 1.1rem; }
+
+    /* Sticky Page Navigation */
+    .surah-page-nav-wrapper {
+        position: sticky; top: 80px; z-index: 100;
+        background: rgba(255, 255, 255, 0.90);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(255,255,255,0.8);
+        border-radius: var(--radius-full);
+        margin: 30px auto 50px;
+        max-width: 900px;
+        padding: 6px;
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .surah-page-nav-wrapper::-webkit-scrollbar { display: none; }
+    .surah-page-nav {
+        display: flex; align-items: center; gap: 5px; margin: 0 auto;
+    }
+    .surah-nav-link {
+        padding: 10px 22px; color: var(--text-medium); text-decoration: none;
+        font-weight: 600; font-size: .85rem; border-radius: var(--radius-full);
+        white-space: nowrap; transition: var(--tr-fast);
+    }
+    .surah-nav-link:hover { background: var(--bg-main); color: var(--navy); }
+    .surah-nav-link.active { 
+        background: linear-gradient(145deg, var(--navy), var(--navy-mid)); 
+        color: var(--white); box-shadow: var(--shadow-sm); 
+    }
+
+    /* Grid Layout */
     .surah-grid {
-        display: grid;
-        grid-template-columns: 1fr 300px;
-        gap: 30px;
-        margin-top: 30px;
+        display: grid; grid-template-columns: 1fr 300px; gap: 30px; margin-top: 30px;
     }
     @media (max-width: 991px) {
-        .surah-grid {
-            grid-template-columns: 1fr;
-        }
-        .surah-sidebar {
-            order: -1; /* optionally move sidebar to top on mobile, or bottom */
-        }
+        .surah-grid { grid-template-columns: 1fr; }
+        .surah-sidebar { order: -1; }
     }
+
+    /* Sidebar Widgets */
     .sidebar-widget {
-        background: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 25px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        background: var(--white); border: 1px solid var(--border-light);
+        border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px;
+        box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    }
+    .sidebar-widget::before {
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: var(--gold-gradient);
     }
     .widget-title {
-        font-size: 1.1rem;
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 2px solid var(--primary-light);
-        color: var(--primary-dark);
+        font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700;
+        color: var(--navy); margin-bottom: 18px; padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-light);
     }
-    .widget-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+    .widget-list { list-style: none; padding: 0; margin: 0; }
     .widget-list li {
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border-light);
     }
-    .widget-list li:last-child {
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border-bottom: none;
-    }
+    .widget-list li:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
     .widget-list a {
-        color: #444;
-        text-decoration: none;
-        transition: color 0.3s;
+        color: var(--text-medium); text-decoration: none; transition: var(--tr-fast);
+        font-weight: 500; display: block; padding: 4px 0;
     }
-    .widget-list a:hover {
-        color: var(--primary);
+    .widget-list a:hover { color: var(--gold-dark); transform: translateX(4px); }
+    .widget-tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* Next/Prev Navigation */
+    .surah-nav-footer { display: flex; justify-content: space-between; margin-top: 60px; border-top: 1px solid var(--border-light); padding-top: 30px; gap: 20px; }
+    .surah-nav-btn {
+        display: flex; align-items: center; gap: 15px; text-decoration: none; color: var(--text-medium);
+        padding: 20px 30px; background: var(--white); border: 1px solid var(--border-light);
+        border-radius: var(--radius-md); transition: var(--tr); box-shadow: var(--shadow-sm);
+        flex: 1; max-width: 48%;
     }
-    .widget-tags {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
+    .surah-nav-btn:hover { box-shadow: var(--shadow-md); border-color: var(--gold); transform: translateY(-3px); color: var(--navy); }
+    .surah-nav-btn i { font-size: 1.2rem; color: var(--gold); }
+    .surah-nav-label { display: block; font-size: .75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .surah-nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--navy); }
+
+    /* Popular Surahs Section */
+    .section-header { text-align: center; margin-top: 80px; margin-bottom: 40px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--navy); margin-bottom: 0; font-weight: 700; }
+    .section-title span { color: var(--gold-dark); font-style: italic; }
+    .section-title::after { content: ""; position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gold-gradient); border-radius: 2px; box-shadow: 0 0 12px rgba(201, 168, 76, 0.25); }
+    .arabic-divider { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 25px 0; }
+    .arabic-divider .line { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .arabic-divider .symbol { font-size: 1.8rem; font-family: 'Scheherazade New', serif; color: var(--gold-dark); }
+
+    .surah-popular-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+    .surah-popular-card {
+        display: flex; align-items: center; background: var(--white); padding: 20px;
+        border: 1px solid var(--border-light); border-radius: var(--radius-md);
+        text-decoration: none; color: var(--text-dark); transition: var(--tr); box-shadow: var(--shadow-xs);
+    }
+    .surah-popular-card:hover { box-shadow: var(--shadow-md); border-color: var(--gold); transform: translateY(-4px); }
+    .surah-popular-number {
+        width: 44px; height: 44px; background: var(--navy-tint); color: var(--navy);
+        border-radius: 12px; display: flex; align-items: center; justify-content: center;
+        font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.2rem;
+        margin-right: 16px; transition: var(--tr); flex-shrink: 0;
+    }
+    .surah-popular-card:hover .surah-popular-number { background: var(--navy); color: var(--gold-light); }
+    .surah-popular-info h3 { margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--navy); font-weight: 700; }
+    .surah-popular-meta { font-size: .8rem; color: var(--text-light); font-weight: 500; }
+
+    @media (max-width: 768px) {
+        .surah-nav-footer { flex-direction: column; }
+        .surah-nav-btn { max-width: 100%; }
+        .section-title { font-size: 2rem; }
     }
 </style>
 
-<div class="surah-container" style="padding-top: 50px; padding-bottom: 50px;">
+<div class="scroll-progress-container">
+    <div id="scrollProgressBar"></div>
+</div>
+
+<div class="surah-container">
     
     {{-- Breadcrumbs --}}
-    <div class="breadcrumb" style="text-align: center; margin-bottom: 35px;">
-        <div style="background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 0.95rem;">
-            <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a>
-            <span style="color: #ccc; margin: 0 8px;">/</span>
-            <a href="{{ route('quran.index') }}" style="color: var(--primary); text-decoration: none;">Quran</a>
-            <span style="color: #ccc; margin: 0 8px;">/</span>
-            <a href="{{ route('surah.index') }}" style="color: var(--primary); text-decoration: none;">Surahs</a>
-            <span style="color: #ccc; margin: 0 8px;">/</span>
-            <span style="color: #666; font-weight: 600;">Surah {{ $surah->name_en }}</span>
+    <div class="surah-breadcrumb">
+        <div class="surah-breadcrumb-inner">
+            <a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a>
+            <span>/</span>
+
+            <a href="{{ route('surah.index') }}">Surahs</a>
+            <span>/</span>
+            <span class="active">Surah {{ $surah->name_en }}</span>
         </div>
     </div>
 
@@ -149,20 +238,18 @@
     {{-- Scholar Verification Badge --}}
     @if($surah->reviews && $surah->reviews->count() > 0)
         @php $review = $surah->reviews->first(); @endphp
-        <div style="text-align: center; margin-bottom: 35px;">
-            <div style="display: inline-flex; align-items: center; background: #e8f5e9; color: #2e7d32; padding: 8px 20px; border-radius: 50px; font-size: 0.95rem; border: 1px solid #c8e6c9;">
-                <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+        <div class="scholar-badge-container">
+            <div class="scholar-badge">
+                <i class="fas fa-check-circle"></i>
                 <span>Verified by <strong>{{ $review->scholar->name }}</strong> ({{ $review->scholar->credential }})</span>
             </div>
         </div>
     @endif
 
-
     <div class="surah-grid">
         <main class="surah-main">
             @include('pages.surah.partials._quick-facts')
             @include('pages.surah.partials._overview')
-            @include('pages.surah.partials._audio-player')
             @include('pages.surah.partials._ayahs')
             @include('pages.surah.partials._important-ayahs')
             @include('pages.surah.partials._themes')
@@ -172,13 +259,13 @@
             @include('pages.surah.partials._faqs')
             
             {{-- Next/Previous Navigation --}}
-            <div class="surah-nav-footer" style="display:flex; justify-content:space-between; margin-top:50px; border-top:1px solid #eee; padding-top:20px;">
+            <div class="surah-nav-footer">
                 @if($prevSurah)
                 <a href="{{ route('surah.show', $prevSurah->slug) }}" class="surah-nav-btn prev">
                     <i class="fas fa-arrow-left"></i>
                     <div>
-                        <span class="surah-nav-label" style="display:block; font-size:0.8rem; color:#888;">Previous Surah</span>
-                        <span class="surah-nav-name" style="font-weight:bold;">{{ $prevSurah->number }}. {{ $prevSurah->name_en }}</span>
+                        <span class="surah-nav-label">Previous Surah</span>
+                        <span class="surah-nav-name">{{ $prevSurah->number }}. {{ $prevSurah->name_en }}</span>
                     </div>
                 </a>
                 @else
@@ -188,8 +275,8 @@
                 @if($nextSurah)
                 <a href="{{ route('surah.show', $nextSurah->slug) }}" class="surah-nav-btn next" style="text-align:right;">
                     <div>
-                        <span class="surah-nav-label" style="display:block; font-size:0.8rem; color:#888;">Next Surah</span>
-                        <span class="surah-nav-name" style="font-weight:bold;">{{ $nextSurah->number }}. {{ $nextSurah->name_en }}</span>
+                        <span class="surah-nav-label">Next Surah</span>
+                        <span class="surah-nav-name">{{ $nextSurah->number }}. {{ $nextSurah->name_en }}</span>
                     </div>
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -200,18 +287,18 @@
 
             {{-- Popular Surahs --}}
             @if(isset($popularSurahs) && $popularSurahs->count() > 0)
-            <div class="section-header" style="margin-top: 70px;">
+            <div class="section-header">
                 <h2 class="section-title">Most Popular <span>Surahs</span></h2>
-                <div class="arabic-divider" style="text-align:center; margin-bottom:20px;"><span class="line"></span><span class="symbol">﷽</span><span class="line"></span></div>
+                <div class="arabic-divider"><span class="line"></span><span class="symbol">﷽</span><span class="line"></span></div>
             </div>
 
-            <div class="surah-popular-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:20px;">
+            <div class="surah-popular-grid">
                 @foreach($popularSurahs as $popular)
-                <a href="{{ route('surah.show', $popular->slug) }}" class="surah-popular-card" style="display:flex; align-items:center; background:#fff; padding:15px; border-radius:10px; text-decoration:none; color:inherit; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
-                    <div class="surah-popular-number" style="width:40px; height:40px; background:#f0f0f0; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:15px;">{{ $popular->number }}</div>
+                <a href="{{ route('surah.show', $popular->slug) }}" class="surah-popular-card">
+                    <div class="surah-popular-number">{{ $popular->number }}</div>
                     <div class="surah-popular-info">
-                        <h3 style="margin:0; font-size:1.1rem;">{{ $popular->name_en }}</h3>
-                        <span class="surah-popular-meta" style="font-size:0.85rem; color:#666;">{{ $popular->total_ayahs }} Ayahs</span>
+                        <h3>{{ $popular->name_en }}</h3>
+                        <span class="surah-popular-meta">{{ $popular->total_ayahs }} Ayahs</span>
                     </div>
                 </a>
                 @endforeach

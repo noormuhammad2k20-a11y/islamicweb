@@ -231,7 +231,7 @@ class IslamicCalendarController extends Controller
         $seoData = [
             'title' => "Islamic Date Today in {$cityName} | {$hijri['day']} {$hijri['month_name']} {$hijri['year']} | Today Islamic Date {$cityName}",
             'description' => "Islamic date today in {$cityName} is {$hijri['day']} {$hijri['month_name']} {$hijri['year']} AH ({$nowPK->format('d F Y')}). Today Islamic date {$cityName} Pakistan. Exact Hijri date {$cityName}.",
-            'canonical' => url("/islamic-date/{$citySlug}"),
+            'canonical' => route('islamic-date-city', $citySlug),
         ];
 
         $this->seoService->setForPage($seoData['title'], $seoData['description'], $seoData['canonical']);
@@ -244,7 +244,7 @@ class IslamicCalendarController extends Controller
     // ── PAGE 6: Year Archive (Programmatic) ───────────────
     public function yearArchive(int $year)
     {
-        abort_if($year < 2018 || $year > 2030, 404);
+        abort_if($year < 2018 || $year > 2036, 404);
 
         $nowPK = Carbon::now('Asia/Karachi');
 
@@ -271,10 +271,18 @@ class IslamicCalendarController extends Controller
         ));
     }
 
-    // ── PAGE 6.5: Year-Month Archive (Programmatic) ───────
-    public function yearMonthArchive(int $year, int $month)
+    public function yearMonthArchive($year, $month)
     {
-        abort_if($year < 2018 || $year > 2030, 404);
+        if (!is_numeric($month)) {
+            $map = [
+                'muharram' => 1, 'safar' => 2, 'rabi-ul-awwal' => 3, 'rabi-ul-akhir' => 4,
+                'jumada-al-awwal' => 5, 'jumada-al-akhir' => 6, 'rajab' => 7, 'shaban' => 8,
+                'ramadan' => 9, 'shawwal' => 10, 'dhul-qadah' => 11, 'dhul-hijjah' => 12
+            ];
+            $month = $map[strtolower($month)] ?? 1;
+        }
+        $month = (int) $month;
+        abort_if($year < 2018 || $year > 2036, 404);
         abort_if($month < 1 || $month > 12, 404);
 
         $nowPK = Carbon::now('Asia/Karachi');

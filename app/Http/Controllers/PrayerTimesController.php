@@ -96,7 +96,7 @@ class PrayerTimesController extends Controller
     // ── Prayer-Specific Page ──────────────────────────────
     public function prayerPage(string $citySlug, string $prayerName)
     {
-        $validPrayers = ['fajr','zuhr','asr','maghrib','isha'];
+        $validPrayers = ['fajr','zuhr','asr','maghrib','isha','nawafil'];
         abort_if(!in_array($prayerName, $validPrayers), 404);
 
         $city = City::where('slug', $citySlug)->first() ?? WorldCity::where('slug', $citySlug)->firstOrFail();
@@ -306,7 +306,7 @@ class PrayerTimesController extends Controller
 
     private function prayerSeo($name,$prayer,$prayerKey,$prayers,$tz): array
     {
-        $time = $prayers[$prayerKey];
+        $time = $prayers[$prayerKey] ?? 'Various Times';
         $date = Carbon::now($tz)->format('d F Y');
         return [
             'title' => ucfirst($prayer)." Time {$name} Today {$date} | {$prayer} Prayer Time {$name} | {$time}",

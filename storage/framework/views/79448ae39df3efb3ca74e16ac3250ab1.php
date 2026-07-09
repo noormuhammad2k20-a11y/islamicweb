@@ -2,9 +2,7 @@
     <h3 class="widget-title">Table of Contents</h3>
     <ul class="widget-list toc-list">
         <li><a href="#overview">Overview</a></li>
-        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($surah->recitationGuides && $surah->recitationGuides->count() > 0): ?>
-        <li><a href="#audioPlayer">Recitations</a></li>
-        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($surah->importantAyahs && $surah->importantAyahs->count() > 0): ?>
         <li><a href="#important-ayahs">Important Ayahs</a></li>
         <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>

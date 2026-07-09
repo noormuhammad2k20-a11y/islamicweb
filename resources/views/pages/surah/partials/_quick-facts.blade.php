@@ -9,7 +9,7 @@
     <div class="surah-stat-pill" style="display: flex; align-items: center; background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 10px 15px; flex: 1; min-width: 140px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
         <i class="fas fa-bookmark" style="color: var(--primary); font-size: 1.5rem; margin-right: 15px;"></i>
         <div style="display: flex; flex-direction: column;">
-            <span class="pill-value" style="font-weight: 700; font-size: 1.1rem; color: #333;">{{ $surah->juz_start }}</span>
+                <span class="pill-value" style="font-weight: 700; font-size: 1.1rem; color: var(--primary);">{{ $surah->juz_start }}</span>
             <span class="pill-label" style="font-size: 0.8rem; color: #777; text-transform: uppercase; letter-spacing: 0.5px;">Juz / Para</span>
         </div>
     </div>

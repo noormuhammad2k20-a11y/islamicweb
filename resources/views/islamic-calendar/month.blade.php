@@ -260,10 +260,7 @@
             <div style="font-size: 1.8rem; color: var(--gold); background: rgba(10,58,42,0.04); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 10px;"><i class="fas fa-mosque"></i></div>
             <div>Prayer Times</div>
         </a>
-        <a href="{{ route('quran.index') }}" class="internal-link" style="display: flex; align-items: center; gap: 15px; padding: 18px; border-radius: 14px; background: white; border: 1px solid var(--border-light); text-decoration: none; color: var(--primary); font-weight: 700; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
-            <div style="font-size: 1.8rem; color: var(--gold); background: rgba(10,58,42,0.04); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 10px;"><i class="fas fa-book-open"></i></div>
-            <div>Al Quran</div>
-        </a>
+
         <a href="{{ route('zakat.index') }}" class="internal-link" style="display: flex; align-items: center; gap: 15px; padding: 18px; border-radius: 14px; background: white; border: 1px solid var(--border-light); text-decoration: none; color: var(--primary); font-weight: 700; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
             <div style="font-size: 1.8rem; color: var(--gold); background: rgba(10,58,42,0.04); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 10px;"><i class="fas fa-hand-holding-heart"></i></div>
             <div>Zakat Calculator</div>
