@@ -102,6 +102,7 @@
                 <li><a href="{{ route('dreams.index') }}" class="{{ request()->routeIs('dreams.*') ? 'active' : '' }}">Dreams</a></li>
                 <li><a href="{{ route('quiz.index') }}" class="{{ request()->routeIs('quiz.*') ? 'active' : '' }}">Quiz</a></li>
                 <li><a href="{{ route('zakat.index') }}" class="{{ request()->routeIs('zakat.*') ? 'active' : '' }}">Zakat</a></li>
+                <li><a href="{{ route('hadith.index') }}" class="{{ request()->is('hadith*') ? 'active' : '' }}">Hadith</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>

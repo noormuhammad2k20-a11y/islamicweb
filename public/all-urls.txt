@@ -55,6 +55,10 @@ http://127.0.0.1:8000/umrah-checklist
 http://127.0.0.1:8000/umrah-duas
 http://127.0.0.1:8000/umrah-guide
 http://127.0.0.1:8000/zakat-calculator
+
+
+
+
 http://127.0.0.1:8000/zakat/nisab
 http://127.0.0.1:8000/zakat/rules
 http://127.0.0.1:8000/zakat-calculator-online

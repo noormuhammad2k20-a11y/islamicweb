@@ -103,6 +103,7 @@
                 <li><a href="<?php echo e(route('dreams.index')); ?>" class="<?php echo e(request()->routeIs('dreams.*') ? 'active' : ''); ?>">Dreams</a></li>
                 <li><a href="<?php echo e(route('quiz.index')); ?>" class="<?php echo e(request()->routeIs('quiz.*') ? 'active' : ''); ?>">Quiz</a></li>
                 <li><a href="<?php echo e(route('zakat.index')); ?>" class="<?php echo e(request()->routeIs('zakat.*') ? 'active' : ''); ?>">Zakat</a></li>
+                <li><a href="<?php echo e(route('hadith.index')); ?>" class="<?php echo e(request()->is('hadith*') ? 'active' : ''); ?>">Hadith</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>

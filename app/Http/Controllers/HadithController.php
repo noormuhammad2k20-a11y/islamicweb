@@ -9,13 +9,16 @@ class HadithController extends Controller
 {
     public function index()
     {
-        $topics = HadithTopic::all();
-        return view('pages.hadith.index', compact('topics'));
+        $topics = HadithTopic::withCount('hadiths')->orderBy('topic_name')->get();
+        return view('hadith.index', compact('topics'));
     }
 
     public function show(HadithTopic $topic)
     {
-        return view('pages.hadith.show', compact('topic'));
+        $hadiths = $topic->hadiths()->orderBy('id')->paginate(10);
+        $otherTopics = HadithTopic::where('id', '!=', $topic->id)
+                        ->inRandomOrder()->limit(6)->get();
+        return view('hadith.show', compact('topic', 'hadiths', 'otherTopics'));
     }
 
     public function hadithShow(HadithTopic $topic, $hadithSlug)
