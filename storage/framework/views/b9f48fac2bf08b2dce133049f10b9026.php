@@ -354,6 +354,32 @@
     <!-- Main Content -->
     <div class="main-content">
         
+        <!-- Topic Overview & Practical Guidance -->
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($topic->overview || $topic->lessons || $topic->practical_guidance): ?>
+        <div class="quran-refs-box" style="margin-bottom: 40px; padding: 30px;">
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($topic->overview): ?>
+            <div style="margin-bottom: 25px;">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: 12px; font-weight: 700;">Overview</h3>
+                <p style="color: var(--text-medium); line-height: 1.8; font-size: 1.05rem; margin: 0;"><?php echo e($topic->overview); ?></p>
+            </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($topic->lessons): ?>
+            <div style="margin-bottom: 25px; padding-top: 25px; border-top: 1px solid var(--border-light);">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px;"><i class="fas fa-graduation-cap" style="color: var(--gold-dark);"></i> Key Lessons</h3>
+                <p style="color: var(--text-medium); line-height: 1.7; font-size: .95rem; margin: 0;"><?php echo e($topic->lessons); ?></p>
+            </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($topic->practical_guidance): ?>
+            <div style="padding-top: 25px; border-top: 1px solid var(--border-light);">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px;"><i class="fas fa-compass" style="color: var(--gold-dark);"></i> Practical Guidance</h3>
+                <p style="color: var(--text-medium); line-height: 1.7; font-size: .95rem; margin: 0;"><?php echo e($topic->practical_guidance); ?></p>
+            </div>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+        </div>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
         <!-- Quran References -->
         <?php $quranRefs = json_decode($topic->quran_references, true); ?>
         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($quranRefs && count($quranRefs) > 0): ?>
@@ -365,9 +391,9 @@
             </div>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $quranRefs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
             <div class="quran-ref-item">
-                <div class="quran-ref-arabic"><?php echo e($ref['arabic']); ?></div>
-                <div class="quran-ref-trans">"<?php echo e($ref['translation']); ?>"</div>
-                <div class="quran-ref-source">— <?php echo e($ref['reference']); ?></div>
+                <div class="quran-ref-arabic"><?php echo e(is_array($ref) ? ($ref['arabic'] ?? '') : ''); ?></div>
+                <div class="quran-ref-trans">"<?php echo e(is_array($ref) ? ($ref['translation'] ?? '') : ''); ?>"</div>
+                <div class="quran-ref-source">— <?php echo e(is_array($ref) ? ($ref['reference'] ?? '') : ''); ?></div>
             </div>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
         </div>
@@ -394,10 +420,10 @@
                 
                 <div style="flex: 1; min-width: 200px;">
                     <label style="font-size: .85rem; color: var(--text-medium); font-weight: 600; margin-bottom: 8px; display: block;">Collection</label>
-                    <select name="book" style="width: 100%; padding: 12px 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-family: 'Outfit', sans-serif; font-size: .95rem; outline: none;">
+                    <select name="collection" style="width: 100%; padding: 12px 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-family: 'Outfit', sans-serif; font-size: .95rem; outline: none;">
                         <option value="">All Collections</option>
                         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $topicBooks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                        <option value="<?php echo e($b); ?>" <?php echo e(request('book') == $b ? 'selected' : ''); ?>><?php echo e($b); ?></option>
+                        <option value="<?php echo e($b->id); ?>" <?php echo e(request('collection') == $b->id ? 'selected' : ''); ?>><?php echo e($b->name_en); ?></option>
                         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                     </select>
                 </div>
@@ -407,7 +433,7 @@
                     <select name="narrator" style="width: 100%; padding: 12px 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-family: 'Outfit', sans-serif; font-size: .95rem; outline: none;">
                         <option value="">All Narrators</option>
                         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $topicNarrators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $n): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
-                        <option value="<?php echo e($n); ?>" <?php echo e(request('narrator') == $n ? 'selected' : ''); ?>><?php echo e(Str::limit($n, 25)); ?></option>
+                        <option value="<?php echo e($n->id); ?>" <?php echo e(request('narrator') == $n->id ? 'selected' : ''); ?>><?php echo e(Str::limit($n->name_en, 25)); ?></option>
                         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                     </select>
                 </div>
@@ -416,7 +442,7 @@
                     <button type="submit" class="btn-primary-nav" style="width: auto; padding: 12px 30px;"><i class="fas fa-check"></i> Apply Filters</button>
                 </div>
                 
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(request()->hasAny(['grade', 'book', 'narrator'])): ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(request()->hasAny(['grade', 'collection', 'narrator'])): ?>
                 <div>
                     <a href="<?php echo e(route('hadith.show', $topic->slug)); ?>" style="color: #e53e3e; font-size: .9rem; font-weight: 600; text-decoration: none; display: inline-block; padding: 12px 15px;">Clear</a>
                 </div>
@@ -455,10 +481,12 @@
                 </div>
                 
                 <div class="hadith-body">
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($hadith->arabic_text && !Str::contains($hadith->arabic_text, 'placeholder until arabic fetch')): ?>
                     <div class="hadith-arabic">
                         <?php echo e($hadith->arabic_text); ?>
 
                     </div>
+                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
                     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($hadith->urdu_translation): ?>
                     <div class="urdu-translation">
@@ -587,8 +615,8 @@
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $topicNarrators->take(5); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $narrator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-light);">
-                    <span style="font-weight: 600; color: var(--navy); font-size: .9rem;"><?php echo e($narrator); ?></span>
-                    <a href="<?php echo e(route('hadith.show', $topic->slug)); ?>?narrator=<?php echo e(urlencode($narrator)); ?>" style="color: var(--gold-dark); text-decoration: none; font-size: .8rem; font-weight: 700;">Filter</a>
+                    <span style="font-weight: 600; color: var(--navy); font-size: .9rem;"><?php echo e($narrator->name_en); ?></span>
+                    <a href="<?php echo e(route('hadith.show', $topic->slug)); ?>?narrator=<?php echo e($narrator->id); ?>" style="color: var(--gold-dark); text-decoration: none; font-size: .8rem; font-weight: 700;">Filter</a>
                 </div>
                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
             </div>
@@ -610,7 +638,7 @@
         <div class="sidebar-card">
             <h3 class="sidebar-title"><i class="fas fa-list-ul" style="color: var(--gold-dark);"></i> Other Topics</h3>
             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $otherTopics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $other): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $relatedTopics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $other): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                 <a href="<?php echo e(route('hadith.show', $other->slug)); ?>" class="topic-pill">
                     <?php echo e($other->topic_name); ?>
 

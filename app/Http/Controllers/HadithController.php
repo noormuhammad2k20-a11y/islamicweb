@@ -14,41 +14,86 @@ class HadithController extends Controller
         $narrators = \App\Models\HadithNarrator::withCount('hadiths')->orderByDesc('hadiths_count')->limit(12)->get();
         
         $stats = [
-            'topics' => $topics->count(),
-            'hadiths' => \App\Models\Hadith::count(),
-            'books' => $collections->count(),
-            'narrators' => $narrators->count() > 0 ? $narrators->count() : \App\Models\Hadith::distinct('narrator')->count('narrator'),
+            'total_topics'      => $topics->count(),
+            'total_hadiths'     => \App\Models\Hadith::count(),
+            'total_collections' => $collections->whereNotNull('hadiths_count')->where('hadiths_count', '>', 0)->count(),
+            'total_narrators'   => \App\Models\HadithNarrator::count(),
         ];
         
         return view('hadith.index', compact('topics', 'collections', 'narrators', 'stats'));
     }
 
-    public function show(Request $request, HadithTopic $topic)
+    public function show(Request $request, $slug)
     {
-        $query = $topic->hadiths();
+        $topic = HadithTopic::where('slug', $slug)->firstOrFail();
+
+        // Eager load hadiths via pivot with collection and narrator
+        $query = $topic->hadiths()->with(['collectionModel', 'narratorModel']);
         
         if ($request->has('grade') && $request->grade != '') {
-            $query->where('grade', 'LIKE', '%' . $request->grade . '%');
+            $query->where('sahih_grade', $request->grade);
         }
         
         if ($request->has('narrator') && $request->narrator != '') {
-            $query->where('narrator', 'LIKE', '%' . $request->narrator . '%');
+            $query->where('narrator_id', $request->narrator);
         }
         
-        if ($request->has('book') && $request->book != '') {
-            $query->where('book_name', 'LIKE', '%' . $request->book . '%');
+        if ($request->has('collection') && $request->collection != '') {
+            $query->where('collection_id', $request->collection);
         }
 
-        $hadiths = $query->orderBy('id')->paginate(10)->withQueryString();
+        $hadiths = $query->paginate(10)->withQueryString();
         
-        $otherTopics = HadithTopic::where('id', '!=', $topic->id)
+        $relatedTopics = HadithTopic::whereHas('hadiths')
+                        ->where('id', '!=', $topic->id)
                         ->inRandomOrder()->limit(6)->get();
                         
-        // Extract unique narrators and books for the filters
-        $topicNarrators = $topic->hadiths()->select('narrator')->distinct()->whereNotNull('narrator')->pluck('narrator');
-        $topicBooks = $topic->hadiths()->select('book_name')->distinct()->whereNotNull('book_name')->pluck('book_name');
+        $topicBooks = \App\Models\HadithCollection::whereHas('hadiths.topics', function($q) use ($topic) {
+            $q->where('hadith_topics.id', $topic->id);
+        })->get();
 
-        return view('hadith.show', compact('topic', 'hadiths', 'otherTopics', 'topicNarrators', 'topicBooks'));
+        $topicNarrators = \App\Models\HadithNarrator::whereHas('hadiths.topics', function($q) use ($topic) {
+            $q->where('hadith_topics.id', $topic->id);
+        })->orderBy('name_en')->get();
+
+        // SEO and Schema Markup
+        $canonicalUrl = config('app.url') . '/hadith/' . $topic->slug;
+        $faqSchema = [];
+        if ($topic->faqs) {
+            $faqs = json_decode($topic->faqs, true);
+            if (is_array($faqs)) {
+                foreach ($faqs as $faq) {
+                    $faqSchema[] = [
+                        '@type' => 'Question',
+                        'name' => $faq['question'],
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text' => $faq['answer']
+                        ]
+                    ];
+                }
+            }
+        }
+
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'FAQPage', 
+                    'mainEntity' => $faqSchema
+                ],
+                [
+                    '@type' => 'BreadcrumbList', 
+                    'itemListElement' => [
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => config('app.url')],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Hadith Topics', 'item' => config('app.url').'/hadith'],
+                        ['@type' => 'ListItem', 'position' => 3, 'name' => $topic->topic_name, 'item' => config('app.url').'/hadith/'.$topic->slug],
+                    ]
+                ],
+            ]
+        ];
+
+        return view('hadith.show', compact('topic', 'hadiths', 'relatedTopics', 'topicBooks', 'topicNarrators', 'canonicalUrl', 'schema'));
     }
 
     public function hadithShow(HadithTopic $topic, $hadithSlug)

@@ -355,6 +355,32 @@
     <!-- Main Content -->
     <div class="main-content">
         
+        <!-- Topic Overview & Practical Guidance -->
+        @if($topic->overview || $topic->lessons || $topic->practical_guidance)
+        <div class="quran-refs-box" style="margin-bottom: 40px; padding: 30px;">
+            @if($topic->overview)
+            <div style="margin-bottom: 25px;">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: 12px; font-weight: 700;">Overview</h3>
+                <p style="color: var(--text-medium); line-height: 1.8; font-size: 1.05rem; margin: 0;">{{ $topic->overview }}</p>
+            </div>
+            @endif
+
+            @if($topic->lessons)
+            <div style="margin-bottom: 25px; padding-top: 25px; border-top: 1px solid var(--border-light);">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px;"><i class="fas fa-graduation-cap" style="color: var(--gold-dark);"></i> Key Lessons</h3>
+                <p style="color: var(--text-medium); line-height: 1.7; font-size: .95rem; margin: 0;">{{ $topic->lessons }}</p>
+            </div>
+            @endif
+
+            @if($topic->practical_guidance)
+            <div style="padding-top: 25px; border-top: 1px solid var(--border-light);">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px;"><i class="fas fa-compass" style="color: var(--gold-dark);"></i> Practical Guidance</h3>
+                <p style="color: var(--text-medium); line-height: 1.7; font-size: .95rem; margin: 0;">{{ $topic->practical_guidance }}</p>
+            </div>
+            @endif
+        </div>
+        @endif
+
         <!-- Quran References -->
         @php $quranRefs = json_decode($topic->quran_references, true); @endphp
         @if($quranRefs && count($quranRefs) > 0)
@@ -366,9 +392,9 @@
             </div>
             @foreach($quranRefs as $ref)
             <div class="quran-ref-item">
-                <div class="quran-ref-arabic">{{ $ref['arabic'] }}</div>
-                <div class="quran-ref-trans">"{{ $ref['translation'] }}"</div>
-                <div class="quran-ref-source">— {{ $ref['reference'] }}</div>
+                <div class="quran-ref-arabic">{{ is_array($ref) ? ($ref['arabic'] ?? '') : '' }}</div>
+                <div class="quran-ref-trans">"{{ is_array($ref) ? ($ref['translation'] ?? '') : '' }}"</div>
+                <div class="quran-ref-source">— {{ is_array($ref) ? ($ref['reference'] ?? '') : '' }}</div>
             </div>
             @endforeach
         </div>
@@ -395,10 +421,10 @@
                 
                 <div style="flex: 1; min-width: 200px;">
                     <label style="font-size: .85rem; color: var(--text-medium); font-weight: 600; margin-bottom: 8px; display: block;">Collection</label>
-                    <select name="book" style="width: 100%; padding: 12px 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-family: 'Outfit', sans-serif; font-size: .95rem; outline: none;">
+                    <select name="collection" style="width: 100%; padding: 12px 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-family: 'Outfit', sans-serif; font-size: .95rem; outline: none;">
                         <option value="">All Collections</option>
                         @foreach($topicBooks as $b)
-                        <option value="{{ $b }}" {{ request('book') == $b ? 'selected' : '' }}>{{ $b }}</option>
+                        <option value="{{ $b->id }}" {{ request('collection') == $b->id ? 'selected' : '' }}>{{ $b->name_en }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -408,7 +434,7 @@
                     <select name="narrator" style="width: 100%; padding: 12px 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-family: 'Outfit', sans-serif; font-size: .95rem; outline: none;">
                         <option value="">All Narrators</option>
                         @foreach($topicNarrators as $n)
-                        <option value="{{ $n }}" {{ request('narrator') == $n ? 'selected' : '' }}>{{ Str::limit($n, 25) }}</option>
+                        <option value="{{ $n->id }}" {{ request('narrator') == $n->id ? 'selected' : '' }}>{{ Str::limit($n->name_en, 25) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -417,7 +443,7 @@
                     <button type="submit" class="btn-primary-nav" style="width: auto; padding: 12px 30px;"><i class="fas fa-check"></i> Apply Filters</button>
                 </div>
                 
-                @if(request()->hasAny(['grade', 'book', 'narrator']))
+                @if(request()->hasAny(['grade', 'collection', 'narrator']))
                 <div>
                     <a href="{{ route('hadith.show', $topic->slug) }}" style="color: #e53e3e; font-size: .9rem; font-weight: 600; text-decoration: none; display: inline-block; padding: 12px 15px;">Clear</a>
                 </div>
@@ -454,9 +480,11 @@
                 </div>
                 
                 <div class="hadith-body">
+                    @if($hadith->arabic_text && !Str::contains($hadith->arabic_text, 'placeholder until arabic fetch'))
                     <div class="hadith-arabic">
                         {{ $hadith->arabic_text }}
                     </div>
+                    @endif
 
                     @if($hadith->urdu_translation)
                     <div class="urdu-translation">
@@ -580,8 +608,8 @@
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 @foreach($topicNarrators->take(5) as $narrator)
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-light);">
-                    <span style="font-weight: 600; color: var(--navy); font-size: .9rem;">{{ $narrator }}</span>
-                    <a href="{{ route('hadith.show', $topic->slug) }}?narrator={{ urlencode($narrator) }}" style="color: var(--gold-dark); text-decoration: none; font-size: .8rem; font-weight: 700;">Filter</a>
+                    <span style="font-weight: 600; color: var(--navy); font-size: .9rem;">{{ $narrator->name_en }}</span>
+                    <a href="{{ route('hadith.show', $topic->slug) }}?narrator={{ $narrator->id }}" style="color: var(--gold-dark); text-decoration: none; font-size: .8rem; font-weight: 700;">Filter</a>
                 </div>
                 @endforeach
             </div>
@@ -603,7 +631,7 @@
         <div class="sidebar-card">
             <h3 class="sidebar-title"><i class="fas fa-list-ul" style="color: var(--gold-dark);"></i> Other Topics</h3>
             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                @foreach($otherTopics as $other)
+                @foreach($relatedTopics as $other)
                 <a href="{{ route('hadith.show', $other->slug) }}" class="topic-pill">
                     {{ $other->topic_name }}
                 </a>

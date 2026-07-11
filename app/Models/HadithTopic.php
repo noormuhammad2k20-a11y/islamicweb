@@ -11,7 +11,7 @@ class HadithTopic extends Model
 
     public function hadiths(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Hadith::class, 'hadith_hadith_topic');
+        return $this->belongsToMany(Hadith::class, 'hadith_hadith_topic', 'hadith_topic_id', 'hadith_id');
     }
 }
 

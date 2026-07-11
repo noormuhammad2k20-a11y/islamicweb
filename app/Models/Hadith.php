@@ -36,7 +36,7 @@ class Hadith extends Model
 
     public function topics(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(HadithTopic::class, 'hadith_hadith_topic');
+        return $this->belongsToMany(HadithTopic::class, 'hadith_hadith_topic', 'hadith_id', 'hadith_topic_id');
     }
 
     public function narratorModel(): BelongsTo
