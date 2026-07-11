@@ -74,9 +74,14 @@
     <div id="monthly-timetable-section">
         <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
             <h2 class="section-title" style="margin-bottom: 0;">Full Ramadan {{ $year }} Timetable — {{ $city->name }}</h2>
-            <button onclick="printTimetable()" class="print-btn" style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'">
-                🖨️ Print Table
-            </button>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="printTimetable()" class="print-btn" style="background: var(--primary); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'">
+                    🖨️ Print Table
+                </button>
+                <button onclick="downloadCSV()" class="csv-btn" style="background: var(--gold); color: var(--primary-dark); border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='none'">
+                    ⬇️ Download CSV
+                </button>
+            </div>
         </div>
 
         <script>
@@ -108,6 +113,28 @@
                     printWindow.print();
                     printWindow.close();
                 }, 250);
+            }
+
+            function downloadCSV() {
+                var table = document.querySelector('#monthly-timetable-section .table-modern');
+                var rows = table.querySelectorAll('tr');
+                var csv = [];
+                for (var i = 0; i < rows.length; i++) {
+                    var row = [], cols = rows[i].querySelectorAll('td, th');
+                    for (var j = 0; j < cols.length; j++) 
+                        row.push('"' + cols[j].innerText + '"');
+                    csv.push(row.join(','));
+                }
+                var csv_string = csv.join('\n');
+                var filename = 'Ramadan_{{ $year }}_{{ $city->name }}_Timetable.csv';
+                var link = document.createElement('a');
+                link.style.display = 'none';
+                link.setAttribute('target', '_blank');
+                link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv_string));
+                link.setAttribute('download', filename);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             }
         </script>
         

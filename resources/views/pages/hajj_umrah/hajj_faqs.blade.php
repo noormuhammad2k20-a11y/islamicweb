@@ -1,68 +1,68 @@
 @extends('layouts.app')
 
-@section('title', 'Hajj & Umrah FAQs — Noor-e-Islam')
-@section('meta_description', 'Common mistakes and travel preparation')
+@section('seo')
+<title>Hajj & Umrah FAQs — Answers to Common Questions | IslamicWeb</title>
+<meta name="description" content="Find answers to all your questions about Hajj and Umrah, including rules, restrictions, women's pilgrimage, and common mistakes.">
+@endsection
 
 @section('content')
-<section class="section services-section" style="padding-top: 60px;">
+<style>
+    :root { --primary: #0A3A2A; --primary-dark: #052116; --gold: #D4AF37; --gold-light: #F3E5AB; --border-light: rgba(10,58,42,0.1); --cream: #faf9f6; --card-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .page-hero { background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 50%, #125740 100%); padding: 60px 20px 80px 20px; text-align: center; color: white; position: relative; overflow: hidden; border-radius: 0 0 40px 40px; margin-bottom: 50px;}
+    .page-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(circle at 25% 25%, var(--gold) 1px, transparent 1px); background-size: 40px 40px; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 800; margin-bottom: 15px; position: relative; z-index: 2; color: var(--gold-light); }
+    .page-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.9); position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+</style>
+
+<section class="page-hero">
+    <h1 class="page-title">Hajj & Umrah FAQs</h1>
+    <p class="page-subtitle">Comprehensive answers to common questions about rituals, rules, and travel preparation.</p>
+</section>
+
+<section class="section" style="padding-bottom: 60px;">
     <div class="section-inner">
-        <div class="breadcrumb" style="text-align: center; margin-bottom: 40px;">
-            <div style="background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 0.95rem;">
-                <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a> 
-                <span style="color: #ccc; margin: 0 10px;">/</span> 
-                <span style="color: #666; font-weight: 600;">Hajj & Umrah FAQs</span>
-            </div>
-        </div>
-
-        <div class="section-header">
-            <div class="section-badge"><i class="fas fa-question-circle"></i> Feature</div>
-            <h1 class="section-title">Hajj & Umrah FAQs</h1>
-            <div class="arabic-divider"><span class="line"></span><span class="symbol">﷽</span><span class="line"></span></div>
-            <p class="section-subtitle">Common mistakes and travel preparation</p>
-        </div>
-
-        <div style="max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 20px;">
+        <div style="max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
             
             <!-- FAQ 1 -->
-            <div style="background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <div style="display: flex; align-items: flex-start; gap: 15px;">
-                    <div style="background: var(--primary-light); color: var(--primary-dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; flex-shrink: 0;">Q</div>
+            <div style="background: white; border-radius: 12px; padding: 25px; box-shadow: var(--card-shadow); border: 1px solid var(--border-light); border-left: 4px solid var(--gold);">
+                <div style="display: flex; align-items: flex-start; gap: 20px;">
+                    <div style="background: rgba(212,175,55,0.1); color: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4rem; flex-shrink: 0; font-family: 'Playfair Display', serif;">Q</div>
                     <div>
-                        <h3 style="color: var(--primary-dark); font-size: 1.15rem; margin: 0 0 10px 0; line-height: 1.4;">What is the difference between Hajj and Umrah?</h3>
-                        <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin: 0;">Hajj is a mandatory obligation (Fard) for those who are physically and financially able, performed only during specific days of Dhul-Hijjah. Umrah is a highly recommended (Sunnah) pilgrimage that can be performed at any time of the year and involves fewer rituals.</p>
+                        <h3 style="color: var(--primary-dark); font-size: 1.3rem; margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-weight: 700;">What is the difference between Hajj and Umrah?</h3>
+                        <p style="color: #444; font-size: 1.05rem; line-height: 1.8; margin: 0;">Hajj is a mandatory obligation (Fard) for those who are physically and financially able, performed only during specific days of Dhul-Hijjah. Umrah is a highly recommended (Sunnah) pilgrimage that can be performed at any time of the year and involves fewer rituals.</p>
                     </div>
                 </div>
             </div>
 
             <!-- FAQ 2 -->
-            <div style="background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <div style="display: flex; align-items: flex-start; gap: 15px;">
-                    <div style="background: var(--primary-light); color: var(--primary-dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; flex-shrink: 0;">Q</div>
+            <div style="background: white; border-radius: 12px; padding: 25px; box-shadow: var(--card-shadow); border: 1px solid var(--border-light); border-left: 4px solid var(--gold);">
+                <div style="display: flex; align-items: flex-start; gap: 20px;">
+                    <div style="background: rgba(212,175,55,0.1); color: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4rem; flex-shrink: 0; font-family: 'Playfair Display', serif;">Q</div>
                     <div>
-                        <h3 style="color: var(--primary-dark); font-size: 1.15rem; margin: 0 0 10px 0; line-height: 1.4;">Who is exempt from performing Hajj?</h3>
-                        <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin: 0;">Anyone who lacks the physical ability due to illness, or lacks the financial means to travel and provide for their family back home, is exempt. For women, historically, traveling without a Mahram was an exemption, though recent regulatory updates have provided alternative group travel provisions.</p>
+                        <h3 style="color: var(--primary-dark); font-size: 1.3rem; margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-weight: 700;">Who is exempt from performing Hajj?</h3>
+                        <p style="color: #444; font-size: 1.05rem; line-height: 1.8; margin: 0;">Anyone who lacks the physical ability due to illness, or lacks the financial means to travel and provide for their family back home, is exempt. For women, historically, traveling without a Mahram was an exemption, though recent regulatory updates have provided alternative group travel provisions.</p>
                     </div>
                 </div>
             </div>
 
             <!-- FAQ 3 -->
-            <div style="background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <div style="display: flex; align-items: flex-start; gap: 15px;">
-                    <div style="background: var(--primary-light); color: var(--primary-dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; flex-shrink: 0;">Q</div>
+            <div style="background: white; border-radius: 12px; padding: 25px; box-shadow: var(--card-shadow); border: 1px solid var(--border-light); border-left: 4px solid var(--gold);">
+                <div style="display: flex; align-items: flex-start; gap: 20px;">
+                    <div style="background: rgba(212,175,55,0.1); color: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4rem; flex-shrink: 0; font-family: 'Playfair Display', serif;">Q</div>
                     <div>
-                        <h3 style="color: var(--primary-dark); font-size: 1.15rem; margin: 0 0 10px 0; line-height: 1.4;">What breaks the state of Ihram?</h3>
-                        <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin: 0;">Engaging in marital relations, cutting hair or nails, wearing scented oils or perfumes, men covering their heads or wearing stitched clothes, and hunting or cutting trees in the Haram boundaries. Committing these acts may require expiation (Fidyah).</p>
+                        <h3 style="color: var(--primary-dark); font-size: 1.3rem; margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-weight: 700;">What breaks the state of Ihram?</h3>
+                        <p style="color: #444; font-size: 1.05rem; line-height: 1.8; margin: 0;">Engaging in marital relations, cutting hair or nails, wearing scented oils or perfumes, men covering their heads or wearing stitched clothes, and hunting or cutting trees in the Haram boundaries. Committing these acts may require expiation (Fidyah).</p>
                     </div>
                 </div>
             </div>
 
             <!-- FAQ 4 -->
-            <div style="background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <div style="display: flex; align-items: flex-start; gap: 15px;">
-                    <div style="background: var(--primary-light); color: var(--primary-dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; flex-shrink: 0;">Q</div>
+            <div style="background: white; border-radius: 12px; padding: 25px; box-shadow: var(--card-shadow); border: 1px solid var(--border-light); border-left: 4px solid var(--gold);">
+                <div style="display: flex; align-items: flex-start; gap: 20px;">
+                    <div style="background: rgba(212,175,55,0.1); color: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.4rem; flex-shrink: 0; font-family: 'Playfair Display', serif;">Q</div>
                     <div>
-                        <h3 style="color: var(--primary-dark); font-size: 1.15rem; margin: 0 0 10px 0; line-height: 1.4;">Is it necessary to visit Madinah during Hajj?</h3>
-                        <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin: 0;">Visiting Madinah and the Prophet's Mosque (Masjid an-Nabawi) is not a mandatory part of the Hajj or Umrah rituals. However, it is highly recommended and holds immense spiritual reward, so most pilgrims include it in their journey.</p>
+                        <h3 style="color: var(--primary-dark); font-size: 1.3rem; margin: 0 0 10px 0; font-family: 'Playfair Display', serif; font-weight: 700;">Is it necessary to visit Madinah during Hajj?</h3>
+                        <p style="color: #444; font-size: 1.05rem; line-height: 1.8; margin: 0;">Visiting Madinah and the Prophet's Mosque (Masjid an-Nabawi) is not a mandatory part of the Hajj or Umrah rituals. However, it is highly recommended and holds immense spiritual reward, so most pilgrims include it in their journey.</p>
                     </div>
                 </div>
             </div>

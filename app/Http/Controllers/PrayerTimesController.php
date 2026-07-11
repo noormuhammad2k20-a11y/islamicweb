@@ -117,13 +117,61 @@ class PrayerTimesController extends Controller
         $prayerKey = $prayerName === 'zuhr' ? 'dhuhr' : $prayerName;
         $seoData = $this->prayerSeo($name, $prayerName, $prayerKey, $prayers, $tz);
 
+        $hijri = $this->toHijri(Carbon::now($tz));
+        $next = $this->getNextPrayer($prayers, $tz);
+        $tomorrow = $this->buildTomorrow($lat, $lng, $tz);
+        $qibla = $this->calcQibla($lat, $lng);
+
+        if ($prayerName === 'nawafil') {
+            $todayNawafil = $this->calculateNawafilTimes($prayers['sunrise'], $prayers['dhuhr'], $prayers['maghrib'], $prayers['isha'], $prayers['fajr']);
+            $monthlyNawafil = [];
+            foreach ($monthly as $row) {
+                // If the prayer time is missing (e.g. "--:--"), fallback to today's times to avoid parse errors.
+                $s = $row['sunrise'] === '--:--' ? $prayers['sunrise'] : $row['sunrise'];
+                $d = $row['dhuhr'] === '--:--' ? $prayers['dhuhr'] : $row['dhuhr'];
+                $m = $row['maghrib'] === '--:--' ? $prayers['maghrib'] : $row['maghrib'];
+                $i = $row['isha'] === '--:--' ? $prayers['isha'] : $row['isha'];
+                $f = $row['fajr'] === '--:--' ? $prayers['fajr'] : $row['fajr'];
+                $nawafil = $this->calculateNawafilTimes($s, $d, $m, $i, $f);
+                $monthlyNawafil[] = array_merge($row, $nawafil);
+            }
+            return view('prayer-times.nawafil', compact(
+                'city','name','citySlug','prayerName','prayers','todayNawafil','monthlyNawafil','seoData','tz','hijri','next','tomorrow','qibla'
+            ));
+        }
+
         return view('prayer-times.prayer', compact(
             'city','name','citySlug','prayerName','prayerKey','prayers',
-            'prayerContent','monthly','seoData','tz'
+            'prayerContent','monthly','seoData','tz','hijri','next','tomorrow','qibla'
         ));
     }
 
     // ── HELPERS ───────────────────────────────────────────
+    private function calculateNawafilTimes($sunrise, $dhuhr, $maghrib, $isha, $nextFajr)
+    {
+        $sunriseTime  = Carbon::parse($sunrise);
+        $dhuhrTime    = Carbon::parse($dhuhr);
+        $maghribTime  = Carbon::parse($maghrib);
+        $ishaTime     = Carbon::parse($isha);
+        $nextFajrTime = Carbon::parse($nextFajr)->addDay();
+
+        // Ishraq: 20 minutes after sunrise
+        $ishraq = $sunriseTime->copy()->addMinutes(20)->format('h:i A');
+
+        // Chasht: midpoint between sunrise and Dhuhr
+        $diffMins = $sunriseTime->diffInMinutes($dhuhrTime);
+        $chasht   = $sunriseTime->copy()->addMinutes((int)($diffMins / 2))->format('h:i A');
+
+        // Awwabin: 15 minutes after Maghrib
+        $awwabin = $maghribTime->copy()->addMinutes(15)->format('h:i A');
+
+        // Tahajjud: 2/3 of night from Isha to next Fajr
+        $nightMins  = $ishaTime->diffInMinutes($nextFajrTime);
+        $tahajjud   = $ishaTime->copy()->addMinutes((int)($nightMins * 2 / 3))->format('h:i A');
+
+        return compact('ishraq', 'chasht', 'awwabin', 'tahajjud');
+    }
+
     private function calcPrayers($lat,$lng,$tz,$madhab='hanafi',$method='Karachi'): array
     {
         $methodConst = defined('\IslamicNetwork\PrayerTimes\Method::METHOD_' . strtoupper($method)) 

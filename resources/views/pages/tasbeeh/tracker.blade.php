@@ -5,180 +5,199 @@
 
 @section('content')
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap');
+
     :root {
-        --tasbeeh-bg: #ffffff;
-        --tasbeeh-text: #333333;
-        --tasbeeh-border: #eaeaea;
-        --tasbeeh-circle: var(--primary);
+        --bg-main: #F7F8FA;
+        --bg-alt: #FFFFFF;
+        --navy: #0A1F3F;
+        --navy-mid: #0F2D52;
+        --navy-light: #14466E;
+        --navy-tint: #E4EBF3;
+        --gold: #C9A84C;
+        --gold-light: #E4D08C;
+        --gold-dark: #8A6E2F;
+        --gold-tint: #FBF8EE;
+        --gold-gradient: linear-gradient(135deg, #C9A84C 0%, #E4D08C 50%, #C9A84C 100%);
+        --text-dark: #0C1425;
+        --text-medium: #4A5568;
+        --text-light: #8E9AB0;
+        --text-faint: #B8C2D4;
+        --white: #ffffff;
+        --border: #DFE5ED;
+        --border-light: #EDF0F5;
+        --shadow-xs: 0 1px 3px rgba(10, 31, 63, 0.04);
+        --shadow-sm: 0 4px 12px rgba(10, 31, 63, 0.05);
+        --shadow-md: 0 8px 30px rgba(10, 31, 63, 0.07);
+        --shadow-lg: 0 16px 48px rgba(10, 31, 63, 0.10);
+        --shadow-gold: 0 8px 32px rgba(201, 168, 76, 0.15);
+        --radius-sm: 14px;
+        --radius-md: 22px;
+        --radius-lg: 32px;
+        --radius-full: 9999px;
+        --tr: all .45s cubic-bezier(.25, .46, .45, .94);
+        --tr-fast: all .25s cubic-bezier(.25, .46, .45, .94);
     }
+
     body.dark-mode-tasbeeh {
-        --tasbeeh-bg: #1a1a1a;
-        --tasbeeh-text: #f0f0f0;
-        --tasbeeh-border: #333333;
-        --tasbeeh-circle: #125740;
-        background-color: #121212;
+        --bg-main: #050A14;
+        --bg-alt: #0F2D52;
+        --navy: #FFFFFF;
+        --navy-mid: #E4D08C;
+        --navy-tint: rgba(255,255,255,0.1);
+        --text-dark: #FFFFFF;
+        --text-medium: rgba(255,255,255,0.8);
+        --text-light: rgba(255,255,255,0.6);
+        --border: rgba(255,255,255,0.1);
+        --border-light: rgba(255,255,255,0.1);
+        --gold-tint: rgba(201, 168, 76, 0.1);
+        background-color: #050A14;
     }
+
+    .tasbeeh-section { 
+        background: var(--bg-main); 
+        padding: 80px 0; 
+        position: relative; 
+        overflow: hidden; 
+    }
+    .tasbeeh-section::before {
+        content: ""; position: absolute; top: 10%; right: -5%;
+        width: 600px; height: 600px;
+        background: radial-gradient(circle, rgba(201, 168, 76, 0.05), transparent 60%);
+        border-radius: 50%; pointer-events: none; z-index: 0;
+    }
+    .tasbeeh-section .section-inner { 
+        max-width: 1140px; margin: 0 auto; padding: 0 20px; 
+        position: relative; z-index: 1; 
+    }
+
+    .tasbeeh-page-header { text-align: center; margin-bottom: 50px; }
+    .tasbeeh-page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--navy); margin-bottom: 12px; font-weight: 700; line-height: 1.1; }
+    .tasbeeh-page-header h1 span { color: var(--gold-dark); font-style: italic; }
+    .tasbeeh-page-header p { font-size: 1.05rem; color: var(--text-medium); max-width: 600px; margin: 0 auto; line-height: 1.85; }
+    .gold-divider { width: 60px; height: 3px; background: var(--gold-gradient); border-radius: 2px; margin: 0 auto 25px; box-shadow: 0 0 12px rgba(201, 168, 76, 0.25); }
+
     .tasbeeh-widget {
-        background: var(--tasbeeh-bg);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        border: 1px solid var(--tasbeeh-border);
-        padding: 40px;
-        max-width: 500px;
-        margin: 0 auto;
-        color: var(--tasbeeh-text);
-        transition: all 0.3s ease;
+        background: var(--white); border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg); border: 1px solid var(--border-light);
+        padding: 40px; max-width: 500px; margin: 0 auto;
+        color: var(--text-dark); transition: all 0.3s ease;
+        position: relative; overflow: hidden;
     }
+    .tasbeeh-widget::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold-gradient); }
+
     .tasbeeh-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid var(--tasbeeh-border);
-        padding-bottom: 15px;
-        margin-bottom: 25px;
+        display: flex; justify-content: space-between; align-items: center;
+        border-bottom: 1px solid var(--border-light); padding-bottom: 20px; margin-bottom: 30px;
     }
-    .tasbeeh-header h2 {
-        font-size: 1.4rem;
-        margin: 0;
-        color: var(--primary);
-    }
+    .tasbeeh-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin: 0; color: var(--navy); font-weight: 700; }
+    .tasbeeh-header h2 i { color: var(--gold); margin-right: 8px; }
+    
     .tasbeeh-tools button {
-        background: none;
-        border: none;
-        color: #888;
-        font-size: 1.2rem;
-        cursor: pointer;
-        margin-left: 10px;
-        transition: color 0.2s;
+        background: var(--bg-main); border: 1px solid var(--border-light); color: var(--text-light);
+        width: 40px; height: 40px; border-radius: 12px; font-size: 1rem; cursor: pointer;
+        margin-left: 8px; transition: var(--tr-fast); display: inline-flex; align-items: center; justify-content: center;
     }
-    .tasbeeh-tools button:hover {
-        color: var(--primary);
-    }
-    .tasbeeh-display {
-        text-align: center;
-        margin: 30px 0;
-    }
+    .tasbeeh-tools button:hover { color: var(--gold-dark); border-color: var(--gold); background: var(--gold-tint); }
+
+    .tasbeeh-display { text-align: center; margin: 30px 0; }
     .tasbeeh-count {
-        font-size: 6rem;
-        font-weight: 800;
-        color: var(--tasbeeh-text);
-        font-family: 'Poppins', sans-serif;
-        line-height: 1;
-        text-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700;
+        color: var(--navy); line-height: 1; text-shadow: 0 4px 10px rgba(10,31,63,0.05);
     }
+
     .btn-tap {
-        width: 160px;
-        height: 160px;
-        border-radius: 50%;
-        background: linear-gradient(145deg, var(--primary), var(--primary-dark));
-        color: white;
-        font-size: 2rem;
-        font-weight: 700;
-        border: 4px solid var(--gold-light);
-        box-shadow: 0 10px 20px rgba(5,67,62,0.3), inset 0 -5px 15px rgba(0,0,0,0.2);
-        cursor: pointer;
-        transition: all 0.1s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 40px auto;
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
+        width: 180px; height: 180px; border-radius: 50%;
+        background: linear-gradient(145deg, var(--navy), var(--navy-mid)); color: var(--white);
+        font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 1px;
+        border: 4px solid var(--gold); box-shadow: 0 15px 30px rgba(10,31,63,0.2);
+        cursor: pointer; transition: all 0.1s; display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 40px auto; user-select: none; -webkit-tap-highlight-color: transparent;
+        position: relative; overflow: hidden;
+    }
+    .btn-tap::after {
+        content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+        border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
     }
     .btn-tap:active {
-        transform: scale(0.92);
-        box-shadow: 0 5px 10px rgba(5,67,62,0.3), inset 0 5px 15px rgba(0,0,0,0.3);
+        transform: scale(0.95); box-shadow: 0 5px 15px rgba(10,31,63,0.2), inset 0 5px 15px rgba(0,0,0,0.2);
+        border-color: var(--gold-dark);
     }
+
     .tasbeeh-controls {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(0,0,0,0.02);
-        padding: 20px;
-        border-radius: 12px;
-        border: 1px solid var(--tasbeeh-border);
+        display: flex; justify-content: space-between; align-items: center;
+        background: var(--bg-main); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-light);
     }
-    .target-group {
-        display: flex;
-        flex-direction: column;
-    }
-    .target-group label {
-        font-size: 0.85rem;
-        color: #777;
-        margin-bottom: 5px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
+    .target-group { display: flex; flex-direction: column; }
+    .target-group label { font-family: 'Outfit', sans-serif; font-size: .75rem; color: var(--text-light); margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
     .settings-select {
-        padding: 10px 15px;
-        border-radius: 8px;
-        border: 1px solid var(--tasbeeh-border);
-        font-size: 1rem;
-        color: var(--tasbeeh-text);
-        background: var(--tasbeeh-bg);
-        cursor: pointer;
-        min-width: 120px;
-        font-weight: 600;
+        padding: 12px 18px; border-radius: var(--radius-full); border: 1px solid var(--border);
+        font-family: 'Outfit', sans-serif; font-size: .9rem; color: var(--navy); background: var(--white);
+        cursor: pointer; min-width: 140px; font-weight: 600; outline: none; transition: var(--tr-fast);
     }
+    .settings-select:focus { border-color: var(--gold); }
+
     .btn-reset {
-        background: transparent;
-        color: #e74c3c;
-        border: 2px solid #e74c3c;
-        padding: 8px 20px;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
+        background: transparent; color: #E74C3C; border: 1px solid #E74C3C;
+        padding: 12px 24px; border-radius: var(--radius-full); font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 600;
+        cursor: pointer; transition: var(--tr-fast); text-transform: uppercase; letter-spacing: 1px;
     }
-    .btn-reset:hover {
-        background: #e74c3c;
-        color: white;
-    }
-    
+    .btn-reset:hover { background: #E74C3C; color: var(--white); }
+
     /* Fullscreen Mode */
-    body.fullscreen-mode header, body.fullscreen-mode footer, body.fullscreen-mode .seo-content-section {
+    body.fullscreen-mode header, body.fullscreen-mode footer, body.fullscreen-mode .seo-content-section, body.fullscreen-mode .tasbeeh-page-header {
         display: none !important;
     }
     body.fullscreen-mode .tasbeeh-widget {
-        margin-top: 10vh;
-        transform: scale(1.1);
+        margin-top: 5vh; transform: scale(1.1);
     }
 
     /* SEO Content Styles */
-    .seo-content-section {
-        max-width: 900px;
-        margin: 60px auto;
-        padding: 0 20px;
-        color: #444;
-        line-height: 1.8;
+    .seo-content-section { max-width: 900px; margin: 80px auto; padding: 0 20px; color: var(--text-medium); line-height: 1.8; }
+    .seo-content-section h2 { 
+        color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-top: 40px; margin-bottom: 20px; 
+        font-weight: 700; line-height: 1.2; position: relative; display: inline-block; padding-bottom: 10px; 
     }
-    .seo-content-section h2 {
-        color: var(--primary);
-        font-family: 'Playfair Display', serif;
-        margin-top: 40px;
-        border-bottom: 2px solid var(--gold);
-        display: inline-block;
-        padding-bottom: 5px;
+    .seo-content-section h2::after { content: ""; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background: var(--gold-gradient); border-radius: 2px; }
+    
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 30px; }
+    .feature-card { 
+        background: var(--white); padding: 30px; border-radius: var(--radius-md); 
+        box-shadow: var(--shadow-sm); border: 1px solid var(--border-light); transition: var(--tr); position: relative; overflow: hidden;
     }
-    .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
+    .feature-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold-gradient); transform: scaleX(0); transform-origin: left; transition: var(--tr); }
+    .feature-card:hover { box-shadow: var(--shadow-md); border-color: var(--navy-tint); transform: translateY(-3px); }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card h3 { color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-top: 0; margin-bottom: 10px; font-weight: 700; }
+    .feature-card p { font-size: .95rem; color: var(--text-medium); margin: 0; }
+
+    .cta-box { 
+        margin-top: 50px; text-align: center; background: var(--white); padding: 40px; 
+        border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border-light); position: relative; overflow: hidden; 
     }
-    .feature-card {
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: var(--card-shadow);
-        border: 1px solid var(--border-light);
+    .cta-box::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold-gradient); }
+    .cta-box h3 { color: var(--navy); margin-top: 0; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; }
+    .cta-box p { color: var(--text-medium); margin-bottom: 20px; }
+    .cta-btn { 
+        display: inline-block; padding: 12px 30px; background: linear-gradient(145deg, var(--navy), var(--navy-mid)); 
+        color: var(--white) !important; text-decoration: none; border-radius: var(--radius-full); 
+        font-weight: 600; font-size: .9rem; transition: var(--tr); box-shadow: var(--shadow-sm); 
     }
-    .feature-card h3 {
-        color: var(--primary);
-        margin-top: 0;
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    .resource-btn { 
+        background: var(--white); color: var(--navy); border: 1px solid var(--border);
+        padding: 12px 24px; border-radius: var(--radius-full); font-family: 'Outfit', sans-serif; font-weight: 600; font-size: .85rem;
+        cursor: pointer; transition: var(--tr); display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-xs); text-decoration: none;
     }
+    .resource-btn:hover { border-color: var(--navy); background: var(--navy-tint); }
+
+    .faq-item { 
+        margin-bottom: 20px; background: var(--white); padding: 25px; 
+        border-radius: var(--radius-md); border: 1px solid var(--border-light); box-shadow: var(--shadow-xs); 
+    }
+    .faq-item h3 { margin-top: 0; font-size: 1.2rem; color: var(--navy); font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+    .faq-item div { color: var(--text-medium); font-size: .95rem; line-height: 1.7; }
 </style>
 
 <!-- JSON-LD Software Application Schema -->
@@ -200,19 +219,19 @@
 }
 </script>
 
-<section class="section" style="padding-top: 60px; background: var(--cream);">
+<section class="tasbeeh-section">
     <div class="section-inner">
-        <div style="text-align: center; margin-bottom: 40px;">
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 10px;">Online Digital Tasbeeh Counter</h1>
-            <p style="color: #666; font-size: 1.1rem;">Your free, local-saving dhikr tracker. Tap anywhere or press Spacebar.</p>
+        <div class="tasbeeh-page-header">
+            <h1>Online Digital <span>Tasbeeh Counter</span></h1>
+            <div class="gold-divider"></div>
+            <p>Your free, local-saving dhikr tracker. Tap anywhere or press Spacebar.</p>
         </div>
 
         <div class="tasbeeh-widget" id="tasbeehApp">
             <div class="tasbeeh-header">
-                <h2><i class="fas fa-fingerprint" style="color: var(--gold);"></i> Dhikr Tracker</h2>
+                <h2><i class="fas fa-fingerprint"></i> Dhikr Tracker</h2>
                 <div class="tasbeeh-tools">
                     <button id="soundToggle" title="Toggle Sound"><i class="fas fa-volume-up"></i></button>
-                    <button id="darkModeToggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
                     <button id="fullscreenToggle" title="Fullscreen Mode"><i class="fas fa-expand"></i></button>
                 </div>
             </div>
@@ -262,10 +281,6 @@
                 <h3>🎯 Target Presets</h3>
                 <p>Easily set goals for 33 (post-salah dhikr), 99 (Asma ul Husna), or 100. The counter will alert you when your cycle is complete.</p>
             </div>
-            <div class="feature-card">
-                <h3>🌙 Dark Mode & Fullscreen</h3>
-                <p>Switch to dark mode to reduce eye strain at night, and enter fullscreen mode to prevent accidental clicks on other links while doing dhikr.</p>
-            </div>
         </div>
 
         <h2>Popular Dhikr to Recite Daily</h2>
@@ -277,10 +292,20 @@
             <li><strong>Durood Shareef:</strong> Sending blessings upon Prophet Muhammad (PBUH).</li>
         </ul>
 
-        <div style="margin-top: 50px; text-align: center; background: #fff; padding: 30px; border-radius: 12px; box-shadow: var(--card-shadow); border: 1px solid var(--border-light);">
-            <h3 style="color: var(--primary); margin-top: 0;">Explore More</h3>
+        <div class="cta-box">
+            <h3>Explore More</h3>
             <p>Looking for the specific method to pray <strong>Salat-ul-Tasbeeh</strong>? We have a complete step-by-step guide explaining the virtues, the exact tasbeeh, and how to perform the 4 Rakat prayer.</p>
-            <a href="{{ route('namaz.salat_tasbeeh') }}" style="display: inline-block; margin-top: 10px; padding: 10px 25px; background: var(--gold); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold;">Read Salat-ul-Tasbeeh Guide</a>
+            <a href="{{ route('namaz.salat_tasbeeh') }}" class="cta-btn">Read Salat-ul-Tasbeeh Guide</a>
+        </div>
+
+        <h2 style="margin-top: 50px;">Related Tools & Resources</h2>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+            <a href="{{ url('/prayer-times') }}" class="resource-btn"><i class="fas fa-clock"></i> Prayer Times</a>
+            <a href="{{ url('/tools/qibla-direction') }}" class="resource-btn"><i class="fas fa-kaaba"></i> Qibla Direction</a>
+            <a href="{{ url('/99-names-of-allah') }}" class="resource-btn"><i class="fas fa-hand-holding-heart"></i> 99 Names of Allah</a>
+            <a href="{{ url('/wazaif') }}" class="resource-btn"><i class="fas fa-book-open"></i> Quran & Wazaif</a>
+            <a href="{{ url('/duas') }}" class="resource-btn"><i class="fas fa-praying-hands"></i> Daily Duas</a>
+            <a href="{{ url('/islamic-events') }}" class="resource-btn"><i class="fas fa-star-and-crescent"></i> Islamic Events</a>
         </div>
     </div>
 </section>
@@ -290,15 +315,15 @@
     <h2>Frequently Asked Questions</h2>
     <div itemscope itemtype="https://schema.org/FAQPage">
         
-        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="margin-bottom: 20px; background: #fff; padding: 20px; border-radius: 8px; border: 1px solid var(--border-light);">
-            <h3 itemprop="name" style="margin-top: 0; font-size: 1.1rem; color: var(--primary);">Does the online tasbeeh counter work offline?</h3>
+        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="faq-item">
+            <h3 itemprop="name">Does the online tasbeeh counter work offline?</h3>
             <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                 <div itemprop="text">Once the page is loaded, the digital tasbeeh counter relies entirely on your browser's local storage and Javascript. It will continue to work and save your count even if your internet connection drops.</div>
             </div>
         </div>
 
-        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" style="margin-bottom: 20px; background: #fff; padding: 20px; border-radius: 8px; border: 1px solid var(--border-light);">
-            <h3 itemprop="name" style="margin-top: 0; font-size: 1.1rem; color: var(--primary);">Is it permissible to use a digital counter for dhikr?</h3>
+        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="faq-item">
+            <h3 itemprop="name">Is it permissible to use a digital counter for dhikr?</h3>
             <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                 <div itemprop="text">Yes, the majority of Islamic scholars agree that using physical beads (misbaha), digital clickers, or online counter apps is completely permissible (Mubah). They are simply tools to help you keep track of numbers, allowing you to focus on the meaning of your dhikr rather than the math. However, counting on the fingers of the right hand remains a highly recommended Sunnah.</div>
             </div>
@@ -315,16 +340,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetSelect = document.getElementById('targetSelect');
     
     const soundToggle = document.getElementById('soundToggle');
-    const darkModeToggle = document.getElementById('darkModeToggle');
     const fullscreenToggle = document.getElementById('fullscreenToggle');
 
     let currentCount = parseInt(localStorage.getItem('tasbeeh_count')) || 0;
     let isSoundEnabled = localStorage.getItem('tasbeeh_sound') !== 'false';
-    let isDarkMode = localStorage.getItem('tasbeeh_dark') === 'true';
 
     // Init state
     countEl.innerText = currentCount;
-    if(isDarkMode) document.body.classList.add('dark-mode-tasbeeh');
     if(!isSoundEnabled) soundToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
 
     // Audio context (soft click)
@@ -389,12 +411,6 @@ document.addEventListener('DOMContentLoaded', function() {
         isSoundEnabled = !isSoundEnabled;
         localStorage.setItem('tasbeeh_sound', isSoundEnabled);
         soundToggle.innerHTML = isSoundEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
-    });
-
-    darkModeToggle.addEventListener('click', () => {
-        isDarkMode = !isDarkMode;
-        localStorage.setItem('tasbeeh_dark', isDarkMode);
-        document.body.classList.toggle('dark-mode-tasbeeh');
     });
 
     fullscreenToggle.addEventListener('click', () => {

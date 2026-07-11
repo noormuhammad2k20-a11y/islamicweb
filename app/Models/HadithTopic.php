@@ -9,9 +9,9 @@ class HadithTopic extends Model
 {
     protected $guarded = [];
 
-    public function hadiths(): HasMany
+    public function hadiths(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Hadith::class, 'topic_id');
+        return $this->belongsToMany(Hadith::class, 'hadith_hadith_topic');
     }
 }
 

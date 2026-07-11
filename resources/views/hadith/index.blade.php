@@ -220,13 +220,16 @@
 <div class="prayer-ticker">
     <div class="prayer-ticker-inner" style="justify-content: center; gap: 40px;">
         <div class="prayer-ticker-label">
-            <i class="fas fa-list-ul"></i> Total Topics: {{ $topics->count() }}
+            <i class="fas fa-list-ul"></i> Total Topics: {{ $stats['topics'] }}
         </div>
         <div class="prayer-ticker-label">
-            <i class="fas fa-quote-right"></i> Total Hadiths: {{ $topics->sum('hadiths_count') }}
+            <i class="fas fa-quote-right"></i> Total Hadiths: {{ $stats['hadiths'] }}
         </div>
         <div class="prayer-ticker-label">
-            <i class="fas fa-book"></i> Major Books Covered
+            <i class="fas fa-book"></i> Authentic Collections: {{ $stats['books'] }}
+        </div>
+        <div class="prayer-ticker-label">
+            <i class="fas fa-users"></i> Key Narrators: {{ $stats['narrators'] }}
         </div>
     </div>
 </div>
@@ -235,7 +238,7 @@
     <div class="section-inner">
         
         <div class="section-header">
-            <div class="section-badge"><i class="fas fa-bookmark"></i> Collections</div>
+            <div class="section-badge"><i class="fas fa-bookmark"></i> Directory</div>
             <h2 class="section-title">Browse by <span>Topic</span></h2>
             <p class="section-subtitle">Select a topic to read related authentic hadiths.</p>
         </div>
@@ -249,11 +252,14 @@
                             <i class="fas fa-star-and-crescent"></i>
                         </div>
                         <h3 class="topic-name">{{ $topic->topic_name }}</h3>
+                        @if($topic->topic_name_arabic)
+                        <div style="font-family: 'Scheherazade New', serif; font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 5px;">{{ $topic->topic_name_arabic }}</div>
+                        @endif
                         <div class="hadith-count-badge">
                             {{ $topic->hadiths_count }} Hadiths
                         </div>
                         <p>
-                            {{ Str::limit($topic->content, 100) }}
+                            {{ Str::limit($topic->introduction ?? $topic->content, 100) }}
                         </p>
                         <div class="read-more">
                             Read Hadiths <i class="fas fa-arrow-right"></i>
@@ -263,6 +269,49 @@
             </div>
             @endforeach
         </div>
+
+        <!-- Browse by Collection -->
+        @if(isset($collections) && $collections->count() > 0)
+        <div class="section-header" style="margin-top: 80px;">
+            <div class="section-badge"><i class="fas fa-book-open"></i> Sources</div>
+            <h2 class="section-title">Browse by <span>Collection</span></h2>
+            <p class="section-subtitle">Explore hadiths by their original books of compilation.</p>
+        </div>
+        <div class="topics-grid">
+            @foreach($collections as $collection)
+            <div class="topic-card-wrapper">
+                <div class="topic-card" style="align-items: flex-start; text-align: left; padding: 25px;">
+                    <h3 class="topic-name">{{ $collection->name_en }}</h3>
+                    @if($collection->name_ar)
+                    <div style="font-family: 'Scheherazade New', serif; font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 5px; width: 100%; text-align: right;">{{ $collection->name_ar }}</div>
+                    @endif
+                    <div class="hadith-count-badge" style="margin-bottom: 15px;">{{ $collection->hadiths_count }} Hadiths</div>
+                    <p style="font-size: .85rem; line-height: 1.5;">{{ Str::limit($collection->introduction, 100) }}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @endif
+
+        <!-- Browse by Narrator -->
+        @if(isset($narrators) && $narrators->count() > 0)
+        <div class="section-header" style="margin-top: 80px;">
+            <div class="section-badge"><i class="fas fa-users"></i> Transmitters</div>
+            <h2 class="section-title">Browse by <span>Narrator</span></h2>
+            <p class="section-subtitle">Discover hadiths transmitted by the prominent companions (Sahabah).</p>
+        </div>
+        <div class="topics-grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+            @foreach($narrators as $narrator)
+            <div class="topic-card-wrapper">
+                <div class="topic-card" style="padding: 20px;">
+                    <div style="width: 50px; height: 50px; background: var(--navy); color: var(--gold-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 15px;"><i class="fas fa-user"></i></div>
+                    <h3 class="topic-name" style="font-size: 1.2rem;">{{ $narrator->name_en }}</h3>
+                    <div class="hadith-count-badge" style="background: var(--navy-tint); color: var(--navy); border: none;">{{ $narrator->hadiths_count }} Hadiths</div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @endif
 
         <!-- Featured Hadiths -->
         @php

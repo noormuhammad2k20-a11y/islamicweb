@@ -11,6 +11,6 @@ class DreamCategory extends Model
 
     public function dreamSymbols()
     {
-        return $this->belongsToMany(DreamSymbol::class, 'dream_category_dream_symbol');
+        return $this->hasMany(DreamSymbol::class, 'category_id');
     }
 }

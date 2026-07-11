@@ -11,13 +11,13 @@
         <span style="margin: 0 6px;">/</span>
         <a href="{{ route('dreams.index') }}" style="color: #1a6b42; text-decoration: none;">خوابوں کی تعبیر</a>
         <span style="margin: 0 6px;">/</span>
-        <span>{{ $symbol->symbol_urdu }}</span>
+        <span>{{ $symbol->symbol_roman_urdu }}</span>
     </nav>
 
     <article style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
         <div style="background: linear-gradient(135deg, #1a1a3e, #2d1b69); padding: 40px; text-align: center; color: #fff;">
-            <h1 style="font-family: 'Amiri', serif; font-size: 2.2rem; margin-bottom: 8px; direction: rtl;">
-                خواب میں {{ $symbol->symbol_urdu }} دیکھنا
+            <h1 style="font-size: 2.2rem; margin-bottom: 8px; direction: {{ getDir($symbol->symbol_roman_urdu) }}; text-align: center;">
+                {{ $symbol->symbol_roman_urdu }}
             </h1>
             <p style="opacity: 0.9; font-size: 1.1rem; margin-bottom: 4px;">{{ $symbol->symbol_english }} — Islamic Dream Interpretation</p>
             <p style="opacity: 0.7; font-size: 0.95rem; font-family: 'Amiri', serif; direction: rtl;">
@@ -45,25 +45,50 @@
         </div>
 
         <div style="padding: 36px;">
-            {{-- Urdu Interpretation --}}
-            <div style="direction: rtl; margin-bottom: 28px;">
-                <h2 style="font-family: 'Amiri', serif; font-size: 1.4rem; color: #2d1b69; margin-bottom: 14px;">
-                    <i class="fas fa-moon"></i> اردو تعبیر
+            {{-- Detailed Islamic Interpretation --}}
+            @php 
+                $interpContent = $symbol->detailed_interpretation_urdu ?? $symbol->interpretation_urdu; 
+                $interpDir = getDir($interpContent);
+                $interpAlign = getAlign($interpContent);
+            @endphp
+            <div style="margin-bottom: 28px;">
+                <h2 style="font-family: 'Amiri', serif; font-size: 1.4rem; color: #2d1b69; margin-bottom: 14px; direction: {{ $interpDir }}; text-align: {{ $interpAlign }};">
+                    <i class="fas fa-moon"></i> اسلامی تعبیر
                 </h2>
-                <div style="font-family: 'Amiri', serif; font-size: 1.15rem; line-height: 2.2; color: #333; background: linear-gradient(135deg, #f8f4ff, #f0ecf8); padding: 24px; border-radius: 10px; border-right: 4px solid #2d1b69;">
-                    {{ $symbol->interpretation_urdu }}
+                <div style="font-family: 'Amiri', serif; font-size: 1.15rem; line-height: 2.2; color: #333; background: linear-gradient(135deg, #f8f4ff, #f0ecf8); padding: 24px; border-radius: 10px; border-{{ $interpDir === 'ltr' ? 'left' : 'right' }}: 4px solid #2d1b69; direction: {{ $interpDir }}; text-align: {{ $interpAlign }};">
+                    {!! $interpContent !!}
                 </div>
             </div>
 
-            {{-- English Interpretation --}}
-            @if($symbol->interpretation_english)
-            <div style="margin-bottom: 28px;">
-                <h2 style="font-size: 1.2rem; color: #2d1b69; margin-bottom: 14px;">
-                    <i class="fas fa-globe"></i> English Interpretation
-                </h2>
-                <div style="font-size: 1.05rem; line-height: 1.9; color: #444; background: #f8f9fa; padding: 24px; border-radius: 10px; border-left: 4px solid #c9982e;">
-                    {{ $symbol->interpretation_english }}
+            {{-- Positive and Negative Meanings --}}
+            @php 
+                $positives = json_decode($symbol->positive_meaning, true);
+                $negatives = json_decode($symbol->negative_meaning, true);
+            @endphp
+
+            @if(!empty($positives) || !empty($negatives))
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 28px;">
+                @if(!empty($positives))
+                <div style="background: #e8f5ee; padding: 20px; border-radius: 10px;">
+                    <h3 style="color: #1a6b42; font-family: 'Amiri', serif; font-size: 1.2rem; margin-bottom: 10px; direction: rtl;"><i class="fas fa-check-circle"></i> مثبت پہلو</h3>
+                    <ul style="padding: 0 20px; color: #222; font-size: 1rem; line-height: 1.8;">
+                        @foreach($positives as $pos)
+                            <li style="direction: {{ getDir($pos) }}; text-align: {{ getAlign($pos) }};">{{ $pos }}</li>
+                        @endforeach
+                    </ul>
                 </div>
+                @endif
+
+                @if(!empty($negatives))
+                <div style="background: #fde8e8; padding: 20px; border-radius: 10px;">
+                    <h3 style="color: #c0392b; font-family: 'Amiri', serif; font-size: 1.2rem; margin-bottom: 10px; direction: rtl;"><i class="fas fa-exclamation-circle"></i> منفی پہلو / تنبیہ</h3>
+                    <ul style="padding: 0 20px; color: #222; font-size: 1rem; line-height: 1.8;">
+                        @foreach($negatives as $neg)
+                            <li style="direction: {{ getDir($neg) }}; text-align: {{ getAlign($neg) }};">{{ $neg }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
             </div>
             @endif
 
@@ -73,32 +98,22 @@
                     <h2 style="font-family: 'Amiri', serif; font-size: 1.4rem; color: #2d1b69; margin-bottom: 14px; direction: rtl;">
                         <i class="fas fa-user-graduate"></i> علمائے کرام کی آراء
                     </h2>
-                    @foreach($symbol->scholarly_opinions as $opinion)
-                    <div style="display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: #fafafa; border-radius: 10px; margin-bottom: 12px; border-right: 3px solid #c9982e; direction: rtl;">
-                        <i class="fas fa-quote-right" style="color: #e0e0e0; font-size: 1.8rem; margin-top: 4px;"></i>
-                        <div>
-                            <span style="display: block; font-weight: 700; color: #1a1a3e; margin-bottom: 6px; font-family: 'Amiri', serif; font-size: 1.1rem;">{{ $opinion['scholar'] ?? 'عالم' }}</span>
-                            @if(isset($opinion['interpretation_urdu']))
-                                <p style="font-family: 'Amiri', serif; font-size: 1.05rem; line-height: 1.8; color: #444; margin-bottom: 4px;">{{ $opinion['interpretation_urdu'] }}</p>
-                            @endif
-                            @if(isset($opinion['interpretation_english']))
-                                <p style="font-size: 0.95rem; line-height: 1.6; color: #666; direction: ltr;">{{ $opinion['interpretation_english'] }}</p>
-                            @endif
-                            @if(isset($opinion['source']))
-                                <span style="font-size: 0.8rem; color: #999; display: block; margin-top: 8px;"><i class="fas fa-book"></i> ماخذ: {{ $opinion['source'] }}</span>
-                            @endif
+                    @foreach($symbol->scholarly_opinions as $scholar => $opinionText)
+                    @php
+                        $opText = is_string($opinionText) ? $opinionText : ($opinionText['interpretation_urdu'] ?? '');
+                        $opDir = getDir($opText);
+                        $opAlign = getAlign($opText);
+                        $scholarName = is_string($scholar) ? $scholar : ($opinionText['scholar'] ?? 'عالم');
+                    @endphp
+                    <div style="display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: #fafafa; border-radius: 10px; margin-bottom: 12px; border-{{ $opDir === 'ltr' ? 'left' : 'right' }}: 3px solid #c9982e; direction: {{ $opDir }}; text-align: {{ $opAlign }};">
+                        <i class="fas fa-quote-{{ $opDir === 'ltr' ? 'left' : 'right' }}" style="color: #e0e0e0; font-size: 1.8rem; margin-top: 4px;"></i>
+                        <div style="width: 100%;">
+                            <span style="display: block; font-weight: 700; color: #1a1a3e; margin-bottom: 6px; font-family: 'Amiri', serif; font-size: 1.1rem;">{{ $scholarName }}</span>
+                            <p style="font-family: 'Amiri', serif; font-size: 1.05rem; line-height: 1.8; color: #444; margin-bottom: 4px;">{{ $opText }}</p>
                         </div>
                     </div>
                     @endforeach
                 </div>
-            @elseif($symbol->scholar_reference)
-            <div style="display: flex; align-items: center; gap: 12px; padding: 18px; background: #fafafa; border-radius: 10px; margin-bottom: 24px;">
-                <i class="fas fa-user-graduate" style="color: #2d1b69; font-size: 1.5rem;"></i>
-                <div>
-                    <span style="font-size: 0.8rem; color: #888;">حوالہ / Reference</span>
-                    <span style="display: block; font-weight: 600; color: #333;">{{ $symbol->scholar_reference }}</span>
-                </div>
-            </div>
             @endif
 
             {{-- Quran Reference --}}
@@ -127,16 +142,6 @@
                 </p>
                 <p style="font-size: 0.85rem; color: #888; direction: rtl; margin-top: 8px;">( {{ $symbol->hadith_reference['source'] ?? 'حدیث' }} )</p>
             </div>
-            @else
-            {{-- Default Hadith about Dreams --}}
-            <div style="background: linear-gradient(135deg, #fffbf0, #fff8e8); border-radius: 10px; padding: 20px; margin-bottom: 28px; border: 1px solid #f0e6c8;">
-                <h3 style="font-size: 1rem; color: #c9982e; margin-bottom: 10px; direction: rtl; font-family: 'Amiri', serif;">
-                    <i class="fas fa-star"></i> خوابوں کے بارے میں حدیث
-                </h3>
-                <p style="font-family: 'Amiri', serif; font-size: 0.95rem; color: #555; direction: rtl; line-height: 1.9;">
-                    نبی ﷺ نے فرمایا: "اچھا خواب اللہ کی طرف سے ہے اور برا خواب شیطان کی طرف سے ہے۔ جب تم میں سے کوئی اچھا خواب دیکھے تو اسے صرف اس کو بتائے جس سے محبت ہو۔" (صحیح بخاری)
-                </p>
-            </div>
             @endif
 
             {{-- FAQs --}}
@@ -144,9 +149,17 @@
             <div style="margin-bottom: 32px; padding-top: 24px; border-top: 1px solid #eee;">
                 <h2 style="font-family: 'Amiri', serif; font-size: 1.4rem; color: #1a1a3e; margin-bottom: 16px; direction: rtl;">عمومی سوالات (FAQs)</h2>
                 @foreach($symbol->faqs as $faq)
+                @php
+                    $faqQ = $faq['question'] ?? '';
+                    $faqA = $faq['answer'] ?? '';
+                    $qDir = getDir($faqQ);
+                    $aDir = getDir($faqA);
+                @endphp
                 <div style="margin-bottom: 16px; background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 16px;">
-                    <h3 style="font-family: 'Amiri', serif; font-size: 1.1rem; color: #2d1b69; margin-bottom: 8px; direction: rtl;"><i class="fas fa-question-circle" style="color: #c9982e; margin-left: 6px;"></i> {{ $faq['question'] ?? '' }}</h3>
-                    <p style="font-family: 'Amiri', serif; font-size: 0.95rem; line-height: 1.8; color: #555; direction: rtl;">{{ $faq['answer'] ?? '' }}</p>
+                    <h3 style="font-family: 'Amiri', serif; font-size: 1.1rem; color: #2d1b69; margin-bottom: 8px; direction: {{ $qDir }}; text-align: {{ getAlign($faqQ) }};">
+                        <i class="fas fa-question-circle" style="color: #c9982e; margin-{{ $qDir === 'ltr' ? 'right' : 'left' }}: 6px;"></i> {{ $faqQ }}
+                    </h3>
+                    <p style="font-family: 'Amiri', serif; font-size: 0.95rem; line-height: 1.8; color: #555; direction: {{ $aDir }}; text-align: {{ getAlign($faqA) }};">{{ $faqA }}</p>
                 </div>
                 @endforeach
             </div>
@@ -155,7 +168,7 @@
             {{-- Share --}}
             <div style="display: flex; gap: 10px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid #eee;">
                 <span style="font-size: 0.9rem; color: #888; display: flex; align-items: center; gap: 6px;"><i class="fas fa-share-alt"></i> شیئر کریں:</span>
-                <a href="https://wa.me/?text={{ urlencode('خواب میں ' . $symbol->symbol_urdu . ' دیکھنے کی تعبیر - ' . url()->current()) }}" target="_blank" style="background: #25d366; color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://wa.me/?text={{ urlencode($symbol->symbol_roman_urdu . ' - ' . url()->current()) }}" target="_blank" style="background: #25d366; color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" style="background: #1877f2; color: #fff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.85rem;"><i class="fab fa-facebook-f"></i> Facebook</a>
             </div>
         </div>
@@ -167,8 +180,12 @@
         <h2 style="font-family: 'Amiri', serif; font-size: 1.5rem; color: #333; margin-bottom: 20px; direction: rtl;">مزید خوابوں کی تعبیر</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;">
             @foreach($related as $r)
-            <a href="{{ route('dreams.show', $r->slug) }}" style="text-decoration: none; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='#2d1b69'" onmouseout="this.style.borderColor='#eee'">
-                <span style="font-family: 'Amiri', serif; font-size: 1.2rem; color: #2d1b69; display: block; direction: rtl;">{{ $r->symbol_urdu }}</span>
+            @php
+                $rDir = getDir($r->symbol_roman_urdu);
+                $rAlign = getAlign($r->symbol_roman_urdu);
+            @endphp
+            <a href="{{ route('dreams.show', $r->slug) }}" style="text-decoration: none; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: {{ $rAlign }}; direction: {{ $rDir }}; transition: all 0.3s;" onmouseover="this.style.borderColor='#2d1b69'" onmouseout="this.style.borderColor='#eee'">
+                <span style="font-size: 1.2rem; color: #2d1b69; display: block; margin-bottom: 4px;">{{ $r->symbol_roman_urdu }}</span>
                 <span style="font-size: 0.8rem; color: #888;">{{ $r->symbol_english }}</span>
             </a>
             @endforeach
@@ -182,8 +199,12 @@
         <h2 style="font-family: 'Amiri', serif; font-size: 1.5rem; color: #c0392b; margin-bottom: 20px; direction: rtl;">اس کے برعکس خواب</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;">
             @foreach($opposite as $o)
-            <a href="{{ route('dreams.show', $o->slug) }}" style="text-decoration: none; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(192,57,43,0.05); border: 1px solid #fde8e8; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='#c0392b'" onmouseout="this.style.borderColor='#fde8e8'">
-                <span style="font-family: 'Amiri', serif; font-size: 1.2rem; color: #c0392b; display: block; direction: rtl;">{{ $o->symbol_urdu }}</span>
+            @php
+                $oDir = getDir($o->symbol_roman_urdu);
+                $oAlign = getAlign($o->symbol_roman_urdu);
+            @endphp
+            <a href="{{ route('dreams.show', $o->slug) }}" style="text-decoration: none; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(192,57,43,0.05); border: 1px solid #fde8e8; text-align: {{ $oAlign }}; direction: {{ $oDir }}; transition: all 0.3s;" onmouseover="this.style.borderColor='#c0392b'" onmouseout="this.style.borderColor='#fde8e8'">
+                <span style="font-size: 1.2rem; color: #c0392b; display: block; margin-bottom: 4px;">{{ $o->symbol_roman_urdu }}</span>
                 <span style="font-size: 0.8rem; color: #888;">{{ $o->symbol_english }}</span>
             </a>
             @endforeach
@@ -197,8 +218,8 @@
         <h2 style="font-family: 'Amiri', serif; font-size: 1.3rem; color: #333; margin-bottom: 16px; direction: rtl;">سب سے زیادہ تلاش کیے گئے</h2>
         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
             @foreach($popular as $p)
-            <a href="{{ route('dreams.show', $p->slug) }}" style="padding: 6px 16px; background: #f0ecf8; color: #2d1b69; border-radius: 20px; text-decoration: none; font-size: 0.85rem; font-family: 'Amiri', serif; transition: all 0.2s;" onmouseover="this.style.background='#2d1b69'; this.style.color='#fff'" onmouseout="this.style.background='#f0ecf8'; this.style.color='#2d1b69'">
-                {{ $p->symbol_urdu }}
+            <a href="{{ route('dreams.show', $p->slug) }}" style="padding: 6px 16px; background: #f0ecf8; color: #2d1b69; border-radius: 20px; text-decoration: none; font-size: 0.85rem; transition: all 0.2s; direction: {{ getDir($p->symbol_roman_urdu) }};" onmouseover="this.style.background='#2d1b69'; this.style.color='#fff'" onmouseout="this.style.background='#f0ecf8'; this.style.color='#2d1b69'">
+                {{ $p->symbol_roman_urdu }}
             </a>
             @endforeach
         </div>
@@ -210,8 +231,12 @@
         <h2 style="font-family: 'Amiri', serif; font-size: 1.5rem; color: #333; margin-bottom: 20px; direction: rtl;">نئے شامل کیے گئے خواب</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;">
             @foreach($recent as $rec)
-            <a href="{{ route('dreams.show', $rec->slug) }}" style="text-decoration: none; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: center; transition: all 0.3s;" onmouseover="this.style.borderColor='#1a6b42'" onmouseout="this.style.borderColor='#eee'">
-                <span style="font-family: 'Amiri', serif; font-size: 1.2rem; color: #1a6b42; display: block; direction: rtl;">{{ $rec->symbol_urdu }}</span>
+            @php
+                $recDir = getDir($rec->symbol_roman_urdu);
+                $recAlign = getAlign($rec->symbol_roman_urdu);
+            @endphp
+            <a href="{{ route('dreams.show', $rec->slug) }}" style="text-decoration: none; background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: {{ $recAlign }}; direction: {{ $recDir }}; transition: all 0.3s;" onmouseover="this.style.borderColor='#1a6b42'" onmouseout="this.style.borderColor='#eee'">
+                <span style="font-size: 1.2rem; color: #1a6b42; display: block; margin-bottom: 4px;">{{ $rec->symbol_roman_urdu }}</span>
                 <span style="font-size: 0.8rem; color: #888;">{{ $rec->symbol_english }}</span>
             </a>
             @endforeach

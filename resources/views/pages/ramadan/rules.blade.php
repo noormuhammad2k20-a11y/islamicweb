@@ -1,53 +1,53 @@
 @extends('layouts.app')
 
-@section('title', 'Fasting Rules — Noor-e-Islam')
-@section('meta_description', 'Fasting conditions and tips')
+@section('seo')
+<title>Ramadan Fasting Rules — Fidyah, Kaffarah & Guidelines | IslamicWeb</title>
+<meta name="description" content="Comprehensive guide to the rules of fasting in Ramadan. Learn what breaks the fast, what is permissible, and the rules of Fidyah and Kaffarah.">
+@endsection
 
 @section('content')
-<section class="section services-section" style="padding-top: 60px;">
-    <div class="section-inner">
-        <div class="breadcrumb" style="text-align: center; margin-bottom: 40px;">
-            <div style="background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 0.95rem;">
-                <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a> 
-                <span style="color: #ccc; margin: 0 10px;">/</span> 
-                <span style="color: #666; font-weight: 600;">Fasting Rules</span>
-            </div>
-        </div>
+<style>
+    :root { --primary: #0A3A2A; --primary-dark: #052116; --gold: #D4AF37; --gold-light: #F3E5AB; --border-light: rgba(10,58,42,0.1); --cream: #faf9f6; --card-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .page-hero { background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 50%, #125740 100%); padding: 60px 20px 80px 20px; text-align: center; color: white; position: relative; overflow: hidden; border-radius: 0 0 40px 40px; margin-bottom: 50px;}
+    .page-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(circle at 25% 25%, var(--gold) 1px, transparent 1px); background-size: 40px 40px; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 800; margin-bottom: 15px; position: relative; z-index: 2; color: var(--gold-light); }
+    .page-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.9); position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+    
+    .rules-container { max-width: 1000px; margin: 0 auto 60px auto; padding: 0 20px; }
+    .rule-card { background: white; border-radius: 20px; padding: 40px; box-shadow: var(--card-shadow); border: 1px solid var(--border-light); margin-bottom: 30px; position: relative; overflow: hidden; }
+    .rule-card::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 5px; background: var(--primary); }
+    .rule-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary); margin-bottom: 20px; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 10px;}
+    .rule-list { list-style: none; padding: 0; margin: 0; }
+    .rule-list li { padding: 15px 0; border-bottom: 1px dashed #eee; font-size: 1.1rem; color: #444; display: flex; align-items: flex-start; gap: 15px; }
+    .rule-list li:last-child { border-bottom: none; }
+    .rule-list li i { color: var(--gold); margin-top: 5px; font-size: 1.2rem; }
+    .rule-text { font-size: 1.15rem; line-height: 1.7; color: #444; }
+</style>
 
-        <div class="section-header">
-            <div class="section-badge"><i class="fas fa-list-ul"></i> Feature</div>
-            <h1 class="section-title">Fasting Rules</h1>
-            <div class="arabic-divider"><span class="line"></span><span class="symbol">﷽</span><span class="line"></span></div>
-            <p class="section-subtitle">Fasting conditions and tips</p>
-        </div>
-
-        <div class="contact-grid" style="grid-template-columns: 1fr;">
-            <div class="contact-info" style="border-top: 4px solid var(--primary); background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-                
-                <!-- CONTENT MOCKUP AREA -->
-                <div style="text-align:center; padding: 50px 0;">
-                    <i class="fas fa-list-ul" style="font-size: 4rem; color: var(--gold); opacity: 0.5; margin-bottom: 20px;"></i>
-                    <h2 style="color: var(--primary-dark); margin-bottom: 15px;">Detailed UI Under Construction</h2>
-                    <p style="color: #666; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-                        This section has been scaffolded and integrated with the Laravel routing system. The dynamic content for <strong>Fasting Rules</strong> will be populated here.
-                    </p>
-                    
-                    <div style="margin-top: 40px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #eee; width: 250px;">
-                            <i class="fas fa-database" style="color: var(--primary); margin-bottom: 10px; font-size: 1.5rem;"></i>
-                            <h4 style="margin-bottom: 5px;">Database Ready</h4>
-                            <p style="font-size: 0.9rem; color: #777;">Ready to connect to your models.</p>
-                        </div>
-                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #eee; width: 250px;">
-                            <i class="fas fa-paint-brush" style="color: var(--primary); margin-bottom: 10px; font-size: 1.5rem;"></i>
-                            <h4 style="margin-bottom: 5px;">Theme Aligned</h4>
-                            <p style="font-size: 0.9rem; color: #777;">Uses global CSS variables and fonts.</p>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
+<section class="page-hero">
+    <h1 class="page-title">Fasting Rules & Guidelines</h1>
+    <p class="page-subtitle">A clear and comprehensive guide to the regulations of fasting, including Fidyah and Kaffarah.</p>
 </section>
+
+<div class="rules-container">
+    @if(isset($rules) && is_array($rules))
+        @foreach($rules as $title => $content)
+        <div class="rule-card">
+            <h2 class="rule-title">{{ $title }}</h2>
+            
+            @if(is_array($content))
+                <ul class="rule-list">
+                    @foreach($content as $item)
+                        <li><i class="fas fa-check-circle"></i> <span>{{ $item }}</span></li>
+                    @endforeach
+                </ul>
+            @else
+                <p class="rule-text">{{ $content }}</p>
+            @endif
+        </div>
+        @endforeach
+    @else
+        <p style="text-align:center;">Rules are currently being updated.</p>
+    @endif
+</div>
 @endsection

@@ -1,53 +1,41 @@
 @extends('layouts.app')
 
-@section('title', 'Ramadan FAQs — Noor-e-Islam')
-@section('meta_description', 'Commonly asked questions about fasting')
+@section('seo')
+<title>Ramadan FAQs — Common Questions About Fasting | IslamicWeb</title>
+<meta name="description" content="Find answers to frequently asked questions about Ramadan, fasting rules, timings, and common misconceptions.">
+@endsection
 
 @section('content')
-<section class="section services-section" style="padding-top: 60px;">
-    <div class="section-inner">
-        <div class="breadcrumb" style="text-align: center; margin-bottom: 40px;">
-            <div style="background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 0.95rem;">
-                <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a> 
-                <span style="color: #ccc; margin: 0 10px;">/</span> 
-                <span style="color: #666; font-weight: 600;">Ramadan FAQs</span>
-            </div>
-        </div>
+<style>
+    :root { --primary: #0A3A2A; --primary-dark: #052116; --gold: #D4AF37; --gold-light: #F3E5AB; --border-light: rgba(10,58,42,0.1); --cream: #faf9f6; --card-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .page-hero { background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 50%, #125740 100%); padding: 60px 20px 80px 20px; text-align: center; color: white; position: relative; overflow: hidden; border-radius: 0 0 40px 40px; margin-bottom: 50px;}
+    .page-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(circle at 25% 25%, var(--gold) 1px, transparent 1px); background-size: 40px 40px; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 800; margin-bottom: 15px; position: relative; z-index: 2; color: var(--gold-light); }
+    .page-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.9); position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+    
+    .faq-container { max-width: 900px; margin: 0 auto 60px auto; padding: 0 20px; }
+    .faq-item { background: white; border-radius: 16px; margin-bottom: 20px; box-shadow: var(--card-shadow); border: 1px solid var(--border-light); padding: 25px; transition: transform 0.3s; }
+    .faq-item:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .faq-q { font-size: 1.3rem; color: var(--primary); font-family: 'Playfair Display', serif; margin: 0 0 15px 0; font-weight: bold; display: flex; gap: 15px; align-items: flex-start; }
+    .faq-q::before { content: 'Q.'; color: var(--gold); font-size: 1.5rem; line-height: 1; }
+    .faq-a { font-size: 1.05rem; color: #555; line-height: 1.7; padding-left: 35px; }
+</style>
 
-        <div class="section-header">
-            <div class="section-badge"><i class="fas fa-question-circle"></i> Feature</div>
-            <h1 class="section-title">Ramadan FAQs</h1>
-            <div class="arabic-divider"><span class="line"></span><span class="symbol">﷽</span><span class="line"></span></div>
-            <p class="section-subtitle">Commonly asked questions about fasting</p>
-        </div>
-
-        <div class="contact-grid" style="grid-template-columns: 1fr;">
-            <div class="contact-info" style="border-top: 4px solid var(--primary); background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
-                
-                <!-- CONTENT MOCKUP AREA -->
-                <div style="text-align:center; padding: 50px 0;">
-                    <i class="fas fa-question-circle" style="font-size: 4rem; color: var(--gold); opacity: 0.5; margin-bottom: 20px;"></i>
-                    <h2 style="color: var(--primary-dark); margin-bottom: 15px;">Detailed UI Under Construction</h2>
-                    <p style="color: #666; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-                        This section has been scaffolded and integrated with the Laravel routing system. The dynamic content for <strong>Ramadan FAQs</strong> will be populated here.
-                    </p>
-                    
-                    <div style="margin-top: 40px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #eee; width: 250px;">
-                            <i class="fas fa-database" style="color: var(--primary); margin-bottom: 10px; font-size: 1.5rem;"></i>
-                            <h4 style="margin-bottom: 5px;">Database Ready</h4>
-                            <p style="font-size: 0.9rem; color: #777;">Ready to connect to your models.</p>
-                        </div>
-                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #eee; width: 250px;">
-                            <i class="fas fa-paint-brush" style="color: var(--primary); margin-bottom: 10px; font-size: 1.5rem;"></i>
-                            <h4 style="margin-bottom: 5px;">Theme Aligned</h4>
-                            <p style="font-size: 0.9rem; color: #777;">Uses global CSS variables and fonts.</p>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
+<section class="page-hero">
+    <h1 class="page-title">Ramadan FAQs</h1>
+    <p class="page-subtitle">Answers to the most common questions regarding fasting, prayer times, and Ramadan rulings.</p>
 </section>
+
+<div class="faq-container">
+    @if(isset($faqs) && is_array($faqs))
+        @foreach($faqs as $faq)
+        <div class="faq-item">
+            <h3 class="faq-q">{{ $faq['q'] }}</h3>
+            <div class="faq-a">{{ $faq['a'] }}</div>
+        </div>
+        @endforeach
+    @else
+        <p style="text-align:center;">FAQs are currently being updated.</p>
+    @endif
+</div>
 @endsection

@@ -138,6 +138,7 @@ $appRoutes = function () {
     Route::get('/hadith/{collection}/{chapter}/{number}', [HadithController::class, 'collectionHadithShow'])
         ->where('collection', 'sahih-bukhari|sahih-muslim|sunan-abu-dawud|jami-at-tirmidhi|sunan-an-nasai|sunan-ibn-majah')
         ->name('hadith.collection.hadithShow');
+    Route::get('/hadith/narrators/{narrator:slug}', [HadithController::class, 'narratorShow'])->name('hadith.narratorShow');
 
     Route::get('/hadith', [HadithController::class, 'index'])->name('hadith.index');
     Route::get('/hadith/{topic:slug}', [HadithController::class, 'show'])->name('hadith.show');
@@ -208,6 +209,9 @@ $appRoutes = function () {
     // CLUSTER 12 — Islamic Tools
     Route::prefix('tools')->group(function () {
         Route::get('/qibla-direction', [ToolsController::class, 'qibla'])->name('tools.qibla');
+        Route::get('/qibla-direction/{country}', [ToolsController::class, 'qiblaByLocation'])->name('tools.qibla.country');
+        Route::get('/qibla-direction/{country}/{state}', [ToolsController::class, 'qiblaByLocation'])->name('tools.qibla.state');
+        Route::get('/qibla-direction/{country}/{state}/{city}', [ToolsController::class, 'qiblaByLocation'])->name('tools.qibla.city');
         Route::get('/age-calculator', [ToolsController::class, 'age'])->name('tools.age');
         Route::get('/islamic-event-finder', [ToolsController::class, 'eventFinder'])->name('tools.events');
         Route::get('/ramadan-calendar-generator', [ToolsController::class, 'ramadanGenerator'])->name('tools.ramadan_gen');
@@ -312,6 +316,7 @@ Route::get('/sitemap-dates.xml', [App\Http\Controllers\SitemapController::class,
 Route::get('/sitemap-prayer.xml', [App\Http\Controllers\SitemapController::class, 'prayer'])->name('sitemap.prayer');
 Route::get('/sitemap-surah.xml', [App\Http\Controllers\SitemapController::class, 'surah'])->name('sitemap.surah');
 Route::get('/sitemap-surahs.xml', [App\Http\Controllers\SitemapController::class, 'surahs'])->name('sitemap.surahs');
+
 Route::get('/sitemap-collections.xml', [App\Http\Controllers\SitemapController::class, 'collections'])->name('sitemap.collections');
 Route::get('/sitemap-hadith.xml', [App\Http\Controllers\SitemapController::class, 'hadith'])->name('sitemap.hadith');
 Route::get('/sitemap-pages.xml', [App\Http\Controllers\SitemapController::class, 'pages'])->name('sitemap.pages');

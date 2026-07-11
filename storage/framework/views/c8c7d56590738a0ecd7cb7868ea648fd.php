@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title', 'Hadith by Topic — احادیث بموضوع | Noor-e-Islam'); ?>
 <?php $__env->startSection('meta_description', 'Browse authentic Hadiths organized by topics. Read Arabic text with Urdu and English translations from Sahih Bukhari, Muslim, Tirmidhi and more.'); ?>
 <?php $__env->startSection('canonical', url('/hadith')); ?>
@@ -218,15 +220,20 @@
 <div class="prayer-ticker">
     <div class="prayer-ticker-inner" style="justify-content: center; gap: 40px;">
         <div class="prayer-ticker-label">
-            <i class="fas fa-list-ul"></i> Total Topics: <?php echo e($topics->count()); ?>
+            <i class="fas fa-list-ul"></i> Total Topics: <?php echo e($stats['topics']); ?>
 
         </div>
         <div class="prayer-ticker-label">
-            <i class="fas fa-quote-right"></i> Total Hadiths: <?php echo e($topics->sum('hadiths_count')); ?>
+            <i class="fas fa-quote-right"></i> Total Hadiths: <?php echo e($stats['hadiths']); ?>
 
         </div>
         <div class="prayer-ticker-label">
-            <i class="fas fa-book"></i> Major Books Covered
+            <i class="fas fa-book"></i> Authentic Collections: <?php echo e($stats['books']); ?>
+
+        </div>
+        <div class="prayer-ticker-label">
+            <i class="fas fa-users"></i> Key Narrators: <?php echo e($stats['narrators']); ?>
+
         </div>
     </div>
 </div>
@@ -235,7 +242,7 @@
     <div class="section-inner">
         
         <div class="section-header">
-            <div class="section-badge"><i class="fas fa-bookmark"></i> Collections</div>
+            <div class="section-badge"><i class="fas fa-bookmark"></i> Directory</div>
             <h2 class="section-title">Browse by <span>Topic</span></h2>
             <p class="section-subtitle">Select a topic to read related authentic hadiths.</p>
         </div>
@@ -249,11 +256,14 @@
                             <i class="fas fa-star-and-crescent"></i>
                         </div>
                         <h3 class="topic-name"><?php echo e($topic->topic_name); ?></h3>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($topic->topic_name_arabic): ?>
+                        <div style="font-family: 'Scheherazade New', serif; font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 5px;"><?php echo e($topic->topic_name_arabic); ?></div>
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                         <div class="hadith-count-badge">
                             <?php echo e($topic->hadiths_count); ?> Hadiths
                         </div>
                         <p>
-                            <?php echo e(Str::limit($topic->content, 100)); ?>
+                            <?php echo e(Str::limit($topic->introduction ?? $topic->content, 100)); ?>
 
                         </p>
                         <div class="read-more">
@@ -264,6 +274,49 @@
             </div>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
         </div>
+
+        <!-- Browse by Collection -->
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($collections) && $collections->count() > 0): ?>
+        <div class="section-header" style="margin-top: 80px;">
+            <div class="section-badge"><i class="fas fa-book-open"></i> Sources</div>
+            <h2 class="section-title">Browse by <span>Collection</span></h2>
+            <p class="section-subtitle">Explore hadiths by their original books of compilation.</p>
+        </div>
+        <div class="topics-grid">
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $collections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $collection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+            <div class="topic-card-wrapper">
+                <div class="topic-card" style="align-items: flex-start; text-align: left; padding: 25px;">
+                    <h3 class="topic-name"><?php echo e($collection->name_en); ?></h3>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($collection->name_ar): ?>
+                    <div style="font-family: 'Scheherazade New', serif; font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 5px; width: 100%; text-align: right;"><?php echo e($collection->name_ar); ?></div>
+                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                    <div class="hadith-count-badge" style="margin-bottom: 15px;"><?php echo e($collection->hadiths_count); ?> Hadiths</div>
+                    <p style="font-size: .85rem; line-height: 1.5;"><?php echo e(Str::limit($collection->introduction, 100)); ?></p>
+                </div>
+            </div>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+        </div>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+        <!-- Browse by Narrator -->
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($narrators) && $narrators->count() > 0): ?>
+        <div class="section-header" style="margin-top: 80px;">
+            <div class="section-badge"><i class="fas fa-users"></i> Transmitters</div>
+            <h2 class="section-title">Browse by <span>Narrator</span></h2>
+            <p class="section-subtitle">Discover hadiths transmitted by the prominent companions (Sahabah).</p>
+        </div>
+        <div class="topics-grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $narrators; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $narrator): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+            <div class="topic-card-wrapper">
+                <div class="topic-card" style="padding: 20px;">
+                    <div style="width: 50px; height: 50px; background: var(--navy); color: var(--gold-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 15px;"><i class="fas fa-user"></i></div>
+                    <h3 class="topic-name" style="font-size: 1.2rem;"><?php echo e($narrator->name_en); ?></h3>
+                    <div class="hadith-count-badge" style="background: var(--navy-tint); color: var(--navy); border: none;"><?php echo e($narrator->hadiths_count); ?> Hadiths</div>
+                </div>
+            </div>
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+        </div>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
         <!-- Featured Hadiths -->
         <?php
@@ -337,4 +390,5 @@ document.getElementById('topicSearch').addEventListener('input', function() {
 });
 </script>
 <?php $__env->stopPush(); ?>
+
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/hadith/index.blade.php ENDPATH**/ ?>

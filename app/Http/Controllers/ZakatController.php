@@ -43,6 +43,7 @@ class ZakatController extends Controller
 
     public function online()
     {
-        return view('pages.placeholder', ['title' => 'online']);
+        $config = ZakatConfig::first() ?? new ZakatConfig(['gold_price_per_gram' => 20000, 'silver_price_per_gram' => 250, 'currency_code' => 'PKR']);
+        return view('pages.zakat.calculator_online', compact('config'));
     }
 }

@@ -1,143 +1,164 @@
 @extends('layouts.app')
 
-@section('title', 'Islamic Facts — Noor-e-Islam')
-@section('meta_description', 'Discover profound Islamic facts and historical knowledge dynamically retrieved from our comprehensive database.')
+@section('title', 'Fascinating Islamic Facts — Did You Know?')
+@section('meta_description', 'Discover fascinating facts about Islam, the Quran, Prophet Muhammad (PBUH), and the Islamic world. Expand your knowledge of the fastest-growing religion.')
+@section('meta_keywords', 'islamic facts, facts about islam, interesting islamic facts, did you know islam, quran facts, prophet muhammad facts')
+
+@section('schema')
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Fascinating Islamic Facts",
+  "description": "Discover fascinating facts about Islam, the Quran, and the Islamic world.",
+  "author": {
+    "@type": "Organization",
+    "name": "Noor-e-Islam"
+  }
+}
+</script>
+@endsection
 
 @section('content')
 <style>
-    .vip-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 30px;
-        margin-bottom: 50px;
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap');
+
+    :root {
+        --primary: #145DA0;
+        --primary-dark: #0C3D6E;
+        --secondary: #F5F8F7;
+        --secondary-light: #FBFDFC;
+        --gold: #B8863B;
+        --gold-light: #D9AE6C;
+        --text-dark: #15211D;
+        --text-medium: #44544E;
+        --text-light: #76867F;
+        --white: #ffffff;
+        --shadow-sm: 0 1px 4px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 16px rgba(0,0,0,0.07);
+        --radius-md: 10px;
+        --radius-lg: 16px;
+        --tr: all 0.25s ease;
     }
-    .fact-card {
-        background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.03);
-        border: 1px solid rgba(0,0,0,0.04);
-        padding: 30px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-    .fact-card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; height: 4px;
-        background: var(--primary);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    .fact-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    }
-    .fact-card:hover::before {
-        opacity: 1;
-    }
-    .fact-title {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--primary-dark);
-        margin-bottom: 15px;
-    }
-    .fact-content {
-        font-family: 'Inter', sans-serif;
-        color: #555;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-    .empty-state {
-        text-align: center;
-        padding: 80px 20px;
-        background: #fff;
-        border-radius: 16px;
-        border: 1px dashed #e0e0e0;
-        grid-column: 1 / -1;
-    }
-    .seo-article {
-        padding: 60px 0;
-        border-top: 1px solid #eaeaea;
-        font-family: 'Inter', sans-serif;
-        line-height: 1.8;
-        color: #333;
-    }
-    .seo-article h2 {
-        font-family: 'Poppins', sans-serif;
-        color: var(--primary-dark);
-        font-weight: 700;
-        font-size: 2.2rem;
-        margin-bottom: 25px;
-    }
-    .seo-article h3 {
-        font-family: 'Poppins', sans-serif;
-        color: var(--primary);
-        font-weight: 600;
-        font-size: 1.5rem;
-        margin-top: 40px;
-        margin-bottom: 20px;
+
+    .k-page * { box-sizing: border-box; }
+    .k-page { font-family: 'Poppins', sans-serif; background: var(--secondary-light); color: var(--text-dark); line-height: 1.7; }
+
+    .k-breadcrumb { background: var(--secondary); border-bottom: 1px solid rgba(20,93,160,0.06); padding: 14px 0; }
+    .k-breadcrumb-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; gap: 10px; font-size: 0.82rem; }
+    .k-breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 500; transition: var(--tr); }
+    .k-breadcrumb a:hover { color: var(--primary-dark); }
+    .k-breadcrumb-sep { color: var(--text-light); font-size: 0.7rem; }
+    .k-breadcrumb-current { color: var(--text-light); font-weight: 500; }
+
+    .k-hero { position: relative; background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 45%, #1C7BC4 75%, var(--primary-dark) 100%); padding: 80px 0; text-align: center; overflow: hidden; }
+    .k-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(circle at 25% 25%, var(--gold) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+    .k-hero-inner { max-width: 800px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+    .k-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.09); backdrop-filter: blur(8px); padding: 6px 18px; border-radius: 30px; font-size: 0.76rem; font-weight: 500; margin-bottom: 16px; color: var(--white); border: 1px solid rgba(255,255,255,0.12); }
+    .k-hero h1 { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 800; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+    .k-hero p { font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 1.8; }
+
+    .k-content { padding: 80px 0; }
+    .k-content-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+
+    .facts-masonry { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+    
+    .fact-card { background: var(--white); border-radius: var(--radius-lg); padding: 35px; box-shadow: var(--shadow-sm); border: 1px solid rgba(20,93,160,0.05); transition: var(--tr); position: relative; overflow: hidden; }
+    .fact-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--primary-light); }
+    .fact-card::before { content: '\f0eb'; font-family: 'Font Awesome 5 Free'; font-weight: 900; position: absolute; right: -15px; top: -15px; font-size: 8rem; color: rgba(20,93,160,0.03); transform: rotate(15deg); transition: var(--tr); }
+    .fact-card:hover::before { color: rgba(184,134,59,0.08); transform: rotate(0); }
+    
+    .fact-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(184,134,59,0.2); }
+    .fact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--primary-dark); margin-bottom: 15px; position: relative; z-index: 2; }
+    .fact-card p { font-size: 0.95rem; color: var(--text-medium); margin-bottom: 0; line-height: 1.8; position: relative; z-index: 2; }
+
+    @media (max-width: 768px) {
+        .k-hero h1 { font-size: 2.4rem; }
+        .facts-masonry { grid-template-columns: 1fr; }
     }
 </style>
 
-<section class="section" style="padding-top: 60px; background-color: #fbfbfb;">
-    <div class="container">
-        <div class="breadcrumb" style="text-align: center; margin-bottom: 40px;">
-            <div style="background: rgba(255,255,255,0.9); padding: 10px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 0.95rem;">
-                <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none;"><i class="fas fa-home"></i> Home</a> 
-                <span style="color: #ccc; margin: 0 10px;">/</span> 
-                <span style="color: #666; font-weight: 600;">Islamic Facts</span>
-            </div>
-        </div>
-
-        <div class="text-center mb-5">
-            <h1 style="font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--primary-dark);">Islamic Facts & Knowledge</h1>
-            <p class="text-muted">Profound insights and historical context derived from authentic sources.</p>
-        </div>
-
-        <div class="vip-grid">
-            @if(isset($facts) && $facts->count() > 0)
-                @foreach($facts as $fact)
-                    <div class="fact-card">
-                        <h3 class="fact-title">{{ $fact->title ?? 'Fascinating Insight' }}</h3>
-                        <p class="fact-content">
-                            {{ $fact->content ?? $fact->description }}
-                        </p>
-                    </div>
-                @endforeach
-            @else
-                <div class="empty-state">
-                    <i class="fas fa-book-open" style="font-size: 3.5rem; color: #ddd; margin-bottom: 20px;"></i>
-                    <h3 style="font-family: 'Poppins', sans-serif; color: var(--primary-dark);">Curating Knowledge</h3>
-                    <p class="text-muted mb-0">Our scholars are currently compiling verified Islamic facts. Please check back soon.</p>
-                </div>
-            @endif
-        </div>
-
-        <!-- SEO Authoritative Content -->
-        <div class="seo-article">
-            <h2>The Preservation and Transmission of Islamic Knowledge</h2>
-            <p>
-                The foundation of Islamic epistemology rests heavily upon the rigorous preservation and systematic transmission of knowledge (Ilm). From the earliest days of revelation, the meticulous documentation of the Quran and the Prophetic traditions (Ahadith) established an unprecedented standard for historical accuracy and textual integrity. Understanding the methodology behind this preservation offers profound insight into the authenticity of Islamic facts and historical narratives.
-            </p>
-            <h3>The Science of Hadith (Ilm al-Hadith)</h3>
-            <p>
-                The authentication of Islamic facts is intricately linked to the Science of Hadith. This highly sophisticated academic discipline involves the critical evaluation of both the text (Matn) and the chain of narrators (Isnad). Early scholars, such as Imam Al-Bukhari and Imam Muslim, developed stringent criteria to verify the reliability, memory, and character of every individual in a chain of transmission. If a single narrator was found to have a weak memory or a lapse in integrity, the hadith could be downgraded from "Sahih" (authentic) to "Da'if" (weak). This unparalleled methodology ensured that the sayings, actions, and approvals of Prophet Muhammad (PBUH) were preserved without corruption.
-            </p>
-            <h3>The Golden Age of Islamic Scholarship</h3>
-            <p>
-                During the Islamic Golden Age, from the 8th to the 14th century, the pursuit of knowledge expanded beyond theology into the empirical sciences, mathematics, medicine, and astronomy. Institutions like the House of Wisdom (Bayt al-Hikmah) in Baghdad served as global centers of learning where scholars translated classical texts and produced original research. Prominent figures such as Al-Khwarizmi (the father of algebra), Ibn Sina (Avicenna), and Al-Biruni authored encyclopedic works that heavily influenced both the Eastern and Western intellectual worlds. The facts derived from this era are not merely historical footnotes; they form the bedrock of many modern scientific disciplines.
-            </p>
-            <h3>Textual Integrity of the Quran</h3>
-            <p>
-                A core factual tenet of Islam is the immaculate preservation of the Quranic text. Unlike other historical manuscripts that underwent numerous revisions, the Quran was compiled into a single standardized text during the caliphate of Uthman ibn Affan, less than two decades after the Prophet's passing. This compilation was cross-referenced with the oral recitations of hundreds of companions (Hafiz) who had memorized the text verbatim. Modern manuscript discoveries, such as the Birmingham Quran manuscript, have provided empirical carbon-dated evidence that aligns perfectly with the traditional Islamic narrative, confirming that the text read today is identical to the text revealed over 1,400 years ago.
-            </p>
-            <h3>The Ongoing Legacy of Islamic Epistemology</h3>
-            <p>
-                The integration of faith and reason remains a hallmark of Islamic theology. The Quran continuously exhorts believers to observe the natural world, reflect upon history, and seek empirical truth as a means to recognize the Creator. This holistic approach to knowledge ensures that Islamic facts are not merely dogmatic assertions but are grounded in a rich tradition of scholarly inquiry, historical verification, and intellectual rigor.
-            </p>
+<div class="k-page">
+    <div class="k-breadcrumb">
+        <div class="k-breadcrumb-inner">
+            <a href="{{ route('home') }}">Home</a>
+            <i class="fas fa-chevron-right k-breadcrumb-sep"></i>
+            <a href="{{ route('knowledge.index') }}">Knowledge</a>
+            <i class="fas fa-chevron-right k-breadcrumb-sep"></i>
+            <span class="k-breadcrumb-current">Islamic Facts</span>
         </div>
     </div>
-</section>
+
+    <section class="k-hero">
+        <div class="k-hero-inner">
+            <div class="k-hero-badge"><i class="fas fa-lightbulb"></i> Did You Know?</div>
+            <h1>Fascinating <span>Islamic</span> Facts</h1>
+            <p>Expand your knowledge with these amazing facts about Islam, the Quran, and the rich history of the Muslim world.</p>
+        </div>
+    </section>
+
+    <section class="k-content">
+        <div class="k-content-inner">
+            
+            <div class="facts-masonry">
+                
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-globe"></i></div>
+                    <h3>The Word "Islam"</h3>
+                    <p>The word "Islam" shares the same Arabic root as the word "Salam", which means peace. It literally translates to "voluntary submission to the will of God." A Muslim is one who submits to this will.</p>
+                </div>
+
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Memorization of the Quran</h3>
+                    <p>The Quran is the only religious book in the world that is memorized entirely, word-for-word, by millions of people (known as Hafiz) around the globe, ensuring its preservation.</p>
+                </div>
+
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Fastest Growing Religion</h3>
+                    <p>According to the Pew Research Center, Islam is currently the fastest-growing major religion in the world, projected to be the largest by the end of the 21st century.</p>
+                </div>
+
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-female"></i></div>
+                    <h3>The First University</h3>
+                    <p>The oldest existing, and continually operating educational institution in the world is the University of Al-Qarawiyyin in Fez, Morocco. It was founded in 859 CE by a Muslim woman named Fatima al-Fihri.</p>
+                </div>
+
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-child"></i></div>
+                    <h3>Jesus in Islam</h3>
+                    <p>Jesus (Isa, peace be upon him) is a highly revered Prophet in Islam. His name is mentioned in the Quran 25 times, which is more times than Prophet Muhammad (PBUH) is mentioned by name.</p>
+                </div>
+
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-cat"></i></div>
+                    <h3>Love for Cats</h3>
+                    <p>Prophet Muhammad (PBUH) was known for his fondness for cats. According to Islamic tradition, cats are considered ritually clean animals and are permitted to enter homes and even mosques.</p>
+                </div>
+
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-star-and-crescent"></i></div>
+                    <h3>Not Just the Middle East</h3>
+                    <p>While Islam originated in the Middle East, only about 20% of the world's Muslims live there today. The country with the largest Muslim population is Indonesia in Southeast Asia.</p>
+                </div>
+
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Discovering Circulation</h3>
+                    <p>Ibn al-Nafis, a 13th-century Arab Muslim physician, was the first person to accurately describe pulmonary blood circulation, centuries before European scientists.</p>
+                </div>
+
+                <div class="fact-card">
+                    <div class="fact-icon"><i class="fas fa-coffee"></i></div>
+                    <h3>The Origins of Coffee</h3>
+                    <p>Coffee was first brewed as a drink by Sufi monks in Yemen in the 15th century. They used it to stay awake during late-night devotions and prayers.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>
 @endsection

@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class HadithKeyword extends Model
 {
-    protected $table = 'hadith_keywords';
-    protected $guarded = [];
+    use HasFactory;
+
+    protected $fillable = [
+        'keyword', 'slug'
+    ];
 
     public function hadiths()
     {

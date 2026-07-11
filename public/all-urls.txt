@@ -83,6 +83,8 @@ http://127.0.0.1:8000/calculators/zakat-on-silver
 http://127.0.0.1:8000/islamic-events
 http://127.0.0.1:8000/islamic-events/ramadan
 http://127.0.0.1:8000/namaz-guides
+
+
 http://127.0.0.1:8000/namaz-guides/how-to-pray-salah
 http://127.0.0.1:8000/namaz-guides/salat-ul-tasbeeh
 http://127.0.0.1:8000/namaz-guides/fajr

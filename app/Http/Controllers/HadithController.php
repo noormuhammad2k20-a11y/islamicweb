@@ -10,20 +10,50 @@ class HadithController extends Controller
     public function index()
     {
         $topics = HadithTopic::withCount('hadiths')->orderBy('topic_name')->get();
-        return view('hadith.index', compact('topics'));
+        $collections = \App\Models\HadithCollection::withCount('hadiths')->get();
+        $narrators = \App\Models\HadithNarrator::withCount('hadiths')->orderByDesc('hadiths_count')->limit(12)->get();
+        
+        $stats = [
+            'topics' => $topics->count(),
+            'hadiths' => \App\Models\Hadith::count(),
+            'books' => $collections->count(),
+            'narrators' => $narrators->count() > 0 ? $narrators->count() : \App\Models\Hadith::distinct('narrator')->count('narrator'),
+        ];
+        
+        return view('hadith.index', compact('topics', 'collections', 'narrators', 'stats'));
     }
 
-    public function show(HadithTopic $topic)
+    public function show(Request $request, HadithTopic $topic)
     {
-        $hadiths = $topic->hadiths()->orderBy('id')->paginate(10);
+        $query = $topic->hadiths();
+        
+        if ($request->has('grade') && $request->grade != '') {
+            $query->where('grade', 'LIKE', '%' . $request->grade . '%');
+        }
+        
+        if ($request->has('narrator') && $request->narrator != '') {
+            $query->where('narrator', 'LIKE', '%' . $request->narrator . '%');
+        }
+        
+        if ($request->has('book') && $request->book != '') {
+            $query->where('book_name', 'LIKE', '%' . $request->book . '%');
+        }
+
+        $hadiths = $query->orderBy('id')->paginate(10)->withQueryString();
+        
         $otherTopics = HadithTopic::where('id', '!=', $topic->id)
                         ->inRandomOrder()->limit(6)->get();
-        return view('hadith.show', compact('topic', 'hadiths', 'otherTopics'));
+                        
+        // Extract unique narrators and books for the filters
+        $topicNarrators = $topic->hadiths()->select('narrator')->distinct()->whereNotNull('narrator')->pluck('narrator');
+        $topicBooks = $topic->hadiths()->select('book_name')->distinct()->whereNotNull('book_name')->pluck('book_name');
+
+        return view('hadith.show', compact('topic', 'hadiths', 'otherTopics', 'topicNarrators', 'topicBooks'));
     }
 
     public function hadithShow(HadithTopic $topic, $hadithSlug)
     {
-        $hadith = \App\Models\Hadith::where('slug', $hadithSlug)->where('topic_id', $topic->id)->firstOrFail();
+        $hadith = $topic->hadiths()->where('slug', $hadithSlug)->firstOrFail();
         return view('pages.hadith.hadith_show', compact('topic', 'hadith'));
     }
 
@@ -41,14 +71,17 @@ class HadithController extends Controller
 
     public function collectionShow($collection)
     {
-        $bookName = $this->getBookName($collection);
-        $hadiths = \App\Models\Hadith::where('book_name', $bookName)->paginate(20);
+        $collectionModel = \App\Models\HadithCollection::where('slug', $collection)->firstOrFail();
+        $bookName = $collectionModel->name_en;
+        $hadiths = $collectionModel->hadiths()->paginate(20);
         
-        if ($hadiths->isEmpty()) {
-            abort(404);
-        }
-        
-        return view('pages.hadith.collection_show', compact('collection', 'bookName', 'hadiths'));
+        return view('pages.hadith.collection_show', compact('collectionModel', 'bookName', 'hadiths'));
+    }
+
+    public function narratorShow(\App\Models\HadithNarrator $narrator)
+    {
+        $hadiths = $narrator->hadiths()->paginate(20);
+        return view('pages.hadith.narrator_show', compact('narrator', 'hadiths'));
     }
 
     public function collectionHadithShow($collection, $chapter, $number)

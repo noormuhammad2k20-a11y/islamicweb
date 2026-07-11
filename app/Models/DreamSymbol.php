@@ -53,9 +53,9 @@ class DreamSymbol extends Model
         return $query->where('dream_type', 0);
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(DreamCategory::class, 'dream_category_dream_symbol');
+        return $this->belongsTo(DreamCategory::class, 'category_id');
     }
 
     // Legacy relation table for related

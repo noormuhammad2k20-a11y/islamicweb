@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ isset($seoMeta->title) && $seoMeta->title ? $seoMeta->title : View::getSection('title', 'نورِ اسلام | Noor-e-Islam') }}</title>
-    <meta name="description" content="{{ isset($seoMeta->meta_description) && $seoMeta->meta_description ? $seoMeta->meta_description : (isset($seoMeta->description) && $seoMeta->description ? $seoMeta->description : View::getSection('meta_description', 'Noor-e-Islam: Accurate Islamic knowledge, prayer times, and Quran.')) }}">
+    <title>@yield('title', 'IslamicWeb — Islamic Knowledge & Tools')</title>
+    <meta name="description" content="@yield('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.')">
     @if(View::hasSection('meta_keywords'))
     <meta name="keywords" content="@yield('meta_keywords')">
     @endif

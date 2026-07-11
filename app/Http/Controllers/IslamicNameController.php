@@ -68,6 +68,25 @@ class IslamicNameController extends Controller
     public function show($slug)
     {
         $name = IslamicName::where('slug', $slug)->firstOrFail();
-        return view('pages.names.show', compact('name'));
+        
+        // Fetch similar names based on gender and initial letter
+        $similarNames = IslamicName::where('is_verified', true)
+                            ->where('gender', $name->gender)
+                            ->where('initial_letter', $name->initial_letter)
+                            ->where('id', '!=', $name->id)
+                            ->limit(5)
+                            ->get();
+                            
+        // If not enough, fetch just by gender
+        if ($similarNames->count() < 5) {
+            $moreNames = IslamicName::where('is_verified', true)
+                            ->where('gender', $name->gender)
+                            ->whereNotIn('id', $similarNames->pluck('id')->push($name->id))
+                            ->limit(5 - $similarNames->count())
+                            ->get();
+            $similarNames = $similarNames->concat($moreNames);
+        }
+
+        return view('pages.names.show', compact('name', 'similarNames'));
     }
 }
