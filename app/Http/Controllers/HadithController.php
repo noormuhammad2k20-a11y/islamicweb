@@ -55,6 +55,22 @@ class HadithController extends Controller
         $topicNarrators = \App\Models\HadithNarrator::whereHas('hadiths.topics', function($q) use ($topic) {
             $q->where('hadith_topics.id', $topic->id);
         })->orderBy('name_en')->get();
+        
+        $authenticSourcesCount = \Illuminate\Support\Facades\DB::table('hadith_hadith_topic as hht')
+            ->join('hadiths as h', 'hht.hadith_id', '=', 'h.id')
+            ->where('hht.hadith_topic_id', $topic->id)
+            ->whereNotNull('h.collection_id')
+            ->distinct('h.collection_id')
+            ->count('h.collection_id');
+            
+        $totalHadithsCount = \Illuminate\Support\Facades\DB::table('hadith_hadith_topic')
+            ->where('hadith_topic_id', $topic->id)
+            ->count();
+            
+        $stats = [
+            'total_hadiths' => $totalHadithsCount,
+            'authentic_sources' => array_fill(0, $authenticSourcesCount, 1) // View expects count($stats['authentic_sources'])
+        ];
 
         // SEO and Schema Markup
         $canonicalUrl = config('app.url') . '/hadith/' . $topic->slug;
@@ -93,7 +109,7 @@ class HadithController extends Controller
             ]
         ];
 
-        return view('hadith.show', compact('topic', 'hadiths', 'relatedTopics', 'topicBooks', 'topicNarrators', 'canonicalUrl', 'schema'));
+        return view('hadith.show', compact('topic', 'hadiths', 'relatedTopics', 'topicBooks', 'topicNarrators', 'canonicalUrl', 'schema', 'stats'));
     }
 
     public function hadithShow(HadithTopic $topic, $hadithSlug)

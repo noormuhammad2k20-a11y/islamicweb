@@ -11,7 +11,8 @@
         "geniusts/hijri-dates": "^1.2",
         "islamic-network/prayer-times": "^1.0",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "stichoza/google-translate-php": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

@@ -1,22 +1,22 @@
-@extends('layouts.app')
 
-@section('seo')
-<title>{{ $name->name_english }} ({{ $name->name_arabic }}) - Islamic Name Meaning, Origin & History | Noor-e-Islam</title>
-<meta name="description" content="Meaning of the Islamic name {{ $name->name_english }} ({{ $name->name_arabic }}) is {{ $name->meaning_english }}. Learn its Urdu meaning, historical background, Quranic references, and personality traits.">
-<link rel="canonical" href="{{ url('/names/' . $name->slug) }}">
+
+<?php $__env->startSection('seo'); ?>
+<title><?php echo e($name->name_english); ?> (<?php echo e($name->name_arabic); ?>) - Islamic Name Meaning, Origin & History | Noor-e-Islam</title>
+<meta name="description" content="Meaning of the Islamic name <?php echo e($name->name_english); ?> (<?php echo e($name->name_arabic); ?>) is <?php echo e($name->meaning_english); ?>. Learn its Urdu meaning, historical background, Quranic references, and personality traits.">
+<link rel="canonical" href="<?php echo e(url('/names/' . $name->slug)); ?>">
 <!-- Schema.org Data -->
 <script type="application/ld+json">
 {
-  "@@context": "https://schema.org",
+  "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Meaning and Background of the Islamic Name {{ $name->name_english }}",
-  "description": "Meaning of the Islamic name {{ $name->name_english }} ({{ $name->name_arabic }}) is {{ $name->meaning_english }}.",
-  "url": "{{ url('/names/' . $name->slug) }}"
+  "headline": "Meaning and Background of the Islamic Name <?php echo e($name->name_english); ?>",
+  "description": "Meaning of the Islamic name <?php echo e($name->name_english); ?> (<?php echo e($name->name_arabic); ?>) is <?php echo e($name->meaning_english); ?>.",
+  "url": "<?php echo e(url('/names/' . $name->slug)); ?>"
 }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap');
 
@@ -218,33 +218,33 @@
 </style>
 
 <section class="name-hero">
-    {{-- Breadcrumbs --}}
+    
     <div class="breadcrumb-bar">
-        <a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a> 
+        <a href="<?php echo e(route('home')); ?>"><i class="fas fa-home"></i> Home</a> 
         <i class="fas fa-chevron-right"></i>
-        <a href="{{ route('names.index') }}">Islamic Names</a> 
+        <a href="<?php echo e(route('names.index')); ?>">Islamic Names</a> 
         <i class="fas fa-chevron-right"></i>
-        <span class="active">{{ $name->name_english }}</span>
+        <span class="active"><?php echo e($name->name_english); ?></span>
     </div>
 
     <div class="hero-meta">
-        <span class="tag-{{ $name->gender }}"><i class="fas {{ $name->gender == 'male' ? 'fa-male' : 'fa-female' }}"></i> {{ ucfirst($name->gender) }}</span>
-        @if($name->origin)
-            <span><i class="fas fa-globe"></i> {{ ucfirst($name->origin) }}</span>
-        @endif
-        @if($name->is_quranic)
+        <span class="tag-<?php echo e($name->gender); ?>"><i class="fas <?php echo e($name->gender == 'male' ? 'fa-male' : 'fa-female'); ?>"></i> <?php echo e(ucfirst($name->gender)); ?></span>
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->origin): ?>
+            <span><i class="fas fa-globe"></i> <?php echo e(ucfirst($name->origin)); ?></span>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->is_quranic): ?>
             <span class="tag-quranic"><i class="fas fa-quran"></i> Quranic</span>
-        @endif
-        @if($name->is_sahabi || $name->is_sahabiyah)
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->is_sahabi || $name->is_sahabiyah): ?>
             <span class="tag-sahabi"><i class="fas fa-users"></i> Sahabah</span>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
     </div>
     
-    <div class="arabic-display">{{ $name->name_arabic }}</div>
-    <h1 class="name-transliteration">{{ $name->name_english }}</h1>
-    @if($name->meaning_english)
-        <p class="name-meaning-en">"{{ $name->meaning_english }}"</p>
-    @endif
+    <div class="arabic-display"><?php echo e($name->name_arabic); ?></div>
+    <h1 class="name-transliteration"><?php echo e($name->name_english); ?></h1>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->meaning_english): ?>
+        <p class="name-meaning-en">"<?php echo e($name->meaning_english); ?>"</p>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     <div class="action-row">
         <button class="action-btn-outline" onclick="shareThis()">
@@ -258,69 +258,69 @@
     <div>
         <div class="meaning-box urdu-box">
             <div class="meaning-label">Meaning in Urdu</div>
-            @php
+            <?php
                 $urduText = 'تفصیلات جلد شامل کی جائیں گی';
                 if (!empty($name->meaning_urdu)) {
                     $urduText = $name->meaning_urdu;
                 } elseif (!empty($name->translation_urdu) && preg_match('/[\x{0600}-\x{06FF}]/u', $name->translation_urdu)) {
                     $urduText = $name->translation_urdu;
                 }
-            @endphp
-            <div class="meaning-value urdu-text" dir="rtl">{{ $urduText }}</div>
+            ?>
+            <div class="meaning-value urdu-text" dir="rtl"><?php echo e($urduText); ?></div>
         </div>
 
-        @if($name->meaning_english)
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->meaning_english): ?>
         <div class="meaning-box" style="padding: 30px;">
             <div class="meaning-label">Meaning in English</div>
-            <div class="meaning-value" style="font-size: 1.6rem;">{{ $name->meaning_english }}</div>
+            <div class="meaning-value" style="font-size: 1.6rem;"><?php echo e($name->meaning_english); ?></div>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
         <div class="content-block-wrapper">
             <h2><i class="fas fa-info-circle" style="color: var(--gold);"></i> Linguistic Breakdown</h2>
-            @if(!empty($name->root_letters))
-                <p>The name <strong>{{ $name->name_english }}</strong> is beautifully derived from the Arabic root letters <strong>{{ $name->root_letters }}</strong>.</p>
-            @elseif(!empty($name->origin))
-                <p>The name <strong>{{ $name->name_english }}</strong> originates from the <strong>{{ ucfirst($name->origin) }}</strong> language, carrying deep cultural and linguistic heritage.</p>
-            @else
-                <p>The name <strong>{{ $name->name_english }}</strong> has a beautiful linguistic origin. Like many Islamic names, its phonetic structure carries deep meaning and psychological impact.</p>
-            @endif
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(!empty($name->root_letters)): ?>
+                <p>The name <strong><?php echo e($name->name_english); ?></strong> is beautifully derived from the Arabic root letters <strong><?php echo e($name->root_letters); ?></strong>.</p>
+            <?php elseif(!empty($name->origin)): ?>
+                <p>The name <strong><?php echo e($name->name_english); ?></strong> originates from the <strong><?php echo e(ucfirst($name->origin)); ?></strong> language, carrying deep cultural and linguistic heritage.</p>
+            <?php else: ?>
+                <p>The name <strong><?php echo e($name->name_english); ?></strong> has a beautiful linguistic origin. Like many Islamic names, its phonetic structure carries deep meaning and psychological impact.</p>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
             
-            @if(!empty($name->detailed_meaning))
-                <p>{{ $name->detailed_meaning }}</p>
-            @else
-                <p>In Islamic naming traditions, understanding a name's origin provides profound insight into its true essence. The phonetic sound of <strong>{{ $name->name_english }}</strong> is known to evoke a sense of 
-                @php
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(!empty($name->detailed_meaning)): ?>
+                <p><?php echo e($name->detailed_meaning); ?></p>
+            <?php else: ?>
+                <p>In Islamic naming traditions, understanding a name's origin provides profound insight into its true essence. The phonetic sound of <strong><?php echo e($name->name_english); ?></strong> is known to evoke a sense of 
+                <?php
                     $sounds = ['strength and dignity', 'peace and tranquility', 'wisdom and grace', 'honor and respect', 'purity and devotion'];
                     $soundSeed = strlen($name->name_english) % 5;
-                @endphp
-                {{ $sounds[$soundSeed] }}.</p>
-            @endif
+                ?>
+                <?php echo e($sounds[$soundSeed]); ?>.</p>
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
 
-        @if($name->is_quranic || $name->quranic_reference)
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->is_quranic || $name->quranic_reference): ?>
         <div class="content-block-wrapper">
             <h2><i class="fas fa-book-quran" style="color: var(--gold);"></i> Usage in Quran</h2>
-            @if($name->quranic_reference)
-                <p>{{ $name->quranic_reference }}</p>
-            @else
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->quranic_reference): ?>
+                <p><?php echo e($name->quranic_reference); ?></p>
+            <?php else: ?>
                 <p>This name or its root word is mentioned in the Holy Quran, making it a blessed and highly recommended name for Muslim children.</p>
-            @endif
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
-        @if($name->biography || $name->is_sahabi || $name->is_sahabiyah)
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->biography || $name->is_sahabi || $name->is_sahabiyah): ?>
         <div class="content-block-wrapper">
             <h2><i class="fas fa-scroll" style="color: var(--gold);"></i> Historical Context & Usage</h2>
-            @if($name->biography)
-                <p>{{ $name->biography }}</p>
-            @else
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->biography): ?>
+                <p><?php echo e($name->biography); ?></p>
+            <?php else: ?>
                 <p>This name was used by the noble Companions (Sahabah/Sahabiyat) of Prophet Muhammad ﷺ. Naming children after the righteous predecessors is a beloved Sunnah in Islam, instilling a sense of spiritual connection and high moral standards.</p>
-            @endif
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
-        @php
+        <?php
             $traits = [];
             if (!empty($name->personality_traits)) {
                 $traits = is_string($name->personality_traits) ? json_decode($name->personality_traits, true) : $name->personality_traits;
@@ -361,17 +361,17 @@
                 }
                 $traits = $mappedTraits;
             }
-        @endphp
+        ?>
         
         <div class="personality-box">
             <h3 class="personality-title">Personality Traits & Psychology</h3>
-            <p class="personality-desc">In Islamic tradition, it is believed that a person's name influences their personality (<em>Tafa'ul</em>). Those named <strong>{{ $name->name_english }}</strong> are often associated with:</p>
+            <p class="personality-desc">In Islamic tradition, it is believed that a person's name influences their personality (<em>Tafa'ul</em>). Those named <strong><?php echo e($name->name_english); ?></strong> are often associated with:</p>
             <div class="personality-grid">
-                @foreach(array_slice($traits, 0, 4) as $trait)
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = array_slice($traits, 0, 4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $trait): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                 <div class="personality-item">
-                    <span class="trait-icon"><i class="fas {{ $trait['icon'] }}"></i></span> <span class="trait-text">{{ $trait['text'] }}</span>
+                    <span class="trait-icon"><i class="fas <?php echo e($trait['icon']); ?>"></i></span> <span class="trait-text"><?php echo e($trait['text']); ?></span>
                 </div>
-                @endforeach
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
             </div>
             <p class="trait-note">* Note: Personality traits are general cultural observations and not definitive religious guarantees.</p>
         </div>
@@ -383,29 +383,29 @@
                 <p>Discover other beautiful Islamic names by category to find the perfect match.</p>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-                <a href="{{ route('names.gender', 'boys') }}" class="seo-link-btn">
+                <a href="<?php echo e(route('names.gender', 'boys')); ?>" class="seo-link-btn">
                     <i class="fas fa-male" style="color: var(--navy-light);"></i>
                     <span>Islamic Boy Names</span>
                 </a>
-                <a href="{{ route('names.gender', 'girls') }}" class="seo-link-btn">
+                <a href="<?php echo e(route('names.gender', 'girls')); ?>" class="seo-link-btn">
                     <i class="fas fa-female" style="color: #be185d;"></i>
                     <span>Islamic Girl Names</span>
                 </a>
-                <a href="{{ route('names.index', ['filter' => 'quranic']) }}" class="seo-link-btn">
+                <a href="<?php echo e(route('names.index', ['filter' => 'quranic'])); ?>" class="seo-link-btn">
                     <i class="fas fa-book-quran" style="color: var(--emerald);"></i>
                     <span>Quranic Names</span>
                 </a>
-                <a href="{{ route('names.index', ['filter' => 'sahabah']) }}" class="seo-link-btn">
+                <a href="<?php echo e(route('names.index', ['filter' => 'sahabah'])); ?>" class="seo-link-btn">
                     <i class="fas fa-users" style="color: var(--navy);"></i>
                     <span>Sahabah Names</span>
                 </a>
-                <a href="{{ route('names.index', ['filter' => 'prophets']) }}" class="seo-link-btn">
+                <a href="<?php echo e(route('names.index', ['filter' => 'prophets'])); ?>" class="seo-link-btn">
                     <i class="fas fa-moon" style="color: var(--gold-dark);"></i>
                     <span>Prophet Names</span>
                 </a>
-                <a href="{{ route('names.index', ['letter' => $name->initial_letter]) }}" class="seo-link-btn">
+                <a href="<?php echo e(route('names.index', ['letter' => $name->initial_letter])); ?>" class="seo-link-btn">
                     <i class="fas fa-font" style="color: var(--navy-mid);"></i>
-                    <span>Names Starting With {{ strtoupper($name->initial_letter) }}</span>
+                    <span>Names Starting With <?php echo e(strtoupper($name->initial_letter)); ?></span>
                 </a>
             </div>
         </div>
@@ -415,49 +415,49 @@
     <aside>
         <div class="sidebar-widget">
             <h3 class="sidebar-title"><i class="fas fa-list" style="color: var(--gold);"></i> Similar Names</h3>
-            <p style="font-size: .9rem; color: var(--text-light); margin-bottom: 20px;">Other {{ $name->gender }} names starting with '{{ $name->initial_letter }}'</p>
+            <p style="font-size: .9rem; color: var(--text-light); margin-bottom: 20px;">Other <?php echo e($name->gender); ?> names starting with '<?php echo e($name->initial_letter); ?>'</p>
             <div class="similar-names-grid">
-                @if(isset($similarNames) && $similarNames->count() > 0)
-                    @foreach($similarNames as $sim)
-                    <a href="{{ route('names.show', $sim->slug) }}" class="similar-name-card">
-                        <span class="en">{{ $sim->name_english }}</span>
-                        <span class="ar">{{ $sim->name_arabic }}</span>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($similarNames) && $similarNames->count() > 0): ?>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = $similarNames; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sim): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                    <a href="<?php echo e(route('names.show', $sim->slug)); ?>" class="similar-name-card">
+                        <span class="en"><?php echo e($sim->name_english); ?></span>
+                        <span class="ar"><?php echo e($sim->name_arabic); ?></span>
                     </a>
-                    @endforeach
-                @else
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                <?php else: ?>
                     <div style="font-size: .9rem; color: var(--text-light); font-style: italic; padding: 15px; background: var(--bg-main); border-radius: var(--radius-sm); border: 1px solid var(--border-light);">More names coming soon...</div>
-                @endif
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
             </div>
-            <a href="{{ route('names.index', ['gender' => $name->gender, 'letter' => $name->initial_letter]) }}" class="view-all-link">View All '{{ $name->initial_letter }}' Names &rarr;</a>
+            <a href="<?php echo e(route('names.index', ['gender' => $name->gender, 'letter' => $name->initial_letter])); ?>" class="view-all-link">View All '<?php echo e($name->initial_letter); ?>' Names &rarr;</a>
         </div>
 
-        @if($name->numerology_value)
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->numerology_value): ?>
         <div class="numerology-widget">
             <h3 class="numerology-title">Numerology (Abjad)</h3>
-            <div class="numerology-value">{{ $name->numerology_value }}</div>
-            <p class="numerology-desc">The numerical value of the Arabic letters in {{ $name->name_english }} according to the Abjad system.</p>
+            <div class="numerology-value"><?php echo e($name->numerology_value); ?></div>
+            <p class="numerology-desc">The numerical value of the Arabic letters in <?php echo e($name->name_english); ?> according to the Abjad system.</p>
         </div>
-        @endif
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         
         <div class="sidebar-widget">
             <h3 class="sidebar-title"><i class="fas fa-heart" style="color: var(--gold);"></i> Compatibility</h3>
-            <p style="font-size: .9rem; color: var(--text-medium); margin-bottom: 20px;">Names that pair well with {{ $name->name_english }}:</p>
+            <p style="font-size: .9rem; color: var(--text-medium); margin-bottom: 20px;">Names that pair well with <?php echo e($name->name_english); ?>:</p>
             <ul class="compat-list">
-                <li>Muhammad {{ $name->name_english }}</li>
-                <li>{{ $name->name_english }} Ali</li>
-                <li>Fatima {{ $name->name_english }}</li>
+                <li>Muhammad <?php echo e($name->name_english); ?></li>
+                <li><?php echo e($name->name_english); ?> Ali</li>
+                <li>Fatima <?php echo e($name->name_english); ?></li>
             </ul>
         </div>
     </aside>
 </div>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script>
 function shareThis() {
     if (navigator.share) {
         navigator.share({ 
-            title: 'Meaning of {{ $name->name_english }}', 
-            text: 'I found the beautiful meaning of the name {{ $name->name_english }} on Noor-e-Islam.',
+            title: 'Meaning of <?php echo e($name->name_english); ?>', 
+            text: 'I found the beautiful meaning of the name <?php echo e($name->name_english); ?> on Noor-e-Islam.',
             url: window.location.href 
         });
     } else {
@@ -466,6 +466,8 @@ function shareThis() {
     }
 }
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/names/show.blade.php ENDPATH**/ ?>

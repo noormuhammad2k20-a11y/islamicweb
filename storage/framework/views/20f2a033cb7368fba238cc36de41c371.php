@@ -1,8 +1,8 @@
-@extends('layouts.app')
 
-@section('title', 'Islamic Names Directory')
 
-@section('content')
+<?php $__env->startSection('title', 'Islamic Names Directory'); ?>
+
+<?php $__env->startSection('content'); ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap');
 
@@ -200,29 +200,30 @@
         <!-- Breadcrumbs -->
         <nav aria-label="breadcrumb" class="breadcrumb-nav">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i> Home</a></li>
-                @if(isset($gender) || request('filter') || request('letter') || request('q'))
-                    <li class="breadcrumb-item"><a href="{{ route('names.index') }}">Islamic Names</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo e(route('home')); ?>"><i class="fas fa-home"></i> Home</a></li>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($gender) || request('filter') || request('letter') || request('q')): ?>
+                    <li class="breadcrumb-item"><a href="<?php echo e(route('names.index')); ?>">Islamic Names</a></li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        @if(request('q'))
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(request('q')): ?>
                             Search Results
-                        @elseif(isset($gender))
-                            {{ ucfirst($gender) }} Names
-                        @elseif(request('filter') == 'sahabah')
+                        <?php elseif(isset($gender)): ?>
+                            <?php echo e(ucfirst($gender)); ?> Names
+                        <?php elseif(request('filter') == 'sahabah'): ?>
                             Sahabah Names
-                        @elseif(request('filter') == 'quranic')
+                        <?php elseif(request('filter') == 'quranic'): ?>
                             Quranic Names
-                        @elseif(request('filter') == 'prophets')
+                        <?php elseif(request('filter') == 'prophets'): ?>
                             Prophets Names
-                        @elseif(request('letter'))
-                            Names Starting With {{ strtoupper(request('letter')) }}
-                        @else
+                        <?php elseif(request('letter')): ?>
+                            Names Starting With <?php echo e(strtoupper(request('letter'))); ?>
+
+                        <?php else: ?>
                             Directory
-                        @endif
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     </li>
-                @else
+                <?php else: ?>
                     <li class="breadcrumb-item active" aria-current="page">Islamic Names</li>
-                @endif
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
             </ol>
         </nav>
 
@@ -233,26 +234,26 @@
         </div>
 
         <div class="filters-container">
-            <form action="{{ route('names.index') }}" method="GET" class="search-row">
-                <input type="text" name="q" class="form-control" placeholder="Search names or meanings..." value="{{ request('q') }}">
+            <form action="<?php echo e(route('names.index')); ?>" method="GET" class="search-row">
+                <input type="text" name="q" class="form-control" placeholder="Search names or meanings..." value="<?php echo e(request('q')); ?>">
                 
                 <select name="gender" class="form-control" style="flex: 0 1 180px;">
                     <option value="">Any Gender</option>
-                    <option value="male" {{ (isset($gender) && $gender == 'male') || request('gender') == 'male' ? 'selected' : '' }}>Boys</option>
-                    <option value="female" {{ (isset($gender) && $gender == 'female') || request('gender') == 'female' ? 'selected' : '' }}>Girls</option>
+                    <option value="male" <?php echo e((isset($gender) && $gender == 'male') || request('gender') == 'male' ? 'selected' : ''); ?>>Boys</option>
+                    <option value="female" <?php echo e((isset($gender) && $gender == 'female') || request('gender') == 'female' ? 'selected' : ''); ?>>Girls</option>
                 </select>
                 
                 <select name="filter" class="form-control" style="flex: 0 1 200px;">
                     <option value="">All Categories</option>
-                    <option value="quranic" {{ request('filter') == 'quranic' ? 'selected' : '' }}>Quranic Names</option>
-                    <option value="sahabah" {{ request('filter') == 'sahabah' ? 'selected' : '' }}>Sahabah / Companions</option>
-                    <option value="prophets" {{ request('filter') == 'prophets' ? 'selected' : '' }}>Prophets</option>
+                    <option value="quranic" <?php echo e(request('filter') == 'quranic' ? 'selected' : ''); ?>>Quranic Names</option>
+                    <option value="sahabah" <?php echo e(request('filter') == 'sahabah' ? 'selected' : ''); ?>>Sahabah / Companions</option>
+                    <option value="prophets" <?php echo e(request('filter') == 'prophets' ? 'selected' : ''); ?>>Prophets</option>
                 </select>
                 
                 <select name="sort" class="form-control" style="flex: 0 1 180px;">
-                    <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>A to Z</option>
-                    <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Z to A</option>
-                    <option value="popular" {{ request('sort') == 'popular' ? 'selected' : '' }}>Popular</option>
+                    <option value="name_asc" <?php echo e(request('sort') == 'name_asc' ? 'selected' : ''); ?>>A to Z</option>
+                    <option value="name_desc" <?php echo e(request('sort') == 'name_desc' ? 'selected' : ''); ?>>Z to A</option>
+                    <option value="popular" <?php echo e(request('sort') == 'popular' ? 'selected' : ''); ?>>Popular</option>
                 </select>
 
                 <button type="submit" class="btn-primary"><i class="fas fa-search"></i> Search</button>
@@ -260,73 +261,77 @@
             
             <div class="quick-links">
                 <span>Quick Filters:</span>
-                <a href="{{ route('names.gender', 'boys') }}" class="quick-link"><i class="fas fa-male"></i> Boys</a>
-                <a href="{{ route('names.gender', 'girls') }}" class="quick-link"><i class="fas fa-female"></i> Girls</a>
-                <a href="{{ route('names.index', ['filter' => 'quranic']) }}" class="quick-link"><i class="fas fa-book-quran"></i> Quranic</a>
-                <a href="{{ route('names.index', ['filter' => 'sahabah']) }}" class="quick-link"><i class="fas fa-users"></i> Sahabah</a>
+                <a href="<?php echo e(route('names.gender', 'boys')); ?>" class="quick-link"><i class="fas fa-male"></i> Boys</a>
+                <a href="<?php echo e(route('names.gender', 'girls')); ?>" class="quick-link"><i class="fas fa-female"></i> Girls</a>
+                <a href="<?php echo e(route('names.index', ['filter' => 'quranic'])); ?>" class="quick-link"><i class="fas fa-book-quran"></i> Quranic</a>
+                <a href="<?php echo e(route('names.index', ['filter' => 'sahabah'])); ?>" class="quick-link"><i class="fas fa-users"></i> Sahabah</a>
             </div>
 
             <div class="alphabet-nav">
-                @foreach(range('A', 'Z') as $char)
-                    <a href="{{ route('names.index', ['letter' => $char, 'gender' => request('gender')]) }}" 
-                       class="alpha-link {{ request('letter') == $char ? 'active' : '' }}">
-                       {{ $char }}
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = range('A', 'Z'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $char): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                    <a href="<?php echo e(route('names.index', ['letter' => $char, 'gender' => request('gender')])); ?>" 
+                       class="alpha-link <?php echo e(request('letter') == $char ? 'active' : ''); ?>">
+                       <?php echo e($char); ?>
+
                     </a>
-                @endforeach
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
             </div>
         </div>
 
         <div>
             <div class="directory-header">
                 <h2>
-                    {{ isset($gender) ? ucfirst($gender) . ' Names' : (request('search') ? 'Search Results' : 'Directory Listings') }}
+                    <?php echo e(isset($gender) ? ucfirst($gender) . ' Names' : (request('search') ? 'Search Results' : 'Directory Listings')); ?>
+
                 </h2>
                 <span>
-                    @php $collection = isset($names) ? $names : $popularNames; @endphp
-                    Showing {{ $collection->count() }} results
+                    <?php $collection = isset($names) ? $names : $popularNames; ?>
+                    Showing <?php echo e($collection->count()); ?> results
                 </span>
             </div>
             
             <div class="names-grid">
-                @forelse($collection as $name)
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__empty_1 = true; $__currentLoopData = $collection; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $name): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
                 <div class="name-card-wrapper">
-                    <a href="{{ route('names.show', $name->slug) }}" class="name-card">
+                    <a href="<?php echo e(route('names.show', $name->slug)); ?>" class="name-card">
                         <div class="card-header">
-                            <h3 class="name-en" title="{{ $name->name_english }}">{{ \Illuminate\Support\Str::limit($name->name_english, 18) }}</h3>
-                            <span class="name-ar" dir="rtl">{{ $name->name_arabic }}</span>
+                            <h3 class="name-en" title="<?php echo e($name->name_english); ?>"><?php echo e(\Illuminate\Support\Str::limit($name->name_english, 18)); ?></h3>
+                            <span class="name-ar" dir="rtl"><?php echo e($name->name_arabic); ?></span>
                         </div>
-                        <p class="name-meaning">{{ $name->translation_urdu }}</p>
+                        <p class="name-meaning"><?php echo e($name->translation_urdu); ?></p>
                         
                         <div class="card-footer">
-                            <span class="tag {{ $name->gender }}" title="{{ ucfirst($name->gender) }}">
-                                <i class="fas {{ $name->gender == 'male' ? 'fa-male' : 'fa-female' }}"></i> {{ ucfirst($name->gender) }}
+                            <span class="tag <?php echo e($name->gender); ?>" title="<?php echo e(ucfirst($name->gender)); ?>">
+                                <i class="fas <?php echo e($name->gender == 'male' ? 'fa-male' : 'fa-female'); ?>"></i> <?php echo e(ucfirst($name->gender)); ?>
+
                             </span>
-                            @if($name->is_quranic)
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->is_quranic): ?>
                                 <span class="tag quranic" title="Quranic Name"><i class="fas fa-book-quran"></i> Quranic</span>
-                            @endif
-                            @if($name->is_sahabi || $name->is_sahabiyah)
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->is_sahabi || $name->is_sahabiyah): ?>
                                 <span class="tag sahabah" title="Sahabah"><i class="fas fa-users"></i> Sahabi</span>
-                            @endif
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                         </div>
                     </a>
-                    <button class="copy-btn" onclick="copyName('{{ addslashes($name->name_english) }}', this)" title="Copy Name">
+                    <button class="copy-btn" onclick="copyName('<?php echo e(addslashes($name->name_english)); ?>', this)" title="Copy Name">
                         <i class="far fa-copy"></i>
                     </button>
                 </div>
-                @empty
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
                 <div class="empty-state">
                     <i class="fas fa-search"></i>
                     <h3>No names found</h3>
                     <p>Try adjusting your search criteria or clearing filters.</p>
                 </div>
-                @endforelse
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
             </div>
 
-            @if(isset($names) && method_exists($names, 'links'))
+            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($names) && method_exists($names, 'links')): ?>
                 <div style="margin-top: 50px;">
-                    {{ $names->links() }}
+                    <?php echo e($names->links()); ?>
+
                 </div>
-            @endif
+            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
         </div>
     </div>
 </section>
@@ -348,4 +353,5 @@ function copyName(text, btn) {
     });
 }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/pages/names/hub.blade.php ENDPATH**/ ?>

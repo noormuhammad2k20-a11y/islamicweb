@@ -480,21 +480,45 @@
                 </div>
                 
                 <div class="hadith-body">
-                    @if($hadith->arabic_text && !Str::contains($hadith->arabic_text, 'placeholder until arabic fetch'))
-                    <div class="hadith-arabic">
+                    @if($hadith->arabic_text && !Str::contains($hadith->arabic_text, 'placeholder'))
+                    <div class="hadith-arabic" dir="rtl" lang="ar" style="
+                        font-family: 'Scheherazade New', 'Amiri', serif;
+                        font-size: 1.4rem;
+                        line-height: 2.2;
+                        text-align: right;
+                        padding: 1rem;
+                        background: rgba(201,167,99, 0.08);
+                        border-right: 3px solid #c9a763;
+                        border-radius: 6px;
+                        margin-bottom: 1rem;
+                        direction: rtl;
+                    ">
                         {{ $hadith->arabic_text }}
                     </div>
+                    @else
+                    <div class="hadith-arabic-placeholder" style="
+                        padding: 0.75rem 1rem;
+                        background: #f8f9fa;
+                        border-radius: 6px;
+                        margin-bottom: 1rem;
+                        color: #aaa;
+                        font-size: 0.85rem;
+                    ">
+                        Arabic text loading... Run: php artisan hadith:fetch-arabic
+                    </div>
                     @endif
+
+                    <div class="hadith-translation">
+                        <span class="label">Translation:</span>
+                        <p>{{ $hadith->english_translation }}</p>
+                    </div>
 
                     @if($hadith->urdu_translation)
-                    <div class="urdu-translation">
-                        <strong>ترجمہ:</strong> {{ $hadith->urdu_translation }}
+                    <div class="hadith-urdu" dir="rtl" lang="ur">
+                        <span class="label">اردو:</span>
+                        <p>{{ $hadith->urdu_translation }}</p>
                     </div>
                     @endif
-
-                    <div class="eng-translation">
-                        <strong>Translation:</strong> {{ $hadith->english_translation }}
-                    </div>
 
                     @if($hadith->explanation)
                     <div class="hadith-explanation">
@@ -535,21 +559,15 @@
                         @endforeach
                     </div>
                     @endif
-                </div>
-
-                <div class="hadith-footer">
-                    <span><i class="fas fa-book"></i> {{ $hadith->book_name }}</span>
-                    @if($hadith->chapter)
-                    <span><i class="fas fa-bookmark"></i> {{ $hadith->chapter }}</span>
-                    @endif
-                    @if($hadith->hadith_number)
-                    <span><i class="fas fa-hashtag"></i> {{ $hadith->hadith_number }}</span>
-                    @endif
-                    <span><i class="fas fa-link"></i> {{ $hadith->reference }}</span>
                     
-                    <button onclick="copyLink('{{ url('/hadith/' . $topic->slug . '#hadith-' . $hadith->id) }}')" class="share-btn">
-                        <i class="fas fa-share-alt"></i> Share
-                    </button>
+                    <div class="hadith-meta">
+                        <span class="chapter">{{ $hadith->chapter ?? $hadith->book_name }}</span>
+                        <span class="reference">{{ $hadith->reference }}</span>
+                        @if($hadith->narrator)
+                        <span class="narrator">Narrated by {{ $hadith->narrator }}</span>
+                        @endif
+                        <button class="share-btn" onclick="copyLink('{{ url('/hadith/' . $topic->slug . '#hadith-' . $hadith->id) }}')">Share</button>
+                    </div>
                 </div>
             </div>
             @endforeach
@@ -647,6 +665,42 @@
         </div>
     </aside>
 </div>
+
+@push('styles')
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    /* Additions for Hadith Module */
+    .hadith-arabic {
+        font-family: 'Scheherazade New', 'Amiri', 'Traditional Arabic', serif;
+        font-size: 1.4rem;
+        line-height: 2.2;
+        text-align: right;
+        direction: rtl;
+    }
+    .hadith-translation .label,
+    .hadith-urdu .label {
+        font-weight: 600;
+        color: var(--gold-color, #c9a763);
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+    .hadith-meta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+        padding-top: 0.75rem;
+        border-top: 1px solid #eee;
+        font-size: 0.85rem;
+        color: #666;
+        margin-top: 0.75rem;
+    }
+    .hadith-meta .reference {
+        font-weight: 600;
+        color: var(--primary-dark, #1a3a5c);
+    }
+</style>
+@endpush
 
 @push('scripts')
 <script>
