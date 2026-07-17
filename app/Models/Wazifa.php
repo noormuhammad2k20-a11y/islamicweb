@@ -55,4 +55,9 @@ class Wazifa extends Model
     {
         return $this->belongsToMany(Hadith::class, 'hadith_wazifa');
     }
+
+    public function seoMeta()
+    {
+        return $this->morphOne(SeoMeta::class, 'metaable');
+    }
 }

@@ -148,6 +148,85 @@ class SchemaHelper
     }
 
     /**
+     * Generate Islamic Name schema.
+     */
+    public static function islamicNameSchema($name): array
+    {
+        $desc = "";
+        if ($name->meaning_urdu) {
+            $desc .= "Matlab: {$name->meaning_urdu}. ";
+        }
+        if ($name->meaning_english) {
+            $desc .= "Meaning: {$name->meaning_english}. ";
+        }
+        $gender = $name->gender ?? 'Unknown';
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'DefinedTerm',
+            'name' => $name->name_english ?? $name->name ?? '',
+            'alternateName' => $name->name_urdu ?? $name->name_arabic ?? '',
+            'termCode' => 'Islamic Name',
+            'description' => $desc . "Gender: {$gender}.",
+            'inDefinedTermSet' => [
+                '@type' => 'DefinedTermSet',
+                'name' => 'Islamic Names — NoorIslam',
+                'url' => config('app.url') . '/islamic-names'
+            ]
+        ];
+    }
+
+    /**
+     * Generate Dream Symbol schema.
+     */
+    public static function dreamSymbolSchema($symbol): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'Article',
+            'articleSection' => 'Islamic Dream Interpretation',
+            'headline' => "Khwab mein " . ($symbol->title_urdu ?? $symbol->symbol_urdu ?? '') . " Dekhne Ki Tabeer",
+            'name' => "Khwab mein " . ($symbol->title_urdu ?? $symbol->symbol_urdu ?? '') . " Dekhne Ki Tabeer",
+            'description' => $symbol->interpretation_urdu ?? $symbol->interpretation ?? $symbol->short_interpretation ?? '',
+            'inLanguage' => ['ur', 'en'],
+            'author' => ['@type' => 'Organization', 'name' => 'NoorIslam'],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'NoorIslam',
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => config('app.url') . '/favicon.svg',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Generate Wazifa schema.
+     */
+    public static function wazifaSchema($wazifa): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'Article',
+            'articleSection' => 'Islamic Wazaif',
+            'headline' => $wazifa->title_en ?? $wazifa->title ?? '',
+            'alternateName' => $wazifa->title_ur ?? $wazifa->title_urdu ?? '',
+            'description' => $wazifa->purpose ?? $wazifa->description ?? '',
+            'inLanguage' => ['ur', 'en', 'ar'],
+            'author' => ['@type' => 'Organization', 'name' => 'NoorIslam'],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'NoorIslam',
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url' => config('app.url') . '/favicon.svg',
+                ],
+            ],
+        ];
+    }
+
+    /**
      * Generate BreadcrumbList schema.
      */
     public static function breadcrumbSchema(array $items): array

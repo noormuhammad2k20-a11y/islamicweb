@@ -19,11 +19,27 @@ class DatabaseSeeder extends Seeder
             SurahContentBlockSeeder::class,
             SurahThemeSeeder::class,
             SurahFaqSeeder::class,
+            // ── PHASE 2: SEO AND CONTENT OPTIMIZATION ──
             SurahImportantAyahSeeder::class,
             SurahRelatedSurahSeeder::class,
             SurahRecitationGuideSeeder::class,
             SurahLearningPathSeeder::class,
             SurahSeoMetaSeeder::class,
+            DuaSeoMetaSeeder::class,
+            IslamicCalendarSeoSeeder::class,
+            SurahPagesSeeder::class,
+            SurahRukuSeeder::class,
+            // V25 Full Audit SEO Seeders
+            FixLongTitlesSeeder::class,
+            CleanupHadithInDuasSeeder::class,
+            PopulateDuaContentSeeder::class,
+            IslamicNameSeoSeeder::class,
+            DreamSymbolSeoSeeder::class,
+            AllahNameSeoSeeder::class,
+            WazifaSeoSeeder::class,
+            HadithSeoSeeder::class,
+            HadithCollectionSeoSeeder::class,
+            CitySeoSeeder::class,
         ]);
         \Illuminate\Support\Facades\Cache::flush();
 

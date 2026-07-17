@@ -21,4 +21,9 @@ class HadithCollection extends Model
     {
         return $this->hasMany(Hadith::class, 'collection_id');
     }
+
+    public function seoMeta()
+    {
+        return $this->morphOne(SeoMeta::class, 'metaable');
+    }
 }

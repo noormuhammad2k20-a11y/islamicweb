@@ -88,4 +88,9 @@ class Hadith extends Model
     {
         return $this->belongsToMany(HadithKeyword::class, 'hadith_hadith_keyword');
     }
+
+    public function seoMeta()
+    {
+        return $this->morphOne(SeoMeta::class, 'metaable');
+    }
 }

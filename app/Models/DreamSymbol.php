@@ -76,4 +76,9 @@ class DreamSymbol extends Model
         return $this->belongsToMany(DreamSymbol::class, 'dream_related_links', 'dream_id', 'related_dream_id')
                     ->wherePivot('relation_type', 'opposite');
     }
+
+    public function seoMeta()
+    {
+        return $this->morphOne(SeoMeta::class, 'metaable');
+    }
 }

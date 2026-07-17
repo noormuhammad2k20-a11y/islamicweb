@@ -14,4 +14,9 @@ class IslamicName extends Model
     {
         return $this->belongsToMany(NameCategory::class, 'islamic_name_name_category');
     }
+
+    public function seoMeta()
+    {
+        return $this->morphOne(SeoMeta::class, 'metaable');
+    }
 }
