@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'IslamicWeb — Islamic Knowledge & Tools')</title>
+    <title>@yield('title', 'NoorIslam — Noor-e-Islam: Islamic Knowledge & Tools')</title>
     <meta name="description" content="@yield('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.')">
     @if(View::hasSection('meta_keywords'))
     <meta name="keywords" content="@yield('meta_keywords')">
@@ -18,6 +18,40 @@
     {!! $seoMeta->schema_override_json !!}
     </script>
     @endif
+
+    {{-- Site-wide WebSite + Organization JSON-LD (SEO ISSUE F & Phase 4) --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "NoorIslam",
+        "alternateName": "Noor-e-Islam",
+        "url": "{{ config('app.url') }}",
+        "description": "Authentic Islamic content — Prayer Times, Duas, Quran, Hadith, Wazaif & more.",
+        "inLanguage": ["en", "ur", "ar"],
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ config('app.url') }}/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "NoorIslam",
+        "alternateName": "نورِ اسلام",
+        "url": "{{ config('app.url') }}",
+        "logo": "{{ asset('favicon.svg') }}",
+        "sameAs": [],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "url": "{{ config('app.url') }}/contact"
+        }
+    }
+    </script>
     @yield('schema')
     @php
         $currentRouteName = Route::currentRouteName();
@@ -27,9 +61,14 @@
         <link rel="alternate" hreflang="x-default" href="{{ route($currentRouteName, array_merge($routeParams, ['locale' => null])) }}" />
         <link rel="alternate" hreflang="en" href="{{ route($currentRouteName, array_merge($routeParams, ['locale' => null])) }}" />
         <link rel="alternate" hreflang="ur" href="{{ route($currentRouteName, array_merge($routeParams, ['locale' => 'ur'])) }}" />
+        <link rel="alternate" hreflang="ar" href="{{ route($currentRouteName, array_merge($routeParams, ['locale' => null])) }}" />
     @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {{-- Arabic font preload for Core Web Vitals (SEO ISSUE G / Step 3) --}}
+    @if(file_exists(public_path('fonts/arabic-font.woff2')))
+    <link rel="preload" href="{{ asset('fonts/arabic-font.woff2') }}" as="font" type="font/woff2" crossorigin>
+    @endif
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap"></noscript>
@@ -37,22 +76,52 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('og_meta')
     
+    @php
+        // ISSUE 7: OG Image fallback — use default image when og_image is empty or file doesn't exist
+        $defaultOgImage = asset('images/og-default.jpg');
+        $ogImage = '';
+        if (isset($seoMeta) && !empty($seoMeta->og_image)) {
+            $ogImage = $seoMeta->og_image;
+        } else {
+            $ogImage = $defaultOgImage;
+        }
+        $twitterImage = '';
+        if (isset($seoMeta) && !empty($seoMeta->twitter_image)) {
+            $twitterImage = $seoMeta->twitter_image;
+        } elseif (isset($seoMeta) && !empty($seoMeta->og_image)) {
+            $twitterImage = $seoMeta->og_image;
+        } else {
+            $twitterImage = $defaultOgImage;
+        }
+    @endphp
     @if(isset($seoMeta) && isset($seoMeta->og_title))
     <meta property="og:title" content="{{ $seoMeta->og_title }}">
     <meta property="og:description" content="{{ $seoMeta->og_description ?? '' }}">
-    <meta property="og:image" content="{{ $seoMeta->og_image ?? '' }}">
+    <meta property="og:image" content="{{ $ogImage }}">
     <meta property="og:url" content="{{ $seoMeta->canonical_url ?? url()->current() }}">
     <meta property="og:type" content="article">
+    <meta property="og:site_name" content="NoorIslam">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ur_PK">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $seoMeta->twitter_title ?? $seoMeta->og_title }}">
     <meta name="twitter:description" content="{{ $seoMeta->twitter_description ?? $seoMeta->og_description ?? '' }}">
-    <meta name="twitter:image" content="{{ $seoMeta->twitter_image ?? $seoMeta->og_image ?? '' }}">
+    <meta name="twitter:image" content="{{ $twitterImage }}">
+    @else
+    {{-- Default OG tags when $seoMeta is not available --}}
+    <meta property="og:title" content="@yield('title', 'NoorIslam — Islamic Knowledge & Tools')">
+    <meta property="og:description" content="@yield('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.')">
+    <meta property="og:image" content="{{ $defaultOgImage }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="NoorIslam">
+    <meta name="twitter:card" content="summary_large_image">
     @endif
 
     <style media="print">
         @page { margin: 1cm; }
         body { background: white !important; font-size: 12pt; color: black !important; }
-        .top-bar, .navbar, .mobile-toggle, .mobile-overlay, .footer, .back-to-top, .toast-container, .social-share, .faq-container, .converter-widget, button, form {
+        .navbar, .mobile-toggle, .mobile-overlay, .footer, .back-to-top, .toast-container, .social-share, .faq-container, .converter-widget, button, form {
             display: none !important;
         }
         .page-header { background: none !important; color: black !important; border: none !important; padding: 20px 0 !important; }
@@ -66,22 +135,6 @@
     @yield('head')
 </head>
 <body>
-
-<div class="top-bar">
-        <div class="top-bar-inner">
-            <div class="top-bar-left">
-                <span class="hijri-date"><i class="fas fa-moon"></i> {{ isset($hijriDate) && $hijriDate ? $hijriDate->hijri_day . ' ' . $hijriDate->hijri_month . ' ' . $hijriDate->hijri_year . ' AH' : date('d M Y') }}</span>
-                <span><i class="fas fa-map-marker-alt"></i> {{ isset($city) && $city ? $city->name : 'Global' }}</span>
-            </div>
-            <div class="top-bar-right">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            </div>
-        </div>
-    </div>
 
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
@@ -214,13 +267,26 @@
             mobileOverlay.classList.toggle('show');
             document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
         }
+        
+        function closeMenu() {
+            if (navLinks.classList.contains('open')) {
+                mobileToggle.classList.remove('active');
+                navLinks.classList.remove('open');
+                mobileOverlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+
         mobileToggle.addEventListener('click', toggleMenu);
-        mobileOverlay.addEventListener('click', toggleMenu);
+        mobileOverlay.addEventListener('click', closeMenu);
 
         document.querySelectorAll('.nav-links a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                if (navLinks.classList.contains('open')) toggleMenu();
-            });
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeMenu();
         });
 
         // Navbar scroll effect

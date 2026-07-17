@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use App\Services\SchemaHelper;
 
 class Surah extends Model
 {
@@ -151,5 +152,25 @@ class Surah extends Model
     public function getImportantAyahByAnchor(string $anchor): ?SurahImportantAyah
     {
         return $this->importantAyahs->firstWhere('anchor_id', $anchor);
+    }
+
+    /**
+     * ISSUE 8: Generate Chapter-type JSON-LD schema for Google rich snippets.
+     */
+    public function generateSchema(): array
+    {
+        return SchemaHelper::surahSchema($this);
+    }
+
+    /**
+     * ISSUE 8: Generate FAQ schema from surah FAQs.
+     */
+    public function generateFaqSchema(): array
+    {
+        $faqs = $this->faqs;
+        if ($faqs->isEmpty()) {
+            return [];
+        }
+        return SchemaHelper::faqSchema($faqs);
     }
 }

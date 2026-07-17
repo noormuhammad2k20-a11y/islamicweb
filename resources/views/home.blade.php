@@ -184,73 +184,6 @@
             box-shadow: 0 0 12px var(--gold-glow);
         }
 
-        /* ===== TOP BAR ===== */
-        .top-bar {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-            padding: 10px 0;
-            font-size: .82rem;
-            color: rgba(255, 255, 255, 0.75);
-            position: relative;
-            z-index: 10;
-            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-        }
-
-        .top-bar-inner {
-            max-width: 1150px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .top-bar-left span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.75);
-        }
-
-        .top-bar-left i {
-            color: var(--gold);
-            font-size: .8rem;
-        }
-
-        .top-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .top-bar-right a {
-            color: var(--white);
-            text-decoration: none;
-            width: 30px;
-            height: 30px;
-            border-radius: var(--radius-full);
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: .7rem;
-            transition: var(--tr-fast);
-        }
-
-        .top-bar-right a:hover {
-            background: var(--gold);
-            color: var(--navy);
-            border-color: var(--gold);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-gold);
-        }
-
         /* ===== NAVBAR ===== */
         .navbar {
             background: rgba(255, 255, 255, 0.80);
@@ -452,6 +385,64 @@
 
         .mobile-toggle.active span:nth-child(3) {
             transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--navy);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mobile-menu.active a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu a:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu a:nth-child(2) { transition-delay: 0.15s; }
+        .mobile-menu a:nth-child(3) { transition-delay: 0.2s; }
+        .mobile-menu a:nth-child(4) { transition-delay: 0.25s; }
+        .mobile-menu a:nth-child(5) { transition-delay: 0.3s; }
+        .mobile-menu a:nth-child(6) { transition-delay: 0.35s; }
+        .mobile-menu a:nth-child(7) { transition-delay: 0.4s; }
+        .mobile-menu a:nth-child(8) { transition-delay: 0.45s; }
+
+        .mobile-menu a:hover {
+            color: var(--gold);
+            transform: scale(1.05);
         }
 
         /* ===== HERO ===== */
@@ -3205,6 +3196,21 @@
             }
         }
 
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 33, 22, 0.6);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .mobile-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .hero-inner {
@@ -3249,22 +3255,41 @@
         }
 
         @media (max-width: 768px) {
-            .top-bar-inner {
-                padding: 0 20px;
-            }
-
-            .top-bar-left {
-                gap: 16px;
-                font-size: .75rem;
-            }
-
             .navbar-inner {
                 padding: 0 20px;
                 height: 64px;
             }
 
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 85%;
+                max-width: 340px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                padding: 100px 24px 30px;
+                box-shadow: 5px 0 30px rgba(0, 0, 0, 0.1);
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                gap: 8px;
+                align-items: flex-start;
+                z-index: 1001;
+                border-radius: 0 24px 24px 0;
+                overflow-y: auto;
+            }
+
+            .nav-links.open {
+                left: 0;
+            }
+
+            .nav-links a {
+                width: 100%;
+                padding: 12px 18px;
+                font-size: 1rem;
+                font-weight: 600;
+                border-radius: 12px;
+                transition: var(--tr);
             }
 
             .mobile-toggle {
@@ -3498,22 +3523,6 @@
 
 <body>
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="top-bar-inner">
-            <div class="top-bar-left">
-                <span><i class="fas fa-calendar-day"></i> Dhul Qa'dah 1446</span>
-                <span><i class="fas fa-map-marker-alt"></i> Your City, Country</span>
-            </div>
-            <div class="top-bar-right">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-    </div>
-
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">
@@ -3524,7 +3533,7 @@
                     <span class="logo-text-en">Noor-e-Islam</span>
                 </div>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="{{ route('home') }}" class="active">Home</a></li>
                 <li><a href="{{ route('prayer-times.hub') }}">Prayer Times</a></li>
                 <li><a href="{{ route('duas.index') }}">Duas</a></li>
@@ -3540,17 +3549,7 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('prayer-times.hub') }}">Prayer Times</a>
-        <a href="{{ route('duas.index') }}">Duas</a>
-        <a href="{{ route('names_allah.index') }}">Names</a>
-        <a href="#wazaif">Wazaif</a>
-        <a href="#dreams">Dreams</a>
-        <a href="#quiz">Quiz</a>
-        <a href="#zakat">Zakat</a>
-    </div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
 
     <!-- Hero -->
     <section class="hero" id="home">
@@ -3571,10 +3570,6 @@
                 <h1 class="hero-title">Illuminate Your Path with <span>Noor-e-Islam</span></h1>
                 <p class="hero-desc">Your trusted companion for daily prayers, Quranic wisdom, the beautiful 99 Names of
                     Allah, and authentic Hadith — all in one place.</p>
-                <div class="hero-buttons">
-
-                    <a href="{{ route('duas.index') }}" class="btn-outline-hero"><i class="fas fa-compass"></i> Explore</a>
-                </div>
             </div>
             <div class="hero-visual">
                 <div class="hero-visual-bg-card">
@@ -3608,37 +3603,66 @@
                     <div>
                         <h5>Next Prayer</h5>
                         @php
-                            $nextPrayerName = 'Maghrib';
-                            $nextPrayerTime = '';
+                            $prayerData = [];
                             if(isset($prayerTimes)) {
                                 $currentPrayerTime = $prayerTimes instanceof \Illuminate\Support\Collection ? $prayerTimes->first() : $prayerTimes;
                                 if ($currentPrayerTime) {
-                                    $now = \Carbon\Carbon::now();
-                                    $prayers = [
-                                        'Fajr' => \Carbon\Carbon::parse($currentPrayerTime->fajr),
-                                        'Sunrise' => \Carbon\Carbon::parse($currentPrayerTime->sunrise),
-                                        'Dhuhr' => \Carbon\Carbon::parse($currentPrayerTime->dhuhr),
-                                        'Asr' => \Carbon\Carbon::parse($currentPrayerTime->asr),
-                                        'Maghrib' => \Carbon\Carbon::parse($currentPrayerTime->maghrib),
-                                        'Isha' => \Carbon\Carbon::parse($currentPrayerTime->isha)
+                                    $prayerData = [
+                                        'Fajr' => \Carbon\Carbon::parse($currentPrayerTime->fajr)->format('Y-m-d H:i:s'),
+                                        'Dhuhr' => \Carbon\Carbon::parse($currentPrayerTime->dhuhr)->format('Y-m-d H:i:s'),
+                                        'Asr' => \Carbon\Carbon::parse($currentPrayerTime->asr)->format('Y-m-d H:i:s'),
+                                        'Maghrib' => \Carbon\Carbon::parse($currentPrayerTime->maghrib)->format('Y-m-d H:i:s'),
+                                        'Isha' => \Carbon\Carbon::parse($currentPrayerTime->isha)->format('Y-m-d H:i:s')
                                     ];
-                                    $found = false;
-                                    foreach($prayers as $name => $time) {
-                                        if($time->isFuture()) {
-                                            $nextPrayerName = $name;
-                                            $nextPrayerTime = $time->format('h:i A');
-                                            $found = true;
-                                            break;
-                                        }
-                                    }
-                                    if(!$found) {
-                                        $nextPrayerName = 'Fajr';
-                                        $nextPrayerTime = $prayers['Fajr']->addDay()->format('h:i A');
-                                    }
                                 }
                             }
                         @endphp
-                        <p>{{ $nextPrayerName }} at {{ $nextPrayerTime }}</p>
+                        <p id="next-prayer-text">Loading...</p>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const prayers = @json($prayerData);
+                                const nextPrayerText = document.getElementById('next-prayer-text');
+
+                                function updateNextPrayer() {
+                                    if (!prayers || Object.keys(prayers).length === 0) {
+                                        nextPrayerText.innerText = 'Unavailable';
+                                        return;
+                                    }
+                                    
+                                    const now = new Date();
+                                    let nextPrayerName = 'Fajr';
+                                    let nextPrayerTime = null;
+                                    let found = false;
+
+                                    for (const [name, timeStr] of Object.entries(prayers)) {
+                                        const timeParts = timeStr.split(/[- :]/);
+                                        const time = new Date(timeParts[0], timeParts[1] - 1, timeParts[2], timeParts[3], timeParts[4], timeParts[5]);
+                                        
+                                        if (time > now) {
+                                            nextPrayerName = name;
+                                            nextPrayerTime = time;
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (!found && prayers['Fajr']) {
+                                        nextPrayerName = 'Fajr';
+                                        const timeParts = prayers['Fajr'].split(/[- :]/);
+                                        nextPrayerTime = new Date(timeParts[0], timeParts[1] - 1, timeParts[2], timeParts[3], timeParts[4], timeParts[5]);
+                                        nextPrayerTime.setDate(nextPrayerTime.getDate() + 1);
+                                    }
+
+                                    if (nextPrayerTime) {
+                                        const timeString = nextPrayerTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                                        nextPrayerText.innerText = nextPrayerName + ' at ' + timeString;
+                                    }
+                                }
+
+                                updateNextPrayer();
+                                setInterval(updateNextPrayer, 30000); // Check every 30 seconds
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -4225,18 +4249,35 @@
         window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
 
         const mobileToggle = document.getElementById('mobileToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileToggle.addEventListener('click', () => {
+        const navLinksMobile = document.getElementById('navLinks');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleMenu() {
             mobileToggle.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
+            navLinksMobile.classList.toggle('open');
+            mobileOverlay.classList.toggle('show');
+            document.body.style.overflow = navLinksMobile.classList.contains('open') ? 'hidden' : '';
+        }
+        
+        function closeMenu() {
+            if (navLinksMobile.classList.contains('open')) {
                 mobileToggle.classList.remove('active');
-                mobileMenu.classList.remove('active');
+                navLinksMobile.classList.remove('open');
+                mobileOverlay.classList.remove('show');
                 document.body.style.overflow = '';
-            });
+            }
+        }
+
+        mobileToggle.addEventListener('click', toggleMenu);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
+
+        navLinksMobile.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeMenu();
         });
 
         // Duas are now loaded dynamically via Blade

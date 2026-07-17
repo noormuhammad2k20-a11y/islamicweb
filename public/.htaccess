@@ -5,6 +5,15 @@
 
     RewriteEngine On
 
+    # SEO ISSUE A: Force www to non-www redirect (canonical URL consistency)
+    RewriteCond %{HTTP_HOST} ^www\.noorislam\.com [NC]
+    RewriteRule ^(.*)$ https://noorislam.com/$1 [R=301,L]
+
+    # Force HTTPS
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP_HOST} ^noorislam\.com [NC]
+    RewriteRule ^(.*)$ https://noorislam.com/$1 [R=301,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

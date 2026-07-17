@@ -64,7 +64,7 @@ $appRoutes = function () {
     Route::get('/islamic-calendar/pakistan', [IslamicCalendarController::class, 'pakistanDate'])->name('islamic-date-pakistan');
     Route::get('/islamic-calendar/pakistan/{city}', [IslamicCalendarController::class, 'cityPage'])->name('islamic-date-pakistan-city');
     Route::get('/islamic-calendar/saudi', [IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi');
-    Route::get('/islamic-calendar/saudi-arabia', [IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi');
+    Route::get('/islamic-calendar/saudi-arabia', [IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi-arabia');
     Route::get('/islamic-calendar/in-urdu', [IslamicCalendarController::class, 'urduDate'])->name('islamic-date-urdu');
 
     // Programmatic: Country pages
@@ -310,7 +310,7 @@ Route::prefix('ajax')->group(function () {
 
 // SEO Routes
 Route::get('/sitemap_index.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.index');
-Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap.xml');
 Route::get('/sitemap-calendar.xml', [App\Http\Controllers\SitemapController::class, 'calendar'])->name('sitemap.calendar');
 Route::get('/sitemap-dates.xml', [App\Http\Controllers\SitemapController::class, 'dates'])->name('sitemap.dates');
 Route::get('/sitemap-prayer.xml', [App\Http\Controllers\SitemapController::class, 'prayer'])->name('sitemap.prayer');
@@ -324,4 +324,5 @@ Route::get('/sitemap-duas.xml', [App\Http\Controllers\SitemapController::class, 
 Route::get('/sitemap-names.xml', [App\Http\Controllers\SitemapController::class, 'names'])->name('sitemap.names');
 Route::get('/sitemap-wazaif.xml', [App\Http\Controllers\SitemapController::class, 'wazaif'])->name('sitemap.wazaif');
 Route::get('/sitemap-dreams.xml', [App\Http\Controllers\SitemapController::class, 'dreams'])->name('sitemap.dreams');
+Route::get('/sitemap-allah-names.xml', [App\Http\Controllers\SitemapController::class, 'allahNames'])->name('sitemap.allah_names');
 Route::get('/robots.txt', [App\Http\Controllers\SitemapController::class, 'robots'])->name('robots');

@@ -100,12 +100,27 @@ class SitemapController extends Controller
     {
         $content = "User-agent: *\n";
         $content .= "Allow: /\n";
+        $content .= "Allow: /prayer-times\n";
+        $content .= "Allow: /prayer-times/\n\n";
         $content .= "Disallow: /admin/\n";
         $content .= "Disallow: /filament/\n";
         $content .= "Disallow: /api/\n";
         $content .= "Disallow: /storage/\n";
         $content .= "Disallow: /ajax/\n";
+        $content .= "Disallow: /login\n";
+        $content .= "Disallow: /register\n";
+        $content .= "Disallow: /*.json$\n\n";
+        $content .= "# Sitemaps\n";
         $content .= "Sitemap: " . url('sitemap_index.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-surahs.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-duas.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-hadith.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-names.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-wazaif.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-prayer.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-calendar.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-allah-names.xml') . "\n";
+        $content .= "Sitemap: " . url('sitemap-dreams.xml') . "\n";
 
         return response($content)->header('Content-Type', 'text/plain');
     }
@@ -133,5 +148,14 @@ class SitemapController extends Controller
     {
         $symbols = \App\Models\DreamSymbol::all();
         return response()->view('sitemap.dreams', ['symbols' => $symbols])->header('Content-Type', 'text/xml');
+    }
+
+    /**
+     * SEO ISSUE D: Allah Names sitemap
+     */
+    public function allahNames()
+    {
+        $names = \App\Models\AllahName::orderBy('number')->get();
+        return response()->view('sitemap.allah-names', ['names' => $names])->header('Content-Type', 'text/xml');
     }
 }

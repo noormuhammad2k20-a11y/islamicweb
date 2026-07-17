@@ -40,4 +40,16 @@
         <loc>{{ route('sitemap.dreams') }}</loc>
         <lastmod>{{ now()->tz('UTC')->toAtomString() }}</lastmod>
     </sitemap>
+    <sitemap>
+        <loc>{{ route('sitemap.allah_names') }}</loc>
+        <lastmod>{{ now()->tz('UTC')->toAtomString() }}</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>{{ route('sitemap.surahs') }}</loc>
+        <lastmod>{{ now()->tz('UTC')->toAtomString() }}</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>{{ route('sitemap.collections') }}</loc>
+        <lastmod>{{ now()->tz('UTC')->toAtomString() }}</lastmod>
+    </sitemap>
 </sitemapindex>

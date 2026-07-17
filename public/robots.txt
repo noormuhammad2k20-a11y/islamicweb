@@ -8,7 +8,18 @@ Disallow: /filament/
 Disallow: /api/
 Disallow: /storage/
 Disallow: /ajax/
+Disallow: /login
+Disallow: /register
 Disallow: /*.json$
 
 # Sitemaps
 Sitemap: https://noorislam.com/sitemap_index.xml
+Sitemap: https://noorislam.com/sitemap-surahs.xml
+Sitemap: https://noorislam.com/sitemap-duas.xml
+Sitemap: https://noorislam.com/sitemap-hadith.xml
+Sitemap: https://noorislam.com/sitemap-names.xml
+Sitemap: https://noorislam.com/sitemap-wazaif.xml
+Sitemap: https://noorislam.com/sitemap-prayer.xml
+Sitemap: https://noorislam.com/sitemap-calendar.xml
+Sitemap: https://noorislam.com/sitemap-allah-names.xml
+Sitemap: https://noorislam.com/sitemap-dreams.xml
