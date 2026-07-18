@@ -81,6 +81,9 @@ class SurahController extends Controller
                 ->firstOrFail();
         });
 
+        // Assemble full arabic text from ayahs
+        $surah->computed_arabic = $surah->ayahs->pluck('arabic_text')->implode(' ');
+
         $prevSurah = Cache::remember("surah.prev.{$surah->number}", now()->addDay(), fn() =>
             Surah::where('number', $surah->number - 1)
                 ->select('number', 'name_en', 'name_ar', 'slug')->first()

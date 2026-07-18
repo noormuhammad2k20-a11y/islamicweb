@@ -146,7 +146,8 @@ class SitemapController extends Controller
 
     public function dreams()
     {
-        $symbols = \App\Models\DreamSymbol::all();
+        // Only include indexed dreams (seo_index=1)
+        $symbols = \App\Models\DreamSymbol::where('seo_index', 1)->get();
         return response()->view('sitemap.dreams', ['symbols' => $symbols])->header('Content-Type', 'text/xml');
     }
 

@@ -3,6 +3,15 @@
 @section('title', $seoMeta->title ?? 'تعبیر الرؤیا | NoorIslam')
 @section('meta_description', $seoMeta->meta_description ?? '')
 
+@section('head')
+    @if($symbol->seo_index == 0)
+        <meta name="robots" content="noindex, follow">
+        <link rel="canonical" href="{{ $symbol->parent ? url('/khwabon-ki-tabeer/' . $symbol->parent->slug) : url('/khwabon-ki-tabeer') }}">
+    @else
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="{{ $seoMeta->canonical_url ?? url()->current() }}">
+    @endif
+@endsection
 @section('content')
 <div style="max-width: 900px; margin: 0 auto; padding: 40px 20px;">
 

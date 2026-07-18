@@ -201,9 +201,14 @@ Respond ONLY in JSON, no markdown formatting:
                         $seoMeta->title = $json['title'] ?? $seoMeta->title;
                         
                         if (!$onlyDescription) {
-                            $seoMeta->meta_description = $json['meta_description'] ?? $seoMeta->meta_description;
+                            $desc = $json['meta_description'] ?? $seoMeta->meta_description;
                         } else {
-                            $seoMeta->meta_description = $json['meta_description'] ?? $seoMeta->meta_description;
+                            $desc = $json['meta_description'] ?? $seoMeta->meta_description;
+                        }
+                        
+                        if ($desc) {
+                            // Never end with "..." from mid-word
+                            $seoMeta->meta_description = mb_substr(strip_tags($desc), 0, 155);
                         }
                         
                         $seoMeta->save();
