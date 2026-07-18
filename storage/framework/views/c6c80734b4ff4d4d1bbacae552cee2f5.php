@@ -307,16 +307,28 @@
         <div class="content-block-wrapper">
             <div class="block-header">
                 <div class="block-icon"><i class="fas fa-info-circle"></i></div>
-                <h2 class="block-title"><?php echo e($name->benefits ? 'Explanation & Virtues' : 'Linguistic Root & Meaning'); ?></h2>
+                <h2 class="block-title">Explanation</h2>
             </div>
             <div class="block-content">
-                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->benefits): ?>
-                    <p><?php echo e($name->benefits); ?></p>
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->explanation): ?>
+                    <p><?php echo e($name->explanation); ?></p>
                 <?php else: ?>
                     <p>The name <strong><?php echo e($name->transliteration); ?></strong> (<?php echo e($name->arabic); ?>) comes from an Arabic root which conveys the deepest essence of its meaning. To understand this attribute is to understand how Allah interacts with His creation through this specific manifestation of His power, mercy, or majesty.</p>
                 <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
             </div>
         </div>
+
+        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->virtues || $name->benefits): ?>
+        <div class="content-block-wrapper">
+            <div class="block-header">
+                <div class="block-icon"><i class="fas fa-star"></i></div>
+                <h2 class="block-title">Virtues & Benefits</h2>
+            </div>
+            <div class="block-content">
+                <p><?php echo e($name->virtues ?? $name->benefits); ?></p>
+            </div>
+        </div>
+        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
         <div class="content-block-wrapper">
             <div class="block-header">
@@ -328,17 +340,30 @@
                     <p><?php echo e($name->quran_reference); ?></p>
                 <?php else: ?>
                     <p>This beautiful name is invoked in the Quran to remind believers of Allah's absolute perfection and to encourage calling upon Him through His most beautiful names.</p>
-                    <div class="quran-ayat">
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+                <div class="quran-ayat">
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->quran_verse_arabic && $name->quran_verse_translation): ?>
+                        <div class="ayat-arabic"><?php echo e($name->quran_verse_arabic); ?></div>
+                        <div class="ayat-ref">"<?php echo e($name->quran_verse_translation); ?>" - <?php echo e($name->quran_reference ?? ''); ?></div>
+                    <?php else: ?>
                         <div class="ayat-arabic">وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا</div>
                         <div class="ayat-ref">"And to Allah belong the best names, so invoke Him by them." (Surah Al-A'raf 7:180)</div>
-                    </div>
-                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                </div>
             </div>
         </div>
 
         <div class="dhikr-widget">
             <h2 class="dhikr-title">Dhikr & Reflection</h2>
-            <p class="dhikr-text">Call upon Allah by saying <strong>يَا <?php echo e($name->arabic); ?></strong> (Ya <?php echo e($name->transliteration); ?>)</p>
+            <p class="dhikr-text">
+                <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->dhikr_reflection): ?>
+                    <?php echo e($name->dhikr_reflection); ?>
+
+                <?php else: ?>
+                    Call upon Allah by saying <strong>يَا <?php echo e($name->arabic); ?></strong> (Ya <?php echo e($name->transliteration); ?>)
+                <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+            </p>
             
             <div class="dhikr-arabic">يَا <?php echo e($name->arabic); ?></div>
             
@@ -359,9 +384,17 @@
             </div>
             <div class="block-content">
                 <ul class="lessons-list">
-                    <li>Recognize this attribute in your daily life and trust in Allah's infinite wisdom.</li>
-                    <li>Call upon Him using this specific name when making dua related to its meaning.</li>
-                    <li>Emulate the positive traits associated with this name in your interactions with others, to the extent humanly possible (e.g., being merciful).</li>
+                    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($name->practical_lessons): ?>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::openLoop(); ?><?php endif; ?><?php $__currentLoopData = explode("\n", $name->practical_lessons); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lesson): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::startLoopIteration(); ?><?php endif; ?>
+                            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(trim($lesson) !== ''): ?>
+                                <li><?php echo e(preg_replace('/^\d+\.\s*/', '', trim($lesson))); ?></li>
+                            <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::endLoop(); ?><?php endif; ?><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::closeLoop(); ?><?php endif; ?>
+                    <?php else: ?>
+                        <li>Recognize this attribute in your daily life and trust in Allah's infinite wisdom.</li>
+                        <li>Call upon Him using this specific name when making dua related to its meaning.</li>
+                        <li>Emulate the positive traits associated with this name in your interactions with others, to the extent humanly possible (e.g., being merciful).</li>
+                    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                 </ul>
             </div>
         </div>

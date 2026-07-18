@@ -307,16 +307,28 @@
         <div class="content-block-wrapper">
             <div class="block-header">
                 <div class="block-icon"><i class="fas fa-info-circle"></i></div>
-                <h2 class="block-title">{{ $name->benefits ? 'Explanation & Virtues' : 'Linguistic Root & Meaning' }}</h2>
+                <h2 class="block-title">Explanation</h2>
             </div>
             <div class="block-content">
-                @if($name->benefits)
-                    <p>{{ $name->benefits }}</p>
+                @if($name->explanation)
+                    <p>{{ $name->explanation }}</p>
                 @else
                     <p>The name <strong>{{ $name->transliteration }}</strong> ({{ $name->arabic }}) comes from an Arabic root which conveys the deepest essence of its meaning. To understand this attribute is to understand how Allah interacts with His creation through this specific manifestation of His power, mercy, or majesty.</p>
                 @endif
             </div>
         </div>
+
+        @if($name->virtues || $name->benefits)
+        <div class="content-block-wrapper">
+            <div class="block-header">
+                <div class="block-icon"><i class="fas fa-star"></i></div>
+                <h2 class="block-title">Virtues & Benefits</h2>
+            </div>
+            <div class="block-content">
+                <p>{{ $name->virtues ?? $name->benefits }}</p>
+            </div>
+        </div>
+        @endif
 
         <div class="content-block-wrapper">
             <div class="block-header">
@@ -328,17 +340,29 @@
                     <p>{{ $name->quran_reference }}</p>
                 @else
                     <p>This beautiful name is invoked in the Quran to remind believers of Allah's absolute perfection and to encourage calling upon Him through His most beautiful names.</p>
-                    <div class="quran-ayat">
+                @endif
+
+                <div class="quran-ayat">
+                    @if($name->quran_verse_arabic && $name->quran_verse_translation)
+                        <div class="ayat-arabic">{{ $name->quran_verse_arabic }}</div>
+                        <div class="ayat-ref">"{{ $name->quran_verse_translation }}" - {{ $name->quran_reference ?? '' }}</div>
+                    @else
                         <div class="ayat-arabic">وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَىٰ فَادْعُوهُ بِهَا</div>
                         <div class="ayat-ref">"And to Allah belong the best names, so invoke Him by them." (Surah Al-A'raf 7:180)</div>
-                    </div>
-                @endif
+                    @endif
+                </div>
             </div>
         </div>
 
         <div class="dhikr-widget">
             <h2 class="dhikr-title">Dhikr & Reflection</h2>
-            <p class="dhikr-text">Call upon Allah by saying <strong>يَا {{ $name->arabic }}</strong> (Ya {{ $name->transliteration }})</p>
+            <p class="dhikr-text">
+                @if($name->dhikr_reflection)
+                    {{ $name->dhikr_reflection }}
+                @else
+                    Call upon Allah by saying <strong>يَا {{ $name->arabic }}</strong> (Ya {{ $name->transliteration }})
+                @endif
+            </p>
             
             <div class="dhikr-arabic">يَا {{ $name->arabic }}</div>
             
@@ -359,9 +383,17 @@
             </div>
             <div class="block-content">
                 <ul class="lessons-list">
-                    <li>Recognize this attribute in your daily life and trust in Allah's infinite wisdom.</li>
-                    <li>Call upon Him using this specific name when making dua related to its meaning.</li>
-                    <li>Emulate the positive traits associated with this name in your interactions with others, to the extent humanly possible (e.g., being merciful).</li>
+                    @if($name->practical_lessons)
+                        @foreach(explode("\n", $name->practical_lessons) as $lesson)
+                            @if(trim($lesson) !== '')
+                                <li>{{ preg_replace('/^\d+\.\s*/', '', trim($lesson)) }}</li>
+                            @endif
+                        @endforeach
+                    @else
+                        <li>Recognize this attribute in your daily life and trust in Allah's infinite wisdom.</li>
+                        <li>Call upon Him using this specific name when making dua related to its meaning.</li>
+                        <li>Emulate the positive traits associated with this name in your interactions with others, to the extent humanly possible (e.g., being merciful).</li>
+                    @endif
                 </ul>
             </div>
         </div>

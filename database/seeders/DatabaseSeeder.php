@@ -88,6 +88,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AllahNameSeeder::class,
+            AllahNamesUniqueContentSeeder::class,
             HadithSeeder::class,
             IslamicNameSeeder::class,
         ]);
