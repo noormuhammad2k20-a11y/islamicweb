@@ -9,6 +9,37 @@
     @endif
 @endpush
 
+@section('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Chapter",
+  "name": "{{ $surah->name_en }}",
+  "position": {{ $surah->number }},
+  "isPartOf": {"@type": "Book", "name": "The Holy Quran"},
+  "inLanguage": ["ar", "ur", "en"]
+}
+</script>
+
+@if(isset($surah->faqs) && $surah->faqs->count())
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    @foreach($surah->faqs->take(5) as $faq)
+    {
+      "@type": "Question",
+      "name": "{{ $faq->question_en }}",
+      "acceptedAnswer": {"@type": "Answer", "text": "{{ $faq->answer_en }}"}
+    }{{ !$loop->last ? ',' : '' }}
+    @endforeach
+  ]
+}
+</script>
+@endif
+@endsection
+
 @section('content')
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap');
