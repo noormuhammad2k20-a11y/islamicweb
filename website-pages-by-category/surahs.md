@@ -1,122 +1,130 @@
 # Surahs
 
-**Total Pages:** 114
+Total number of pages: 126
 
-| URL | Page Title | Meta Description | H1 | Index Status | Canonical URL | Page Type | Notes |
-|---|---|---|---|---|---|---|---|
-| `/surahs` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | All 114 Surahs of the Quran | Index | https://noorislam.com | Static/Hub | Good |
-| `/surah/al-faatiha` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-baqara` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/aal-i-imraan` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-nisaa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-maaida` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-anaam` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-araaf` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-anfaal` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-tawba` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/yunus` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/hud` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/yusuf` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ar-rad` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ibrahim` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-hijr` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-nahl` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-israa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-kahf` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/maryam` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/taa-haa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-anbiyaa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-hajj` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-muminoon` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-noor` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-furqaan` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ash-shuaraa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-naml` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-qasas` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-ankaboot` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ar-room` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/luqman` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/as-sajda` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-ahzaab` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/saba` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/faatir` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/yaseen` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/as-saaffaat` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/saad` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/az-zumar` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ghafir` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/fussilat` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ash-shura` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/az-zukhruf` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ad-dukhaan` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-jaathiya` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-ahqaf` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/muhammad` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-fath` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-hujuraat` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/qaaf` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/adh-dhaariyat` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-tur` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-najm` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-qamar` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ar-rahmaan` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-waaqia` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-hadid` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-mujaadila` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-hashr` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-mumtahana` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/as-saff` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-jumua` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-munaafiqoon` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-taghaabun` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-talaaq` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-tahrim` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-mulk` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-qalam` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-haaqqa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-maaarij` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/nooh` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-jinn` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-muzzammil` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-muddaththir` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-qiyaama` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-insaan` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-mursalaat` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-naba` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-naaziaat` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/abasa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-takwir` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-infitaar` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-mutaffifin` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-inshiqaaq` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-burooj` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-taariq` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-alaa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-ghaashiya` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-fajr` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-balad` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ash-shams` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-lail` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ad-dhuhaa` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/ash-sharh` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-tin` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-alaq` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-qadr` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-bayyina` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/az-zalzala` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-aadiyaat` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-qaaria` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/at-takaathur` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-asr` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-humaza` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-fil` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/quraish` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-maaun` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-kawthar` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-kaafiroon` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-nasr` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-masad` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-ikhlaas` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/al-falaq` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-| `/surah/an-naas` | ERROR: 500 | N/A | N/A | N/A | N/A | Dynamic | Failed to load page |
-
+http://127.0.0.1:8000/surah/al-faatiha
+http://127.0.0.1:8000/surah/al-baqara
+http://127.0.0.1:8000/surah/aal-i-imraan
+http://127.0.0.1:8000/surah/an-nisaa
+http://127.0.0.1:8000/surah/al-maaida
+http://127.0.0.1:8000/surah/al-anaam
+http://127.0.0.1:8000/surah/al-araaf
+http://127.0.0.1:8000/surah/al-anfaal
+http://127.0.0.1:8000/surah/at-tawba
+http://127.0.0.1:8000/surah/yunus
+http://127.0.0.1:8000/surah/hud
+http://127.0.0.1:8000/surah/yusuf
+http://127.0.0.1:8000/surah/ar-rad
+http://127.0.0.1:8000/surah/ibrahim
+http://127.0.0.1:8000/surah/al-hijr
+http://127.0.0.1:8000/surah/an-nahl
+http://127.0.0.1:8000/surah/al-israa
+http://127.0.0.1:8000/surah/al-kahf
+http://127.0.0.1:8000/surah/maryam
+http://127.0.0.1:8000/surah/taa-haa
+http://127.0.0.1:8000/surah/al-anbiyaa
+http://127.0.0.1:8000/surah/al-hajj
+http://127.0.0.1:8000/surah/al-muminoon
+http://127.0.0.1:8000/surah/an-noor
+http://127.0.0.1:8000/surah/al-furqaan
+http://127.0.0.1:8000/surah/ash-shuaraa
+http://127.0.0.1:8000/surah/an-naml
+http://127.0.0.1:8000/surah/al-qasas
+http://127.0.0.1:8000/surah/al-ankaboot
+http://127.0.0.1:8000/surah/ar-room
+http://127.0.0.1:8000/surah/luqman
+http://127.0.0.1:8000/surah/as-sajda
+http://127.0.0.1:8000/surah/al-ahzaab
+http://127.0.0.1:8000/surah/saba
+http://127.0.0.1:8000/surah/faatir
+http://127.0.0.1:8000/surah/yaseen
+http://127.0.0.1:8000/surah/as-saaffaat
+http://127.0.0.1:8000/surah/saad
+http://127.0.0.1:8000/surah/az-zumar
+http://127.0.0.1:8000/surah/ghafir
+http://127.0.0.1:8000/surah/fussilat
+http://127.0.0.1:8000/surah/ash-shura
+http://127.0.0.1:8000/surah/az-zukhruf
+http://127.0.0.1:8000/surah/ad-dukhaan
+http://127.0.0.1:8000/surah/al-jaathiya
+http://127.0.0.1:8000/surah/al-ahqaf
+http://127.0.0.1:8000/surah/muhammad
+http://127.0.0.1:8000/surah/al-fath
+http://127.0.0.1:8000/surah/al-hujuraat
+http://127.0.0.1:8000/surah/qaaf
+http://127.0.0.1:8000/surah/adh-dhaariyat
+http://127.0.0.1:8000/surah/at-tur
+http://127.0.0.1:8000/surah/an-najm
+http://127.0.0.1:8000/surah/al-qamar
+http://127.0.0.1:8000/surah/ar-rahmaan
+http://127.0.0.1:8000/surah/al-waaqia
+http://127.0.0.1:8000/surah/al-hadid
+http://127.0.0.1:8000/surah/al-mujaadila
+http://127.0.0.1:8000/surah/al-hashr
+http://127.0.0.1:8000/surah/al-mumtahana
+http://127.0.0.1:8000/surah/as-saff
+http://127.0.0.1:8000/surah/al-jumua
+http://127.0.0.1:8000/surah/al-munaafiqoon
+http://127.0.0.1:8000/surah/at-taghaabun
+http://127.0.0.1:8000/surah/at-talaaq
+http://127.0.0.1:8000/surah/at-tahrim
+http://127.0.0.1:8000/surah/al-mulk
+http://127.0.0.1:8000/surah/al-qalam
+http://127.0.0.1:8000/surah/al-haaqqa
+http://127.0.0.1:8000/surah/al-maaarij
+http://127.0.0.1:8000/surah/nooh
+http://127.0.0.1:8000/surah/al-jinn
+http://127.0.0.1:8000/surah/al-muzzammil
+http://127.0.0.1:8000/surah/al-muddaththir
+http://127.0.0.1:8000/surah/al-qiyaama
+http://127.0.0.1:8000/surah/al-insaan
+http://127.0.0.1:8000/surah/al-mursalaat
+http://127.0.0.1:8000/surah/an-naba
+http://127.0.0.1:8000/surah/an-naaziaat
+http://127.0.0.1:8000/surah/abasa
+http://127.0.0.1:8000/surah/at-takwir
+http://127.0.0.1:8000/surah/al-infitaar
+http://127.0.0.1:8000/surah/al-mutaffifin
+http://127.0.0.1:8000/surah/al-inshiqaaq
+http://127.0.0.1:8000/surah/al-burooj
+http://127.0.0.1:8000/surah/at-taariq
+http://127.0.0.1:8000/surah/al-alaa
+http://127.0.0.1:8000/surah/al-ghaashiya
+http://127.0.0.1:8000/surah/al-fajr
+http://127.0.0.1:8000/surah/al-balad
+http://127.0.0.1:8000/surah/ash-shams
+http://127.0.0.1:8000/surah/al-lail
+http://127.0.0.1:8000/surah/ad-dhuhaa
+http://127.0.0.1:8000/surah/ash-sharh
+http://127.0.0.1:8000/surah/at-tin
+http://127.0.0.1:8000/surah/al-alaq
+http://127.0.0.1:8000/surah/al-qadr
+http://127.0.0.1:8000/surah/al-bayyina
+http://127.0.0.1:8000/surah/az-zalzala
+http://127.0.0.1:8000/surah/al-aadiyaat
+http://127.0.0.1:8000/surah/al-qaaria
+http://127.0.0.1:8000/surah/at-takaathur
+http://127.0.0.1:8000/surah/al-asr
+http://127.0.0.1:8000/surah/al-humaza
+http://127.0.0.1:8000/surah/al-fil
+http://127.0.0.1:8000/surah/quraish
+http://127.0.0.1:8000/surah/al-maaun
+http://127.0.0.1:8000/surah/al-kawthar
+http://127.0.0.1:8000/surah/al-kaafiroon
+http://127.0.0.1:8000/surah/an-nasr
+http://127.0.0.1:8000/surah/al-masad
+http://127.0.0.1:8000/surah/al-ikhlaas
+http://127.0.0.1:8000/surah/al-falaq
+http://127.0.0.1:8000/surah/an-naas
+http://127.0.0.1:8000/surahs/collections/surah-manzil
+http://127.0.0.1:8000/surahs/collections/panj-surah
+http://127.0.0.1:8000/surahs/collections/4-qul
+http://127.0.0.1:8000/surahs/collections/last-10-surahs
+http://127.0.0.1:8000/surahs/collections/short-surahs
+http://127.0.0.1:8000/surahs/collections/quran-surah-list
+http://127.0.0.1:8000/surahs
+http://127.0.0.1:8000/ur/surahs
+http://127.0.0.1:8000/surah-yaseen
+http://127.0.0.1:8000/surah-waqiah
+http://127.0.0.1:8000/surah-e-mulk
+http://127.0.0.1:8000/surah-muzammil

@@ -10,7 +10,7 @@ class IslamicNameController extends Controller
 {
     public function index(Request $request)
     {
-        $query = IslamicName::where('is_verified', true);
+        $query = IslamicName::where('status', 'active')->where('is_verified', true);
 
         // Search Keyword
         if ($request->filled('q')) {
@@ -67,7 +67,20 @@ class IslamicNameController extends Controller
 
     public function show($slug)
     {
-        $name = IslamicName::where('slug', $slug)->firstOrFail();
+        // First check if name exists at all (including inactive)
+        $nameExists = IslamicName::withoutGlobalScope('active')
+            ->where('slug', $slug)
+            ->first();
+
+        if (!$nameExists) {
+            abort(404);
+        }
+
+        if ($nameExists->status === 'inactive') {
+            abort(410, 'This Islamic name page has been removed.');
+        }
+
+        $name = $nameExists;
         
         // Fetch similar names based on gender and initial letter
         $similarNames = IslamicName::where('is_verified', true)

@@ -1,15 +1,41 @@
 # Hajj & Umrah
 
-**Total Pages:** 8
+Total number of pages: 32
 
-| URL | Page Title | Meta Description | H1 | Index Status | Canonical URL | Page Type | Notes |
-|---|---|---|---|---|---|---|---|
-| `/hajj-and-umrah` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Hajj & Umrah Hub | Index | https://noorislam.com | Static/Hub | Good |
-| `/hajj-guide` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Step-by-step Hajj Guide | Index | https://noorislam.com | Static/Hub | Good |
-| `/umrah-guide` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Step-by-step Umrah Guide | Index | https://noorislam.com | Static/Hub | Good |
-| `/hajj-checklist` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Hajj Checklist | Index | https://noorislam.com | Static/Hub | Good |
-| `/umrah-checklist` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Umrah Checklist | Index | https://noorislam.com | Static/Hub | Good |
-| `/hajj-faqs` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Hajj & Umrah FAQs | Index | https://noorislam.com | Static/Hub | Good |
-| `/hajj-duas` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Hajj Duas | Index | https://noorislam.com | Static/Hub | Good |
-| `/umrah-duas` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Umrah Duas | Index | https://noorislam.com | Static/Hub | Good |
+http://127.0.0.1:8000/hajj-and-umrah
+http://127.0.0.1:8000/hajj-guide
+http://127.0.0.1:8000/umrah-guide
+http://127.0.0.1:8000/hajj-checklist
+http://127.0.0.1:8000/umrah-checklist
+http://127.0.0.1:8000/hajj-faqs
+http://127.0.0.1:8000/hajj-duas
+http://127.0.0.1:8000/umrah-duas
+http://127.0.0.1:8000/hajj-umrah
+http://127.0.0.1:8000/hajj-umrah/hajj-guide
+http://127.0.0.1:8000/hajj-umrah/umrah-guide
+http://127.0.0.1:8000/hajj-umrah/hajj-duas
+http://127.0.0.1:8000/hajj-umrah/umrah-duas
+http://127.0.0.1:8000/hajj-umrah/hajj-checklist
 
+
+
+
+
+http://127.0.0.1:8000/hajj-umrah/umrah-checklist
+http://127.0.0.1:8000/hajj-umrah/hajj-faqs
+http://127.0.0.1:8000/ur/hajj-and-umrah
+http://127.0.0.1:8000/ur/hajj-guide
+http://127.0.0.1:8000/ur/umrah-guide
+http://127.0.0.1:8000/ur/hajj-checklist
+http://127.0.0.1:8000/ur/umrah-checklist
+http://127.0.0.1:8000/ur/hajj-faqs
+http://127.0.0.1:8000/ur/hajj-duas
+http://127.0.0.1:8000/ur/umrah-duas
+http://127.0.0.1:8000/ur/hajj-umrah
+http://127.0.0.1:8000/ur/hajj-umrah/hajj-guide
+http://127.0.0.1:8000/ur/hajj-umrah/umrah-guide
+http://127.0.0.1:8000/ur/hajj-umrah/hajj-duas
+http://127.0.0.1:8000/ur/hajj-umrah/umrah-duas
+http://127.0.0.1:8000/ur/hajj-umrah/hajj-checklist
+http://127.0.0.1:8000/ur/hajj-umrah/umrah-checklist
+http://127.0.0.1:8000/ur/hajj-umrah/hajj-faqs

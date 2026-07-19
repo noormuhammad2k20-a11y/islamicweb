@@ -15,37 +15,52 @@ class IslamicNamesTable
     {
         return $table
             ->columns([
-                TextColumn::make('name_arabic')
+                \Filament\Tables\Columns\TextColumn::make('name_arabic')
                     ->searchable(),
-                TextColumn::make('name_english')
+                \Filament\Tables\Columns\TextColumn::make('name_english')
                     ->searchable(),
-                TextColumn::make('translation_urdu')
+                \Filament\Tables\Columns\TextColumn::make('translation_urdu')
                     ->searchable(),
-                TextColumn::make('gender')
+                \Filament\Tables\Columns\TextColumn::make('gender')
                     ->badge(),
-                TextColumn::make('origin')
+                \Filament\Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn ($state) => $state === 'active' ? 'success' : 'danger'),
+                \Filament\Tables\Columns\IconColumn::make('is_quranic')
+                    ->boolean(),
+                \Filament\Tables\Columns\TextColumn::make('origin')
                     ->searchable(),
-                TextColumn::make('favorited_count')
+                \Filament\Tables\Columns\TextColumn::make('favorited_count')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('slug')
+                \Filament\Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                IconColumn::make('is_verified')
+                \Filament\Tables\Columns\IconColumn::make('is_verified')
                     ->boolean(),
-                TextColumn::make('created_at')
+                \Filament\Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
+                \Filament\Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                \Filament\Tables\Filters\SelectFilter::make('status')
+                    ->options(['active' => 'Active', 'inactive' => 'Inactive']),
+                \Filament\Tables\Filters\SelectFilter::make('gender')
+                    ->options(['male' => 'Male', 'female' => 'Female']),
+                \Filament\Tables\Filters\TernaryFilter::make('is_quranic')->label('Quranic Names'),
             ])
             ->recordActions([
                 EditAction::make(),
+                \Filament\Tables\Actions\Action::make('toggle_status')
+                    ->label(fn ($record) => $record->status === 'active' ? 'Deactivate' : 'Activate')
+                    ->action(fn ($record) => $record->update([
+                        'status' => $record->status === 'active' ? 'inactive' : 'active'
+                    ]))
+                    ->requiresConfirmation(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

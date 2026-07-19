@@ -1,100 +1,852 @@
 # Prayer Times
 
-**Total Pages:** 92
+Total number of pages: 848
 
-| URL | Page Title | Meta Description | H1 | Index Status | Canonical URL | Page Type | Notes |
-|---|---|---|---|---|---|---|---|
-| `/prayer-times/pakistan` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Pakistan | Index | https://noorislam.com | Static/Hub | Good |
-| `/prayer-times/karachi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Karachi | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/lahore` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Lahore | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/islamabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Islamabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/rawalpindi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Rawalpindi | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/faisalabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Faisalabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/multan` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Multan | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/peshawar` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Peshawar | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/quetta` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Quetta | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/sialkot` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Sialkot | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/gujranwala` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Gujranwala | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/hyderabad-sindh` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Hyderabad Sindh | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/sukkur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Sukkur | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/sargodha` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Sargodha | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/bahawalpur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Bahawalpur | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/abbottabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Abbottabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/dera-ghazi-khan` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Dera Ghazi Khan | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/sahiwal` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Sahiwal | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/gujrat` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Gujrat | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/muzaffarabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Muzaffarabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/mardan` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Mardan | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/larkana` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Larkana | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/nawabshah` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Nawabshah | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/rahim-yar-khan` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Rahim Yar Khan | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/okara` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Okara | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/sheikhupura` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Sheikhupura | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/hyderabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Hyderabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/jhang` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Jhang | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kasur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kasur | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/mingora` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Mingora | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/mirpur-khas` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Mirpur Khas | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/chiniot` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Chiniot | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kamoke` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kamoke | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/sadiqabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Sadiqabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/burewala` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Burewala | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/jacobabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Jacobabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/muzaffargarh` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Muzaffargarh | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/muridke` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Muridke | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/jhelum` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Jhelum | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/shikarpur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Shikarpur | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/hafizabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Hafizabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kohat` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kohat | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/khanewal` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Khanewal | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/dadu` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Dadu | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/gojra` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Gojra | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/mandi-bahauddin` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Mandi Bahauddin | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/tando-allahyar` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Tando Allahyar | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/daska` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Daska | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/pakpattan` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Pakpattan | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/bahawalnagar` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Bahawalnagar | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/tando-adam` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Tando Adam | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/khairpur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Khairpur | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/chishtian` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Chishtian | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/attock` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Attock | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/vehari` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Vehari | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kot-abdul-malik` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kot Abdul Malik | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/ferozewala` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Ferozewala | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/chakwal` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Chakwal | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/gujranwala-cantonment` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Gujranwala Cantonment | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kamalia` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kamalia | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/umerkot` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Umerkot | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/ahmedpur-east` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Ahmedpur East | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kot-addu` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kot Addu | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/wazirabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Wazirabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/mansehra` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Mansehra | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/layyah` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Layyah | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/mirpur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Mirpur | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/swabi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Swabi | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/chaman` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Chaman | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/taxila` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Taxila | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/nowshera` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Nowshera | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/khushab` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Khushab | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/shahdadkot` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Shahdadkot | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/mianwali` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Mianwali | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kabal` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kabal | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/lodhran` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Lodhran | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/hasilpur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Hasilpur | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/charsadda` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Charsadda | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/bhakkar` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Bhakkar | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/badin` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Badin | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/arif-wala` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Arif Wala | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/ghotki` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Ghotki | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/sambrial` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Sambrial | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/jatoi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Jatoi | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/haroonabad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Haroonabad | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/daharki` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Daharki | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/narowal` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Narowal | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/tando-muhammad-khan` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Tando Muhammad Khan | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kamber-ali-khan` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kamber Ali Khan | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/mirpur-mathelo` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Mirpur Mathelo | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/kandhkot` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Kandhkot | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/bhalwal` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Bhalwal | Index | https://noorislam.com | Dynamic | Good |
-| `/prayer-times/gwadar` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Prayer Times in Gwadar | Index | https://noorislam.com | Dynamic | Good |
-
+http://127.0.0.1:8000/prayer-times/pakistan
+http://127.0.0.1:8000/prayer-times/uae
+http://127.0.0.1:8000/prayer-times/saudi-arabia
+http://127.0.0.1:8000/prayer-times/india
+http://127.0.0.1:8000/prayer-times/usa
+http://127.0.0.1:8000/prayer-times/karachi
+http://127.0.0.1:8000/prayer-times/karachi/fajr
+http://127.0.0.1:8000/prayer-times/karachi/zuhr
+http://127.0.0.1:8000/prayer-times/karachi/asr
+http://127.0.0.1:8000/prayer-times/karachi/maghrib
+http://127.0.0.1:8000/prayer-times/karachi/isha
+http://127.0.0.1:8000/prayer-times/lahore
+http://127.0.0.1:8000/prayer-times/lahore/fajr
+http://127.0.0.1:8000/prayer-times/lahore/zuhr
+http://127.0.0.1:8000/prayer-times/lahore/asr
+http://127.0.0.1:8000/prayer-times/lahore/maghrib
+http://127.0.0.1:8000/prayer-times/lahore/isha
+http://127.0.0.1:8000/prayer-times/islamabad
+http://127.0.0.1:8000/prayer-times/islamabad/fajr
+http://127.0.0.1:8000/prayer-times/islamabad/zuhr
+http://127.0.0.1:8000/prayer-times/islamabad/asr
+http://127.0.0.1:8000/prayer-times/islamabad/maghrib
+http://127.0.0.1:8000/prayer-times/islamabad/isha
+http://127.0.0.1:8000/prayer-times/rawalpindi
+http://127.0.0.1:8000/prayer-times/rawalpindi/fajr
+http://127.0.0.1:8000/prayer-times/rawalpindi/zuhr
+http://127.0.0.1:8000/prayer-times/rawalpindi/asr
+http://127.0.0.1:8000/prayer-times/rawalpindi/maghrib
+http://127.0.0.1:8000/prayer-times/rawalpindi/isha
+http://127.0.0.1:8000/prayer-times/faisalabad
+http://127.0.0.1:8000/prayer-times/faisalabad/fajr
+http://127.0.0.1:8000/prayer-times/faisalabad/zuhr
+http://127.0.0.1:8000/prayer-times/faisalabad/asr
+http://127.0.0.1:8000/prayer-times/faisalabad/maghrib
+http://127.0.0.1:8000/prayer-times/faisalabad/isha
+http://127.0.0.1:8000/prayer-times/multan
+http://127.0.0.1:8000/prayer-times/multan/fajr
+http://127.0.0.1:8000/prayer-times/multan/zuhr
+http://127.0.0.1:8000/prayer-times/multan/asr
+http://127.0.0.1:8000/prayer-times/multan/maghrib
+http://127.0.0.1:8000/prayer-times/multan/isha
+http://127.0.0.1:8000/prayer-times/peshawar
+http://127.0.0.1:8000/prayer-times/peshawar/fajr
+http://127.0.0.1:8000/prayer-times/peshawar/zuhr
+http://127.0.0.1:8000/prayer-times/peshawar/asr
+http://127.0.0.1:8000/prayer-times/peshawar/maghrib
+http://127.0.0.1:8000/prayer-times/peshawar/isha
+http://127.0.0.1:8000/prayer-times/quetta
+http://127.0.0.1:8000/prayer-times/quetta/fajr
+http://127.0.0.1:8000/prayer-times/quetta/zuhr
+http://127.0.0.1:8000/prayer-times/quetta/asr
+http://127.0.0.1:8000/prayer-times/quetta/maghrib
+http://127.0.0.1:8000/prayer-times/quetta/isha
+http://127.0.0.1:8000/prayer-times/sialkot
+http://127.0.0.1:8000/prayer-times/sialkot/fajr
+http://127.0.0.1:8000/prayer-times/sialkot/zuhr
+http://127.0.0.1:8000/prayer-times/sialkot/asr
+http://127.0.0.1:8000/prayer-times/sialkot/maghrib
+http://127.0.0.1:8000/prayer-times/sialkot/isha
+http://127.0.0.1:8000/prayer-times/gujranwala
+http://127.0.0.1:8000/prayer-times/gujranwala/fajr
+http://127.0.0.1:8000/prayer-times/gujranwala/zuhr
+http://127.0.0.1:8000/prayer-times/gujranwala/asr
+http://127.0.0.1:8000/prayer-times/gujranwala/maghrib
+http://127.0.0.1:8000/prayer-times/gujranwala/isha
+http://127.0.0.1:8000/prayer-times/hyderabad-sindh
+http://127.0.0.1:8000/prayer-times/hyderabad-sindh/fajr
+http://127.0.0.1:8000/prayer-times/hyderabad-sindh/zuhr
+http://127.0.0.1:8000/prayer-times/hyderabad-sindh/asr
+http://127.0.0.1:8000/prayer-times/hyderabad-sindh/maghrib
+http://127.0.0.1:8000/prayer-times/hyderabad-sindh/isha
+http://127.0.0.1:8000/prayer-times/sukkur
+http://127.0.0.1:8000/prayer-times/sukkur/fajr
+http://127.0.0.1:8000/prayer-times/sukkur/zuhr
+http://127.0.0.1:8000/prayer-times/sukkur/asr
+http://127.0.0.1:8000/prayer-times/sukkur/maghrib
+http://127.0.0.1:8000/prayer-times/sukkur/isha
+http://127.0.0.1:8000/prayer-times/sargodha
+http://127.0.0.1:8000/prayer-times/sargodha/fajr
+http://127.0.0.1:8000/prayer-times/sargodha/zuhr
+http://127.0.0.1:8000/prayer-times/sargodha/asr
+http://127.0.0.1:8000/prayer-times/sargodha/maghrib
+http://127.0.0.1:8000/prayer-times/sargodha/isha
+http://127.0.0.1:8000/prayer-times/bahawalpur
+http://127.0.0.1:8000/prayer-times/bahawalpur/fajr
+http://127.0.0.1:8000/prayer-times/bahawalpur/zuhr
+http://127.0.0.1:8000/prayer-times/bahawalpur/asr
+http://127.0.0.1:8000/prayer-times/bahawalpur/maghrib
+http://127.0.0.1:8000/prayer-times/bahawalpur/isha
+http://127.0.0.1:8000/prayer-times/abbottabad
+http://127.0.0.1:8000/prayer-times/abbottabad/fajr
+http://127.0.0.1:8000/prayer-times/abbottabad/zuhr
+http://127.0.0.1:8000/prayer-times/abbottabad/asr
+http://127.0.0.1:8000/prayer-times/abbottabad/maghrib
+http://127.0.0.1:8000/prayer-times/abbottabad/isha
+http://127.0.0.1:8000/prayer-times/dera-ghazi-khan
+http://127.0.0.1:8000/prayer-times/dera-ghazi-khan/fajr
+http://127.0.0.1:8000/prayer-times/dera-ghazi-khan/zuhr
+http://127.0.0.1:8000/prayer-times/dera-ghazi-khan/asr
+http://127.0.0.1:8000/prayer-times/dera-ghazi-khan/maghrib
+http://127.0.0.1:8000/prayer-times/dera-ghazi-khan/isha
+http://127.0.0.1:8000/prayer-times/sahiwal
+http://127.0.0.1:8000/prayer-times/sahiwal/fajr
+http://127.0.0.1:8000/prayer-times/sahiwal/zuhr
+http://127.0.0.1:8000/prayer-times/sahiwal/asr
+http://127.0.0.1:8000/prayer-times/sahiwal/maghrib
+http://127.0.0.1:8000/prayer-times/sahiwal/isha
+http://127.0.0.1:8000/prayer-times/gujrat
+http://127.0.0.1:8000/prayer-times/gujrat/fajr
+http://127.0.0.1:8000/prayer-times/gujrat/zuhr
+http://127.0.0.1:8000/prayer-times/gujrat/asr
+http://127.0.0.1:8000/prayer-times/gujrat/maghrib
+http://127.0.0.1:8000/prayer-times/gujrat/isha
+http://127.0.0.1:8000/prayer-times/muzaffarabad
+http://127.0.0.1:8000/prayer-times/muzaffarabad/fajr
+http://127.0.0.1:8000/prayer-times/muzaffarabad/zuhr
+http://127.0.0.1:8000/prayer-times/muzaffarabad/asr
+http://127.0.0.1:8000/prayer-times/muzaffarabad/maghrib
+http://127.0.0.1:8000/prayer-times/muzaffarabad/isha
+http://127.0.0.1:8000/prayer-times/mardan
+http://127.0.0.1:8000/prayer-times/mardan/fajr
+http://127.0.0.1:8000/prayer-times/mardan/zuhr
+http://127.0.0.1:8000/prayer-times/mardan/asr
+http://127.0.0.1:8000/prayer-times/mardan/maghrib
+http://127.0.0.1:8000/prayer-times/mardan/isha
+http://127.0.0.1:8000/prayer-times/larkana
+http://127.0.0.1:8000/prayer-times/larkana/fajr
+http://127.0.0.1:8000/prayer-times/larkana/zuhr
+http://127.0.0.1:8000/prayer-times/larkana/asr
+http://127.0.0.1:8000/prayer-times/larkana/maghrib
+http://127.0.0.1:8000/prayer-times/larkana/isha
+http://127.0.0.1:8000/prayer-times/nawabshah
+http://127.0.0.1:8000/prayer-times/nawabshah/fajr
+http://127.0.0.1:8000/prayer-times/nawabshah/zuhr
+http://127.0.0.1:8000/prayer-times/nawabshah/asr
+http://127.0.0.1:8000/prayer-times/nawabshah/maghrib
+http://127.0.0.1:8000/prayer-times/nawabshah/isha
+http://127.0.0.1:8000/prayer-times/rahim-yar-khan
+http://127.0.0.1:8000/prayer-times/rahim-yar-khan/fajr
+http://127.0.0.1:8000/prayer-times/rahim-yar-khan/zuhr
+http://127.0.0.1:8000/prayer-times/rahim-yar-khan/asr
+http://127.0.0.1:8000/prayer-times/rahim-yar-khan/maghrib
+http://127.0.0.1:8000/prayer-times/rahim-yar-khan/isha
+http://127.0.0.1:8000/prayer-times/okara
+http://127.0.0.1:8000/prayer-times/okara/fajr
+http://127.0.0.1:8000/prayer-times/okara/zuhr
+http://127.0.0.1:8000/prayer-times/okara/asr
+http://127.0.0.1:8000/prayer-times/okara/maghrib
+http://127.0.0.1:8000/prayer-times/okara/isha
+http://127.0.0.1:8000/prayer-times/sheikhupura
+http://127.0.0.1:8000/prayer-times/sheikhupura/fajr
+http://127.0.0.1:8000/prayer-times/sheikhupura/zuhr
+http://127.0.0.1:8000/prayer-times/sheikhupura/asr
+http://127.0.0.1:8000/prayer-times/sheikhupura/maghrib
+http://127.0.0.1:8000/prayer-times/sheikhupura/isha
+http://127.0.0.1:8000/prayer-times/hyderabad
+http://127.0.0.1:8000/prayer-times/hyderabad/fajr
+http://127.0.0.1:8000/prayer-times/hyderabad/zuhr
+http://127.0.0.1:8000/prayer-times/hyderabad/asr
+http://127.0.0.1:8000/prayer-times/hyderabad/maghrib
+http://127.0.0.1:8000/prayer-times/hyderabad/isha
+http://127.0.0.1:8000/prayer-times/jhang
+http://127.0.0.1:8000/prayer-times/jhang/fajr
+http://127.0.0.1:8000/prayer-times/jhang/zuhr
+http://127.0.0.1:8000/prayer-times/jhang/asr
+http://127.0.0.1:8000/prayer-times/jhang/maghrib
+http://127.0.0.1:8000/prayer-times/jhang/isha
+http://127.0.0.1:8000/prayer-times/kasur
+http://127.0.0.1:8000/prayer-times/kasur/fajr
+http://127.0.0.1:8000/prayer-times/kasur/zuhr
+http://127.0.0.1:8000/prayer-times/kasur/asr
+http://127.0.0.1:8000/prayer-times/kasur/maghrib
+http://127.0.0.1:8000/prayer-times/kasur/isha
+http://127.0.0.1:8000/prayer-times/mingora
+http://127.0.0.1:8000/prayer-times/mingora/fajr
+http://127.0.0.1:8000/prayer-times/mingora/zuhr
+http://127.0.0.1:8000/prayer-times/mingora/asr
+http://127.0.0.1:8000/prayer-times/mingora/maghrib
+http://127.0.0.1:8000/prayer-times/mingora/isha
+http://127.0.0.1:8000/prayer-times/mirpur-khas
+http://127.0.0.1:8000/prayer-times/mirpur-khas/fajr
+http://127.0.0.1:8000/prayer-times/mirpur-khas/zuhr
+http://127.0.0.1:8000/prayer-times/mirpur-khas/asr
+http://127.0.0.1:8000/prayer-times/mirpur-khas/maghrib
+http://127.0.0.1:8000/prayer-times/mirpur-khas/isha
+http://127.0.0.1:8000/prayer-times/chiniot
+http://127.0.0.1:8000/prayer-times/chiniot/fajr
+http://127.0.0.1:8000/prayer-times/chiniot/zuhr
+http://127.0.0.1:8000/prayer-times/chiniot/asr
+http://127.0.0.1:8000/prayer-times/chiniot/maghrib
+http://127.0.0.1:8000/prayer-times/chiniot/isha
+http://127.0.0.1:8000/prayer-times/kamoke
+http://127.0.0.1:8000/prayer-times/kamoke/fajr
+http://127.0.0.1:8000/prayer-times/kamoke/zuhr
+http://127.0.0.1:8000/prayer-times/kamoke/asr
+http://127.0.0.1:8000/prayer-times/kamoke/maghrib
+http://127.0.0.1:8000/prayer-times/kamoke/isha
+http://127.0.0.1:8000/prayer-times/sadiqabad
+http://127.0.0.1:8000/prayer-times/sadiqabad/fajr
+http://127.0.0.1:8000/prayer-times/sadiqabad/zuhr
+http://127.0.0.1:8000/prayer-times/sadiqabad/asr
+http://127.0.0.1:8000/prayer-times/sadiqabad/maghrib
+http://127.0.0.1:8000/prayer-times/sadiqabad/isha
+http://127.0.0.1:8000/prayer-times/burewala
+http://127.0.0.1:8000/prayer-times/burewala/fajr
+http://127.0.0.1:8000/prayer-times/burewala/zuhr
+http://127.0.0.1:8000/prayer-times/burewala/asr
+http://127.0.0.1:8000/prayer-times/burewala/maghrib
+http://127.0.0.1:8000/prayer-times/burewala/isha
+http://127.0.0.1:8000/prayer-times/jacobabad
+http://127.0.0.1:8000/prayer-times/jacobabad/fajr
+http://127.0.0.1:8000/prayer-times/jacobabad/zuhr
+http://127.0.0.1:8000/prayer-times/jacobabad/asr
+http://127.0.0.1:8000/prayer-times/jacobabad/maghrib
+http://127.0.0.1:8000/prayer-times/jacobabad/isha
+http://127.0.0.1:8000/prayer-times/muzaffargarh
+http://127.0.0.1:8000/prayer-times/muzaffargarh/fajr
+http://127.0.0.1:8000/prayer-times/muzaffargarh/zuhr
+http://127.0.0.1:8000/prayer-times/muzaffargarh/asr
+http://127.0.0.1:8000/prayer-times/muzaffargarh/maghrib
+http://127.0.0.1:8000/prayer-times/muzaffargarh/isha
+http://127.0.0.1:8000/prayer-times/muridke
+http://127.0.0.1:8000/prayer-times/muridke/fajr
+http://127.0.0.1:8000/prayer-times/muridke/zuhr
+http://127.0.0.1:8000/prayer-times/muridke/asr
+http://127.0.0.1:8000/prayer-times/muridke/maghrib
+http://127.0.0.1:8000/prayer-times/muridke/isha
+http://127.0.0.1:8000/prayer-times/jhelum
+http://127.0.0.1:8000/prayer-times/jhelum/fajr
+http://127.0.0.1:8000/prayer-times/jhelum/zuhr
+http://127.0.0.1:8000/prayer-times/jhelum/asr
+http://127.0.0.1:8000/prayer-times/jhelum/maghrib
+http://127.0.0.1:8000/prayer-times/jhelum/isha
+http://127.0.0.1:8000/prayer-times/shikarpur
+http://127.0.0.1:8000/prayer-times/shikarpur/fajr
+http://127.0.0.1:8000/prayer-times/shikarpur/zuhr
+http://127.0.0.1:8000/prayer-times/shikarpur/asr
+http://127.0.0.1:8000/prayer-times/shikarpur/maghrib
+http://127.0.0.1:8000/prayer-times/shikarpur/isha
+http://127.0.0.1:8000/prayer-times/hafizabad
+http://127.0.0.1:8000/prayer-times/hafizabad/fajr
+http://127.0.0.1:8000/prayer-times/hafizabad/zuhr
+http://127.0.0.1:8000/prayer-times/hafizabad/asr
+http://127.0.0.1:8000/prayer-times/hafizabad/maghrib
+http://127.0.0.1:8000/prayer-times/hafizabad/isha
+http://127.0.0.1:8000/prayer-times/kohat
+http://127.0.0.1:8000/prayer-times/kohat/fajr
+http://127.0.0.1:8000/prayer-times/kohat/zuhr
+http://127.0.0.1:8000/prayer-times/kohat/asr
+http://127.0.0.1:8000/prayer-times/kohat/maghrib
+http://127.0.0.1:8000/prayer-times/kohat/isha
+http://127.0.0.1:8000/prayer-times/khanewal
+http://127.0.0.1:8000/prayer-times/khanewal/fajr
+http://127.0.0.1:8000/prayer-times/khanewal/zuhr
+http://127.0.0.1:8000/prayer-times/khanewal/asr
+http://127.0.0.1:8000/prayer-times/khanewal/maghrib
+http://127.0.0.1:8000/prayer-times/khanewal/isha
+http://127.0.0.1:8000/prayer-times/dadu
+http://127.0.0.1:8000/prayer-times/dadu/fajr
+http://127.0.0.1:8000/prayer-times/dadu/zuhr
+http://127.0.0.1:8000/prayer-times/dadu/asr
+http://127.0.0.1:8000/prayer-times/dadu/maghrib
+http://127.0.0.1:8000/prayer-times/dadu/isha
+http://127.0.0.1:8000/prayer-times/gojra
+http://127.0.0.1:8000/prayer-times/gojra/fajr
+http://127.0.0.1:8000/prayer-times/gojra/zuhr
+http://127.0.0.1:8000/prayer-times/gojra/asr
+http://127.0.0.1:8000/prayer-times/gojra/maghrib
+http://127.0.0.1:8000/prayer-times/gojra/isha
+http://127.0.0.1:8000/prayer-times/mandi-bahauddin
+http://127.0.0.1:8000/prayer-times/mandi-bahauddin/fajr
+http://127.0.0.1:8000/prayer-times/mandi-bahauddin/zuhr
+http://127.0.0.1:8000/prayer-times/mandi-bahauddin/asr
+http://127.0.0.1:8000/prayer-times/mandi-bahauddin/maghrib
+http://127.0.0.1:8000/prayer-times/mandi-bahauddin/isha
+http://127.0.0.1:8000/prayer-times/tando-allahyar
+http://127.0.0.1:8000/prayer-times/tando-allahyar/fajr
+http://127.0.0.1:8000/prayer-times/tando-allahyar/zuhr
+http://127.0.0.1:8000/prayer-times/tando-allahyar/asr
+http://127.0.0.1:8000/prayer-times/tando-allahyar/maghrib
+http://127.0.0.1:8000/prayer-times/tando-allahyar/isha
+http://127.0.0.1:8000/prayer-times/daska
+http://127.0.0.1:8000/prayer-times/daska/fajr
+http://127.0.0.1:8000/prayer-times/daska/zuhr
+http://127.0.0.1:8000/prayer-times/daska/asr
+http://127.0.0.1:8000/prayer-times/daska/maghrib
+http://127.0.0.1:8000/prayer-times/daska/isha
+http://127.0.0.1:8000/prayer-times/pakpattan
+http://127.0.0.1:8000/prayer-times/pakpattan/fajr
+http://127.0.0.1:8000/prayer-times/pakpattan/zuhr
+http://127.0.0.1:8000/prayer-times/pakpattan/asr
+http://127.0.0.1:8000/prayer-times/pakpattan/maghrib
+http://127.0.0.1:8000/prayer-times/pakpattan/isha
+http://127.0.0.1:8000/prayer-times/bahawalnagar
+http://127.0.0.1:8000/prayer-times/bahawalnagar/fajr
+http://127.0.0.1:8000/prayer-times/bahawalnagar/zuhr
+http://127.0.0.1:8000/prayer-times/bahawalnagar/asr
+http://127.0.0.1:8000/prayer-times/bahawalnagar/maghrib
+http://127.0.0.1:8000/prayer-times/bahawalnagar/isha
+http://127.0.0.1:8000/prayer-times/tando-adam
+http://127.0.0.1:8000/prayer-times/tando-adam/fajr
+http://127.0.0.1:8000/prayer-times/tando-adam/zuhr
+http://127.0.0.1:8000/prayer-times/tando-adam/asr
+http://127.0.0.1:8000/prayer-times/tando-adam/maghrib
+http://127.0.0.1:8000/prayer-times/tando-adam/isha
+http://127.0.0.1:8000/prayer-times/khairpur
+http://127.0.0.1:8000/prayer-times/khairpur/fajr
+http://127.0.0.1:8000/prayer-times/khairpur/zuhr
+http://127.0.0.1:8000/prayer-times/khairpur/asr
+http://127.0.0.1:8000/prayer-times/khairpur/maghrib
+http://127.0.0.1:8000/prayer-times/khairpur/isha
+http://127.0.0.1:8000/prayer-times/chishtian
+http://127.0.0.1:8000/prayer-times/chishtian/fajr
+http://127.0.0.1:8000/prayer-times/chishtian/zuhr
+http://127.0.0.1:8000/prayer-times/chishtian/asr
+http://127.0.0.1:8000/prayer-times/chishtian/maghrib
+http://127.0.0.1:8000/prayer-times/chishtian/isha
+http://127.0.0.1:8000/prayer-times/attock
+http://127.0.0.1:8000/prayer-times/attock/fajr
+http://127.0.0.1:8000/prayer-times/attock/zuhr
+http://127.0.0.1:8000/prayer-times/attock/asr
+http://127.0.0.1:8000/prayer-times/attock/maghrib
+http://127.0.0.1:8000/prayer-times/attock/isha
+http://127.0.0.1:8000/prayer-times/vehari
+http://127.0.0.1:8000/prayer-times/vehari/fajr
+http://127.0.0.1:8000/prayer-times/vehari/zuhr
+http://127.0.0.1:8000/prayer-times/vehari/asr
+http://127.0.0.1:8000/prayer-times/vehari/maghrib
+http://127.0.0.1:8000/prayer-times/vehari/isha
+http://127.0.0.1:8000/prayer-times/kot-abdul-malik
+http://127.0.0.1:8000/prayer-times/kot-abdul-malik/fajr
+http://127.0.0.1:8000/prayer-times/kot-abdul-malik/zuhr
+http://127.0.0.1:8000/prayer-times/kot-abdul-malik/asr
+http://127.0.0.1:8000/prayer-times/kot-abdul-malik/maghrib
+http://127.0.0.1:8000/prayer-times/kot-abdul-malik/isha
+http://127.0.0.1:8000/prayer-times/ferozewala
+http://127.0.0.1:8000/prayer-times/ferozewala/fajr
+http://127.0.0.1:8000/prayer-times/ferozewala/zuhr
+http://127.0.0.1:8000/prayer-times/ferozewala/asr
+http://127.0.0.1:8000/prayer-times/ferozewala/maghrib
+http://127.0.0.1:8000/prayer-times/ferozewala/isha
+http://127.0.0.1:8000/prayer-times/chakwal
+http://127.0.0.1:8000/prayer-times/chakwal/fajr
+http://127.0.0.1:8000/prayer-times/chakwal/zuhr
+http://127.0.0.1:8000/prayer-times/chakwal/asr
+http://127.0.0.1:8000/prayer-times/chakwal/maghrib
+http://127.0.0.1:8000/prayer-times/chakwal/isha
+http://127.0.0.1:8000/prayer-times/gujranwala-cantonment
+http://127.0.0.1:8000/prayer-times/gujranwala-cantonment/fajr
+http://127.0.0.1:8000/prayer-times/gujranwala-cantonment/zuhr
+http://127.0.0.1:8000/prayer-times/gujranwala-cantonment/asr
+http://127.0.0.1:8000/prayer-times/gujranwala-cantonment/maghrib
+http://127.0.0.1:8000/prayer-times/gujranwala-cantonment/isha
+http://127.0.0.1:8000/prayer-times/kamalia
+http://127.0.0.1:8000/prayer-times/kamalia/fajr
+http://127.0.0.1:8000/prayer-times/kamalia/zuhr
+http://127.0.0.1:8000/prayer-times/kamalia/asr
+http://127.0.0.1:8000/prayer-times/kamalia/maghrib
+http://127.0.0.1:8000/prayer-times/kamalia/isha
+http://127.0.0.1:8000/prayer-times/umerkot
+http://127.0.0.1:8000/prayer-times/umerkot/fajr
+http://127.0.0.1:8000/prayer-times/umerkot/zuhr
+http://127.0.0.1:8000/prayer-times/umerkot/asr
+http://127.0.0.1:8000/prayer-times/umerkot/maghrib
+http://127.0.0.1:8000/prayer-times/umerkot/isha
+http://127.0.0.1:8000/prayer-times/ahmedpur-east
+http://127.0.0.1:8000/prayer-times/ahmedpur-east/fajr
+http://127.0.0.1:8000/prayer-times/ahmedpur-east/zuhr
+http://127.0.0.1:8000/prayer-times/ahmedpur-east/asr
+http://127.0.0.1:8000/prayer-times/ahmedpur-east/maghrib
+http://127.0.0.1:8000/prayer-times/ahmedpur-east/isha
+http://127.0.0.1:8000/prayer-times/kot-addu
+http://127.0.0.1:8000/prayer-times/kot-addu/fajr
+http://127.0.0.1:8000/prayer-times/kot-addu/zuhr
+http://127.0.0.1:8000/prayer-times/kot-addu/asr
+http://127.0.0.1:8000/prayer-times/kot-addu/maghrib
+http://127.0.0.1:8000/prayer-times/kot-addu/isha
+http://127.0.0.1:8000/prayer-times/wazirabad
+http://127.0.0.1:8000/prayer-times/wazirabad/fajr
+http://127.0.0.1:8000/prayer-times/wazirabad/zuhr
+http://127.0.0.1:8000/prayer-times/wazirabad/asr
+http://127.0.0.1:8000/prayer-times/wazirabad/maghrib
+http://127.0.0.1:8000/prayer-times/wazirabad/isha
+http://127.0.0.1:8000/prayer-times/mansehra
+http://127.0.0.1:8000/prayer-times/mansehra/fajr
+http://127.0.0.1:8000/prayer-times/mansehra/zuhr
+http://127.0.0.1:8000/prayer-times/mansehra/asr
+http://127.0.0.1:8000/prayer-times/mansehra/maghrib
+http://127.0.0.1:8000/prayer-times/mansehra/isha
+http://127.0.0.1:8000/prayer-times/layyah
+http://127.0.0.1:8000/prayer-times/layyah/fajr
+http://127.0.0.1:8000/prayer-times/layyah/zuhr
+http://127.0.0.1:8000/prayer-times/layyah/asr
+http://127.0.0.1:8000/prayer-times/layyah/maghrib
+http://127.0.0.1:8000/prayer-times/layyah/isha
+http://127.0.0.1:8000/prayer-times/mirpur
+http://127.0.0.1:8000/prayer-times/mirpur/fajr
+http://127.0.0.1:8000/prayer-times/mirpur/zuhr
+http://127.0.0.1:8000/prayer-times/mirpur/asr
+http://127.0.0.1:8000/prayer-times/mirpur/maghrib
+http://127.0.0.1:8000/prayer-times/mirpur/isha
+http://127.0.0.1:8000/prayer-times/swabi
+http://127.0.0.1:8000/prayer-times/swabi/fajr
+http://127.0.0.1:8000/prayer-times/swabi/zuhr
+http://127.0.0.1:8000/prayer-times/swabi/asr
+http://127.0.0.1:8000/prayer-times/swabi/maghrib
+http://127.0.0.1:8000/prayer-times/swabi/isha
+http://127.0.0.1:8000/prayer-times/chaman
+http://127.0.0.1:8000/prayer-times/chaman/fajr
+http://127.0.0.1:8000/prayer-times/chaman/zuhr
+http://127.0.0.1:8000/prayer-times/chaman/asr
+http://127.0.0.1:8000/prayer-times/chaman/maghrib
+http://127.0.0.1:8000/prayer-times/chaman/isha
+http://127.0.0.1:8000/prayer-times/taxila
+http://127.0.0.1:8000/prayer-times/taxila/fajr
+http://127.0.0.1:8000/prayer-times/taxila/zuhr
+http://127.0.0.1:8000/prayer-times/taxila/asr
+http://127.0.0.1:8000/prayer-times/taxila/maghrib
+http://127.0.0.1:8000/prayer-times/taxila/isha
+http://127.0.0.1:8000/prayer-times/nowshera
+http://127.0.0.1:8000/prayer-times/nowshera/fajr
+http://127.0.0.1:8000/prayer-times/nowshera/zuhr
+http://127.0.0.1:8000/prayer-times/nowshera/asr
+http://127.0.0.1:8000/prayer-times/nowshera/maghrib
+http://127.0.0.1:8000/prayer-times/nowshera/isha
+http://127.0.0.1:8000/prayer-times/khushab
+http://127.0.0.1:8000/prayer-times/khushab/fajr
+http://127.0.0.1:8000/prayer-times/khushab/zuhr
+http://127.0.0.1:8000/prayer-times/khushab/asr
+http://127.0.0.1:8000/prayer-times/khushab/maghrib
+http://127.0.0.1:8000/prayer-times/khushab/isha
+http://127.0.0.1:8000/prayer-times/shahdadkot
+http://127.0.0.1:8000/prayer-times/shahdadkot/fajr
+http://127.0.0.1:8000/prayer-times/shahdadkot/zuhr
+http://127.0.0.1:8000/prayer-times/shahdadkot/asr
+http://127.0.0.1:8000/prayer-times/shahdadkot/maghrib
+http://127.0.0.1:8000/prayer-times/shahdadkot/isha
+http://127.0.0.1:8000/prayer-times/mianwali
+http://127.0.0.1:8000/prayer-times/mianwali/fajr
+http://127.0.0.1:8000/prayer-times/mianwali/zuhr
+http://127.0.0.1:8000/prayer-times/mianwali/asr
+http://127.0.0.1:8000/prayer-times/mianwali/maghrib
+http://127.0.0.1:8000/prayer-times/mianwali/isha
+http://127.0.0.1:8000/prayer-times/kabal
+http://127.0.0.1:8000/prayer-times/kabal/fajr
+http://127.0.0.1:8000/prayer-times/kabal/zuhr
+http://127.0.0.1:8000/prayer-times/kabal/asr
+http://127.0.0.1:8000/prayer-times/kabal/maghrib
+http://127.0.0.1:8000/prayer-times/kabal/isha
+http://127.0.0.1:8000/prayer-times/lodhran
+http://127.0.0.1:8000/prayer-times/lodhran/fajr
+http://127.0.0.1:8000/prayer-times/lodhran/zuhr
+http://127.0.0.1:8000/prayer-times/lodhran/asr
+http://127.0.0.1:8000/prayer-times/lodhran/maghrib
+http://127.0.0.1:8000/prayer-times/lodhran/isha
+http://127.0.0.1:8000/prayer-times/hasilpur
+http://127.0.0.1:8000/prayer-times/hasilpur/fajr
+http://127.0.0.1:8000/prayer-times/hasilpur/zuhr
+http://127.0.0.1:8000/prayer-times/hasilpur/asr
+http://127.0.0.1:8000/prayer-times/hasilpur/maghrib
+http://127.0.0.1:8000/prayer-times/hasilpur/isha
+http://127.0.0.1:8000/prayer-times/charsadda
+http://127.0.0.1:8000/prayer-times/charsadda/fajr
+http://127.0.0.1:8000/prayer-times/charsadda/zuhr
+http://127.0.0.1:8000/prayer-times/charsadda/asr
+http://127.0.0.1:8000/prayer-times/charsadda/maghrib
+http://127.0.0.1:8000/prayer-times/charsadda/isha
+http://127.0.0.1:8000/prayer-times/bhakkar
+http://127.0.0.1:8000/prayer-times/bhakkar/fajr
+http://127.0.0.1:8000/prayer-times/bhakkar/zuhr
+http://127.0.0.1:8000/prayer-times/bhakkar/asr
+http://127.0.0.1:8000/prayer-times/bhakkar/maghrib
+http://127.0.0.1:8000/prayer-times/bhakkar/isha
+http://127.0.0.1:8000/prayer-times/badin
+http://127.0.0.1:8000/prayer-times/badin/fajr
+http://127.0.0.1:8000/prayer-times/badin/zuhr
+http://127.0.0.1:8000/prayer-times/badin/asr
+http://127.0.0.1:8000/prayer-times/badin/maghrib
+http://127.0.0.1:8000/prayer-times/badin/isha
+http://127.0.0.1:8000/prayer-times/arif-wala
+http://127.0.0.1:8000/prayer-times/arif-wala/fajr
+http://127.0.0.1:8000/prayer-times/arif-wala/zuhr
+http://127.0.0.1:8000/prayer-times/arif-wala/asr
+http://127.0.0.1:8000/prayer-times/arif-wala/maghrib
+http://127.0.0.1:8000/prayer-times/arif-wala/isha
+http://127.0.0.1:8000/prayer-times/ghotki
+http://127.0.0.1:8000/prayer-times/ghotki/fajr
+http://127.0.0.1:8000/prayer-times/ghotki/zuhr
+http://127.0.0.1:8000/prayer-times/ghotki/asr
+http://127.0.0.1:8000/prayer-times/ghotki/maghrib
+http://127.0.0.1:8000/prayer-times/ghotki/isha
+http://127.0.0.1:8000/prayer-times/sambrial
+http://127.0.0.1:8000/prayer-times/sambrial/fajr
+http://127.0.0.1:8000/prayer-times/sambrial/zuhr
+http://127.0.0.1:8000/prayer-times/sambrial/asr
+http://127.0.0.1:8000/prayer-times/sambrial/maghrib
+http://127.0.0.1:8000/prayer-times/sambrial/isha
+http://127.0.0.1:8000/prayer-times/jatoi
+http://127.0.0.1:8000/prayer-times/jatoi/fajr
+http://127.0.0.1:8000/prayer-times/jatoi/zuhr
+http://127.0.0.1:8000/prayer-times/jatoi/asr
+http://127.0.0.1:8000/prayer-times/jatoi/maghrib
+http://127.0.0.1:8000/prayer-times/jatoi/isha
+http://127.0.0.1:8000/prayer-times/haroonabad
+http://127.0.0.1:8000/prayer-times/haroonabad/fajr
+http://127.0.0.1:8000/prayer-times/haroonabad/zuhr
+http://127.0.0.1:8000/prayer-times/haroonabad/asr
+http://127.0.0.1:8000/prayer-times/haroonabad/maghrib
+http://127.0.0.1:8000/prayer-times/haroonabad/isha
+http://127.0.0.1:8000/prayer-times/daharki
+http://127.0.0.1:8000/prayer-times/daharki/fajr
+http://127.0.0.1:8000/prayer-times/daharki/zuhr
+http://127.0.0.1:8000/prayer-times/daharki/asr
+http://127.0.0.1:8000/prayer-times/daharki/maghrib
+http://127.0.0.1:8000/prayer-times/daharki/isha
+http://127.0.0.1:8000/prayer-times/narowal
+http://127.0.0.1:8000/prayer-times/narowal/fajr
+http://127.0.0.1:8000/prayer-times/narowal/zuhr
+http://127.0.0.1:8000/prayer-times/narowal/asr
+http://127.0.0.1:8000/prayer-times/narowal/maghrib
+http://127.0.0.1:8000/prayer-times/narowal/isha
+http://127.0.0.1:8000/prayer-times/tando-muhammad-khan
+http://127.0.0.1:8000/prayer-times/tando-muhammad-khan/fajr
+http://127.0.0.1:8000/prayer-times/tando-muhammad-khan/zuhr
+http://127.0.0.1:8000/prayer-times/tando-muhammad-khan/asr
+http://127.0.0.1:8000/prayer-times/tando-muhammad-khan/maghrib
+http://127.0.0.1:8000/prayer-times/tando-muhammad-khan/isha
+http://127.0.0.1:8000/prayer-times/kamber-ali-khan
+http://127.0.0.1:8000/prayer-times/kamber-ali-khan/fajr
+http://127.0.0.1:8000/prayer-times/kamber-ali-khan/zuhr
+http://127.0.0.1:8000/prayer-times/kamber-ali-khan/asr
+http://127.0.0.1:8000/prayer-times/kamber-ali-khan/maghrib
+http://127.0.0.1:8000/prayer-times/kamber-ali-khan/isha
+http://127.0.0.1:8000/prayer-times/mirpur-mathelo
+http://127.0.0.1:8000/prayer-times/mirpur-mathelo/fajr
+http://127.0.0.1:8000/prayer-times/mirpur-mathelo/zuhr
+http://127.0.0.1:8000/prayer-times/mirpur-mathelo/asr
+http://127.0.0.1:8000/prayer-times/mirpur-mathelo/maghrib
+http://127.0.0.1:8000/prayer-times/mirpur-mathelo/isha
+http://127.0.0.1:8000/prayer-times/kandhkot
+http://127.0.0.1:8000/prayer-times/kandhkot/fajr
+http://127.0.0.1:8000/prayer-times/kandhkot/zuhr
+http://127.0.0.1:8000/prayer-times/kandhkot/asr
+http://127.0.0.1:8000/prayer-times/kandhkot/maghrib
+http://127.0.0.1:8000/prayer-times/kandhkot/isha
+http://127.0.0.1:8000/prayer-times/bhalwal
+http://127.0.0.1:8000/prayer-times/bhalwal/fajr
+http://127.0.0.1:8000/prayer-times/bhalwal/zuhr
+http://127.0.0.1:8000/prayer-times/bhalwal/asr
+http://127.0.0.1:8000/prayer-times/bhalwal/maghrib
+http://127.0.0.1:8000/prayer-times/bhalwal/isha
+http://127.0.0.1:8000/prayer-times/gwadar
+http://127.0.0.1:8000/prayer-times/gwadar/fajr
+http://127.0.0.1:8000/prayer-times/gwadar/zuhr
+http://127.0.0.1:8000/prayer-times/gwadar/asr
+http://127.0.0.1:8000/prayer-times/gwadar/maghrib
+http://127.0.0.1:8000/prayer-times/gwadar/isha
+http://127.0.0.1:8000/prayer-times/dubai
+http://127.0.0.1:8000/prayer-times/dubai/fajr
+http://127.0.0.1:8000/prayer-times/dubai/zuhr
+http://127.0.0.1:8000/prayer-times/dubai/asr
+http://127.0.0.1:8000/prayer-times/dubai/maghrib
+http://127.0.0.1:8000/prayer-times/dubai/isha
+http://127.0.0.1:8000/prayer-times/abu-dhabi
+http://127.0.0.1:8000/prayer-times/abu-dhabi/fajr
+http://127.0.0.1:8000/prayer-times/abu-dhabi/zuhr
+http://127.0.0.1:8000/prayer-times/abu-dhabi/asr
+http://127.0.0.1:8000/prayer-times/abu-dhabi/maghrib
+http://127.0.0.1:8000/prayer-times/abu-dhabi/isha
+http://127.0.0.1:8000/prayer-times/sharjah
+http://127.0.0.1:8000/prayer-times/sharjah/fajr
+http://127.0.0.1:8000/prayer-times/sharjah/zuhr
+http://127.0.0.1:8000/prayer-times/sharjah/asr
+http://127.0.0.1:8000/prayer-times/sharjah/maghrib
+http://127.0.0.1:8000/prayer-times/sharjah/isha
+http://127.0.0.1:8000/prayer-times/ajman
+http://127.0.0.1:8000/prayer-times/ajman/fajr
+http://127.0.0.1:8000/prayer-times/ajman/zuhr
+http://127.0.0.1:8000/prayer-times/ajman/asr
+http://127.0.0.1:8000/prayer-times/ajman/maghrib
+http://127.0.0.1:8000/prayer-times/ajman/isha
+http://127.0.0.1:8000/prayer-times/al-ain
+http://127.0.0.1:8000/prayer-times/al-ain/fajr
+http://127.0.0.1:8000/prayer-times/al-ain/zuhr
+http://127.0.0.1:8000/prayer-times/al-ain/asr
+http://127.0.0.1:8000/prayer-times/al-ain/maghrib
+http://127.0.0.1:8000/prayer-times/al-ain/isha
+http://127.0.0.1:8000/prayer-times/ras-al-khaimah
+http://127.0.0.1:8000/prayer-times/ras-al-khaimah/fajr
+http://127.0.0.1:8000/prayer-times/ras-al-khaimah/zuhr
+http://127.0.0.1:8000/prayer-times/ras-al-khaimah/asr
+http://127.0.0.1:8000/prayer-times/ras-al-khaimah/maghrib
+http://127.0.0.1:8000/prayer-times/ras-al-khaimah/isha
+http://127.0.0.1:8000/prayer-times/fujairah
+http://127.0.0.1:8000/prayer-times/fujairah/fajr
+http://127.0.0.1:8000/prayer-times/fujairah/zuhr
+http://127.0.0.1:8000/prayer-times/fujairah/asr
+http://127.0.0.1:8000/prayer-times/fujairah/maghrib
+http://127.0.0.1:8000/prayer-times/fujairah/isha
+http://127.0.0.1:8000/prayer-times/umm-al-quwain
+http://127.0.0.1:8000/prayer-times/umm-al-quwain/fajr
+http://127.0.0.1:8000/prayer-times/umm-al-quwain/zuhr
+http://127.0.0.1:8000/prayer-times/umm-al-quwain/asr
+http://127.0.0.1:8000/prayer-times/umm-al-quwain/maghrib
+http://127.0.0.1:8000/prayer-times/umm-al-quwain/isha
+http://127.0.0.1:8000/prayer-times/mussafah
+http://127.0.0.1:8000/prayer-times/mussafah/fajr
+http://127.0.0.1:8000/prayer-times/mussafah/zuhr
+http://127.0.0.1:8000/prayer-times/mussafah/asr
+http://127.0.0.1:8000/prayer-times/mussafah/maghrib
+http://127.0.0.1:8000/prayer-times/mussafah/isha
+http://127.0.0.1:8000/prayer-times/jebel-ali
+http://127.0.0.1:8000/prayer-times/jebel-ali/fajr
+http://127.0.0.1:8000/prayer-times/jebel-ali/zuhr
+http://127.0.0.1:8000/prayer-times/jebel-ali/asr
+http://127.0.0.1:8000/prayer-times/jebel-ali/maghrib
+http://127.0.0.1:8000/prayer-times/jebel-ali/isha
+http://127.0.0.1:8000/prayer-times/makkah
+http://127.0.0.1:8000/prayer-times/makkah/fajr
+http://127.0.0.1:8000/prayer-times/makkah/zuhr
+http://127.0.0.1:8000/prayer-times/makkah/asr
+http://127.0.0.1:8000/prayer-times/makkah/maghrib
+http://127.0.0.1:8000/prayer-times/makkah/isha
+http://127.0.0.1:8000/prayer-times/madinah
+http://127.0.0.1:8000/prayer-times/madinah/fajr
+http://127.0.0.1:8000/prayer-times/madinah/zuhr
+http://127.0.0.1:8000/prayer-times/madinah/asr
+http://127.0.0.1:8000/prayer-times/madinah/maghrib
+http://127.0.0.1:8000/prayer-times/madinah/isha
+http://127.0.0.1:8000/prayer-times/riyadh
+http://127.0.0.1:8000/prayer-times/riyadh/fajr
+http://127.0.0.1:8000/prayer-times/riyadh/zuhr
+http://127.0.0.1:8000/prayer-times/riyadh/asr
+http://127.0.0.1:8000/prayer-times/riyadh/maghrib
+http://127.0.0.1:8000/prayer-times/riyadh/isha
+http://127.0.0.1:8000/prayer-times/jeddah
+http://127.0.0.1:8000/prayer-times/jeddah/fajr
+http://127.0.0.1:8000/prayer-times/jeddah/zuhr
+http://127.0.0.1:8000/prayer-times/jeddah/asr
+http://127.0.0.1:8000/prayer-times/jeddah/maghrib
+http://127.0.0.1:8000/prayer-times/jeddah/isha
+http://127.0.0.1:8000/prayer-times/dammam
+http://127.0.0.1:8000/prayer-times/dammam/fajr
+http://127.0.0.1:8000/prayer-times/dammam/zuhr
+http://127.0.0.1:8000/prayer-times/dammam/asr
+http://127.0.0.1:8000/prayer-times/dammam/maghrib
+http://127.0.0.1:8000/prayer-times/dammam/isha
+http://127.0.0.1:8000/prayer-times/khobar
+http://127.0.0.1:8000/prayer-times/khobar/fajr
+http://127.0.0.1:8000/prayer-times/khobar/zuhr
+http://127.0.0.1:8000/prayer-times/khobar/asr
+http://127.0.0.1:8000/prayer-times/khobar/maghrib
+http://127.0.0.1:8000/prayer-times/khobar/isha
+http://127.0.0.1:8000/prayer-times/jubail
+http://127.0.0.1:8000/prayer-times/jubail/fajr
+http://127.0.0.1:8000/prayer-times/jubail/zuhr
+http://127.0.0.1:8000/prayer-times/jubail/asr
+http://127.0.0.1:8000/prayer-times/jubail/maghrib
+http://127.0.0.1:8000/prayer-times/jubail/isha
+http://127.0.0.1:8000/prayer-times/taif
+http://127.0.0.1:8000/prayer-times/taif/fajr
+http://127.0.0.1:8000/prayer-times/taif/zuhr
+http://127.0.0.1:8000/prayer-times/taif/asr
+http://127.0.0.1:8000/prayer-times/taif/maghrib
+http://127.0.0.1:8000/prayer-times/taif/isha
+http://127.0.0.1:8000/prayer-times/hail
+http://127.0.0.1:8000/prayer-times/hail/fajr
+http://127.0.0.1:8000/prayer-times/hail/zuhr
+http://127.0.0.1:8000/prayer-times/hail/asr
+http://127.0.0.1:8000/prayer-times/hail/maghrib
+http://127.0.0.1:8000/prayer-times/hail/isha
+http://127.0.0.1:8000/prayer-times/buraidah
+http://127.0.0.1:8000/prayer-times/buraidah/fajr
+http://127.0.0.1:8000/prayer-times/buraidah/zuhr
+http://127.0.0.1:8000/prayer-times/buraidah/asr
+http://127.0.0.1:8000/prayer-times/buraidah/maghrib
+http://127.0.0.1:8000/prayer-times/buraidah/isha
+http://127.0.0.1:8000/prayer-times/tabuk
+http://127.0.0.1:8000/prayer-times/tabuk/fajr
+http://127.0.0.1:8000/prayer-times/tabuk/zuhr
+http://127.0.0.1:8000/prayer-times/tabuk/asr
+http://127.0.0.1:8000/prayer-times/tabuk/maghrib
+http://127.0.0.1:8000/prayer-times/tabuk/isha
+http://127.0.0.1:8000/prayer-times/najran
+http://127.0.0.1:8000/prayer-times/najran/fajr
+http://127.0.0.1:8000/prayer-times/najran/zuhr
+http://127.0.0.1:8000/prayer-times/najran/asr
+http://127.0.0.1:8000/prayer-times/najran/maghrib
+http://127.0.0.1:8000/prayer-times/najran/isha
+http://127.0.0.1:8000/prayer-times/abha
+http://127.0.0.1:8000/prayer-times/abha/fajr
+http://127.0.0.1:8000/prayer-times/abha/zuhr
+http://127.0.0.1:8000/prayer-times/abha/asr
+http://127.0.0.1:8000/prayer-times/abha/maghrib
+http://127.0.0.1:8000/prayer-times/abha/isha
+http://127.0.0.1:8000/prayer-times/yanbu
+http://127.0.0.1:8000/prayer-times/yanbu/fajr
+http://127.0.0.1:8000/prayer-times/yanbu/zuhr
+http://127.0.0.1:8000/prayer-times/yanbu/asr
+http://127.0.0.1:8000/prayer-times/yanbu/maghrib
+http://127.0.0.1:8000/prayer-times/yanbu/isha
+http://127.0.0.1:8000/prayer-times/bangalore
+http://127.0.0.1:8000/prayer-times/bangalore/fajr
+http://127.0.0.1:8000/prayer-times/bangalore/zuhr
+http://127.0.0.1:8000/prayer-times/bangalore/asr
+http://127.0.0.1:8000/prayer-times/bangalore/maghrib
+http://127.0.0.1:8000/prayer-times/bangalore/isha
+http://127.0.0.1:8000/prayer-times/mumbai
+http://127.0.0.1:8000/prayer-times/mumbai/fajr
+http://127.0.0.1:8000/prayer-times/mumbai/zuhr
+http://127.0.0.1:8000/prayer-times/mumbai/asr
+http://127.0.0.1:8000/prayer-times/mumbai/maghrib
+http://127.0.0.1:8000/prayer-times/mumbai/isha
+http://127.0.0.1:8000/prayer-times/chennai
+http://127.0.0.1:8000/prayer-times/chennai/fajr
+http://127.0.0.1:8000/prayer-times/chennai/zuhr
+http://127.0.0.1:8000/prayer-times/chennai/asr
+http://127.0.0.1:8000/prayer-times/chennai/maghrib
+http://127.0.0.1:8000/prayer-times/chennai/isha
+http://127.0.0.1:8000/prayer-times/kochi
+http://127.0.0.1:8000/prayer-times/kochi/fajr
+http://127.0.0.1:8000/prayer-times/kochi/zuhr
+http://127.0.0.1:8000/prayer-times/kochi/asr
+http://127.0.0.1:8000/prayer-times/kochi/maghrib
+http://127.0.0.1:8000/prayer-times/kochi/isha
+http://127.0.0.1:8000/prayer-times/calicut
+http://127.0.0.1:8000/prayer-times/calicut/fajr
+http://127.0.0.1:8000/prayer-times/calicut/zuhr
+http://127.0.0.1:8000/prayer-times/calicut/asr
+http://127.0.0.1:8000/prayer-times/calicut/maghrib
+http://127.0.0.1:8000/prayer-times/calicut/isha
+http://127.0.0.1:8000/prayer-times/kozhikode
+http://127.0.0.1:8000/prayer-times/kozhikode/fajr
+http://127.0.0.1:8000/prayer-times/kozhikode/zuhr
+http://127.0.0.1:8000/prayer-times/kozhikode/asr
+http://127.0.0.1:8000/prayer-times/kozhikode/maghrib
+http://127.0.0.1:8000/prayer-times/kozhikode/isha
+http://127.0.0.1:8000/prayer-times/kannur
+http://127.0.0.1:8000/prayer-times/kannur/fajr
+http://127.0.0.1:8000/prayer-times/kannur/zuhr
+http://127.0.0.1:8000/prayer-times/kannur/asr
+http://127.0.0.1:8000/prayer-times/kannur/maghrib
+http://127.0.0.1:8000/prayer-times/kannur/isha
+http://127.0.0.1:8000/prayer-times/malappuram
+http://127.0.0.1:8000/prayer-times/malappuram/fajr
+http://127.0.0.1:8000/prayer-times/malappuram/zuhr
+http://127.0.0.1:8000/prayer-times/malappuram/asr
+http://127.0.0.1:8000/prayer-times/malappuram/maghrib
+http://127.0.0.1:8000/prayer-times/malappuram/isha
+http://127.0.0.1:8000/prayer-times/thrissur
+http://127.0.0.1:8000/prayer-times/thrissur/fajr
+http://127.0.0.1:8000/prayer-times/thrissur/zuhr
+http://127.0.0.1:8000/prayer-times/thrissur/asr
+http://127.0.0.1:8000/prayer-times/thrissur/maghrib
+http://127.0.0.1:8000/prayer-times/thrissur/isha
+http://127.0.0.1:8000/prayer-times/delhi
+http://127.0.0.1:8000/prayer-times/delhi/fajr
+http://127.0.0.1:8000/prayer-times/delhi/zuhr
+http://127.0.0.1:8000/prayer-times/delhi/asr
+http://127.0.0.1:8000/prayer-times/delhi/maghrib
+http://127.0.0.1:8000/prayer-times/delhi/isha
+http://127.0.0.1:8000/prayer-times/lucknow
+http://127.0.0.1:8000/prayer-times/lucknow/fajr
+http://127.0.0.1:8000/prayer-times/lucknow/zuhr
+http://127.0.0.1:8000/prayer-times/lucknow/asr
+http://127.0.0.1:8000/prayer-times/lucknow/maghrib
+http://127.0.0.1:8000/prayer-times/lucknow/isha
+http://127.0.0.1:8000/prayer-times/hyderabad-india
+http://127.0.0.1:8000/prayer-times/hyderabad-india/fajr
+http://127.0.0.1:8000/prayer-times/hyderabad-india/zuhr
+http://127.0.0.1:8000/prayer-times/hyderabad-india/asr
+http://127.0.0.1:8000/prayer-times/hyderabad-india/maghrib
+http://127.0.0.1:8000/prayer-times/hyderabad-india/isha
+http://127.0.0.1:8000/prayer-times/new-york
+http://127.0.0.1:8000/prayer-times/new-york/fajr
+http://127.0.0.1:8000/prayer-times/new-york/zuhr
+http://127.0.0.1:8000/prayer-times/new-york/asr
+http://127.0.0.1:8000/prayer-times/new-york/maghrib
+http://127.0.0.1:8000/prayer-times/new-york/isha
+http://127.0.0.1:8000/prayer-times/chicago
+http://127.0.0.1:8000/prayer-times/chicago/fajr
+http://127.0.0.1:8000/prayer-times/chicago/zuhr
+http://127.0.0.1:8000/prayer-times/chicago/asr
+http://127.0.0.1:8000/prayer-times/chicago/maghrib
+http://127.0.0.1:8000/prayer-times/chicago/isha
+http://127.0.0.1:8000/prayer-times/houston
+http://127.0.0.1:8000/prayer-times/houston/fajr
+http://127.0.0.1:8000/prayer-times/houston/zuhr
+http://127.0.0.1:8000/prayer-times/houston/asr
+http://127.0.0.1:8000/prayer-times/houston/maghrib
+http://127.0.0.1:8000/prayer-times/houston/isha
+http://127.0.0.1:8000/prayer-times/los-angeles
+http://127.0.0.1:8000/prayer-times/los-angeles/fajr
+http://127.0.0.1:8000/prayer-times/los-angeles/zuhr
+http://127.0.0.1:8000/prayer-times/los-angeles/asr
+http://127.0.0.1:8000/prayer-times/los-angeles/maghrib
+http://127.0.0.1:8000/prayer-times/los-angeles/isha
+http://127.0.0.1:8000/prayer-times/boston
+http://127.0.0.1:8000/prayer-times/boston/fajr
+http://127.0.0.1:8000/prayer-times/boston/zuhr
+http://127.0.0.1:8000/prayer-times/boston/asr
+http://127.0.0.1:8000/prayer-times/boston/maghrib
+http://127.0.0.1:8000/prayer-times/boston/isha
+http://127.0.0.1:8000/prayer-times/dallas
+http://127.0.0.1:8000/prayer-times/dallas/fajr
+http://127.0.0.1:8000/prayer-times/dallas/zuhr
+http://127.0.0.1:8000/prayer-times/dallas/asr
+http://127.0.0.1:8000/prayer-times/dallas/maghrib
+http://127.0.0.1:8000/prayer-times/dallas/isha
+http://127.0.0.1:8000/prayer-times/philadelphia
+http://127.0.0.1:8000/prayer-times/philadelphia/fajr
+http://127.0.0.1:8000/prayer-times/philadelphia/zuhr
+http://127.0.0.1:8000/prayer-times/philadelphia/asr
+http://127.0.0.1:8000/prayer-times/philadelphia/maghrib
+http://127.0.0.1:8000/prayer-times/philadelphia/isha
+http://127.0.0.1:8000/prayer-times/detroit
+http://127.0.0.1:8000/prayer-times/detroit/fajr
+http://127.0.0.1:8000/prayer-times/detroit/zuhr
+http://127.0.0.1:8000/prayer-times/detroit/asr
+http://127.0.0.1:8000/prayer-times/detroit/maghrib
+http://127.0.0.1:8000/prayer-times/detroit/isha
+http://127.0.0.1:8000/prayer-times/minneapolis
+http://127.0.0.1:8000/prayer-times/minneapolis/fajr
+http://127.0.0.1:8000/prayer-times/minneapolis/zuhr
+http://127.0.0.1:8000/prayer-times/minneapolis/asr
+http://127.0.0.1:8000/prayer-times/minneapolis/maghrib
+http://127.0.0.1:8000/prayer-times/minneapolis/isha
+http://127.0.0.1:8000/prayer-times/san-diego
+http://127.0.0.1:8000/prayer-times/san-diego/fajr
+http://127.0.0.1:8000/prayer-times/san-diego/zuhr
+http://127.0.0.1:8000/prayer-times/san-diego/asr
+http://127.0.0.1:8000/prayer-times/san-diego/maghrib
+http://127.0.0.1:8000/prayer-times/san-diego/isha
+http://127.0.0.1:8000/prayer-times/dearborn-michigan
+http://127.0.0.1:8000/prayer-times/dearborn-michigan/fajr
+http://127.0.0.1:8000/prayer-times/dearborn-michigan/zuhr
+http://127.0.0.1:8000/prayer-times/dearborn-michigan/asr
+http://127.0.0.1:8000/prayer-times/dearborn-michigan/maghrib
+http://127.0.0.1:8000/prayer-times/dearborn-michigan/isha
+http://127.0.0.1:8000/prayer-times/buffalo-ny
+http://127.0.0.1:8000/prayer-times/buffalo-ny/fajr
+http://127.0.0.1:8000/prayer-times/buffalo-ny/zuhr
+http://127.0.0.1:8000/prayer-times/buffalo-ny/asr
+http://127.0.0.1:8000/prayer-times/buffalo-ny/maghrib
+http://127.0.0.1:8000/prayer-times/buffalo-ny/isha
+http://127.0.0.1:8000/prayer-times
+http://127.0.0.1:8000/ur/prayer-times
+http://127.0.0.1:8000/namaz-time

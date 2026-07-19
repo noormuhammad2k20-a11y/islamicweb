@@ -1,107 +1,105 @@
 # 99 Names of Allah
 
-**Total Pages:** 99
+Total number of pages: 101
 
-| URL | Page Title | Meta Description | H1 | Index Status | Canonical URL | Page Type | Notes |
-|---|---|---|---|---|---|---|---|
-| `/99-names-of-allah` | 99 Names of Allah (Asma ul Husna) - Meaning &amp; Benefits | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | 99 Names of Allah | Index | https://noorislam.com | Static/Hub | Good |
-| `/99-names-of-allah/ar-rahman` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ar-Rahman | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ar-rahim` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ar-Rahim | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-malik` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Malik | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-quddus` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Quddus | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/as-salam` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | As-Salam | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mumin` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mu&#039;min | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muhaymin` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muhaymin | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-aziz` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Aziz | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-jabbar` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Jabbar | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mutakabbir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mutakabbir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-khaliq` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Khaliq | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-bari` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Bari&#039; | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-musawwir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Musawwir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-ghaffar` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Ghaffar | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-qahhar` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Qahhar | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-wahhab` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Wahhab | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ar-razzaq` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ar-Razzaq | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-fattah` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Fattah | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-alim` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-&#039;Alim | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-qabid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Qabid | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-basit` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Basit | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-khafid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Khafid | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ar-rafi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ar-Rafi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muizz` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mu&#039;izz | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mudhill` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mudhill | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/as-sami` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | As-Sami | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-basir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Basir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-hakam` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Hakam | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-adl` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-&#039;Adl | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-latif` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Latif | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-khabir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Khabir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-halim` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Halim | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-azim` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-&#039;Azim | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-ghafur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Ghafur | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ash-shakur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ash-Shakur | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-ali` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-&#039;Ali | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-kabir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Kabir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-hafiz` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Hafiz | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muqit` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muqit | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-hasib` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Hasib | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-jalil` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Jalil | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-karim` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Karim | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ar-raqib` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ar-Raqib | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mujib` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mujib | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-wasi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Wasi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-hakim` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Hakim | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-wadud` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Wadud | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-majeed` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Majeed | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-baith` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Ba&#039;ith | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ash-shahid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ash-Shahid | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-haqq` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Haqq | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-wakil` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Wakil | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-qawi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Qawi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-matin` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Matin | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-wali` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Wali | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-hamid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Hamid | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muhsi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muhsi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mubdi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mubdi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mu&#039;id | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muhyi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muhyi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mumit` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mumit | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-hayy` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Hayy | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-qayyum` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Qayyum | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-wajid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Wajid | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-maajid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Maajid | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-wahid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Wahid | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-ahad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Ahad | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/as-samad` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | As-Samad | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-qadir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Qadir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muqtadir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muqtadir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muqaddim` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muqaddim | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muakhkhir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mu&#039;akhkhir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-awwal` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Awwal | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-akhir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Akhir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/az-zahir` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Az-Zahir | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-batin` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Batin | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-waali` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Waali | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mutaali` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muta&#039;ali | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-barr` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Barr | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/at-tawwab` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | At-Tawwab | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muntaqim` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muntaqim | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-afuww` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-&#039;Afuww | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ar-rauf` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ar-Ra&#039;uf | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/malik-al-mulk` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Malik-al-Mulk | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/dhu-al-jalal-wa-al-ikram` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Dhu-al-Jalal wa-al-Ikram | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-muqsit` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Muqsit | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-jami` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Jami | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-ghani` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Ghani | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mughni` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mughni | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-mani` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Mani&#039; | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ad-darr` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ad-Darr | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/an-nafi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | An-Nafi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/an-nur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | An-Nur | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-hadi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Hadi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-badi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Badi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-baqi` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Baqi | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/al-warith` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Al-Warith | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/ar-rashid` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | Ar-Rashid | Index | https://noorislam.com | Dynamic | Good |
-| `/99-names-of-allah/as-sabur` | NoorIslam — Noor-e-Islam: Islamic Knowledge &amp; Tools | Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge. | As-Sabur | Index | https://noorislam.com | Dynamic | Good |
-
+http://127.0.0.1:8000/99-names-of-allah/ar-rahman
+http://127.0.0.1:8000/99-names-of-allah/ar-rahim
+http://127.0.0.1:8000/99-names-of-allah/al-malik
+http://127.0.0.1:8000/99-names-of-allah/al-quddus
+http://127.0.0.1:8000/99-names-of-allah/as-salam
+http://127.0.0.1:8000/99-names-of-allah/al-mumin
+http://127.0.0.1:8000/99-names-of-allah/al-muhaymin
+http://127.0.0.1:8000/99-names-of-allah/al-aziz
+http://127.0.0.1:8000/99-names-of-allah/al-jabbar
+http://127.0.0.1:8000/99-names-of-allah/al-mutakabbir
+http://127.0.0.1:8000/99-names-of-allah/al-khaliq
+http://127.0.0.1:8000/99-names-of-allah/al-bari
+http://127.0.0.1:8000/99-names-of-allah/al-musawwir
+http://127.0.0.1:8000/99-names-of-allah/al-ghaffar
+http://127.0.0.1:8000/99-names-of-allah/al-qahhar
+http://127.0.0.1:8000/99-names-of-allah/al-wahhab
+http://127.0.0.1:8000/99-names-of-allah/ar-razzaq
+http://127.0.0.1:8000/99-names-of-allah/al-fattah
+http://127.0.0.1:8000/99-names-of-allah/al-alim
+http://127.0.0.1:8000/99-names-of-allah/al-qabid
+http://127.0.0.1:8000/99-names-of-allah/al-basit
+http://127.0.0.1:8000/99-names-of-allah/al-khafid
+http://127.0.0.1:8000/99-names-of-allah/ar-rafi
+http://127.0.0.1:8000/99-names-of-allah/al-muizz
+http://127.0.0.1:8000/99-names-of-allah/al-mudhill
+http://127.0.0.1:8000/99-names-of-allah/as-sami
+http://127.0.0.1:8000/99-names-of-allah/al-basir
+http://127.0.0.1:8000/99-names-of-allah/al-hakam
+http://127.0.0.1:8000/99-names-of-allah/al-adl
+http://127.0.0.1:8000/99-names-of-allah/al-latif
+http://127.0.0.1:8000/99-names-of-allah/al-khabir
+http://127.0.0.1:8000/99-names-of-allah/al-halim
+http://127.0.0.1:8000/99-names-of-allah/al-azim
+http://127.0.0.1:8000/99-names-of-allah/al-ghafur
+http://127.0.0.1:8000/99-names-of-allah/ash-shakur
+http://127.0.0.1:8000/99-names-of-allah/al-ali
+http://127.0.0.1:8000/99-names-of-allah/al-kabir
+http://127.0.0.1:8000/99-names-of-allah/al-hafiz
+http://127.0.0.1:8000/99-names-of-allah/al-muqit
+http://127.0.0.1:8000/99-names-of-allah/al-hasib
+http://127.0.0.1:8000/99-names-of-allah/al-jalil
+http://127.0.0.1:8000/99-names-of-allah/al-karim
+http://127.0.0.1:8000/99-names-of-allah/ar-raqib
+http://127.0.0.1:8000/99-names-of-allah/al-mujib
+http://127.0.0.1:8000/99-names-of-allah/al-wasi
+http://127.0.0.1:8000/99-names-of-allah/al-hakim
+http://127.0.0.1:8000/99-names-of-allah/al-wadud
+http://127.0.0.1:8000/99-names-of-allah/al-majeed
+http://127.0.0.1:8000/99-names-of-allah/al-baith
+http://127.0.0.1:8000/99-names-of-allah/ash-shahid
+http://127.0.0.1:8000/99-names-of-allah/al-haqq
+http://127.0.0.1:8000/99-names-of-allah/al-wakil
+http://127.0.0.1:8000/99-names-of-allah/al-qawi
+http://127.0.0.1:8000/99-names-of-allah/al-matin
+http://127.0.0.1:8000/99-names-of-allah/al-wali
+http://127.0.0.1:8000/99-names-of-allah/al-hamid
+http://127.0.0.1:8000/99-names-of-allah/al-muhsi
+http://127.0.0.1:8000/99-names-of-allah/al-mubdi
+http://127.0.0.1:8000/99-names-of-allah/al-muid
+http://127.0.0.1:8000/99-names-of-allah/al-muhyi
+http://127.0.0.1:8000/99-names-of-allah/al-mumit
+http://127.0.0.1:8000/99-names-of-allah/al-hayy
+http://127.0.0.1:8000/99-names-of-allah/al-qayyum
+http://127.0.0.1:8000/99-names-of-allah/al-wajid
+http://127.0.0.1:8000/99-names-of-allah/al-maajid
+http://127.0.0.1:8000/99-names-of-allah/al-wahid
+http://127.0.0.1:8000/99-names-of-allah/al-ahad
+http://127.0.0.1:8000/99-names-of-allah/as-samad
+http://127.0.0.1:8000/99-names-of-allah/al-qadir
+http://127.0.0.1:8000/99-names-of-allah/al-muqtadir
+http://127.0.0.1:8000/99-names-of-allah/al-muqaddim
+http://127.0.0.1:8000/99-names-of-allah/al-muakhkhir
+http://127.0.0.1:8000/99-names-of-allah/al-awwal
+http://127.0.0.1:8000/99-names-of-allah/al-akhir
+http://127.0.0.1:8000/99-names-of-allah/az-zahir
+http://127.0.0.1:8000/99-names-of-allah/al-batin
+http://127.0.0.1:8000/99-names-of-allah/al-waali
+http://127.0.0.1:8000/99-names-of-allah/al-mutaali
+http://127.0.0.1:8000/99-names-of-allah/al-barr
+http://127.0.0.1:8000/99-names-of-allah/at-tawwab
+http://127.0.0.1:8000/99-names-of-allah/al-muntaqim
+http://127.0.0.1:8000/99-names-of-allah/al-afuww
+http://127.0.0.1:8000/99-names-of-allah/ar-rauf
+http://127.0.0.1:8000/99-names-of-allah/malik-al-mulk
+http://127.0.0.1:8000/99-names-of-allah/dhu-al-jalal-wa-al-ikram
+http://127.0.0.1:8000/99-names-of-allah/al-muqsit
+http://127.0.0.1:8000/99-names-of-allah/al-jami
+http://127.0.0.1:8000/99-names-of-allah/al-ghani
+http://127.0.0.1:8000/99-names-of-allah/al-mughni
+http://127.0.0.1:8000/99-names-of-allah/al-mani
+http://127.0.0.1:8000/99-names-of-allah/ad-darr
+http://127.0.0.1:8000/99-names-of-allah/an-nafi
+http://127.0.0.1:8000/99-names-of-allah/an-nur
+http://127.0.0.1:8000/99-names-of-allah/al-hadi
+http://127.0.0.1:8000/99-names-of-allah/al-badi
+http://127.0.0.1:8000/99-names-of-allah/al-baqi
+http://127.0.0.1:8000/99-names-of-allah/al-warith
+http://127.0.0.1:8000/99-names-of-allah/ar-rashid
+http://127.0.0.1:8000/99-names-of-allah/as-sabur
+http://127.0.0.1:8000/99-names-of-allah
+http://127.0.0.1:8000/ur/99-names-of-allah
