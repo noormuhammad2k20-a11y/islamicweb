@@ -3981,7 +3981,7 @@
     <section class="section surahs-section" id="popular-surahs">
         <div class="section-inner">
             <div class="surahs-header-wrap">
-                <a href="#" href="{{ route('surah.index') }}" class="surahs-view-all-btn">View All 114 Surahs <i class="fas fa-arrow-right"></i></a>
+                <a href="{{ route('surah.index') }}" class="surahs-view-all-btn">View All 114 Surahs <i class="fas fa-arrow-right"></i></a>
                 <p class="surahs-bismillah arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
                 <div class="gold-line"></div>
                 <span class="section-badge"><i class="fas fa-book-quran"></i> POPULAR SURAHS</span>

@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $__env->yieldContent('title', 'NoorIslam — Noor-e-Islam: Islamic Knowledge & Tools'); ?></title>
-    <meta name="description" content="<?php echo $__env->yieldContent('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.'); ?>">
+    <title><?php echo e($seo['title'] ?? $seoData['title'] ?? View::getSection('title', 'NoorIslam — Noor-e-Islam: Islamic Knowledge & Tools')); ?></title>
+    <meta name="description" content="<?php echo e($seo['description'] ?? $seoData['description'] ?? View::getSection('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.')); ?>">
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(View::hasSection('meta_keywords')): ?>
     <meta name="keywords" content="<?php echo $__env->yieldContent('meta_keywords'); ?>">
     <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     <!-- SEO Canonical and Hreflang -->
     <link rel="icon" href="<?php echo e(asset('favicon.svg')); ?>" type="image/svg+xml">
-    <link rel="canonical" href="<?php echo e(isset($seoMeta->canonical_url) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current())); ?>">
+    <link rel="canonical" href="<?php echo e($seo['canonical'] ?? $seoData['canonical'] ?? (isset($seoMeta->canonical_url) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current()))); ?>">
 
     <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($seoMeta->schema_override_json) && $seoMeta->schema_override_json): ?>
     <script type="application/ld+json">

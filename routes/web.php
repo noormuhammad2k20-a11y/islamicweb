@@ -224,7 +224,7 @@ $appRoutes = function () {
         Route::get('/pillars-of-iman', [IslamicKnowledgeController::class, 'pillarsIman'])->name('knowledge.pillars_iman');
         Route::get('/prophets-in-islam', [IslamicKnowledgeController::class, 'prophets'])->name('knowledge.prophets');
         Route::get('/islamic-history', [IslamicKnowledgeController::class, 'history'])->name('knowledge.history');
-        Route::get('/islamic-facts', [IslamicKnowledgeController::class, 'facts'])->name('knowledge.facts');
+        Route::redirect('/islamic-facts', '/knowledge', 301)->name('knowledge.facts');
     });
 
     // CLUSTER 14 — Media Section
@@ -263,13 +263,14 @@ $appRoutes = function () {
     Route::get('/search', [\App\Http\Controllers\SearchController::class, 'index'])->name('search');
 
 
-    // CLUSTER 16 — Programmatic SEO Pages
-    Route::get('/islamic-date-today', [IslamicDateController::class, 'index'])->name('seo.islamic_date_today');
-    Route::get('/prayer-times-today', [PrayerTimesController::class, 'today'])->name('seo.prayer_today');
-    Route::get('/sehri-time-today', [RamadanController::class, 'sehriToday'])->name('seo.sehri_today');
-    Route::get('/iftar-time-today', [RamadanController::class, 'iftarToday'])->name('seo.iftar_today');
-    Route::get('/zakat-calculator-online', [\App\Http\Controllers\ZakatController::class, 'online'])->name('seo.zakat_online');
-    Route::get('/qibla-finder-online', [ToolsController::class, 'qiblaOnline'])->name('seo.qibla_online');
+    // CLUSTER 16 — Dedicated SEO Landing Pages
+    Route::get('/islamic-date-today', [\App\Http\Controllers\SeoLandingPageController::class, 'islamicDateToday'])->name('seo.islamic-date-today');
+    Route::get('/prayer-times-today', [\App\Http\Controllers\SeoLandingPageController::class, 'prayerTimesToday'])->name('seo.prayer-times-today');
+    Route::get('/sehri-time-today', [\App\Http\Controllers\SeoLandingPageController::class, 'sehriTimeToday'])->name('seo.sehri-time-today');
+    Route::get('/iftar-time-today', [\App\Http\Controllers\SeoLandingPageController::class, 'iftarTimeToday'])->name('seo.iftar-time-today');
+    Route::get('/zakat-calculator-online', [\App\Http\Controllers\SeoLandingPageController::class, 'zakatCalculatorOnline'])->name('seo.zakat-calculator-online');
+    Route::get('/qibla-finder-online', [\App\Http\Controllers\SeoLandingPageController::class, 'qiblaFinderOnline'])->name('seo.qibla-finder-online');
+
 
     // CLUSTER 20 — Wazaif Section
     Route::prefix('wazaif')->group(function () {

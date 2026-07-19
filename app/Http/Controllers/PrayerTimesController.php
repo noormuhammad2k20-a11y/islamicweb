@@ -346,8 +346,8 @@ class PrayerTimesController extends Controller
     {
         $date = Carbon::now($tz)->format('d F Y');
         return [
-            'title' => "Prayer Time {$name} Today {$date} | Namaz Timing {$name} | Fajr {$prayers['fajr']} Maghrib {$prayers['maghrib']}",
-            'description' => "Prayer time {$name} today {$date}: Fajr {$prayers['fajr']}, Dhuhr {$prayers['dhuhr']}, Asr {$prayers['asr']}, Maghrib {$prayers['maghrib']}, Isha {$prayers['isha']}. Islamic date {$hijri['day']} {$hijri['month_name']} {$hijri['year']} AH. Exact {$name} namaz timing.",
+            'title' => "{$name} Prayer Times Today | Fajr, Dhuhr, Asr, Maghrib, Isha — Noor-e-Islam",
+            'description' => "Get accurate {$name} prayer times for today, {$date}. Fajr at {$prayers['fajr']}, Dhuhr at {$prayers['dhuhr']}, Asr at {$prayers['asr']}, Maghrib at {$prayers['maghrib']}, Isha at {$prayers['isha']}. Updated daily with correct Islamic timings.",
             'canonical' => url("/prayer-times/{$slug}"),
         ];
     }

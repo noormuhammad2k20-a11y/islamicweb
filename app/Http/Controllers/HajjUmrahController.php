@@ -9,7 +9,12 @@ class HajjUmrahController extends Controller
 {
     public function index()
     {
-        return view('pages.hajj_umrah.hub');
+        $seoData = [
+            'title' => 'Hajj & Umrah Guide 2026 | Complete Information — Noor-e-Islam',
+            'description' => 'Complete hub for Hajj and Umrah guides, checklists, and duas for 2026.',
+            'canonical' => url('/hajj-and-umrah'),
+        ];
+        return view('pages.hajj_umrah.hub', compact('seoData'));
     }
 
     public function hajjGuide()
@@ -60,7 +65,13 @@ class HajjUmrahController extends Controller
                 ]
             ]
         ];
-        return view('pages.hajj_umrah.hajj_guide', compact('guides'));
+        
+        $seoData = [
+            'title' => 'Complete Hajj Guide 2026 | Step-by-Step Rituals & Rules — Noor-e-Islam',
+            'description' => 'Complete step-by-step Hajj guide for 2026. Learn the rituals of Tawaf, Sa\'i, Wuquf at Arafah, Muzdalifah, Rami, and Qurbani. Includes essential duas and tips.',
+            'canonical' => url('/hajj-guide'),
+        ];
+        return view('pages.hajj_umrah.hajj_guide', compact('guides', 'seoData'));
     }
 
     public function umrahGuide()
@@ -108,12 +119,33 @@ class HajjUmrahController extends Controller
                 ]
             ]
         ];
-        return view('pages.hajj_umrah.umrah_guide', compact('guides'));
+        
+        $seoData = [
+            'title' => 'Complete Umrah Guide 2026 | Step-by-Step How to Perform Umrah — Noor-e-Islam',
+            'description' => 'Perform Umrah correctly with our step-by-step guide. Learn about Ihram, Tawaf around the Kaaba, Sa\'i between Safa and Marwa, and Halq or Taqsir with duas.',
+            'canonical' => url('/umrah-guide'),
+        ];
+        return view('pages.hajj_umrah.umrah_guide', compact('guides', 'seoData'));
     }
 
-    public function hajjDuas() { return view('pages.hajj_umrah.hajj_duas'); }
-    public function umrahDuas() { return view('pages.hajj_umrah.umrah_duas'); }
-    public function hajjChecklist() { return view('pages.hajj_umrah.hajj_checklist'); }
-    public function umrahChecklist() { return view('pages.hajj_umrah.umrah_checklist'); }
-    public function hajjFaqs() { return view('pages.hajj_umrah.hajj_faqs'); }
+    public function hajjDuas() { 
+        $seoData = ['title' => 'Hajj Duas in Arabic with Urdu Translation | Supplications — Noor-e-Islam', 'description' => 'Essential Duas for Hajj in Arabic with Urdu translation.', 'canonical' => url('/hajj-duas')];
+        return view('pages.hajj_umrah.hajj_duas', compact('seoData')); 
+    }
+    public function umrahDuas() { 
+        $seoData = ['title' => 'Umrah Duas in Arabic & Urdu | Step-by-Step Supplications — Noor-e-Islam', 'description' => 'Essential Duas for Umrah in Arabic with Urdu translation.', 'canonical' => url('/umrah-duas')];
+        return view('pages.hajj_umrah.umrah_duas', compact('seoData')); 
+    }
+    public function hajjChecklist() { 
+        $seoData = ['title' => 'Hajj Packing Checklist 2026 | Essential Items for Hajj — Noor-e-Islam', 'description' => 'Complete packing checklist for Hajj 2026. Essential items to bring.', 'canonical' => url('/hajj-checklist')];
+        return view('pages.hajj_umrah.hajj_checklist', compact('seoData')); 
+    }
+    public function umrahChecklist() { 
+        $seoData = ['title' => 'Umrah Packing Checklist 2026 | What to Pack for Umrah — Noor-e-Islam', 'description' => 'Complete packing checklist for Umrah 2026. Essential items to bring.', 'canonical' => url('/umrah-checklist')];
+        return view('pages.hajj_umrah.umrah_checklist', compact('seoData')); 
+    }
+    public function hajjFaqs() { 
+        $seoData = ['title' => 'Hajj & Umrah Frequently Asked Questions | Answers — Noor-e-Islam', 'description' => 'Frequently asked questions about Hajj and Umrah.', 'canonical' => url('/hajj-faqs')];
+        return view('pages.hajj_umrah.hajj_faqs', compact('seoData')); 
+    }
 }

@@ -49,9 +49,10 @@ class SurahController extends Controller
 
     public function show($slug)
     {
-        if ($slug instanceof Surah) {
-            $slug = $slug->slug;
-        }
+        try {
+            if ($slug instanceof Surah) {
+                $slug = $slug->slug;
+            }
         
         $surah = Cache::remember("surah.show.{$slug}", now()->addHours(24), function () use ($slug) {
             return Surah::where('slug', $slug)
@@ -126,6 +127,10 @@ class SurahController extends Controller
         return view('pages.surah.show', compact(
             'surah', 'prevSurah', 'nextSurah', 'popularSurahs', 'mushafPages', 'seoData', 'schemaOrg'
         ));
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Surah Error: ' . $e->getMessage());
+            abort(404);
+        }
     }
 
     public function collection(string $slug)

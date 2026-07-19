@@ -33,10 +33,7 @@
 <?php $__env->startSection('schema'); ?>
 <script type="application/ld+json">
 {
-  "<?php $__contextArgs = [];
-if (context()->has($__contextArgs[0])) :
-if (isset($value)) { $__contextPrevious[] = $value; }
-$value = context()->get($__contextArgs[0]); ?>": "https://schema.org",
+  "@context": "https://schema.org",
   "@type": "Chapter",
   "name": "<?php echo e($surah->name_en); ?>",
   "position": <?php echo e($surah->number); ?>,
@@ -48,10 +45,7 @@ $value = context()->get($__contextArgs[0]); ?>": "https://schema.org",
 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($surah->faqs) && $surah->faqs->count()): ?>
 <script type="application/ld+json">
 {
-  "<?php $__contextArgs = [];
-if (context()->has($__contextArgs[0])) :
-if (isset($value)) { $__contextPrevious[] = $value; }
-$value = context()->get($__contextArgs[0]); ?>": "https://schema.org",
+  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     <?php $__currentLoopData = $surah->faqs->take(5); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $faq): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

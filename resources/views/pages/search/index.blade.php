@@ -1,12 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Search - Index')
+@section('title', 'Search Islamic Content | Noor-e-Islam')
+
+@section('head')
+<meta name="robots" content="noindex, follow" />
+@endsection
 
 @section('content')
 <div class="page-header" style="background: var(--primary); color: white; padding: 40px 0; text-align: center;">
     <div class="container">
-        <h1 style="color: white; margin-bottom: 10px;">Search - Index</h1>
-        <p style="opacity: 0.8; margin-bottom: 0;">Explore Search - Index</p>
+        <h1 style="color: white; margin-bottom: 10px;">Search Islamic Content | Noor-e-Islam</h1>
+        <p style="opacity: 0.8; margin-bottom: 0;">Search for prayer times, Surah, duas, Islamic calendar, and more...</p>
     </div>
 </div>
 

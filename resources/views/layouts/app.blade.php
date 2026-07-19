@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'NoorIslam — Noor-e-Islam: Islamic Knowledge & Tools')</title>
-    <meta name="description" content="@yield('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.')">
+    <title>{{ $seo['title'] ?? $seoData['title'] ?? View::getSection('title', 'NoorIslam — Noor-e-Islam: Islamic Knowledge & Tools') }}</title>
+    <meta name="description" content="{{ $seo['description'] ?? $seoData['description'] ?? View::getSection('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.') }}">
     @if(View::hasSection('meta_keywords'))
     <meta name="keywords" content="@yield('meta_keywords')">
     @endif
 
     <!-- SEO Canonical and Hreflang -->
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-    <link rel="canonical" href="{{ isset($seoMeta->canonical_url) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current()) }}">
+    <link rel="canonical" href="{{ $seo['canonical'] ?? $seoData['canonical'] ?? (isset($seoMeta->canonical_url) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current())) }}">
 
     @if(isset($seoMeta->schema_override_json) && $seoMeta->schema_override_json)
     <script type="application/ld+json">
