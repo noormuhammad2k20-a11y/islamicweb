@@ -13,8 +13,8 @@ use App\Http\Controllers\HadithController;
 use App\Http\Controllers\IslamicEventsController;
 use App\Http\Controllers\NamazGuideController;
 use App\Http\Controllers\RamadanController;
-use App\Http\Controllers\HajjUmrahController;
 use App\Http\Controllers\ToolsController;
+
 use App\Http\Controllers\IslamicKnowledgeController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\BlogController;
@@ -35,16 +35,6 @@ $appRoutes = function () {
     Route::get('/disclaimer', [PageController::class, 'disclaimer'])->name('disclaimer');
     Route::get('/sitemap', [PageController::class, 'sitemap'])->name('sitemap');
     Route::get('/faq', [PageController::class, 'faq'])->name('faq');
-
-    // Hajj & Umrah
-    Route::get('/hajj-and-umrah', [\App\Http\Controllers\HajjUmrahController::class, 'index'])->name('hajj-umrah.index');
-    Route::get('/hajj-guide', [\App\Http\Controllers\HajjUmrahController::class, 'hajjGuide'])->name('hajj-umrah.hajj-guide');
-    Route::get('/umrah-guide', [\App\Http\Controllers\HajjUmrahController::class, 'umrahGuide'])->name('hajj-umrah.umrah-guide');
-    Route::get('/hajj-checklist', [\App\Http\Controllers\HajjUmrahController::class, 'hajjChecklist'])->name('hajj-umrah.hajj-checklist');
-    Route::get('/umrah-checklist', [\App\Http\Controllers\HajjUmrahController::class, 'umrahChecklist'])->name('hajj-umrah.umrah-checklist');
-    Route::get('/hajj-faqs', [\App\Http\Controllers\HajjUmrahController::class, 'hajjFaqs'])->name('hajj-umrah.hajj-faqs');
-    Route::get('/hajj-duas', [\App\Http\Controllers\HajjUmrahController::class, 'hajjDuas'])->name('hajj-umrah.hajj-duas');
-    Route::get('/umrah-duas', [\App\Http\Controllers\HajjUmrahController::class, 'umrahDuas'])->name('hajj-umrah.umrah-duas');
 
     // Knowledge (Allah Names)
     Route::get('/knowledge/names-of-allah', [\App\Http\Controllers\AllahNameController::class, 'index'])->name('knowledge.names-of-allah');
@@ -192,18 +182,6 @@ $appRoutes = function () {
         Route::get('/rules', [RamadanController::class, 'rules'])->name('ramadan.rules');
         Route::get('/faqs', [RamadanController::class, 'faqs'])->name('ramadan.faqs');
         Route::get('/laylatul-qadr-guide', [RamadanController::class, 'laylatulQadr'])->name('ramadan.laylatul_qadr');
-    });
-
-    // CLUSTER 11 — Hajj & Umrah Section
-    Route::prefix('hajj-umrah')->group(function () {
-        Route::get('/', [HajjUmrahController::class, 'index'])->name('hajj_umrah.index');
-        Route::get('/hajj-guide', [HajjUmrahController::class, 'hajjGuide'])->name('hajj_umrah.hajj_guide');
-        Route::get('/umrah-guide', [HajjUmrahController::class, 'umrahGuide'])->name('hajj_umrah.umrah_guide');
-        Route::get('/hajj-duas', [HajjUmrahController::class, 'hajjDuas'])->name('hajj_umrah.hajj_duas');
-        Route::get('/umrah-duas', [HajjUmrahController::class, 'umrahDuas'])->name('hajj_umrah.umrah_duas');
-        Route::get('/hajj-checklist', [HajjUmrahController::class, 'hajjChecklist'])->name('hajj_umrah.hajj_checklist');
-        Route::get('/umrah-checklist', [HajjUmrahController::class, 'umrahChecklist'])->name('hajj_umrah.umrah_checklist');
-        Route::get('/hajj-faqs', [HajjUmrahController::class, 'hajjFaqs'])->name('hajj_umrah.hajj_faqs');
     });
 
     // CLUSTER 12 — Islamic Tools

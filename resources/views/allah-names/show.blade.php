@@ -428,9 +428,7 @@
                 <a href="/ramadan-guide/calendar" title="Ramadan Calendar & Timetable" style="display: flex; align-items: center; gap: 10px; color: var(--text-medium); text-decoration: none; font-weight: 500; transition: var(--tr-fast); padding: 8px 0; border-bottom: 1px solid var(--border-light);">
                     <i class="fas fa-moon" style="color: var(--gold); width: 20px; text-align: center;"></i> Ramadan Calendar
                 </a>
-                <a href="/hajj-and-umrah" title="Complete Hajj & Umrah Guide" style="display: flex; align-items: center; gap: 10px; color: var(--text-medium); text-decoration: none; font-weight: 500; transition: var(--tr-fast); padding: 8px 0;">
-                    <i class="fas fa-kaaba" style="color: var(--gold); width: 20px; text-align: center;"></i> Hajj & Umrah Hub
-                </a>
+
             </div>
         </div>
     </aside>

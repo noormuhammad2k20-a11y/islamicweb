@@ -14,11 +14,17 @@
 
 | [Home](home.md) | 2 |
 | [Islamic Calendar](islamic-calendar.md) | 34 |
+
 | [Islamic Events](islamic-events.md) | 2 |
+
 | [Islamic Knowledge](islamic-knowledge.md) | 14 |
+
 | [Islamic Months](islamic-months.md) | 16 |
+
 | [Islamic Names](islamic-names.md) | 13132 |
+
 | [Islamic Quiz](islamic-quiz.md) | 2 |
+
 | [Khwabon Ki Tabeer](khwabon-ki-tabeer.md) | 4572 |
 | [Media](media.md) | 8 |
 | [Namaz Guides](namaz-guides.md) | 4 |
