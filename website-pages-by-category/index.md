@@ -9,7 +9,6 @@
 | [Hadith](hadith.md) | 104 |
 
 
-| [Hajj & Umrah](hajj-umrah.md) | 32 |---------->> Delete This Complete
 
 
 | [Home](home.md) | 2 |

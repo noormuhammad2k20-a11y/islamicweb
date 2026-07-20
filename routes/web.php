@@ -22,6 +22,18 @@ use App\Http\Controllers\WazaifController;
 use App\Http\Controllers\DreamController;
 use App\Http\Controllers\QuizController;
 
+// Explicit English-only Islamic Calendar Routes (Removed from /ur/)
+Route::middleware('setlocale')->group(function () {
+    Route::redirect('/islamic-date', '/islamic-calendar', 301);
+    Route::redirect('/hijri-date', '/islamic-calendar', 301);
+    Route::get('/islamic-calendar', [\App\Http\Controllers\IslamicCalendarController::class, 'mainCalendar'])->name('islamic-calendar');
+    Route::get('/islamic-calendar/today', [\App\Http\Controllers\IslamicCalendarController::class, 'islamicDateToday'])->name('islamic-date-today');
+    Route::get('/islamic-calendar/pakistan', [\App\Http\Controllers\IslamicCalendarController::class, 'pakistanDate'])->name('islamic-date-pakistan');
+    Route::get('/islamic-calendar/saudi', [\App\Http\Controllers\IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi');
+    Route::get('/islamic-calendar/saudi-arabia', [\App\Http\Controllers\IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi-arabia');
+    Route::get('/islamic-calendar/in-urdu', [\App\Http\Controllers\IslamicCalendarController::class, 'urduDate'])->name('islamic-date-urdu');
+});
+
 $appRoutes = function () {
 
     // Homepage
@@ -44,18 +56,10 @@ $appRoutes = function () {
     Route::get('/khwabon-ki-tabeer/{slug}', [\App\Http\Controllers\DreamController::class, 'show'])->name('dreams.show');
 
     // CLUSTER 1 — Islamic Calendar + Programmatic SEO Pages
-    // Redirect old /islamic-date to new hub
-    Route::redirect('/islamic-date', '/islamic-calendar', 301);
-    Route::redirect('/hijri-date', '/islamic-calendar', 301);
-
+    // Redirect old /islamic-date to new hub (Moved outside to be English-only)
+    
     // Main pages
-    Route::get('/islamic-calendar', [IslamicCalendarController::class, 'mainCalendar'])->name('islamic-calendar');
-    Route::get('/islamic-calendar/today', [IslamicCalendarController::class, 'islamicDateToday'])->name('islamic-date-today');
-    Route::get('/islamic-calendar/pakistan', [IslamicCalendarController::class, 'pakistanDate'])->name('islamic-date-pakistan');
     Route::get('/islamic-calendar/pakistan/{city}', [IslamicCalendarController::class, 'cityPage'])->name('islamic-date-pakistan-city');
-    Route::get('/islamic-calendar/saudi', [IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi');
-    Route::get('/islamic-calendar/saudi-arabia', [IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi-arabia');
-    Route::get('/islamic-calendar/in-urdu', [IslamicCalendarController::class, 'urduDate'])->name('islamic-date-urdu');
 
     // Programmatic: Country pages
     Route::get('/islamic-calendar/{country}', [IslamicCalendarController::class, 'countryPage'])
