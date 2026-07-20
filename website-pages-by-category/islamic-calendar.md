@@ -1,5 +1,8 @@
 # Islamic Calendar
 
+
+http://127.0.0.1:8000/islamic-calendar/today    ------>> is koesa kro [islamic-date-today]
+
 Total number of pages: 34
 
 http://127.0.0.1:8000/islamic-calendar
