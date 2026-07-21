@@ -3,87 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $seo['title'] ?? $seoData['title'] ?? View::getSection('title', 'NoorIslam — Noor-e-Islam: Islamic Knowledge & Tools') }}</title>
-    <meta name="description" content="{{ $seo['description'] ?? $seoData['description'] ?? View::getSection('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.') }}">
-    @if(View::hasSection('meta_keywords'))
-    <meta name="keywords" content="@yield('meta_keywords')">
-    @endif
+    <title><?php echo e($seo['title'] ?? $seoData['title'] ?? View::getSection('title', 'NoorIslam — Noor-e-Islam: Islamic Knowledge & Tools')); ?></title>
+    <meta name="description" content="<?php echo e($seo['description'] ?? $seoData['description'] ?? View::getSection('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.')); ?>">
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(View::hasSection('meta_keywords')): ?>
+    <meta name="keywords" content="<?php echo $__env->yieldContent('meta_keywords'); ?>">
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     <!-- SEO Canonical and Hreflang -->
-    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-    <link rel="canonical" href="{{ $seo['canonical'] ?? $seoData['canonical'] ?? (isset($seoMeta->canonical_url) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current())) }}">
+    <link rel="icon" href="<?php echo e(asset('favicon.svg')); ?>" type="image/svg+xml">
+    <link rel="canonical" href="<?php echo e($seo['canonical'] ?? $seoData['canonical'] ?? (isset($seoMeta->canonical_url) && $seoMeta->canonical_url ? $seoMeta->canonical_url : (View::hasSection('canonical') ? View::getSection('canonical') : url()->current()))); ?>">
 
-    @if(isset($seoMeta->schema_override_json) && $seoMeta->schema_override_json)
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($seoMeta->schema_override_json) && $seoMeta->schema_override_json): ?>
     <script type="application/ld+json">
-    {!! $seoMeta->schema_override_json !!}
-    </script>
-    @endif
+    <?php echo $seoMeta->schema_override_json; ?>
 
-    {{-- Site-wide WebSite + Organization JSON-LD (SEO ISSUE F & Phase 4) --}}
+    </script>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
+
+    
     <script type="application/ld+json">
     {
-        "@@context": "https://schema.org",
-        "@@type": "WebSite",
+        "@context": "https://schema.org",
+        "@type": "WebSite",
         "name": "NoorIslam",
         "alternateName": "Noor-e-Islam",
-        "url": "{{ config('app.url') }}",
+        "url": "<?php echo e(config('app.url')); ?>",
         "description": "Authentic Islamic content — Prayer Times, Duas, Quran, Hadith, Wazaif & more.",
         "inLanguage": ["en", "ar"],
         "potentialAction": {
-            "@@type": "SearchAction",
-            "target": "{{ config('app.url') }}/search?q={search_term_string}",
+            "@type": "SearchAction",
+            "target": "<?php echo e(config('app.url')); ?>/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     }
     </script>
     <script type="application/ld+json">
     {
-        "@@context": "https://schema.org",
-        "@@type": "Organization",
+        "@context": "https://schema.org",
+        "@type": "Organization",
         "name": "NoorIslam",
         "alternateName": "نورِ اسلام",
-        "url": "{{ config('app.url') }}",
-        "logo": "{{ asset('favicon.svg') }}",
+        "url": "<?php echo e(config('app.url')); ?>",
+        "logo": "<?php echo e(asset('favicon.svg')); ?>",
         "sameAs": [],
         "contactPoint": {
-            "@@type": "ContactPoint",
+            "@type": "ContactPoint",
             "contactType": "customer service",
-            "url": "{{ config('app.url') }}/contact"
+            "url": "<?php echo e(config('app.url')); ?>/contact"
         }
     }
     </script>
     <script type="application/ld+json">
     {
-      "@@context": "https://schema.org",
-      "@@type": "BreadcrumbList",
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@@type": "ListItem", "position": 1, "name": "Home", "item": "{{ url('/') }}"},
-        {"@@type": "ListItem", "position": 2, "name": "@yield('title', 'Page')", "item": "{{ url()->current() }}"}
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "<?php echo e(url('/')); ?>"},
+        {"@type": "ListItem", "position": 2, "name": "<?php echo $__env->yieldContent('title', 'Page'); ?>", "item": "<?php echo e(url()->current()); ?>"}
       ]
     }
     </script>
-    @yield('schema')
-    @php
+    <?php echo $__env->yieldContent('schema'); ?>
+    <?php
         $currentRouteName = Route::currentRouteName();
         $routeParams = Route::current() ? Route::current()->parameters() : [];
-    @endphp
-    <link rel="alternate" hreflang="x-default" href="{{ url()->current() }}" />
+    ?>
+    <link rel="alternate" hreflang="x-default" href="<?php echo e(url()->current()); ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {{-- Arabic font preload for Core Web Vitals (SEO ISSUE G / Step 3) --}}
-    @if(file_exists(public_path('fonts/arabic-font.woff2')))
-    <link rel="preload" href="{{ asset('fonts/arabic-font.woff2') }}" as="font" type="font/woff2" crossorigin>
-    @endif
+    
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(file_exists(public_path('fonts/arabic-font.woff2'))): ?>
+    <link rel="preload" href="<?php echo e(asset('fonts/arabic-font.woff2')); ?>" as="font" type="font/woff2" crossorigin>
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
     
 
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap"></noscript>
-    <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @yield('og_meta')
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/fontawesome/css/all.min.css')); ?>">
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
+    <?php echo $__env->yieldContent('og_meta'); ?>
     
-    @php
+    <?php
         // ISSUE 7: OG Image fallback — use default image when og_image is empty or file doesn't exist
         $defaultOgImage = asset('images/og-default.jpg');
         $ogImage = '';
@@ -100,30 +101,30 @@
         } else {
             $twitterImage = $defaultOgImage;
         }
-    @endphp
-    @if(isset($seoMeta) && isset($seoMeta->og_title))
-    <meta property="og:title" content="{{ $seoMeta->og_title }}">
-    <meta property="og:description" content="{{ $seoMeta->og_description ?? '' }}">
-    <meta property="og:image" content="{{ $ogImage }}">
-    <meta property="og:url" content="{{ $seoMeta->canonical_url ?? url()->current() }}">
+    ?>
+    <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if(isset($seoMeta) && isset($seoMeta->og_title)): ?>
+    <meta property="og:title" content="<?php echo e($seoMeta->og_title); ?>">
+    <meta property="og:description" content="<?php echo e($seoMeta->og_description ?? ''); ?>">
+    <meta property="og:image" content="<?php echo e($ogImage); ?>">
+    <meta property="og:url" content="<?php echo e($seoMeta->canonical_url ?? url()->current()); ?>">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="NoorIslam">
     <meta property="og:locale" content="en_US">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $seoMeta->twitter_title ?? $seoMeta->og_title }}">
-    <meta name="twitter:description" content="{{ $seoMeta->twitter_description ?? $seoMeta->og_description ?? '' }}">
-    <meta name="twitter:image" content="{{ $twitterImage }}">
-    @else
-    {{-- Default OG tags when $seoMeta is not available --}}
-    <meta property="og:title" content="@yield('title', 'NoorIslam — Islamic Knowledge & Tools')">
-    <meta property="og:description" content="@yield('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.')">
-    <meta property="og:image" content="{{ $defaultOgImage }}">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="<?php echo e($seoMeta->twitter_title ?? $seoMeta->og_title); ?>">
+    <meta name="twitter:description" content="<?php echo e($seoMeta->twitter_description ?? $seoMeta->og_description ?? ''); ?>">
+    <meta name="twitter:image" content="<?php echo e($twitterImage); ?>">
+    <?php else: ?>
+    
+    <meta property="og:title" content="<?php echo $__env->yieldContent('title', 'NoorIslam — Islamic Knowledge & Tools'); ?>">
+    <meta property="og:description" content="<?php echo $__env->yieldContent('meta_description', 'Discover accurate prayer times, Quranic verses, daily duas, and authentic Islamic knowledge.'); ?>">
+    <meta property="og:image" content="<?php echo e($defaultOgImage); ?>">
+    <meta property="og:url" content="<?php echo e(url()->current()); ?>">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="NoorIslam">
     <meta name="twitter:card" content="summary_large_image">
-    @endif
+    <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
 
     <style media="print">
         @page { margin: 1cm; }
@@ -139,30 +140,30 @@
         .calendar-day.today { background: none !important; font-weight: bold !important; border: 2px solid black !important; color: black !important; }
         a { text-decoration: none !important; color: black !important; }
     </style>
-    @yield('head')
+    <?php echo $__env->yieldContent('head'); ?>
 </head>
 <body>
 
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">
-            <a href="{{ route('home') }}" class="logo">
-                <img src="{{ asset('favicon.svg') }}" alt="Logo" style="width: 44px; height: 44px; border-radius: 50%;">
+            <a href="<?php echo e(route('home')); ?>" class="logo">
+                <img src="<?php echo e(asset('favicon.svg')); ?>" alt="Logo" style="width: 44px; height: 44px; border-radius: 50%;">
                 <div class="logo-text">
                     <span class="logo-text-ar">نورِ اسلام</span>
                     <span class="logo-text-en">Noor-e-Islam</span>
                 </div>
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="{{ route('prayer-times.hub') }}" class="{{ request()->routeIs('prayer-times.*') ? 'active' : '' }}"><i class="fas fa-clock"></i> Prayer Times</a></li>
-                <li><a href="{{ route('duas.index') }}" class="{{ request()->routeIs('duas.*') ? 'active' : '' }}"><i class="fas fa-hands-praying"></i> Duas</a></li>
-                <li><a href="{{ route('names.index') }}" class="{{ request()->routeIs('names.*') ? 'active' : '' }}"><i class="fas fa-book-quran"></i> Names</a></li>
-                <li><a href="{{ route('wazaif.index') }}" class="{{ request()->routeIs('wazaif.*') ? 'active' : '' }}"><i class="fas fa-star-and-crescent"></i> Wazaif</a></li>
-                <li><a href="{{ route('dreams.index') }}" class="{{ request()->routeIs('dreams.*') ? 'active' : '' }}"><i class="fas fa-moon"></i> Dreams</a></li>
+                <li><a href="<?php echo e(route('home')); ?>" class="<?php echo e(request()->routeIs('home') ? 'active' : ''); ?>"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="<?php echo e(route('prayer-times.hub')); ?>" class="<?php echo e(request()->routeIs('prayer-times.*') ? 'active' : ''); ?>"><i class="fas fa-clock"></i> Prayer Times</a></li>
+                <li><a href="<?php echo e(route('duas.index')); ?>" class="<?php echo e(request()->routeIs('duas.*') ? 'active' : ''); ?>"><i class="fas fa-hands-praying"></i> Duas</a></li>
+                <li><a href="<?php echo e(route('names.index')); ?>" class="<?php echo e(request()->routeIs('names.*') ? 'active' : ''); ?>"><i class="fas fa-book-quran"></i> Names</a></li>
+                <li><a href="<?php echo e(route('wazaif.index')); ?>" class="<?php echo e(request()->routeIs('wazaif.*') ? 'active' : ''); ?>"><i class="fas fa-star-and-crescent"></i> Wazaif</a></li>
+                <li><a href="<?php echo e(route('dreams.index')); ?>" class="<?php echo e(request()->routeIs('dreams.*') ? 'active' : ''); ?>"><i class="fas fa-moon"></i> Dreams</a></li>
 
-                <li><a href="{{ route('zakat.index') }}" class="{{ request()->routeIs('zakat.*') ? 'active' : '' }}"><i class="fas fa-coins"></i> Zakat</a></li>
-                <li><a href="{{ route('hadith.index') }}" class="{{ request()->is('hadith*') ? 'active' : '' }}"><i class="fas fa-book-open"></i> Hadith</a></li>
+                <li><a href="<?php echo e(route('zakat.index')); ?>" class="<?php echo e(request()->routeIs('zakat.*') ? 'active' : ''); ?>"><i class="fas fa-coins"></i> Zakat</a></li>
+                <li><a href="<?php echo e(route('hadith.index')); ?>" class="<?php echo e(request()->is('hadith*') ? 'active' : ''); ?>"><i class="fas fa-book-open"></i> Hadith</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -173,7 +174,7 @@
     <div class="mobile-overlay" id="mobileOverlay"></div>
 
     <main>
-        @yield('content')
+        <?php echo $__env->yieldContent('content'); ?>
     </main>
 
 <footer class="footer">
@@ -181,8 +182,8 @@
         <div class="footer-top">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="{{ route('home') }}" class="logo">
-                        <img src="{{ asset('favicon.svg') }}" alt="Logo" style="width: 44px; height: 44px; border-radius: 50%;">
+                    <a href="<?php echo e(route('home')); ?>" class="logo">
+                        <img src="<?php echo e(asset('favicon.svg')); ?>" alt="Logo" style="width: 44px; height: 44px; border-radius: 50%;">
                         <div class="logo-text"><span class="logo-text-ar">نورِ اسلام</span><span
                                 class="logo-text-en">Noor-e-Islam</span></div>
                     </a>
@@ -196,63 +197,63 @@
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="{{ route('home') }}"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="{{ route('about') }}"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                        <li><a href="{{ route('islamic-calendar') }}"><i class="fas fa-chevron-right"></i> Islamic Calendar</a></li>
-                        <li><a href="{{ route('names.index') }}"><i class="fas fa-chevron-right"></i> Islamic Names</a></li>
-                        <li><a href="{{ route('zakat.index') }}"><i class="fas fa-chevron-right"></i> Zakat Calculator</a></li>
-                        <li><a href="{{ route('contact') }}"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="<?php echo e(route('home')); ?>"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="<?php echo e(route('about')); ?>"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="<?php echo e(route('islamic-calendar')); ?>"><i class="fas fa-chevron-right"></i> Islamic Calendar</a></li>
+                        <li><a href="<?php echo e(route('names.index')); ?>"><i class="fas fa-chevron-right"></i> Islamic Names</a></li>
+                        <li><a href="<?php echo e(route('zakat.index')); ?>"><i class="fas fa-chevron-right"></i> Zakat Calculator</a></li>
+                        <li><a href="<?php echo e(route('contact')); ?>"><i class="fas fa-chevron-right"></i> Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="{{ route('prayer-times.hub') }}"><i class="fas fa-chevron-right"></i> Prayer Times</a></li>
-                        <li><a href="{{ route('duas.index') }}"><i class="fas fa-chevron-right"></i> Daily Duas</a></li>
-                        <li><a href="{{ route('wazaif.index') }}"><i class="fas fa-chevron-right"></i> Wazaif</a></li>
-                        <li><a href="{{ route('tasbeeh.counter') }}"><i class="fas fa-chevron-right"></i> Tasbeeh Counter</a></li>
-                        <li><a href="{{ route('dreams.index') }}"><i class="fas fa-chevron-right"></i> Khwabon Ki Tabeer</a></li>
+                        <li><a href="<?php echo e(route('prayer-times.hub')); ?>"><i class="fas fa-chevron-right"></i> Prayer Times</a></li>
+                        <li><a href="<?php echo e(route('duas.index')); ?>"><i class="fas fa-chevron-right"></i> Daily Duas</a></li>
+                        <li><a href="<?php echo e(route('wazaif.index')); ?>"><i class="fas fa-chevron-right"></i> Wazaif</a></li>
+                        <li><a href="<?php echo e(route('tasbeeh.counter')); ?>"><i class="fas fa-chevron-right"></i> Tasbeeh Counter</a></li>
+                        <li><a href="<?php echo e(route('dreams.index')); ?>"><i class="fas fa-chevron-right"></i> Khwabon Ki Tabeer</a></li>
 
-                        <li><a href="{{ route('events.index') }}"><i class="fas fa-chevron-right"></i> Islamic Calendar</a></li>
-                        <li><a href="{{ route('hadith.index') }}"><i class="fas fa-chevron-right"></i> Hadith Collection</a></li>
-                        <li><a href="{{ route('converter.show') }}"><i class="fas fa-chevron-right"></i> Date Converter</a></li>
+                        <li><a href="<?php echo e(route('events.index')); ?>"><i class="fas fa-chevron-right"></i> Islamic Calendar</a></li>
+                        <li><a href="<?php echo e(route('hadith.index')); ?>"><i class="fas fa-chevron-right"></i> Hadith Collection</a></li>
+                        <li><a href="<?php echo e(route('converter.show')); ?>"><i class="fas fa-chevron-right"></i> Date Converter</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Prayer Times</h4>
                     <div class="footer-prayer-times">
-                        @php
+                        <?php
                             $footerPrayerTime = null;
                             if (isset($prayerTimes)) {
                                 $footerPrayerTime = $prayerTimes instanceof \Illuminate\Support\Collection ? $prayerTimes->first() : $prayerTimes;
                             }
-                        @endphp
-                        @if($footerPrayerTime)
-                            <div class="footer-prayer-item"><span class="fp-name">Fajr</span><span class="fp-time">{{ \Carbon\Carbon::parse($footerPrayerTime->fajr)->format('h:i A') }}</span></div>
-                            <div class="footer-prayer-item"><span class="fp-name">Sunrise</span><span class="fp-time">{{ \Carbon\Carbon::parse($footerPrayerTime->sunrise)->format('h:i A') }}</span></div>
-                            <div class="footer-prayer-item"><span class="fp-name">Dhuhr</span><span class="fp-time">{{ \Carbon\Carbon::parse($footerPrayerTime->dhuhr)->format('h:i A') }}</span></div>
-                            <div class="footer-prayer-item"><span class="fp-name">Asr</span><span class="fp-time">{{ \Carbon\Carbon::parse($footerPrayerTime->asr)->format('h:i A') }}</span></div>
-                            <div class="footer-prayer-item"><span class="fp-name">Maghrib</span><span class="fp-time">{{ \Carbon\Carbon::parse($footerPrayerTime->maghrib)->format('h:i A') }}</span></div>
-                            <div class="footer-prayer-item"><span class="fp-name">Isha</span><span class="fp-time">{{ \Carbon\Carbon::parse($footerPrayerTime->isha)->format('h:i A') }}</span></div>
-                        @else
+                        ?>
+                        <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($footerPrayerTime): ?>
+                            <div class="footer-prayer-item"><span class="fp-name">Fajr</span><span class="fp-time"><?php echo e(\Carbon\Carbon::parse($footerPrayerTime->fajr)->format('h:i A')); ?></span></div>
+                            <div class="footer-prayer-item"><span class="fp-name">Sunrise</span><span class="fp-time"><?php echo e(\Carbon\Carbon::parse($footerPrayerTime->sunrise)->format('h:i A')); ?></span></div>
+                            <div class="footer-prayer-item"><span class="fp-name">Dhuhr</span><span class="fp-time"><?php echo e(\Carbon\Carbon::parse($footerPrayerTime->dhuhr)->format('h:i A')); ?></span></div>
+                            <div class="footer-prayer-item"><span class="fp-name">Asr</span><span class="fp-time"><?php echo e(\Carbon\Carbon::parse($footerPrayerTime->asr)->format('h:i A')); ?></span></div>
+                            <div class="footer-prayer-item"><span class="fp-name">Maghrib</span><span class="fp-time"><?php echo e(\Carbon\Carbon::parse($footerPrayerTime->maghrib)->format('h:i A')); ?></span></div>
+                            <div class="footer-prayer-item"><span class="fp-name">Isha</span><span class="fp-time"><?php echo e(\Carbon\Carbon::parse($footerPrayerTime->isha)->format('h:i A')); ?></span></div>
+                        <?php else: ?>
                             <div class="footer-prayer-item"><span class="fp-name">Fajr</span><span class="fp-time">05:12 AM</span></div>
                             <div class="footer-prayer-item"><span class="fp-name">Sunrise</span><span class="fp-time">06:28 AM</span></div>
                             <div class="footer-prayer-item"><span class="fp-name">Dhuhr</span><span class="fp-time">12:35 PM</span></div>
                             <div class="footer-prayer-item"><span class="fp-name">Asr</span><span class="fp-time">04:02 PM</span></div>
                             <div class="footer-prayer-item"><span class="fp-name">Maghrib</span><span class="fp-time">06:48 PM</span></div>
                             <div class="footer-prayer-item"><span class="fp-name">Isha</span><span class="fp-time">08:15 PM</span></div>
-                        @endif
+                        <?php endif; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="footer-bottom-inner">
-                <p>&copy; 2025 <a href="{{ route('home') }}">Noor-e-Islam</a>. All rights reserved. Made with love for the Ummah.</p>
+                <p>&copy; 2025 <a href="<?php echo e(route('home')); ?>">Noor-e-Islam</a>. All rights reserved. Made with love for the Ummah.</p>
                 <div class="footer-bottom-links">
-                    <a href="{{ route('privacy') }}">Privacy Policy</a>
+                    <a href="<?php echo e(route('privacy')); ?>">Privacy Policy</a>
                     <a href="#">Terms of Use</a>
-                    <a href="{{ route('sitemap.index') }}">Sitemap</a>
+                    <a href="<?php echo e(route('sitemap.index')); ?>">Sitemap</a>
                 </div>
             </div>
         </div>
@@ -458,6 +459,7 @@
             showToast('Video feature will be available soon, InshaAllah.');
         });
     </script>
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
+<?php /**PATH D:\Xamp\htdocs\Islamicwebsite\resources\views/layouts/app.blade.php ENDPATH**/ ?>

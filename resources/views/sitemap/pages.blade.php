@@ -5,7 +5,6 @@
     <url><loc>{{ route('seo.sehri-time-today') }}</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
     <url><loc>{{ route('seo.iftar-time-today') }}</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
     <url><loc>{{ route('seo.qibla-finder-online') }}</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
-    <url><loc>{{ route('seo.islamic-date-today') }}</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
     <url><loc>{{ route('seo.zakat-calculator-online') }}</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
     <url><loc>{{ route('about') }}</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
     <url><loc>{{ route('contact') }}</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>

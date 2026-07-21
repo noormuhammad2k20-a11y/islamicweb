@@ -216,24 +216,7 @@ return new class extends Migration
             });
         }
 
-        // 5. Islamic Quiz questions
-        if (!Schema::hasTable('islamic_quizzes')) {
-            Schema::create('islamic_quizzes', function (Blueprint $table) {
-                $table->id();
-                $table->text('question_urdu');
-                $table->text('question_english')->nullable();
-                $table->string('option_a', 255);
-                $table->string('option_b', 255);
-                $table->string('option_c', 255);
-                $table->string('option_d', 255);
-                $table->enum('correct_option', ['a', 'b', 'c', 'd']);
-                $table->text('explanation')->nullable();
-                $table->string('category', 100)->nullable();
-                $table->enum('difficulty', ['easy', 'medium', 'hard'])->default('easy');
-                $table->timestamps();
-                $table->index('category');
-            });
-        }
+
 
         // 6. Page views analytics
         if (!Schema::hasTable('page_views')) {
@@ -283,7 +266,7 @@ return new class extends Migration
         Schema::dropIfExists('ramadan_sections');
         Schema::dropIfExists('quran_recitations');
         Schema::dropIfExists('page_views');
-        Schema::dropIfExists('islamic_quizzes');
+
         Schema::dropIfExists('dream_symbols');
         Schema::dropIfExists('wazaif');
         Schema::dropIfExists('quran_bookmarks');

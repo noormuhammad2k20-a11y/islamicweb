@@ -292,11 +292,7 @@
             <li><strong>Durood Shareef:</strong> Sending blessings upon Prophet Muhammad (PBUH).</li>
         </ul>
 
-        <div class="cta-box">
-            <h3>Explore More</h3>
-            <p>Looking for the specific method to pray <strong>Salat-ul-Tasbeeh</strong>? We have a complete step-by-step guide explaining the virtues, the exact tasbeeh, and how to perform the 4 Rakat prayer.</p>
-            <a href="{{ route('namaz.salat_tasbeeh') }}" class="cta-btn">Read Salat-ul-Tasbeeh Guide</a>
-        </div>
+
 
         <h2 style="margin-top: 50px;">Related Tools & Resources</h2>
         <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">

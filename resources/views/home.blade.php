@@ -3540,7 +3540,6 @@
                 <li><a href="{{ route('names_allah.index') }}">Names</a></li>
                 <li><a href="#wazaif">Wazaif</a></li>
                 <li><a href="#dreams">Dreams</a></li>
-                <li><a href="#quiz">Quiz</a></li>
                 <li><a href="#zakat" class="nav-cta">Zakat</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">

@@ -11,30 +11,27 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\SurahController;
 use App\Http\Controllers\HadithController;
 use App\Http\Controllers\IslamicEventsController;
-use App\Http\Controllers\NamazGuideController;
+
 use App\Http\Controllers\RamadanController;
 use App\Http\Controllers\ToolsController;
 
 use App\Http\Controllers\IslamicKnowledgeController;
-use App\Http\Controllers\MediaController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\WazaifController;
 use App\Http\Controllers\DreamController;
 use App\Http\Controllers\QuizController;
 
 // Explicit English-only Islamic Calendar Routes (Removed from /ur/)
-Route::middleware('setlocale')->group(function () {
     Route::redirect('/islamic-date', '/islamic-calendar', 301);
     Route::redirect('/hijri-date', '/islamic-calendar', 301);
+    Route::redirect('/islamic-calendar/today', '/islamic-date-today', 301);
     Route::get('/islamic-calendar', [\App\Http\Controllers\IslamicCalendarController::class, 'mainCalendar'])->name('islamic-calendar');
-    Route::get('/islamic-calendar/today', [\App\Http\Controllers\IslamicCalendarController::class, 'islamicDateToday'])->name('islamic-date-today');
+    Route::get('/islamic-date-today', [\App\Http\Controllers\IslamicCalendarController::class, 'islamicDateToday'])->name('islamic-date-today');
     Route::get('/islamic-calendar/pakistan', [\App\Http\Controllers\IslamicCalendarController::class, 'pakistanDate'])->name('islamic-date-pakistan');
     Route::get('/islamic-calendar/saudi', [\App\Http\Controllers\IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi');
     Route::get('/islamic-calendar/saudi-arabia', [\App\Http\Controllers\IslamicCalendarController::class, 'saudiDate'])->name('islamic-date-saudi-arabia');
-    Route::get('/islamic-calendar/in-urdu', [\App\Http\Controllers\IslamicCalendarController::class, 'urduDate'])->name('islamic-date-urdu');
-});
+    
 
-$appRoutes = function () {
 
     // Homepage
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -107,13 +104,7 @@ $appRoutes = function () {
     Route::get('/prayer-times', fn() => redirect('/prayer-times/pakistan'))
         ->name('prayer-times.hub');
 
-    // CLUSTER 2.1 — Namaz Guides
-    Route::prefix('namaz-guides')->group(function () {
-        Route::get('/', [NamazGuideController::class, 'index'])->name('namaz.index');
-        Route::get('/how-to-pray-salah', [NamazGuideController::class, 'salah'])->name('namaz.salah');
-        Route::get('/salat-ul-tasbeeh', [NamazGuideController::class, 'salatUlTasbeeh'])->name('namaz.salat_tasbeeh');
-        Route::get('/{prayer}', [NamazGuideController::class, 'show'])->name('namaz.show');
-    });
+
 
     // CLUSTER 6 — Surah Details
     Route::get('/surahs', [SurahController::class, 'index'])->name('surah.index');
@@ -209,13 +200,7 @@ $appRoutes = function () {
         Route::redirect('/islamic-facts', '/knowledge', 301)->name('knowledge.facts');
     });
 
-    // CLUSTER 14 — Media Section
-    Route::prefix('media')->group(function () {
-        Route::get('/', [MediaController::class, 'index'])->name('media.index');
-        Route::get('/wallpapers', [MediaController::class, 'wallpapers'])->name('media.wallpapers');
-        Route::get('/images', [MediaController::class, 'images'])->name('media.images');
-        Route::get('/quotes', [MediaController::class, 'quotes'])->name('media.quotes');
-    });
+
 
     // CLUSTER 15 — Blog Section
     Route::prefix('blog')->group(function () {
@@ -246,7 +231,6 @@ $appRoutes = function () {
 
 
     // CLUSTER 16 — Dedicated SEO Landing Pages
-    Route::get('/islamic-date-today', [\App\Http\Controllers\SeoLandingPageController::class, 'islamicDateToday'])->name('seo.islamic-date-today');
     Route::get('/prayer-times-today', [\App\Http\Controllers\SeoLandingPageController::class, 'prayerTimesToday'])->name('seo.prayer-times-today');
     Route::get('/sehri-time-today', [\App\Http\Controllers\SeoLandingPageController::class, 'sehriTimeToday'])->name('seo.sehri-time-today');
     Route::get('/iftar-time-today', [\App\Http\Controllers\SeoLandingPageController::class, 'iftarTimeToday'])->name('seo.iftar-time-today');
@@ -266,13 +250,60 @@ $appRoutes = function () {
         Route::get('/{slug}', [DreamController::class, 'show'])->name('dreams.show');
     });
 
-    // CLUSTER 22 — Islamic Quiz
-    Route::get('/islamic-quiz', [QuizController::class, 'index'])->name('quiz.index');
 
-};
 
-Route::middleware('setlocale')->group($appRoutes);
-Route::prefix('ur')->name('ur.')->middleware('setlocale')->group($appRoutes);
+// ── AWS BEDROCK TEST ROUTES ──────────────────────────────────────────
+use App\Services\BedrockService;
+
+// Test 1: Simple connection test
+Route::get('/test-bedrock', function (BedrockService $bedrock) {
+    try {
+        $response = $bedrock->chat('Say hello in one sentence.');
+        return response()->json([
+            'status'   => 'success',
+            'response' => $response,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'error'  => $e->getMessage(),
+        ], 500);
+    }
+});
+
+// Test 2: Islamic names ke liye test
+Route::get('/test-bedrock-islamic', function (BedrockService $bedrock) {
+    try {
+        $response = $bedrock->chat(
+            'Give me 3 beautiful Islamic names for a baby boy with their meanings in Urdu. Format as JSON.'
+        );
+        return response()->json([
+            'status'   => 'success',
+            'response' => $response,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'error'  => $e->getMessage(),
+        ], 500);
+    }
+});
+
+// Test 3: Available models dekho
+Route::get('/test-bedrock-models', function (BedrockService $bedrock) {
+    try {
+        $models = $bedrock->listModels();
+        return response()->json([
+            'status' => 'success',
+            'models' => $models,
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'error'  => $e->getMessage(),
+        ], 500);
+    }
+});
 
 // Phase 5 SEO Redirects
 Route::redirect('/namaz-time', '/prayer-times/karachi', 301);

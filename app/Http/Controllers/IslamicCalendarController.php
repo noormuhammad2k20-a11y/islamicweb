@@ -81,7 +81,7 @@ class IslamicCalendarController extends Controller
         $seoData = [
             'title' => "Islamic Date Today {$nowPK->format('d F Y')} | {$hijriPK['day']} {$hijriPK['month_name']} {$hijriPK['year']} | Today Islamic Date Pakistan",
             'description' => "Islamic date today in Pakistan is {$hijriPK['day']} {$hijriPK['month_name']} {$hijriPK['year']} AH ({$nowPK->format('d F Y')}). Saudi Arabia Islamic date today is {$hijriSA['day']} {$hijriSA['month_name']}. Exact Islamic date today in Karachi, Lahore, Rawalpindi, Faisalabad.",
-            'canonical' => url('/islamic-calendar/today'),
+            'canonical' => url('/islamic-date-today'),
         ];
 
         $this->seoService->setForPage($seoData['title'], $seoData['description'], $seoData['canonical']);
